@@ -1,0 +1,13 @@
+{
+  "name": "fixed_32",
+  "initial_elo": 1500.0,
+  "divisor": 400.0,
+  "provisional_match_limit": 10,
+  "provisional_k": 32,
+  "standard_k": 32,
+  "annual_regression": 0.0,
+  "ensemble": {
+    "xgboost": 0.6,
+    "logistic": 0.4
+  }
+}

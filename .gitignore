@@ -1,0 +1,6 @@
+.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+data/cache/tracked_fixtures.json
+data/cache/*.tmp

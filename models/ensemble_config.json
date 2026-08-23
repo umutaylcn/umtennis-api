@@ -1,0 +1,8 @@
+{
+  "xgboost_weight": 0.6,
+  "logistic_weight": 0.4,
+  "decision_threshold": 0.5,
+  "training_period": "1990–2026 partial",
+  "primary_test_period": "2023–2025",
+  "model_feature_count": 119
+}
