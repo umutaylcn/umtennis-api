@@ -1,7 +1,11 @@
 .env
+.venv/
+.vscode/
+.idea/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.ipynb_checkpoints/
 data/cache/tracked_fixtures.json
 data/cache/presentation_history.joblib
 data/cache/*.tmp

@@ -1,0 +1,60 @@
+{
+  "selected_algorithm": "0.60 XGBoost + 0.40 Logistic Regression",
+  "primary_metric": "log_loss",
+  "final_test_2023_2025": {
+    "accuracy": 0.6619361378611252,
+    "roc_auc": 0.7255692467854082,
+    "log_loss": 0.6083101087889121,
+    "brier_score": 0.21116542561454263
+  },
+  "backtest_2026_partial": {
+    "accuracy": 0.6596244131455399,
+    "roc_auc": 0.7328889073930304,
+    "log_loss": 0.6015127069834735,
+    "brier_score": 0.20838428298678877
+  },
+  "confidence_thresholds": [
+    {
+      "minimum_confidence": 0.55,
+      "matches": 6573,
+      "coverage": 0.8328687278256462,
+      "accuracy": 0.686444545869466
+    },
+    {
+      "minimum_confidence": 0.6,
+      "matches": 5352,
+      "coverage": 0.6781550937658388,
+      "accuracy": 0.719170403587444
+    },
+    {
+      "minimum_confidence": 0.65,
+      "matches": 4179,
+      "coverage": 0.529523568170299,
+      "accuracy": 0.748983010289543
+    },
+    {
+      "minimum_confidence": 0.7,
+      "matches": 3133,
+      "coverage": 0.39698428788646734,
+      "accuracy": 0.7800829875518672
+    },
+    {
+      "minimum_confidence": 0.75,
+      "matches": 2217,
+      "coverage": 0.28091738469336036,
+      "accuracy": 0.8110058637798827
+    },
+    {
+      "minimum_confidence": 0.8,
+      "matches": 1420,
+      "coverage": 0.17992904206791688,
+      "accuracy": 0.8450704225352113
+    },
+    {
+      "minimum_confidence": 0.9,
+      "matches": 375,
+      "coverage": 0.047516472377090724,
+      "accuracy": 0.944
+    }
+  ]
+}
