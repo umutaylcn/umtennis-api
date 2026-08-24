@@ -296,6 +296,8 @@ def health(request: Request) -> dict[str, Any]:
         "status": "ok",
         "model": "xgboost_logistic_ensemble",
         "state_as_of_utc": _iso_utc(service.state.state_as_of),
+        "presentation_cache_ready": service.presentation.cache_path.exists(),
+        "fixture_cache_seconds": FIXTURE_CACHE_SECONDS,
     }
 
 
