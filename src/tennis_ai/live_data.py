@@ -118,6 +118,12 @@ class LiveTennisClient:
             if bool(fixture.get("is_qualifying", False)):
                 continue
 
+            # The provider keeps cancelled and recently finished events in the
+            # fixtures feed. Only genuinely upcoming matches belong on the site.
+            status = str(fixture.get("status") or "").strip().casefold()
+            if status != "scheduled":
+                continue
+
             tournament_name = str(fixture.get("tournament") or "").strip()
             event_date_text = str(fixture.get("event_date") or "").strip()
             try:
@@ -150,7 +156,7 @@ class LiveTennisClient:
                     surface=fixture.get("surface"),
                     round_name=fixture.get("round"),
                     round_code=fixture.get("round_code"),
-                    status=fixture.get("status"),
+                    status=status,
                     is_qualifying=False,
                 )
             )
