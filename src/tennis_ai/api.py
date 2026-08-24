@@ -109,7 +109,11 @@ class PredictionService:
                 )
             else:
                 try:
-                    fixtures = build_upcoming_fixture_table(self.project_root, self.client)
+                    fixtures = build_upcoming_fixture_table(
+                        self.project_root,
+                        self.client,
+                        self.state.players.keys(),
+                    )
                 except TennisAPIError:
                     fixtures = load_fixture_snapshot(self.project_root)
             if not USE_MOCK_FIXTURES and not fixtures.empty:

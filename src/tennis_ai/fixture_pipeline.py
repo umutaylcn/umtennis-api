@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 import json
 import os
 from pathlib import Path
+from typing import Iterable
 
 import pandas as pd
 
@@ -129,15 +130,17 @@ def _resolve_player(
 def build_upcoming_fixture_table(
     project_root: str | Path,
     client: LiveTennisClient,
+    historical_names: Iterable[str] | None = None,
 ) -> pd.DataFrame:
     root = Path(project_root)
-    model_data = pd.read_pickle(
-        root / "data" / "processed" / "atp_model_data_1990_2026.pkl"
-    )
-    historical_names = pd.concat(
-        [model_data["p1_name"], model_data["p2_name"]],
-        ignore_index=True,
-    ).dropna()
+    if historical_names is None:
+        model_data = pd.read_pickle(
+            root / "data" / "processed" / "atp_model_data_1990_2026.pkl"
+        )
+        historical_names = pd.concat(
+            [model_data["p1_name"], model_data["p2_name"]],
+            ignore_index=True,
+        ).dropna()
 
     matcher = HistoricalPlayerMatcher(historical_names)
     cache = PlayerProfileCache(root / "data" / "cache" / "live_players.json")
