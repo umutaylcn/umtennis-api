@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import pandas as pd
 
-from .fixture_pipeline import build_upcoming_fixture_table
+from .fixture_pipeline import build_upcoming_fixture_table, load_fixture_snapshot
 from .inference import EnsemblePredictor
 from .live_data import LiveTennisClient, TennisAPIError
 from .mock_fixtures import build_mock_fixture_table
@@ -22,7 +22,7 @@ from .presentation import PlayerPresentationService
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-FIXTURE_CACHE_SECONDS = 300
+FIXTURE_CACHE_SECONDS = int(os.getenv("FIXTURE_CACHE_SECONDS", "3600"))
 USE_MOCK_FIXTURES = os.getenv("USE_MOCK_FIXTURES", "0").strip().lower() not in {
     "0", "false", "no"
 }
@@ -93,7 +93,7 @@ class PredictionService:
         self.ensure_current_artifacts()
         with self._lock:
             cache_fresh = (
-                not self._fixtures.empty
+                self._fixtures_loaded_at > 0
                 and time.monotonic() - self._fixtures_loaded_at < FIXTURE_CACHE_SECONDS
             )
             if cache_fresh and not force_refresh:
@@ -108,7 +108,10 @@ class PredictionService:
                     limit=MOCK_ELO_LIMIT,
                 )
             else:
-                fixtures = build_upcoming_fixture_table(self.project_root, self.client)
+                try:
+                    fixtures = build_upcoming_fixture_table(self.project_root, self.client)
+                except TennisAPIError:
+                    fixtures = load_fixture_snapshot(self.project_root)
             if not USE_MOCK_FIXTURES and not fixtures.empty:
                 fixtures = fixtures[
                     fixtures["identities_resolved"]
@@ -285,10 +288,7 @@ def health(request: Request) -> dict[str, Any]:
 
 @app.get("/api/matches")
 def upcoming_matches(request: Request) -> dict[str, Any]:
-    try:
-        matches = _service(request).match_list()
-    except TennisAPIError as exc:
-        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    matches = _service(request).match_list()
     return {"count": len(matches), "matches": matches}
 
 

@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timedelta, timezone
+import json
+import os
 from pathlib import Path
 
 import pandas as pd
@@ -9,6 +12,85 @@ import pandas as pd
 from .live_data import LiveTennisClient, UpcomingMatch
 from .player_matching import HistoricalPlayerMatcher, PlayerProfileCache
 from .result_tracker import TrackedFixtureStore
+
+
+FIXTURE_SNAPSHOT_NAME = "upcoming_fixtures.json"
+
+
+def fixture_snapshot_path(project_root: str | Path) -> Path:
+    return Path(project_root) / "data" / "cache" / FIXTURE_SNAPSHOT_NAME
+
+
+def save_fixture_snapshot(project_root: str | Path, table: pd.DataFrame) -> None:
+    """Persist the last successful model-ready fixture response across restarts."""
+    if table.empty:
+        return
+    path = fixture_snapshot_path(project_root)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    serializable = table.copy()
+    serializable["start_time_utc"] = pd.to_datetime(
+        serializable["start_time_utc"], utc=True, errors="coerce"
+    ).map(lambda value: value.isoformat() if pd.notna(value) else None)
+    payload = {
+        "saved_at_utc": datetime.now(timezone.utc).isoformat(),
+        "fixtures": serializable.where(pd.notna(serializable), None).to_dict("records"),
+    }
+    temporary_path = path.with_suffix(".tmp")
+    temporary_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    os.replace(temporary_path, path)
+
+
+def load_fixture_snapshot(
+    project_root: str | Path,
+    *,
+    now_utc: datetime | None = None,
+) -> pd.DataFrame:
+    """Load still-relevant fixtures when the provider is unavailable or rate-limited."""
+    path = fixture_snapshot_path(project_root)
+    if not path.exists():
+        return pd.DataFrame()
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        table = pd.DataFrame(payload.get("fixtures", []))
+    except (OSError, ValueError, TypeError):
+        return pd.DataFrame()
+    if table.empty or "start_time_utc" not in table:
+        return pd.DataFrame()
+
+    optional_columns = (
+        "event_date",
+        "p1_match_status",
+        "p2_match_status",
+        "p1_match_score",
+        "p2_match_score",
+        "p1_current_rank_points",
+        "p2_current_rank_points",
+        "p1_hand",
+        "p2_hand",
+        "p1_birthday",
+        "p2_birthday",
+        "p1_country",
+        "p2_country",
+    )
+    for column in optional_columns:
+        if column not in table:
+            table[column] = None
+
+    table["start_time_utc"] = pd.to_datetime(
+        table["start_time_utc"], utc=True, errors="coerce"
+    )
+    reference = pd.Timestamp(now_utc or datetime.now(timezone.utc))
+    # Keep a short grace period for matches whose scheduled start moved or was delayed.
+    lower_bound = reference - timedelta(hours=3)
+    upper_bound = reference + timedelta(days=8)
+    table = table[
+        table["start_time_utc"].between(lower_bound, upper_bound, inclusive="both")
+    ]
+    return table.sort_values(
+        ["start_time_utc", "tournament_name"], na_position="last"
+    ).reset_index(drop=True)
 
 
 def _resolve_player(
@@ -82,6 +164,7 @@ def build_upcoming_fixture_table(
         TrackedFixtureStore(
             root / "data" / "cache" / "tracked_fixtures.json"
         ).track(table)
+        save_fixture_snapshot(root, table)
     return table
 
 
