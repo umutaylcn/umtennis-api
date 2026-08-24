@@ -22,6 +22,29 @@ def fixture_snapshot_path(project_root: str | Path) -> Path:
     return Path(project_root) / "data" / "cache" / FIXTURE_SNAPSHOT_NAME
 
 
+def fixture_snapshot_is_fresh(
+    project_root: str | Path,
+    max_age_seconds: int,
+    *,
+    now_utc: datetime | None = None,
+) -> bool:
+    path = fixture_snapshot_path(project_root)
+    if not path.exists():
+        return False
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        saved_at = pd.Timestamp(payload["saved_at_utc"])
+        if saved_at.tzinfo is None:
+            saved_at = saved_at.tz_localize("UTC")
+        else:
+            saved_at = saved_at.tz_convert("UTC")
+    except (OSError, KeyError, ValueError, TypeError):
+        return False
+    reference = pd.Timestamp(now_utc or datetime.now(timezone.utc))
+    age_seconds = (reference - saved_at).total_seconds()
+    return 0 <= age_seconds < max_age_seconds
+
+
 def save_fixture_snapshot(project_root: str | Path, table: pd.DataFrame) -> None:
     """Persist the last successful model-ready fixture response across restarts."""
     if table.empty:

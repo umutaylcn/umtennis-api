@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+import joblib
 import numpy as np
 import pandas as pd
 
@@ -25,17 +26,59 @@ STAT_COLUMNS = {
 # The 2026 provider feed contains this shortened duplicate of Ben Shelton.
 # Keep it available for historical matching, but never rank it as a second player.
 LEADERBOARD_EXCLUDED_ALIASES = {"Shelton B."}
+PRESENTATION_CACHE_VERSION = 1
 
 
 class PlayerPresentationService:
-    def __init__(self, project_root: Path, state: CurrentStateEngine) -> None:
+    def __init__(
+        self,
+        project_root: Path,
+        state: CurrentStateEngine,
+        *,
+        use_cache: bool = True,
+    ) -> None:
         self.root = project_root
         self.state = state
         self._matches: dict[str, list[dict[str, Any]]] = defaultdict(list)
         self._elo_ranks: dict[str, int] = {}
         self._surface_ranks: dict[str, dict[str, int]] = {}
         self._active_names: set[str] = set()
-        self._load()
+        self._load(use_cache=use_cache)
+
+    @property
+    def cache_path(self) -> Path:
+        return self.root / "data" / "cache" / "presentation_history.joblib"
+
+    def _load_cache(self) -> bool:
+        if not self.cache_path.exists():
+            return False
+        try:
+            payload = joblib.load(self.cache_path)
+            if payload.get("version") != PRESENTATION_CACHE_VERSION:
+                return False
+            self._matches = defaultdict(list, payload["matches"])
+            self._active_names = set(payload["active_names"])
+        except (AttributeError, EOFError, OSError, KeyError, TypeError, ValueError):
+            return False
+        self._active_names = {
+            name for name in self._active_names if name in self.state.players
+        }
+        self._rebuild_rankings()
+        return True
+
+    def _save_cache(self) -> None:
+        self.cache_path.parent.mkdir(parents=True, exist_ok=True)
+        temporary_path = self.cache_path.with_suffix(".tmp")
+        joblib.dump(
+            {
+                "version": PRESENTATION_CACHE_VERSION,
+                "active_names": sorted(self._active_names),
+                "matches": dict(self._matches),
+            },
+            temporary_path,
+            compress=3,
+        )
+        temporary_path.replace(self.cache_path)
 
     def _rebuild_rankings(self) -> None:
         ranked_names = self._active_names - LEADERBOARD_EXCLUDED_ALIASES
@@ -151,7 +194,9 @@ class PlayerPresentationService:
                         }
                     )
 
-    def _load(self) -> None:
+    def _load(self, *, use_cache: bool = True) -> None:
+        if use_cache and self._load_cache():
+            return
         active_index_path = (
             self.root / "data" / "processed" / "active_players_2026.json"
         )
@@ -241,6 +286,7 @@ class PlayerPresentationService:
             history.sort(
                 key=lambda row: (row["played_at_utc"], row.get("sort_order", 0))
             )
+        self._save_cache()
 
     @staticmethod
     def _rank(ratings: dict[str, float]) -> dict[str, int]:

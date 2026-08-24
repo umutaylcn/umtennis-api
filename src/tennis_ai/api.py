@@ -14,7 +14,11 @@ from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import pandas as pd
 
-from .fixture_pipeline import build_upcoming_fixture_table, load_fixture_snapshot
+from .fixture_pipeline import (
+    build_upcoming_fixture_table,
+    fixture_snapshot_is_fresh,
+    load_fixture_snapshot,
+)
 from .inference import EnsemblePredictor
 from .live_data import LiveTennisClient, TennisAPIError
 from .mock_fixtures import build_mock_fixture_table
@@ -22,7 +26,7 @@ from .presentation import PlayerPresentationService
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-FIXTURE_CACHE_SECONDS = int(os.getenv("FIXTURE_CACHE_SECONDS", "3600"))
+FIXTURE_CACHE_SECONDS = int(os.getenv("FIXTURE_CACHE_SECONDS", "86400"))
 USE_MOCK_FIXTURES = os.getenv("USE_MOCK_FIXTURES", "0").strip().lower() not in {
     "0", "false", "no"
 }
@@ -108,14 +112,19 @@ class PredictionService:
                     limit=MOCK_ELO_LIMIT,
                 )
             else:
-                try:
-                    fixtures = build_upcoming_fixture_table(
-                        self.project_root,
-                        self.client,
-                        self.state.players.keys(),
-                    )
-                except TennisAPIError:
+                if fixture_snapshot_is_fresh(
+                    self.project_root, FIXTURE_CACHE_SECONDS
+                ):
                     fixtures = load_fixture_snapshot(self.project_root)
+                else:
+                    try:
+                        fixtures = build_upcoming_fixture_table(
+                            self.project_root,
+                            self.client,
+                            self.state.players.keys(),
+                        )
+                    except TennisAPIError:
+                        fixtures = load_fixture_snapshot(self.project_root)
             if not USE_MOCK_FIXTURES and not fixtures.empty:
                 fixtures = fixtures[
                     fixtures["identities_resolved"]

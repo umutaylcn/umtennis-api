@@ -3,4 +3,5 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 data/cache/tracked_fixtures.json
+data/cache/presentation_history.joblib
 data/cache/*.tmp
