@@ -145,7 +145,10 @@ class LiveTennisClient:
 
             upcoming.append(
                 UpcomingMatch(
-                    match_id=int(fixture["id"]),
+                    # `id` is the fixture-row id. The match detail endpoint uses
+                    # `match_id`; treating them as the same caused collisions with
+                    # unrelated historical matches and silently blocked result sync.
+                    match_id=int(fixture.get("match_id") or fixture["id"]),
                     event_date=fixture.get("event_date"),
                     start_time=fixture.get("start_time"),
                     p1_id=fixture.get("player1_id"),

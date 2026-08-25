@@ -1,8 +1,8 @@
 {
-  "saved_at_utc": "2026-08-25T11:46:28.351024+00:00",
+  "saved_at_utc": "2026-08-25T13:18:26.269438+00:00",
   "fixtures": [
     {
-      "match_id": 27522,
+      "match_id": 177894,
       "event_date": "2026-08-25",
       "start_time_utc": "2026-08-25T18:00:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -31,7 +31,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27523,
+      "match_id": 177895,
       "event_date": "2026-08-25",
       "start_time_utc": "2026-08-25T18:00:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -60,7 +60,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27870,
+      "match_id": 178286,
       "event_date": "2026-08-25",
       "start_time_utc": "2026-08-25T18:00:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -89,7 +89,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27871,
+      "match_id": 178287,
       "event_date": "2026-08-25",
       "start_time_utc": "2026-08-25T18:00:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -118,7 +118,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27978,
+      "match_id": 178493,
       "event_date": "2026-08-25",
       "start_time_utc": "2026-08-25T19:30:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -147,7 +147,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27605,
+      "match_id": 178284,
       "event_date": "2026-08-25",
       "start_time_utc": "2026-08-25T19:30:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -176,7 +176,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27524,
+      "match_id": 177906,
       "event_date": "2026-08-25",
       "start_time_utc": "2026-08-25T19:30:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -205,7 +205,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27872,
+      "match_id": 178288,
       "event_date": "2026-08-25",
       "start_time_utc": "2026-08-25T20:00:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -218,9 +218,9 @@
       "p1_historical_name": "Arthur Fery",
       "p2_historical_name": "Cruz Hewitt",
       "p1_match_status": "exact",
-      "p2_match_status": "new_player",
+      "p2_match_status": "exact",
       "p1_match_score": 1.0,
-      "p2_match_score": 0.56,
+      "p2_match_score": 1.0,
       "p1_current_rank": 37,
       "p2_current_rank": 376,
       "p1_current_rank_points": 1253,
@@ -234,7 +234,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27964,
+      "match_id": 178484,
       "event_date": "2026-08-26",
       "start_time_utc": "2026-08-25T21:00:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -263,7 +263,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27606,
+      "match_id": 178285,
       "event_date": "2026-08-26",
       "start_time_utc": "2026-08-25T21:00:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -292,7 +292,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27977,
+      "match_id": 178491,
       "event_date": "2026-08-26",
       "start_time_utc": "2026-08-25T21:00:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -321,7 +321,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27876,
+      "match_id": 178295,
       "event_date": "2026-08-26",
       "start_time_utc": "2026-08-25T22:30:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -350,7 +350,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27877,
+      "match_id": 178296,
       "event_date": "2026-08-26",
       "start_time_utc": "2026-08-25T22:30:00+00:00",
       "tournament_name": "Winston-Salem",
@@ -379,7 +379,7 @@
       "identities_resolved": true
     },
     {
-      "match_id": 27369,
+      "match_id": 177883,
       "event_date": "2026-08-26",
       "start_time_utc": "2026-08-26T00:00:00+00:00",
       "tournament_name": "Winston-Salem",

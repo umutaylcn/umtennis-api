@@ -45,6 +45,16 @@ class LiveTennisClientTests(unittest.TestCase):
         self.assertEqual([match.match_id for match in matches], [1])
         self.assertEqual(matches[0].status, "scheduled")
 
+    def test_upcoming_feed_uses_match_detail_id_when_available(self):
+        client = LiveTennisClient("test-key")
+        row = fixture(27091, "scheduled")
+        row["match_id"] = 178288
+
+        with patch.object(client, "_get", return_value={"data": [row]}):
+            matches = client.get_upcoming_matches()
+
+        self.assertEqual(matches[0].match_id, 178288)
+
 
 if __name__ == "__main__":
     unittest.main()

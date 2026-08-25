@@ -120,6 +120,12 @@ class HistoricalPlayerMatcher:
         for historical_names in self._names_by_normalized.values():
             for historical_name in historical_names:
                 historical_tokens = normalize_player_name(historical_name).split()
+                # Do not treat another provider-style abbreviation (for example
+                # ``Sesko Z.``) as a full historical identity. A one-letter family
+                # token can otherwise fuzzy-match unrelated surnames containing
+                # that letter, such as ``Gorzny S.``.
+                if any(len(token) == 1 for token in historical_tokens):
+                    continue
                 for family_start in range(1, len(historical_tokens)):
                     given_initials = [
                         token[0] for token in historical_tokens[:family_start]
