@@ -102,15 +102,21 @@ class HistoricalPlayerMatcher:
         return best_name, best_score, "fuzzy"
 
     def match_surname_initial(self, short_name: str) -> tuple[str | None, float, str]:
-        """Match provider names such as ``Zverev A.`` to full historical names."""
+        """Match provider names such as ``Zverev A.`` or ``A. Zverev``."""
         normalized = normalize_player_name(short_name)
         tokens = normalized.split()
-        if len(tokens) < 2 or len(tokens[-1]) != 1:
+        if len(tokens) < 2:
             return self.match(short_name)
 
         initial_tokens: list[str] = []
-        while tokens and len(tokens[-1]) == 1:
-            initial_tokens.insert(0, tokens.pop())
+        if len(tokens[-1]) == 1:
+            while tokens and len(tokens[-1]) == 1:
+                initial_tokens.insert(0, tokens.pop())
+        elif len(tokens[0]) == 1:
+            while tokens and len(tokens[0]) == 1:
+                initial_tokens.append(tokens.pop(0))
+        else:
+            return self.match(short_name)
         if not tokens or not initial_tokens:
             return self.match(short_name)
 

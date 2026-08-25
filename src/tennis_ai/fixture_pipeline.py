@@ -130,7 +130,7 @@ def _resolve_player(
         cache.set(player_id, profile)
 
     full_name = str((profile or {}).get("name") or fallback_name).strip()
-    historical_name, score, status = matcher.match(full_name)
+    historical_name, score, status = matcher.match_surname_initial(full_name)
     # A genuinely new tour player has no row in the historical model data yet.
     # Keep authoritative full provider names as cold-start identities, while
     # continuing to reject close/ambiguous matches that could merge two players.
