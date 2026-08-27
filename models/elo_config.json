@@ -6,6 +6,7 @@
   "provisional_k": 32,
   "standard_k": 32,
   "annual_regression": 0.0,
+  "retirement_weight": 0.5,
   "ensemble": {
     "xgboost": 0.6,
     "logistic": 0.4

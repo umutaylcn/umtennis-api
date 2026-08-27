@@ -45,6 +45,7 @@ class EloConfig:
     provisional_k: float = PROVISIONAL_K
     standard_k: float = STANDARD_K
     annual_regression: float = 0.0
+    retirement_weight: float = 0.5
 
 
 DEFAULT_ELO_CONFIG = EloConfig()
@@ -255,9 +256,13 @@ class CurrentStateEngine:
         self._apply_annual_regression(loser, season)
         surface = str(row.surface)
         config = getattr(self, "elo_config", DEFAULT_ELO_CONFIG)
+        match_status = str(getattr(row, "match_status", "completed")).casefold()
+        elo_weight = config.retirement_weight if match_status == "retirement" else 1.0
         winner_change, loser_change = elo_changes(
             winner.elo, loser.elo, winner.matches, loser.matches, True, config
         )
+        winner_change *= elo_weight
+        loser_change *= elo_weight
         winner.elo += winner_change
         loser.elo += loser_change
         winner.matches += 1
@@ -273,6 +278,8 @@ class CurrentStateEngine:
             True,
             config,
         )
+        winner_surface_change *= elo_weight
+        loser_surface_change *= elo_weight
         winner.surface_elo[surface] += winner_surface_change
         loser.surface_elo[surface] += loser_surface_change
         winner.surface_matches[surface] += 1
@@ -294,14 +301,17 @@ class CurrentStateEngine:
         loser_tourney["losses"] += 1
         loser_tourney["elo_lost"] += -loser_change
 
-        winner_tourney["sets_won"] += int(row.winner_sets)
-        winner_tourney["sets_lost"] += int(row.loser_sets)
-        winner_tourney["games_won"] += int(row.winner_games)
-        winner_tourney["games_lost"] += int(row.loser_games)
-        loser_tourney["sets_won"] += int(row.loser_sets)
-        loser_tourney["sets_lost"] += int(row.winner_sets)
-        loser_tourney["games_won"] += int(row.loser_games)
-        loser_tourney["games_lost"] += int(row.winner_games)
+        # A retirement has an official winner, but its partial score must not be
+        # treated as a completed set/game performance.
+        if match_status != "retirement":
+            winner_tourney["sets_won"] += int(row.winner_sets)
+            winner_tourney["sets_lost"] += int(row.loser_sets)
+            winner_tourney["games_won"] += int(row.winner_games)
+            winner_tourney["games_lost"] += int(row.loser_games)
+            loser_tourney["sets_won"] += int(row.loser_sets)
+            loser_tourney["sets_lost"] += int(row.winner_sets)
+            loser_tourney["games_won"] += int(row.loser_games)
+            loser_tourney["games_lost"] += int(row.winner_games)
 
         if pd.notna(row.winner_rank):
             winner.rank = float(row.winner_rank)

@@ -78,7 +78,7 @@ class ResultTrackerTests(unittest.TestCase):
             self.assertEqual(results.iloc[0].loser_games, 11)
             self.assertEqual(len(match_identity_keys(results)), 1)
 
-    def test_retirement_is_terminal_and_never_becomes_training_result(self):
+    def test_retirement_becomes_weighted_state_result(self):
         with tempfile.TemporaryDirectory() as directory:
             store = TrackedFixtureStore(Path(directory) / "tracked.json")
             store.track(fixture_frame(99))
@@ -93,8 +93,10 @@ class ResultTrackerTests(unittest.TestCase):
                 ),
                 now=pd.Timestamp("2026-08-24T00:00:00Z"),
             )
-            self.assertTrue(results.empty)
-            self.assertEqual(terminal, [99])
+            self.assertEqual(len(results), 1)
+            self.assertEqual(results.iloc[0].winner_name, "Adam Walton")
+            self.assertEqual(results.iloc[0].match_status, "retirement")
+            self.assertEqual(terminal, [])
             self.assertEqual(pending, [])
             self.assertEqual(mismatch, [])
 

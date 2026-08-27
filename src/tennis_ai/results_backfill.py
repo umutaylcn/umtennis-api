@@ -1,4 +1,4 @@
-"""Convert the free current-season CSV into completed main-tour match updates."""
+"""Convert the free current-season CSV into state-applicable main-tour updates."""
 
 from __future__ import annotations
 
@@ -95,7 +95,7 @@ def load_completed_backfill(
     mask = (
         source["tour_type"].eq(1)
         & source["status"].eq("FINISHED")
-        & source["status_extra"].eq("FINISHED")
+        & source["status_extra"].isin(["FINISHED", "RETIRED"])
         & source["winner_code"].isin([1, 2])
         & source["surface"].str.casefold().isin(["hard", "clay", "grass"])
         & ~source["tournament"].str.contains("Qualification", case=False, na=False)
@@ -142,6 +142,9 @@ def load_completed_backfill(
                 "loser_rank": getattr(row, f"{loser_prefix}_rank"),
                 "winner_rank_points": getattr(row, f"{winner_prefix}_points"),
                 "loser_rank_points": getattr(row, f"{loser_prefix}_points"),
+                "match_status": (
+                    "retirement" if str(row.status_extra).upper() == "RETIRED" else "completed"
+                ),
                 "home_match_status": home_status,
                 "away_match_status": away_status,
                 "home_match_score": round(home_score, 4),
@@ -160,7 +163,7 @@ def load_terminal_match_keys(
     csv_path: str | Path,
     historical_names: pd.Series,
 ) -> set[tuple[str, frozenset[str]]]:
-    """Matches that are over but must not update Elo (retirement/walkover)."""
+    """Matches that are over but have no official result usable by the model."""
     source = pd.read_csv(csv_path, low_memory=False)
     source["played_at_utc"] = pd.to_datetime(
         source["date_timestamp"], unit="s", utc=True, errors="coerce"
@@ -168,7 +171,7 @@ def load_terminal_match_keys(
     mask = (
         source["tour_type"].eq(1)
         & source["status"].eq("FINISHED")
-        & source["status_extra"].isin(["RETIRED", "WALKOVER"])
+        & source["status_extra"].isin(["WALKOVER", "CANCELLED"])
         & ~source["tournament"].str.contains("Qualification", case=False, na=False)
         & source["played_at_utc"].ge(BACKFILL_START_UTC)
     )

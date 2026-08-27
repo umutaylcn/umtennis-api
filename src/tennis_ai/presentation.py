@@ -250,7 +250,7 @@ class PlayerPresentationService:
             source = source[
                 source["tour_type"].eq(1)
                 & source["status"].eq("FINISHED")
-                & source["status_extra"].eq("FINISHED")
+                & source["status_extra"].isin(["FINISHED", "RETIRED"])
                 & source["winner_code"].isin([1, 2])
                 & ~source["tournament"].str.contains("Qualification", case=False, na=False)
             ].copy()
@@ -278,8 +278,13 @@ class PlayerPresentationService:
                         "won": bool(won),
                         "opponent": name_map.get(str(getattr(row, f"{opponent_side}_name"))),
                     }
+                    is_retirement = str(row.status_extra).upper() == "RETIRED"
                     for source_name, target_name in STAT_COLUMNS.items():
-                        record[target_name] = getattr(row, f"{side}_{source_name}")
+                        # Retirement counts toward form, but partial performance
+                        # metrics must not distort career averages.
+                        record[target_name] = (
+                            None if is_retirement else getattr(row, f"{side}_{source_name}")
+                        )
                     self._matches[name].append(record)
 
         for history in self._matches.values():

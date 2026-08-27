@@ -20,7 +20,7 @@ from .results_backfill import (
 )
 
 
-TERMINAL_EVENT_STATUSES = {"retired", "walk over", "cancelled"}
+TERMINAL_EVENT_STATUSES = {"walk over", "cancelled"}
 
 
 def _json_value(value: Any) -> Any:
@@ -125,11 +125,15 @@ class TrackedFixtureStore:
         _atomic_json({"version": 1, "fixtures": self._fixtures}, self.path)
 
 
-def _score_totals(detail: dict[str, Any], winner: int) -> tuple[int, int, int, int]:
+def _score_totals(
+    detail: dict[str, Any], winner: int, *, allow_partial: bool = False
+) -> tuple[int, int, int, int]:
     score = detail.get("score") or {}
     sets = score.get("sets") or [0, 0]
     games = score.get("games") or [[], []]
     if len(sets) < 2 or len(games) < 2:
+        if allow_partial:
+            return 0, 0, 0, 0
         raise ValueError("Completed match has an incomplete score payload")
     winner_index = winner - 1
     loser_index = 1 - winner_index
@@ -150,7 +154,10 @@ def _completed_row(record: dict[str, Any], detail: dict[str, Any]) -> dict[str, 
     )
     surface = str(detail.get("surface") or record["surface"]).title()
     round_code = detail.get("round_code") or record.get("round")
-    winner_sets, loser_sets, winner_games, loser_games = _score_totals(detail, winner)
+    is_retirement = str(detail.get("event_status") or "").casefold() == "retired"
+    winner_sets, loser_sets, winner_games, loser_games = _score_totals(
+        detail, winner, allow_partial=is_retirement
+    )
     played_at = detail.get("scheduled_time") or record["start_time_utc"]
     level = tournament_level(tournament)
     return {
@@ -173,6 +180,7 @@ def _completed_row(record: dict[str, Any], detail: dict[str, Any]) -> dict[str, 
         "loser_rank": record.get(f"{loser_prefix}_rank"),
         "winner_rank_points": record.get(f"{winner_prefix}_rank_points"),
         "loser_rank_points": record.get(f"{loser_prefix}_rank_points"),
+        "match_status": "retirement" if is_retirement else "completed",
         "home_match_status": "provider_id",
         "away_match_status": "provider_id",
         "home_match_score": 1.0,
