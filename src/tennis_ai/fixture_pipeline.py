@@ -206,8 +206,11 @@ def _fixture_row(
         "tournament_name": fixture.tournament_name,
         "surface": fixture.surface,
         "round": fixture.round_code,
-        "p1_display_name": p1["historical_name"] or p1["provider_full_name"],
-        "p2_display_name": p2["historical_name"] or p2["provider_full_name"],
+        # Model lookup uses the historical identity, but the UI should retain
+        # the current provider's canonical full name (for example John Jeffrey
+        # Wolf rather than the archive abbreviation J J Wolf).
+        "p1_display_name": p1["provider_full_name"],
+        "p2_display_name": p2["provider_full_name"],
         "p1_id": fixture.p1_id,
         "p2_id": fixture.p2_id,
         "p1_historical_name": p1["historical_name"],

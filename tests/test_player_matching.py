@@ -31,6 +31,12 @@ class HistoricalPlayerMatcherTests(unittest.TestCase):
         self.assertIsNone(matched)
         self.assertEqual(status, "unresolved_short")
 
+    def test_john_jeffrey_wolf_maps_to_historical_initials(self):
+        matcher = HistoricalPlayerMatcher(["J J Wolf"])
+
+        self.assertEqual(matcher.match("John Jeffrey Wolf")[0], "J J Wolf")
+        self.assertEqual(matcher.match_surname_initial("Wolf J. J.")[0], "J J Wolf")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -41,8 +41,15 @@ class PlayerProfileCache:
 
 
 class HistoricalPlayerMatcher:
+    _EXPLICIT_ALIASES = {
+        "john jeffrey wolf": "J J Wolf",
+        "wolf j j": "J J Wolf",
+        "jj wolf": "J J Wolf",
+    }
+
     def __init__(self, historical_names: Iterable[str]) -> None:
         names = sorted({str(name).strip() for name in historical_names if str(name).strip()})
+        self._historical_names = set(names)
         self._names_by_normalized: dict[str, list[str]] = {}
         self._names_by_compact: dict[str, list[str]] = {}
         self._names_by_token_set: dict[str, list[str]] = {}
@@ -53,7 +60,16 @@ class HistoricalPlayerMatcher:
             token_set = " ".join(sorted(normalized.split()))
             self._names_by_token_set.setdefault(token_set, []).append(name)
 
+    def _match_explicit_alias(self, name: str) -> tuple[str | None, float, str] | None:
+        target = self._EXPLICIT_ALIASES.get(normalize_player_name(name))
+        if target is not None and target in self._historical_names:
+            return target, 1.0, "explicit_alias"
+        return None
+
     def match(self, live_name: str) -> tuple[str | None, float, str]:
+        explicit = self._match_explicit_alias(live_name)
+        if explicit is not None:
+            return explicit
         normalized_live = normalize_player_name(live_name)
         exact = self._names_by_normalized.get(normalized_live, [])
         if len(exact) == 1:
@@ -103,6 +119,9 @@ class HistoricalPlayerMatcher:
 
     def match_surname_initial(self, short_name: str) -> tuple[str | None, float, str]:
         """Match provider names such as ``Zverev A.`` or ``A. Zverev``."""
+        explicit = self._match_explicit_alias(short_name)
+        if explicit is not None:
+            return explicit
         normalized = normalize_player_name(short_name)
         tokens = normalized.split()
         if len(tokens) < 2:
