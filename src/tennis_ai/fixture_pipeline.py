@@ -11,11 +11,30 @@ from typing import Iterable
 import pandas as pd
 
 from .live_data import LiveTennisClient, UpcomingMatch
-from .player_matching import HistoricalPlayerMatcher, PlayerProfileCache
+from .player_matching import (
+    HistoricalPlayerMatcher,
+    PlayerProfileCache,
+    normalize_player_name,
+)
 from .result_tracker import TrackedFixtureStore
 
 
 FIXTURE_SNAPSHOT_NAME = "upcoming_fixtures.json"
+
+DISPLAY_NAME_ALIASES = {
+    "a molcan": "Alex Molcan",
+    "f cina": "Federico Cina",
+    "luca van assche": "Luca Van Assche",
+    "pablo carreno busta": "Pablo Carreno Busta",
+    "s baez": "Sebastian Baez",
+    "tomas vera barrios": "Tomas Barrios Vera",
+    "v kopriva": "Vit Kopriva",
+}
+
+
+def canonical_display_name(name: object) -> str:
+    value = str(name).strip()
+    return DISPLAY_NAME_ALIASES.get(normalize_player_name(value), value)
 
 
 def fixture_snapshot_path(project_root: str | Path) -> Path:
@@ -134,7 +153,7 @@ def _resolve_player(
     # A genuinely new tour player has no row in the historical model data yet.
     # Keep authoritative full provider names as cold-start identities, while
     # continuing to reject close/ambiguous matches that could merge two players.
-    if historical_name is None and status == "unresolved" and score < 0.70:
+    if historical_name is None and status == "unresolved":
         historical_name = full_name
         status = "new_player"
     return {
@@ -209,8 +228,8 @@ def _fixture_row(
         # Model lookup uses the historical identity, but the UI should retain
         # the current provider's canonical full name (for example John Jeffrey
         # Wolf rather than the archive abbreviation J J Wolf).
-        "p1_display_name": p1["provider_full_name"],
-        "p2_display_name": p2["provider_full_name"],
+        "p1_display_name": canonical_display_name(p1["provider_full_name"]),
+        "p2_display_name": canonical_display_name(p2["provider_full_name"]),
         "p1_id": fixture.p1_id,
         "p2_id": fixture.p2_id,
         "p1_historical_name": p1["historical_name"],

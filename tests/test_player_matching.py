@@ -37,6 +37,12 @@ class HistoricalPlayerMatcherTests(unittest.TestCase):
         self.assertEqual(matcher.match("John Jeffrey Wolf")[0], "J J Wolf")
         self.assertEqual(matcher.match_surname_initial("Wolf J. J.")[0], "J J Wolf")
 
+    def test_coleman_wong_variants_share_one_history(self):
+        matcher = HistoricalPlayerMatcher(["Coleman Wong", "Chak Lam Coleman Wong"])
+
+        self.assertEqual(matcher.match("Coleman Chak Lam Wong")[0], "Coleman Wong")
+        self.assertEqual(matcher.match_surname_initial("Wong C.")[0], "Coleman Wong")
+
 
 if __name__ == "__main__":
     unittest.main()
