@@ -10,7 +10,7 @@ from typing import Iterable
 
 import pandas as pd
 
-from .live_data import LiveTennisClient, UpcomingMatch
+from .live_data import LiveTennisClient, TennisAPIError, UpcomingMatch
 from .player_matching import (
     HistoricalPlayerMatcher,
     PlayerProfileCache,
@@ -144,9 +144,17 @@ def _resolve_player(
     matcher: HistoricalPlayerMatcher,
 ) -> dict[str, object]:
     profile = cache.get(player_id) if player_id is not None else None
-    if profile is None and player_id is not None:
-        profile = client.get_player(player_id)
-        cache.set(player_id, profile)
+    if player_id is not None:
+        # Ranking and ranking-points fields change every week.  Reusing a player
+        # profile forever mixed snapshots from different dates and could assign
+        # the same ATP rank to multiple players. Refresh live fixture players on
+        # every daily build, while retaining the cache as an outage fallback.
+        try:
+            profile = client.get_player(player_id)
+            cache.set(player_id, profile)
+        except TennisAPIError:
+            if profile is None:
+                raise
 
     full_name = str((profile or {}).get("name") or fallback_name).strip()
     historical_name, score, status = matcher.match_surname_initial(full_name)

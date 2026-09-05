@@ -1550,9 +1550,9 @@
     "id": 8730,
     "is_doubles_team": false,
     "name": "Jakub Menšik",
-    "ranking": 17,
-    "ranking_movement": "up",
-    "ranking_points": 2205,
+    "ranking": 18,
+    "ranking_movement": "down",
+    "ranking_points": 2445,
     "stats": {
       "ratings": null,
       "season": [
@@ -1715,9 +1715,9 @@
     "id": 1253,
     "is_doubles_team": false,
     "name": "Michael Zheng",
-    "ranking": 110,
-    "ranking_movement": "down",
-    "ranking_points": 595,
+    "ranking": 107,
+    "ranking_movement": "up",
+    "ranking_points": 590,
     "stats": {
       "ratings": {
         "computed": {
@@ -2769,9 +2769,9 @@
     "id": 19,
     "is_doubles_team": false,
     "name": "Tommy Paul",
-    "ranking": 24,
-    "ranking_movement": "down",
-    "ranking_points": 2075,
+    "ranking": 21,
+    "ranking_movement": "up",
+    "ranking_points": 2225,
     "stats": {
       "ratings": {
         "computed": {
@@ -4278,8 +4278,8 @@
     "id": 35,
     "is_doubles_team": false,
     "name": "Alejandro Tabilo",
-    "ranking": 29,
-    "ranking_movement": "down",
+    "ranking": 28,
+    "ranking_movement": "up",
     "ranking_points": 1688,
     "stats": {
       "ratings": {
@@ -7456,7 +7456,7 @@
     "id": 37,
     "is_doubles_team": false,
     "name": "Daniil Medvedev",
-    "ranking": 7,
+    "ranking": 8,
     "ranking_movement": "down",
     "ranking_points": 3580,
     "stats": {
@@ -8081,9 +8081,9 @@
     "id": 18,
     "is_doubles_team": false,
     "name": "Taylor Fritz",
-    "ranking": 9,
-    "ranking_movement": "same",
-    "ranking_points": 3375,
+    "ranking": 10,
+    "ranking_movement": "down",
+    "ranking_points": 3475,
     "stats": {
       "ratings": {
         "computed": {
@@ -9100,9 +9100,9 @@
     "id": 6,
     "is_doubles_team": false,
     "name": "Alexander Zverev",
-    "ranking": 3,
-    "ranking_movement": "same",
-    "ranking_points": 8090,
+    "ranking": 2,
+    "ranking_movement": "up",
+    "ranking_points": 7790,
     "stats": {
       "ratings": {
         "computed": {
@@ -11649,9 +11649,9 @@
     "id": 652,
     "is_doubles_team": false,
     "name": "Flavio Cobolli",
-    "ranking": 10,
-    "ranking_movement": "down",
-    "ranking_points": 3330,
+    "ranking": 6,
+    "ranking_movement": "up",
+    "ranking_points": 3720,
     "stats": {
       "ratings": {
         "computed": {
@@ -12773,9 +12773,9 @@
     "id": 511,
     "is_doubles_team": false,
     "name": "Learner Tien",
-    "ranking": 12,
-    "ranking_movement": "up",
-    "ranking_points": 2545,
+    "ranking": 15,
+    "ranking_movement": "down",
+    "ranking_points": 2565,
     "stats": {
       "ratings": {
         "computed": {
@@ -13412,9 +13412,9 @@
     "id": 9,
     "is_doubles_team": false,
     "name": "Frances Tiafoe",
-    "ranking": 23,
-    "ranking_movement": "down",
-    "ranking_points": 2130,
+    "ranking": 12,
+    "ranking_movement": "up",
+    "ranking_points": 2680,
     "stats": {
       "ratings": {
         "computed": {
@@ -22076,7 +22076,7 @@
     "id": 522,
     "is_doubles_team": false,
     "name": "Benjamin Bonzi",
-    "ranking": 100,
+    "ranking": 97,
     "ranking_movement": "up",
     "ranking_points": 656,
     "stats": {
@@ -29733,9 +29733,9 @@
     "id": 207,
     "is_doubles_team": false,
     "name": "Botic Van De Zandschulp",
-    "ranking": 59,
+    "ranking": 70,
     "ranking_movement": "up",
-    "ranking_points": 969,
+    "ranking_points": 868,
     "stats": {
       "ratings": {
         "computed": {
@@ -30232,8 +30232,8 @@
     "id": 506,
     "is_doubles_team": false,
     "name": "Luciano Darderi",
-    "ranking": 20,
-    "ranking_movement": "up",
+    "ranking": 22,
+    "ranking_movement": "down",
     "ranking_points": 2175,
     "stats": {
       "ratings": {
@@ -36109,8 +36109,8 @@
     "is_doubles_team": false,
     "name": "Stefanos Tsitsipas",
     "ranking": 53,
-    "ranking_movement": "down",
-    "ranking_points": 1000,
+    "ranking_movement": "same",
+    "ranking_points": 1015,
     "stats": {
       "ratings": {
         "computed": {
@@ -39040,7 +39040,7 @@
     "id": 16,
     "is_doubles_team": false,
     "name": "Karen Khachanov",
-    "ranking": 49,
+    "ranking": 50,
     "ranking_movement": "down",
     "ranking_points": 1050,
     "stats": {
@@ -45855,8 +45855,8 @@
     "id": 24,
     "is_doubles_team": false,
     "name": "Tomas Martin Etcheverry",
-    "ranking": 31,
-    "ranking_movement": "same",
+    "ranking": 32,
+    "ranking_movement": "down",
     "ranking_points": 1440,
     "stats": {
       "ratings": {
@@ -49843,7 +49843,7 @@
     "id": 528,
     "is_doubles_team": false,
     "name": "Zizou Bergs",
-    "ranking": 35,
+    "ranking": 37,
     "ranking_movement": "down",
     "ranking_points": 1345,
     "stats": {
@@ -56437,8 +56437,8 @@
     "id": 842,
     "is_doubles_team": false,
     "name": "Dane Sweeny",
-    "ranking": 122,
-    "ranking_movement": "down",
+    "ranking": 123,
+    "ranking_movement": "up",
     "ranking_points": 506,
     "stats": {
       "ratings": {
@@ -63057,7 +63057,7 @@
     "id": 36,
     "is_doubles_team": false,
     "name": "Alex Michelsen",
-    "ranking": 45,
+    "ranking": 46,
     "ranking_movement": "down",
     "ranking_points": 1070,
     "stats": {
@@ -67988,8 +67988,8 @@
     "id": 526,
     "is_doubles_team": false,
     "name": "Alexander Blockx",
-    "ranking": 32,
-    "ranking_movement": "same",
+    "ranking": 34,
+    "ranking_movement": "down",
     "ranking_points": 1396,
     "stats": {
       "ratings": {
