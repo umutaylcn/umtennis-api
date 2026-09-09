@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from .player_matching import HistoricalPlayerMatcher
+from .player_matching import HistoricalPlayerMatcher, normalize_player_name
 
 
 BACKFILL_START_UTC = pd.Timestamp("2026-06-08", tz="UTC")
@@ -32,6 +32,31 @@ DRAW_SIZE_MAP = {
 }
 
 
+def player_identity_key(name: object) -> str:
+    """Normalize full names and provider abbreviations to surname + initials."""
+    tokens = normalize_player_name(str(name)).split()
+    if not tokens:
+        return ""
+    if len(tokens) == 1:
+        return tokens[0]
+
+    if len(tokens[-1]) == 1:
+        initials: list[str] = []
+        while tokens and len(tokens[-1]) == 1:
+            initials.insert(0, tokens.pop())
+        family = tokens[-1] if tokens else ""
+        return f"{family}:{''.join(initials)}"
+
+    if len(tokens[0]) == 1:
+        initials = []
+        while tokens and len(tokens[0]) == 1:
+            initials.append(tokens.pop(0))
+        family = tokens[-1] if tokens else ""
+        return f"{family}:{''.join(initials)}"
+
+    return f"{tokens[-1]}:{tokens[0][0]}"
+
+
 def match_identity_key(row: object) -> tuple[str, str, frozenset[str], str]:
     """Provider-independent identity used to prevent cross-source duplicates."""
     played_at = pd.to_datetime(getattr(row, "played_at_utc"), utc=True)
@@ -41,7 +66,12 @@ def match_identity_key(row: object) -> tuple[str, str, frozenset[str], str]:
     return (
         played_at.date().isoformat(),
         tournament,
-        frozenset((str(getattr(row, "winner_name")), str(getattr(row, "loser_name")))),
+        frozenset(
+            (
+                player_identity_key(getattr(row, "winner_name")),
+                player_identity_key(getattr(row, "loser_name")),
+            )
+        ),
         str(getattr(row, "round")),
     )
 

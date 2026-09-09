@@ -1,6 +1,7 @@
 from pathlib import Path
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 
 import pandas as pd
@@ -10,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from tennis_ai.result_tracker import TrackedFixtureStore, collect_tracked_results
-from tennis_ai.results_backfill import match_identity_keys
+from tennis_ai.results_backfill import match_identity_key, match_identity_keys
 
 
 def fixture_frame(match_id: int = 42) -> pd.DataFrame:
@@ -45,6 +46,23 @@ class FakeClient:
 
 
 class ResultTrackerTests(unittest.TestCase):
+    def test_cross_provider_full_and_abbreviated_names_share_identity(self):
+        full = SimpleNamespace(
+            played_at_utc="2026-09-09T03:05:00Z",
+            tourney_name="US Open",
+            winner_name="Ben Shelton",
+            loser_name="Carlos Alcaraz",
+            round="QF",
+        )
+        abbreviated = SimpleNamespace(
+            played_at_utc="2026-09-09T03:05:00Z",
+            tourney_name="US Open ATP",
+            winner_name="Shelton B.",
+            loser_name="Alcaraz C.",
+            round="QF",
+        )
+        self.assertEqual(match_identity_key(full), match_identity_key(abbreviated))
+
     def test_completed_match_survives_restart_and_builds_winner_row(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "tracked.json"
