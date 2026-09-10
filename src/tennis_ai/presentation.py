@@ -12,6 +12,12 @@ import numpy as np
 import pandas as pd
 
 from .player_matching import HistoricalPlayerMatcher
+from .results_backfill import (
+    ROUND_MAP,
+    clean_tournament_name,
+    match_identity_key,
+    player_identity_key,
+)
 from .state_engine import CurrentStateEngine, SUPPORTED_SURFACES
 
 
@@ -194,6 +200,56 @@ class PlayerPresentationService:
                         }
                     )
 
+    @staticmethod
+    def _csv_match_identity(
+        row: Any,
+        winner_name: str,
+        loser_name: str,
+    ) -> tuple[str, str, frozenset[str], str]:
+        """Build the same provider-independent identity used by state backfills."""
+        played_at = pd.to_datetime(row.played_at_utc, utc=True)
+        return (
+            played_at.date().isoformat(),
+            clean_tournament_name(row.tournament),
+            frozenset(
+                (player_identity_key(winner_name), player_identity_key(loser_name))
+            ),
+            ROUND_MAP.get(str(row.round), str(row.round)),
+        )
+
+    def _append_backfill_only_history(
+        self,
+        backfill: pd.DataFrame,
+        active_names: set[str],
+        existing_keys: set[tuple[str, str, frozenset[str], str]],
+    ) -> None:
+        """Add tracked results missing from the season CSV without duplicating matches."""
+        seen = set(existing_keys)
+        for row in backfill.sort_values("played_at_utc").itertuples(index=False):
+            key = match_identity_key(row)
+            if key in seen:
+                continue
+            seen.add(key)
+            for name, opponent, won in (
+                (str(row.winner_name), str(row.loser_name), True),
+                (str(row.loser_name), str(row.winner_name), False),
+            ):
+                if name not in active_names:
+                    continue
+                record: dict[str, Any] = {
+                    "played_at_utc": pd.to_datetime(row.played_at_utc, utc=True),
+                    "sort_order": 0,
+                    "surface": str(row.surface).title(),
+                    "won": won,
+                    "opponent": opponent,
+                }
+                # The tracker guarantees the result and score, but does not always
+                # provide complete serve/return stats. Missing metrics are ignored
+                # by the summary averages instead of fabricating values.
+                for metric in STAT_COLUMNS.values():
+                    record[metric] = None
+                self._matches[name].append(record)
+
     def _load(self, *, use_cache: bool = True) -> None:
         if use_cache and self._load_cache():
             return
@@ -220,6 +276,7 @@ class PlayerPresentationService:
             active_names |= set(backfill["loser_name"].dropna().astype(str))
 
         csv_path = self.root / "data" / "external" / "2026-atp-season.csv"
+        current_match_keys: set[tuple[str, str, frozenset[str], str]] = set()
         if csv_path.exists():
             provider_players = pd.read_csv(
                 csv_path,
@@ -263,6 +320,14 @@ class PlayerPresentationService:
             }
 
             for row in source.sort_values("played_at_utc").itertuples(index=False):
+                home_name = name_map.get(str(row.home_name))
+                away_name = name_map.get(str(row.away_name))
+                winner_name = home_name if int(row.winner_code) == 1 else away_name
+                loser_name = away_name if int(row.winner_code) == 1 else home_name
+                if winner_name and loser_name:
+                    current_match_keys.add(
+                        self._csv_match_identity(row, winner_name, loser_name)
+                    )
                 for side, opponent_side, won in (
                     ("home", "away", int(row.winner_code) == 1),
                     ("away", "home", int(row.winner_code) == 2),
@@ -286,6 +351,13 @@ class PlayerPresentationService:
                             None if is_retirement else getattr(row, f"{side}_{source_name}")
                         )
                     self._matches[name].append(record)
+
+        if backfill_path.exists():
+            self._append_backfill_only_history(
+                backfill,
+                active_names,
+                current_match_keys,
+            )
 
         for history in self._matches.values():
             history.sort(
