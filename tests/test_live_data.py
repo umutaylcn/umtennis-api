@@ -29,11 +29,12 @@ def fixture(match_id: int, status: str) -> dict[str, object]:
 
 
 class LiveTennisClientTests(unittest.TestCase):
-    def test_upcoming_feed_keeps_only_scheduled_matches(self):
+    def test_upcoming_feed_keeps_scheduled_and_live_matches(self):
         client = LiveTennisClient("test-key")
         payload = {
             "data": [
                 fixture(1, "scheduled"),
+                fixture(4, "live"),
                 fixture(2, "cancelled"),
                 fixture(3, "finished"),
             ]
@@ -42,8 +43,9 @@ class LiveTennisClientTests(unittest.TestCase):
         with patch.object(client, "_get", return_value=payload):
             matches = client.get_upcoming_matches()
 
-        self.assertEqual([match.match_id for match in matches], [1])
+        self.assertEqual([match.match_id for match in matches], [1, 4])
         self.assertEqual(matches[0].status, "scheduled")
+        self.assertEqual(matches[1].status, "live")
 
     def test_upcoming_feed_uses_match_detail_id_when_available(self):
         client = LiveTennisClient("test-key")

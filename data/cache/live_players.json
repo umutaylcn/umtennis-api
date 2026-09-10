@@ -9402,17 +9402,18 @@
           }
         },
         "elo": {
-          "clay": 2021.3,
+          "clay": 2047.8,
           "clay_rank": 3,
           "elo_rank": 3,
-          "grass": 1894.3,
-          "grass_rank": 4,
-          "hard": 2031.0,
+          "grass": 1946.7,
+          "grass_rank": 3,
+          "hard": 2027.1,
           "hard_rank": 3,
-          "overall": 2078.8,
+          "overall": 2093.1,
           "peak": 2176.5,
           "peak_month": "2022-01"
         },
+        "elo_as_of": "2026-09-10",
         "match_count": 896,
         "meta": {
           "backhand": 2,
@@ -9425,6 +9426,7 @@
           "peak_rank": 2
         }
       },
+      "ratings_as_of": "2026-09-10",
       "season": [
         {
           "clay_lost": "",
@@ -9735,18 +9737,32 @@
           "type": "mixed_doubles"
         },
         {
+          "clay_lost": "4",
+          "clay_won": "20",
+          "grass_lost": "2",
+          "grass_won": "9",
+          "hard_lost": "7",
+          "hard_won": "21",
+          "matches_lost": "13",
+          "matches_won": "50",
+          "rank": "2",
+          "season": "2026",
+          "titles": "1",
+          "type": "singles"
+        },
+        {
           "clay_lost": "",
           "clay_won": "",
           "grass_lost": "",
           "grass_won": "",
           "hard_lost": "1",
-          "hard_won": "1",
+          "hard_won": "0",
           "matches_lost": "1",
-          "matches_won": "1",
-          "rank": "3",
+          "matches_won": "0",
+          "rank": "",
           "season": "2026",
           "titles": "0",
-          "type": "singles"
+          "type": "mixed_doubles"
         }
       ]
     },
@@ -13714,17 +13730,18 @@
           }
         },
         "elo": {
-          "clay": 1791.2,
-          "clay_rank": 34,
-          "elo_rank": 28,
-          "grass": 1733.8,
-          "grass_rank": 22,
-          "hard": 1835.4,
-          "hard_rank": 25,
-          "overall": 1865.9,
+          "clay": 1835.6,
+          "clay_rank": 21,
+          "elo_rank": 15,
+          "grass": 1825.9,
+          "grass_rank": 9,
+          "hard": 1883.7,
+          "hard_rank": 14,
+          "overall": 1934.2,
           "peak": 1974.0,
           "peak_month": "2023-06"
         },
+        "elo_as_of": "2026-09-10",
         "match_count": 685,
         "meta": {
           "backhand": 2,
@@ -13737,6 +13754,7 @@
           "peak_rank": 10
         }
       },
+      "ratings_as_of": "2026-09-10",
       "season": [
         {
           "clay_lost": "",
@@ -13977,18 +13995,32 @@
           "type": "mixed_doubles"
         },
         {
+          "clay_lost": "4",
+          "clay_won": "7",
+          "grass_lost": "2",
+          "grass_won": "9",
+          "hard_lost": "10",
+          "hard_won": "25",
+          "matches_lost": "16",
+          "matches_won": "41",
+          "rank": "12",
+          "season": "2026",
+          "titles": "1",
+          "type": "singles"
+        },
+        {
           "clay_lost": "",
           "clay_won": "",
           "grass_lost": "",
           "grass_won": "",
-          "hard_lost": "1",
-          "hard_won": "1",
-          "matches_lost": "1",
-          "matches_won": "1",
-          "rank": "30",
+          "hard_lost": "0",
+          "hard_won": "0",
+          "matches_lost": "0",
+          "matches_won": "0",
+          "rank": "",
           "season": "2026",
           "titles": "0",
-          "type": "singles"
+          "type": "mixed_doubles"
         }
       ]
     },
@@ -39342,17 +39374,18 @@
           }
         },
         "elo": {
-          "clay": 1808.8,
-          "clay_rank": 27,
-          "elo_rank": 34,
-          "grass": 1752.8,
-          "grass_rank": 18,
-          "hard": 1793.5,
-          "hard_rank": 33,
-          "overall": 1849.3,
+          "clay": 1768.6,
+          "clay_rank": 42,
+          "elo_rank": 56,
+          "grass": 1710.2,
+          "grass_rank": 32,
+          "hard": 1741.6,
+          "hard_rank": 55,
+          "overall": 1790.8,
           "peak": 2029.5,
           "peak_month": "2018-10"
         },
+        "elo_as_of": "2026-09-10",
         "match_count": 739,
         "meta": {
           "backhand": 2,
@@ -39365,6 +39398,7 @@
           "peak_rank": 8
         }
       },
+      "ratings_as_of": "2026-09-10",
       "season": [
         {
           "clay_lost": "",
@@ -39619,15 +39653,15 @@
           "type": "singles"
         },
         {
-          "clay_lost": "",
-          "clay_won": "",
-          "grass_lost": "",
-          "grass_won": "",
-          "hard_lost": "1",
-          "hard_won": "0",
-          "matches_lost": "1",
-          "matches_won": "0",
-          "rank": "17",
+          "clay_lost": "6",
+          "clay_won": "7",
+          "grass_lost": "2",
+          "grass_won": "2",
+          "hard_lost": "10",
+          "hard_won": "11",
+          "matches_lost": "18",
+          "matches_won": "20",
+          "rank": "50",
           "season": "2026",
           "titles": "0",
           "type": "singles"
@@ -53204,17 +53238,18 @@
           }
         },
         "elo": {
-          "clay": 1845.1,
-          "clay_rank": 20,
-          "elo_rank": 11,
-          "grass": 1863.4,
-          "grass_rank": 5,
-          "hard": 1921.7,
-          "hard_rank": 9,
-          "overall": 1960.5,
+          "clay": 1853.6,
+          "clay_rank": 17,
+          "elo_rank": 7,
+          "grass": 1852.9,
+          "grass_rank": 6,
+          "hard": 1948.5,
+          "hard_rank": 6,
+          "overall": 1977.5,
           "peak": 2024.4,
           "peak_month": "2025-08"
         },
+        "elo_as_of": "2026-09-10",
         "match_count": 296,
         "meta": {
           "backhand": 2,
@@ -53227,6 +53262,7 @@
           "peak_rank": 5
         }
       },
+      "ratings_as_of": "2026-09-10",
       "season": [
         {
           "clay_lost": "2",
@@ -53479,6 +53515,20 @@
           "season": "2025",
           "titles": "0",
           "type": "mixed_doubles"
+        },
+        {
+          "clay_lost": "5",
+          "clay_won": "8",
+          "grass_lost": "2",
+          "grass_won": "6",
+          "hard_lost": "6",
+          "hard_won": "23",
+          "matches_lost": "13",
+          "matches_won": "37",
+          "rank": "9",
+          "season": "2026",
+          "titles": "4",
+          "type": "singles"
         }
       ]
     },

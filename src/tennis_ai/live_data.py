@@ -119,9 +119,9 @@ class LiveTennisClient:
                 continue
 
             # The provider keeps cancelled and recently finished events in the
-            # fixtures feed. Only genuinely upcoming matches belong on the site.
+            # fixtures feed. Keep scheduled and in-progress matches on the site.
             status = str(fixture.get("status") or "").strip().casefold()
-            if status != "scheduled":
+            if status not in {"scheduled", "live"}:
                 continue
 
             tournament_name = str(fixture.get("tournament") or "").strip()
