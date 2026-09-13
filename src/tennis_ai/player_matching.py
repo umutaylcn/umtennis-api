@@ -42,6 +42,8 @@ class PlayerProfileCache:
 
 class HistoricalPlayerMatcher:
     _EXPLICIT_ALIASES = {
+        "mensik j": "Jakub Mensik",
+        "shelton b": "Ben Shelton",
         "coleman chak lam wong": "Coleman Wong",
         "chak lam coleman wong": "Coleman Wong",
         "wong c": "Coleman Wong",

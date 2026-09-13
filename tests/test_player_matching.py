@@ -10,6 +10,14 @@ from tennis_ai.player_matching import HistoricalPlayerMatcher
 
 
 class HistoricalPlayerMatcherTests(unittest.TestCase):
+    def test_current_provider_abbreviations_resolve_to_canonical_players(self):
+        matcher = HistoricalPlayerMatcher(
+            ["Ben Shelton", "Bryan Shelton", "Jakub Mensik", "Jakub Menšík"]
+        )
+
+        self.assertEqual(matcher.match_surname_initial("Shelton B.")[0], "Ben Shelton")
+        self.assertEqual(matcher.match_surname_initial("Mensik J.")[0], "Jakub Mensik")
+
     def test_short_name_maps_to_cached_full_identity(self):
         matcher = HistoricalPlayerMatcher(
             ["Cruz Hewitt", "Sebastian Gorzny", "Sebastian Baez"]
