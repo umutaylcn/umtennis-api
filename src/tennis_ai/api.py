@@ -23,6 +23,7 @@ from .inference import EnsemblePredictor
 from .live_data import LiveTennisClient, TennisAPIError
 from .mock_fixtures import build_mock_fixture_table
 from .presentation import PlayerPresentationService
+from .prediction_history import PredictionHistoryStore
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -52,6 +53,9 @@ class PredictionService:
         self.state = joblib.load(self._state_path)
         self.predictor = EnsemblePredictor(project_root)
         self.presentation = PlayerPresentationService(project_root, self.state)
+        self.prediction_history = PredictionHistoryStore(
+            project_root / "data" / "cache" / "prediction_history.json"
+        )
         self.client = LiveTennisClient.from_env(project_root / ".env")
         self._fixtures = pd.DataFrame()
         self._fixtures_loaded_at = 0.0
@@ -149,6 +153,9 @@ class PredictionService:
 
     def match_list(self) -> list[dict[str, Any]]:
         return [self._match_payload(row) for _, row in self.fixtures().iterrows()]
+
+    def previous_match_list(self, limit: int = 100) -> list[dict[str, Any]]:
+        return self.prediction_history.completed(limit)
 
     def predict(self, match_id: int) -> dict[str, Any]:
         self.ensure_current_artifacts()
@@ -304,6 +311,12 @@ def health(request: Request) -> dict[str, Any]:
 @app.get("/api/matches")
 def upcoming_matches(request: Request) -> dict[str, Any]:
     matches = _service(request).match_list()
+    return {"count": len(matches), "matches": matches}
+
+
+@app.get("/api/previous-matches")
+def previous_matches(request: Request, limit: int = 100) -> dict[str, Any]:
+    matches = _service(request).previous_match_list(min(max(limit, 1), 250))
     return {"count": len(matches), "matches": matches}
 
 
