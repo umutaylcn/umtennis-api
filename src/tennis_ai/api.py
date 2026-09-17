@@ -152,7 +152,21 @@ class PredictionService:
             return fixtures.copy()
 
     def match_list(self) -> list[dict[str, Any]]:
-        return [self._match_payload(row) for _, row in self.fixtures().iterrows()]
+        matches: list[dict[str, Any]] = []
+        for _, row in self.fixtures().iterrows():
+            payload = self._match_payload(row)
+            prediction = self.predictor.predict_frame(self.state.build_feature_row(row))
+            payload.update(
+                {
+                    "p1_win_probability": prediction["p1_win_probability"],
+                    "p2_win_probability": prediction["p2_win_probability"],
+                    "predicted_winner": prediction["predicted_winner"],
+                    "confidence": prediction["confidence"],
+                    "confidence_label": prediction["confidence_label"],
+                }
+            )
+            matches.append(payload)
+        return matches
 
     def previous_match_list(self, limit: int = 100) -> list[dict[str, Any]]:
         return self.prediction_history.completed(limit)
