@@ -57,6 +57,16 @@ class LiveTennisClientTests(unittest.TestCase):
 
         self.assertEqual(matches[0].match_id, 178288)
 
+    def test_upcoming_feed_excludes_davis_cup(self):
+        client = LiveTennisClient("test-key")
+        davis_cup = fixture(5, "scheduled")
+        davis_cup["tournament"] = "ATP Davis Cup - World Group II"
+
+        with patch.object(client, "_get", return_value={"data": [davis_cup]}):
+            matches = client.get_upcoming_matches()
+
+        self.assertEqual(matches, [])
+
 
 if __name__ == "__main__":
     unittest.main()

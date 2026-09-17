@@ -21,6 +21,11 @@ MAIN_DRAW_START_DATES: dict[tuple[str, int], date] = {
 }
 
 
+# Team competitions are not part of the ATP tour-level dataset used to train
+# UMTennis. The provider still returns them for ``tour=atp``.
+EXCLUDED_TOURNAMENT_MARKERS = ("davis cup",)
+
+
 class TennisAPIError(RuntimeError):
     """Raised when the tennis provider returns an unsuccessful response."""
 
@@ -125,6 +130,11 @@ class LiveTennisClient:
                 continue
 
             tournament_name = str(fixture.get("tournament") or "").strip()
+            if any(
+                marker in tournament_name.casefold()
+                for marker in EXCLUDED_TOURNAMENT_MARKERS
+            ):
+                continue
             event_date_text = str(fixture.get("event_date") or "").strip()
             try:
                 event_day = date.fromisoformat(event_date_text)
