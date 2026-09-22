@@ -74,12 +74,15 @@ class LiveTennisClient:
         self._api_key = api_key.strip()
         self._timeout_seconds = timeout_seconds
         self._session = session or requests.Session()
+        self._rate_limited = False
 
     @classmethod
     def from_env(cls, env_path: str | Path | None = None) -> "LiveTennisClient":
         return cls(load_api_key(env_path))
 
     def _get(self, endpoint: str, **params: Any) -> dict[str, Any]:
+        if self._rate_limited:
+            raise TennisAPIError("API günlük veya dakikalık request limitine ulaştı")
         headers = {"Authorization": f"Bearer {self._api_key}"}
         try:
             response = self._session.get(
@@ -89,6 +92,7 @@ class LiveTennisClient:
                 timeout=self._timeout_seconds,
             )
             if response.status_code == 429:
+                self._rate_limited = True
                 raise TennisAPIError("API günlük veya dakikalık request limitine ulaştı")
             response.raise_for_status()
             payload = response.json()
@@ -120,7 +124,8 @@ class LiveTennisClient:
 
         upcoming: list[UpcomingMatch] = []
         for fixture in fixtures:
-            if bool(fixture.get("is_qualifying", False)):
+            round_name = str(fixture.get("round") or "").strip()
+            if bool(fixture.get("is_qualifying", False)) or "qual" in round_name.casefold():
                 continue
 
             # The provider keeps cancelled and recently finished events in the
@@ -167,7 +172,7 @@ class LiveTennisClient:
                     p2_name=p2_name,
                     tournament_name=tournament_name,
                     surface=fixture.get("surface"),
-                    round_name=fixture.get("round"),
+                    round_name=round_name or None,
                     round_code=fixture.get("round_code"),
                     status=status,
                     is_qualifying=False,

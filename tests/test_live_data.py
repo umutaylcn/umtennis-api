@@ -67,6 +67,17 @@ class LiveTennisClientTests(unittest.TestCase):
 
         self.assertEqual(matches, [])
 
+    def test_upcoming_feed_excludes_qualifying_when_provider_flag_is_wrong(self):
+        client = LiveTennisClient("test-key")
+        qualifying = fixture(6, "scheduled")
+        qualifying["round"] = "Qualification"
+        qualifying["round_code"] = None
+
+        with patch.object(client, "_get", return_value={"data": [qualifying]}):
+            matches = client.get_upcoming_matches()
+
+        self.assertEqual(matches, [])
+
 
 if __name__ == "__main__":
     unittest.main()

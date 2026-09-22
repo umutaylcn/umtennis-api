@@ -154,7 +154,10 @@ def _resolve_player(
             cache.set(player_id, profile)
         except TennisAPIError:
             if profile is None:
-                raise
+                # Fixture data still contains a usable provider identity.  A
+                # missing profile must not make the whole daily snapshot fail
+                # when the optional ranking endpoint is rate-limited.
+                profile = {"name": fallback_name}
 
     full_name = str((profile or {}).get("name") or fallback_name).strip()
     historical_name, score, status = matcher.match_surname_initial(full_name)
