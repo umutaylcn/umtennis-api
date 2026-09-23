@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import datetime, timezone
 import sys
 import tempfile
 import unittest
@@ -30,13 +31,33 @@ class PredictionHistoryTests(unittest.TestCase):
         results = pd.DataFrame([{"provider_match_id": 12, "winner_name": "Player Two", "loser_name": "Player One", "match_status": "completed", "winner_sets": 3, "loser_sets": 1}])
         with tempfile.TemporaryDirectory() as directory:
             store = PredictionHistoryStore(Path(directory) / "history.json")
-            self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor()), 1)
-            self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor()), 0)
+            capture_time = datetime(2026, 9, 11, 8, tzinfo=timezone.utc)
+            self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor(), now_utc=capture_time), 1)
+            self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor(), now_utc=capture_time), 0)
             self.assertEqual(store.finalize(results), 1)
             row = PredictionHistoryStore(store.path).completed()[0]
             self.assertEqual(row["predicted_winner"], "Player One")
             self.assertEqual(row["actual_winner"], "Player Two")
             self.assertFalse(row["prediction_correct"])
+
+    def test_started_matches_are_not_captured_or_shown_as_previous_predictions(self):
+        fixtures = pd.DataFrame([{"match_id": 13, "start_time_utc": pd.Timestamp("2026-09-11T12:00:00Z"), "tournament_name": "US Open", "surface": "hard", "round": "SF", "p1_display_name": "Player One", "p2_display_name": "Player Two", "identities_resolved": True}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            self.assertEqual(
+                store.capture(
+                    fixtures, FakeState(), FakePredictor(),
+                    now_utc=datetime(2026, 9, 11, 13, tzinfo=timezone.utc),
+                ), 0,
+            )
+            store._predictions["13"] = {
+                "match_id": 13,
+                "start_time_utc": "2026-09-11T12:00:00Z",
+                "captured_at_utc": "2026-09-11T13:00:00Z",
+                "state_as_of_utc": "2026-09-10T00:00:00Z",
+                "actual_winner": "Player One",
+            }
+            self.assertEqual(store.completed(), [])
 
 
 if __name__ == "__main__":

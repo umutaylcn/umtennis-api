@@ -25,6 +25,19 @@ def _iso_utc(value: Any) -> str | None:
     return timestamp.isoformat().replace("+00:00", "Z")
 
 
+def _is_pre_match_record(record: dict[str, Any]) -> bool:
+    """Only predictions actually captured before the scheduled start count."""
+    start = pd.to_datetime(record.get("start_time_utc"), utc=True, errors="coerce")
+    captured = pd.to_datetime(record.get("captured_at_utc"), utc=True, errors="coerce")
+    state_as_of = pd.to_datetime(record.get("state_as_of_utc"), utc=True, errors="coerce")
+    return bool(
+        pd.notna(start)
+        and pd.notna(captured)
+        and captured < start
+        and (pd.isna(state_as_of) or state_as_of < start)
+    )
+
+
 class PredictionHistoryStore:
     """Durable store; a prediction is never overwritten after first capture."""
 
@@ -36,12 +49,26 @@ class PredictionHistoryStore:
         else:
             self._predictions: dict[str, dict[str, Any]] = {}
 
-    def capture(self, fixtures: pd.DataFrame, state: Any, predictor: Any) -> int:
+    def capture(
+        self, fixtures: pd.DataFrame, state: Any, predictor: Any,
+        *, now_utc: datetime | None = None,
+    ) -> int:
         captured = 0
         if fixtures.empty:
             return captured
+        captured_at = pd.Timestamp(now_utc or datetime.now(timezone.utc))
+        if captured_at.tzinfo is None:
+            captured_at = captured_at.tz_localize("UTC")
+        else:
+            captured_at = captured_at.tz_convert("UTC")
+        state_as_of = pd.to_datetime(state.state_as_of, utc=True, errors="coerce")
         for _, fixture in fixtures.iterrows():
             if not bool(fixture.get("identities_resolved", False)):
+                continue
+            start = pd.to_datetime(fixture.start_time_utc, utc=True, errors="coerce")
+            if pd.isna(start) or captured_at >= start:
+                continue
+            if pd.notna(state_as_of) and state_as_of >= start:
                 continue
             match_id = str(int(fixture.match_id))
             if match_id in self._predictions:
@@ -59,7 +86,7 @@ class PredictionHistoryStore:
                 "p2_win_probability": prediction["p2_win_probability"],
                 "predicted_winner": prediction["predicted_winner"],
                 "confidence": prediction["confidence"],
-                "captured_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+                "captured_at_utc": _iso_utc(captured_at),
                 "state_as_of_utc": _iso_utc(state.state_as_of),
                 "actual_winner": None,
                 "actual_loser": None,
@@ -115,7 +142,10 @@ class PredictionHistoryStore:
         return finalized
 
     def completed(self, limit: int = 100) -> list[dict[str, Any]]:
-        rows = [item.copy() for item in self._predictions.values() if item.get("actual_winner")]
+        rows = [
+            item.copy() for item in self._predictions.values()
+            if item.get("actual_winner") and _is_pre_match_record(item)
+        ]
         rows.sort(key=lambda item: (item.get("start_time_utc") or "", item["match_id"]), reverse=True)
         return rows[: max(0, limit)]
 
