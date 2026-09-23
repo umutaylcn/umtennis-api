@@ -31,6 +31,28 @@ DISPLAY_NAME_ALIASES = {
     "v kopriva": "Vit Kopriva",
 }
 
+# The live provider currently labels ATP player 445 as "Ying Zhang", which is
+# a different (WTA) player.  IDs are stable, so correct the identity before
+# historical matching, presentation, and photo lookup.
+PLAYER_ID_NAME_OVERRIDES = {
+    445: "Zhizhen Zhang",
+}
+
+
+def apply_player_id_name_overrides(table: pd.DataFrame) -> pd.DataFrame:
+    """Repair known provider identity collisions in fresh and cached fixtures."""
+    corrected = table.copy()
+    for side in ("p1", "p2"):
+        id_column = f"{side}_id"
+        if id_column not in corrected:
+            continue
+        for player_id, name in PLAYER_ID_NAME_OVERRIDES.items():
+            mask = pd.to_numeric(corrected[id_column], errors="coerce").eq(player_id)
+            for column in (f"{side}_display_name", f"{side}_historical_name"):
+                if column in corrected:
+                    corrected.loc[mask, column] = name
+    return corrected
+
 
 def canonical_display_name(name: object) -> str:
     value = str(name).strip()
@@ -70,7 +92,7 @@ def save_fixture_snapshot(project_root: str | Path, table: pd.DataFrame) -> None
         return
     path = fixture_snapshot_path(project_root)
     path.parent.mkdir(parents=True, exist_ok=True)
-    serializable = table.copy()
+    serializable = apply_player_id_name_overrides(table)
     serializable["start_time_utc"] = pd.to_datetime(
         serializable["start_time_utc"], utc=True, errors="coerce"
     ).map(lambda value: value.isoformat() if pd.notna(value) else None)
@@ -131,6 +153,7 @@ def load_fixture_snapshot(
     table = table[
         table["start_time_utc"].between(lower_bound, upper_bound, inclusive="both")
     ]
+    table = apply_player_id_name_overrides(table)
     return table.sort_values(
         ["start_time_utc", "tournament_name"], na_position="last"
     ).reset_index(drop=True)
@@ -159,7 +182,10 @@ def _resolve_player(
                 # when the optional ranking endpoint is rate-limited.
                 profile = {"name": fallback_name}
 
-    full_name = str((profile or {}).get("name") or fallback_name).strip()
+    full_name = PLAYER_ID_NAME_OVERRIDES.get(
+        player_id,
+        str((profile or {}).get("name") or fallback_name).strip(),
+    )
     historical_name, score, status = matcher.match_surname_initial(full_name)
     # A genuinely new tour player has no row in the historical model data yet.
     # Keep authoritative full provider names as cold-start identities, while

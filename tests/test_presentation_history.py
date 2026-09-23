@@ -51,6 +51,41 @@ class PresentationHistoryTests(unittest.TestCase):
         self.assertFalse(service._matches["Botic Van De Zandschulp"][0]["won"])
         self.assertEqual(len(service._matches["Luciano Darderi"]), 0)
 
+    def test_provider_duplicate_and_unsupported_surface_are_not_added(self):
+        service = PlayerPresentationService.__new__(PlayerPresentationService)
+        service._matches = defaultdict(list)
+        backfill = pd.DataFrame(
+            [
+                {
+                    "provider_match_id": 101,
+                    "played_at_utc": "2026-09-03T23:40:00Z",
+                    "tourney_name": "US Open",
+                    "round": "R64",
+                    "surface": "Hard",
+                    "winner_name": "Michael Zheng",
+                    "loser_name": "Bu Y.",
+                },
+                {
+                    "provider_match_id": 102,
+                    "played_at_utc": "2026-09-19T12:00:00Z",
+                    "tourney_name": "Davis Cup",
+                    "round": "RR",
+                    "surface": "No Surface",
+                    "winner_name": "Michael Zheng",
+                    "loser_name": "Player Two",
+                },
+            ]
+        )
+
+        service._append_backfill_only_history(
+            backfill,
+            {"Michael Zheng", "Bu Y.", "Player Two"},
+            set(),
+            {101},
+        )
+
+        self.assertEqual(len(service._matches["Michael Zheng"]), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

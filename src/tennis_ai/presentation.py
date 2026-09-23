@@ -32,7 +32,7 @@ STAT_COLUMNS = {
 # The 2026 provider feed contains this shortened duplicate of Ben Shelton.
 # Keep it available for historical matching, but never rank it as a second player.
 LEADERBOARD_EXCLUDED_ALIASES = {"Shelton B."}
-PRESENTATION_CACHE_VERSION = 1
+PRESENTATION_CACHE_VERSION = 2
 
 
 class PlayerPresentationService:
@@ -222,10 +222,17 @@ class PlayerPresentationService:
         backfill: pd.DataFrame,
         active_names: set[str],
         existing_keys: set[tuple[str, str, frozenset[str], str]],
+        existing_provider_ids: set[int] | None = None,
     ) -> None:
         """Add tracked results missing from the season CSV without duplicating matches."""
         seen = set(existing_keys)
+        provider_ids = existing_provider_ids or set()
         for row in backfill.sort_values("played_at_utc").itertuples(index=False):
+            provider_id = getattr(row, "provider_match_id", None)
+            if pd.notna(provider_id) and int(provider_id) in provider_ids:
+                continue
+            if str(row.surface).title() not in SUPPORTED_SURFACES:
+                continue
             key = match_identity_key(row)
             if key in seen:
                 continue
@@ -277,6 +284,7 @@ class PlayerPresentationService:
 
         csv_path = self.root / "data" / "external" / "2026-atp-season.csv"
         current_match_keys: set[tuple[str, str, frozenset[str], str]] = set()
+        current_provider_ids: set[int] = set()
         if csv_path.exists():
             provider_players = pd.read_csv(
                 csv_path,
@@ -320,6 +328,8 @@ class PlayerPresentationService:
             }
 
             for row in source.sort_values("played_at_utc").itertuples(index=False):
+                if pd.notna(row.match_id):
+                    current_provider_ids.add(int(row.match_id))
                 home_name = name_map.get(str(row.home_name))
                 away_name = name_map.get(str(row.away_name))
                 winner_name = home_name if int(row.winner_code) == 1 else away_name
@@ -357,6 +367,7 @@ class PlayerPresentationService:
                 backfill,
                 active_names,
                 current_match_keys,
+                current_provider_ids,
             )
 
         for history in self._matches.values():
