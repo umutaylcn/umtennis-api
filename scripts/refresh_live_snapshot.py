@@ -33,8 +33,6 @@ def main() -> None:
         )
     except TennisAPIError as exc:
         fixtures = load_fixture_snapshot(PROJECT_ROOT)
-        if "round" in fixtures:
-            fixtures = fixtures[fixtures["round"].notna()].reset_index(drop=True)
         if not fixtures.empty:
             save_fixture_snapshot(PROJECT_ROOT, fixtures)
         print(f"Upcoming provider unavailable; retained cached fixtures: {exc}")

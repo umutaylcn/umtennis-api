@@ -260,7 +260,7 @@ class PredictionService:
             "start_time_utc": _iso_utc(row.start_time_utc),
             "tournament_name": str(row.tournament_name),
             "surface": str(row.surface).title(),
-            "round": str(row["round"]),
+            "round": str(row["round"]) if pd.notna(row["round"]) and str(row["round"]).strip().lower() not in {"", "nan", "none"} else "TBD",
             "p1_name": str(row.p1_display_name),
             "p2_name": str(row.p2_display_name),
             "p1_id": int(row.p1_id) if pd.notna(row.p1_id) else None,

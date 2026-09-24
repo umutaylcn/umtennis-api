@@ -59,6 +59,24 @@ def canonical_display_name(name: object) -> str:
     return DISPLAY_NAME_ALIASES.get(normalize_player_name(value), value)
 
 
+def fixture_round_code(code: object, name: object) -> str | None:
+    """Use provider round names when its compact code is absent; never guess a stage."""
+    known_codes = {"R128", "R64", "R32", "R16", "QF", "SF", "F", "RR"}
+    compact = str(code or "").strip().upper()
+    if compact in known_codes:
+        return compact
+    normalized = str(name or "").strip().casefold()
+    names = {
+        "round of 128": "R128", "round of 64": "R64",
+        "round of 32": "R32", "round of 16": "R16",
+        "quarterfinal": "QF", "quarterfinals": "QF",
+        "semi-final": "SF", "semi-finals": "SF",
+        "semifinal": "SF", "semifinals": "SF",
+        "final": "F", "round robin": "RR",
+    }
+    return names.get(normalized)
+
+
 def fixture_snapshot_path(project_root: str | Path) -> Path:
     return Path(project_root) / "data" / "cache" / FIXTURE_SNAPSHOT_NAME
 
@@ -261,7 +279,7 @@ def _fixture_row(
         "start_time_utc": fixture.start_time,
         "tournament_name": fixture.tournament_name,
         "surface": fixture.surface,
-        "round": fixture.round_code,
+        "round": fixture_round_code(fixture.round_code, fixture.round_name),
         # Model lookup uses the historical identity, but the UI should retain
         # the current provider's canonical full name (for example John Jeffrey
         # Wolf rather than the archive abbreviation J J Wolf).

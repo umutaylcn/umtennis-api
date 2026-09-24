@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from tennis_ai.live_data import LiveTennisClient
+from tennis_ai.fixture_pipeline import fixture_round_code
 
 
 def fixture(match_id: int, status: str) -> dict[str, object]:
@@ -29,6 +30,11 @@ def fixture(match_id: int, status: str) -> dict[str, object]:
 
 
 class LiveTennisClientTests(unittest.TestCase):
+    def test_round_name_fallback_does_not_invent_missing_round(self):
+        self.assertEqual(fixture_round_code(None, "Round of 16"), "R16")
+        self.assertEqual(fixture_round_code("QF", "Quarterfinal"), "QF")
+        self.assertIsNone(fixture_round_code(None, None))
+
     def test_upcoming_feed_keeps_scheduled_and_live_matches(self):
         client = LiveTennisClient("test-key")
         payload = {
