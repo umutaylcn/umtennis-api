@@ -1553,7 +1553,7 @@
     "is_doubles_team": false,
     "name": "Jakub Menšik",
     "ranking": 15,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 2495,
     "ranking_status": "ranked",
@@ -3694,6 +3694,7 @@
     "tour": "atp"
   },
   "197": {
+    "archive_player_id": null,
     "backhand": null,
     "birthday": "2004-04-28",
     "country": "par",
@@ -3709,8 +3710,10 @@
     "is_doubles_team": false,
     "name": "Daniel Adolfo Vallejo",
     "ranking": 58,
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 939,
+    "ranking_status": "ranked",
     "stats": {
       "ratings": {
         "computed": {
@@ -4126,9 +4129,9 @@
           "grass_won": "0",
           "hard_lost": "5",
           "hard_won": "5",
-          "matches_lost": "20",
-          "matches_won": "41",
-          "rank": "60",
+          "matches_lost": "21",
+          "matches_won": "42",
+          "rank": "58",
           "season": "2026",
           "titles": "2",
           "type": "singles"
@@ -4155,7 +4158,7 @@
     "is_doubles_team": false,
     "name": "Rafael Jodar",
     "ranking": 14,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 2659,
     "ranking_status": "ranked",
@@ -7330,7 +7333,7 @@
     "is_doubles_team": false,
     "name": "Brandon Nakashima",
     "ranking": 16,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "same",
     "ranking_points": 2410,
     "ranking_status": "ranked",
@@ -7804,6 +7807,7 @@
     "tour": "atp"
   },
   "37": {
+    "archive_player_id": 106421,
     "backhand": null,
     "birthday": "1996-02-11",
     "country": null,
@@ -7819,9 +7823,11 @@
     "id": 37,
     "is_doubles_team": false,
     "name": "Daniil Medvedev",
-    "ranking": 8,
-    "ranking_movement": "down",
-    "ranking_points": 3580,
+    "ranking": 6,
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
+    "ranking_movement": "up",
+    "ranking_points": 3770,
+    "ranking_status": "ranked",
     "stats": {
       "ratings": {
         "computed": {
@@ -8121,17 +8127,18 @@
           }
         },
         "elo": {
-          "clay": 1921.9,
-          "clay_rank": 9,
-          "elo_rank": 6,
-          "grass": 1883.0,
-          "grass_rank": 5,
-          "hard": 1977.6,
-          "hard_rank": 5,
-          "overall": 2007.9,
+          "clay": 1868.2,
+          "clay_rank": 12,
+          "elo_rank": 17,
+          "grass": 1831.9,
+          "grass_rank": 9,
+          "hard": 1917.5,
+          "hard_rank": 9,
+          "overall": 1935.9,
           "peak": 2201.2,
           "peak_month": "2022-01"
         },
+        "elo_as_of": "2026-09-22",
         "match_count": 842,
         "meta": {
           "backhand": 2,
@@ -8144,6 +8151,7 @@
           "peak_rank": 1
         }
       },
+      "ratings_as_of": "2026-09-22",
       "season": [
         {
           "clay_lost": "2",
@@ -10602,7 +10610,7 @@
     "is_doubles_team": false,
     "name": "Jaime Faria",
     "ranking": 68,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 871,
     "ranking_status": "ranked",
@@ -14399,6 +14407,7 @@
     "tour": "atp"
   },
   "1002": {
+    "archive_player_id": 207678,
     "backhand": null,
     "birthday": "2001-11-15",
     "country": "arg",
@@ -14414,8 +14423,10 @@
     "is_doubles_team": false,
     "name": "Juan Manuel Cerundolo",
     "ranking": 53,
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 986,
+    "ranking_status": "ranked",
     "stats": {
       "ratings": {
         "computed": {
@@ -14854,17 +14865,17 @@
           "type": "singles"
         },
         {
-          "clay_lost": "9",
-          "clay_won": "12",
-          "grass_lost": "",
-          "grass_won": "",
-          "hard_lost": "2",
-          "hard_won": "2",
-          "matches_lost": "11",
-          "matches_won": "14",
-          "rank": "72",
+          "clay_lost": "13",
+          "clay_won": "23",
+          "grass_lost": "2",
+          "grass_won": "2",
+          "hard_lost": "6",
+          "hard_won": "7",
+          "matches_lost": "21",
+          "matches_won": "32",
+          "rank": "45",
           "season": "2026",
-          "titles": "0",
+          "titles": "1",
           "type": "singles"
         }
       ]
@@ -15916,6 +15927,7 @@
     "tour": "atp"
   },
   "30": {
+    "archive_player_id": 111794,
     "backhand": null,
     "birthday": "1996-01-13",
     "country": "pol",
@@ -15931,8 +15943,10 @@
     "is_doubles_team": false,
     "name": "Kamil Majchrzak",
     "ranking": 73,
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "same",
     "ranking_points": 777,
+    "ranking_status": "ranked",
     "stats": {
       "ratings": {
         "computed": {
@@ -16433,8 +16447,8 @@
           "grass_won": "9",
           "hard_lost": "13",
           "hard_won": "9",
-          "matches_lost": "19",
-          "matches_won": "19",
+          "matches_lost": "20",
+          "matches_won": "20",
           "rank": "73",
           "season": "2026",
           "titles": "1",
@@ -16448,11 +16462,12 @@
     "archive_player_id": 126128,
     "backhand": null,
     "birthday": "1997-08-07",
-    "country": "rus",
+    "country": null,
     "data_completeness": {
-      "known": 4,
+      "known": 3,
       "missing": [
-        "backhand"
+        "backhand",
+        "country"
       ],
       "of": 5
     },
@@ -16461,7 +16476,7 @@
     "is_doubles_team": false,
     "name": "Roman Safiullin",
     "ranking": 102,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 594,
     "ranking_status": "ranked",
@@ -18564,7 +18579,7 @@
     "is_doubles_team": false,
     "name": "Jenson Brooksby",
     "ranking": 77,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 763,
     "ranking_status": "ranked",
@@ -20587,6 +20602,7 @@
     "tour": "atp"
   },
   "411": {
+    "archive_player_id": 208316,
     "backhand": null,
     "birthday": "2001-05-29",
     "country": "fra",
@@ -20602,8 +20618,10 @@
     "is_doubles_team": false,
     "name": "Valentin Royer",
     "ranking": 104,
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 585,
+    "ranking_status": "ranked",
     "stats": {
       "ratings": {
         "computed": {
@@ -31862,7 +31880,7 @@
     "is_doubles_team": false,
     "name": "Quentin Halys",
     "ranking": 49,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 1070,
     "ranking_status": "ranked",
@@ -32849,7 +32867,7 @@
     "is_doubles_team": false,
     "name": "Fabian Marozsan",
     "ranking": 59,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 930,
     "ranking_status": "ranked",
@@ -33950,7 +33968,7 @@
     "is_doubles_team": false,
     "name": "Adrian Mannarino",
     "ranking": 78,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 745,
     "ranking_status": "ranked",
@@ -34620,7 +34638,7 @@
     "is_doubles_team": false,
     "name": "Martin Damm",
     "ranking": 106,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 583,
     "ranking_status": "ranked",
@@ -35057,15 +35075,15 @@
           "type": "singles"
         },
         {
-          "clay_lost": "4",
-          "clay_won": "3",
-          "grass_lost": "",
-          "grass_won": "",
-          "hard_lost": "8",
-          "hard_won": "11",
-          "matches_lost": "12",
-          "matches_won": "14",
-          "rank": "115",
+          "clay_lost": "6",
+          "clay_won": "7",
+          "grass_lost": "5",
+          "grass_won": "7",
+          "hard_lost": "13",
+          "hard_won": "16",
+          "matches_lost": "24",
+          "matches_won": "30",
+          "rank": "90",
           "season": "2026",
           "titles": "0",
           "type": "singles"
@@ -38754,7 +38772,7 @@
     "is_doubles_team": false,
     "name": "Casper Ruud",
     "ranking": 17,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 2335,
     "ranking_status": "ranked",
@@ -40436,7 +40454,7 @@
     "is_doubles_team": false,
     "name": "Alexander Bublik",
     "ranking": 21,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 2185,
     "ranking_status": "ranked",
@@ -47706,7 +47724,7 @@
     "is_doubles_team": false,
     "name": "Hubert Hurkacz",
     "ranking": 46,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 1120,
     "ranking_status": "ranked",
@@ -48260,17 +48278,17 @@
           "type": "singles"
         },
         {
-          "clay_lost": "3",
-          "clay_won": "7",
-          "grass_lost": "",
-          "grass_won": "",
-          "hard_lost": "8",
-          "hard_won": "5",
-          "matches_lost": "11",
-          "matches_won": "12",
-          "rank": "53",
+          "clay_lost": "5",
+          "clay_won": "8",
+          "grass_lost": "3",
+          "grass_won": "4",
+          "hard_lost": "11",
+          "hard_won": "13",
+          "matches_lost": "19",
+          "matches_won": "25",
+          "rank": "47",
           "season": "2026",
-          "titles": "0",
+          "titles": "1",
           "type": "singles"
         }
       ]
@@ -49145,7 +49163,7 @@
     "is_doubles_team": false,
     "name": "Francisco Cerundolo",
     "ranking": 22,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 2130,
     "ranking_status": "ranked",
@@ -55630,7 +55648,7 @@
     "is_doubles_team": false,
     "name": "Valentin Vacherot",
     "ranking": 19,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 2250,
     "ranking_status": "ranked",
@@ -56100,15 +56118,15 @@
           "type": "mixed_doubles"
         },
         {
-          "clay_lost": "",
-          "clay_won": "",
+          "clay_lost": "4",
+          "clay_won": "6",
           "grass_lost": "",
           "grass_won": "",
-          "hard_lost": "1",
-          "hard_won": "0",
-          "matches_lost": "1",
-          "matches_won": "0",
-          "rank": "31",
+          "hard_lost": "10",
+          "hard_won": "10",
+          "matches_lost": "14",
+          "matches_won": "18",
+          "rank": "23",
           "season": "2026",
           "titles": "0",
           "type": "singles"
@@ -56167,6 +56185,20 @@
           "rank": "2",
           "season": "2",
           "titles": "2",
+          "type": "mixed_doubles"
+        },
+        {
+          "clay_lost": "",
+          "clay_won": "",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "1",
+          "hard_won": "0",
+          "matches_lost": "1",
+          "matches_won": "0",
+          "rank": "",
+          "season": "2026",
+          "titles": "0",
           "type": "mixed_doubles"
         }
       ]
@@ -58332,7 +58364,7 @@
     "is_doubles_team": false,
     "name": "Denis Shapovalov",
     "ranking": 50,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 1065,
     "ranking_status": "ranked",
@@ -58920,7 +58952,7 @@
     "is_doubles_team": false,
     "name": "Lloyd Harris",
     "ranking": 136,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 428,
     "ranking_status": "ranked",
@@ -60355,7 +60387,7 @@
     "is_doubles_team": false,
     "name": "Coleman Chak Lam Wong",
     "ranking": 108,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 578,
     "ranking_status": "ranked",
@@ -61900,7 +61932,7 @@
     "is_doubles_team": false,
     "name": "Hugo Gaston",
     "ranking": 97,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 634,
     "ranking_status": "ranked",
@@ -71629,7 +71661,7 @@
     "is_doubles_team": false,
     "name": "Kyrian Jacquet",
     "ranking": 107,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 581,
     "ranking_status": "ranked",
@@ -72084,6 +72116,7 @@
     "tour": null
   },
   "91": {
+    "archive_player_id": 124186,
     "backhand": null,
     "birthday": "1997-02-01",
     "country": "fra",
@@ -72099,8 +72132,10 @@
     "is_doubles_team": false,
     "name": "Alexandre Muller",
     "ranking": 135,
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 428,
+    "ranking_status": "ranked",
     "stats": {
       "ratings": {
         "computed": {
@@ -72684,10 +72719,10 @@
           "grass_lost": "1",
           "grass_won": "0",
           "hard_lost": "7",
-          "hard_won": "4",
+          "hard_won": "5",
           "matches_lost": "23",
-          "matches_won": "13",
-          "rank": "138",
+          "matches_won": "14",
+          "rank": "135",
           "season": "2026",
           "titles": "0",
           "type": "singles"
@@ -74618,6 +74653,7 @@
     "tour": "atp"
   },
   "840": {
+    "archive_player_id": null,
     "backhand": null,
     "birthday": "2002-01-19",
     "country": "chn",
@@ -74633,8 +74669,10 @@
     "is_doubles_team": false,
     "name": "Yunchaokete Bu",
     "ranking": 111,
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "down",
     "ranking_points": 552,
+    "ranking_status": "ranked",
     "stats": {
       "ratings": null,
       "ratings_as_of": null,
@@ -74808,17 +74846,17 @@
           "type": "singles"
         },
         {
-          "clay_lost": "",
-          "clay_won": "",
-          "grass_lost": "",
-          "grass_won": "",
-          "hard_lost": "7",
-          "hard_won": "9",
-          "matches_lost": "8",
-          "matches_won": "9",
-          "rank": "152",
+          "clay_lost": "1",
+          "clay_won": "0",
+          "grass_lost": "2",
+          "grass_won": "11",
+          "hard_lost": "13",
+          "hard_won": "19",
+          "matches_lost": "17",
+          "matches_won": "30",
+          "rank": "124",
           "season": "2026",
-          "titles": "0",
+          "titles": "2",
           "type": "singles"
         }
       ]
@@ -75847,7 +75885,7 @@
     "is_doubles_team": false,
     "name": "Nikoloz Basilashvili",
     "ranking": 145,
-    "ranking_checked_at": "2026-09-24T14:26:35.191556Z",
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
     "ranking_movement": "up",
     "ranking_points": 385,
     "ranking_status": "ranked",
@@ -76426,6 +76464,1007 @@
           "rank": "145",
           "season": "2026",
           "titles": "0",
+          "type": "singles"
+        }
+      ]
+    },
+    "tour": "atp"
+  },
+  "1006": {
+    "archive_player_id": null,
+    "backhand": null,
+    "birthday": "1999-06-05",
+    "country": "esp",
+    "data_completeness": {
+      "known": 4,
+      "missing": [
+        "backhand"
+      ],
+      "of": 5
+    },
+    "hand": "L",
+    "id": 1006,
+    "is_doubles_team": false,
+    "name": "Alejandro Davidovich Fokina",
+    "ranking": 29,
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
+    "ranking_movement": "up",
+    "ranking_points": 1680,
+    "ranking_status": "ranked",
+    "stats": {
+      "ratings": {
+        "computed": {
+          "by_level": {
+            "G": {
+              "l": 28,
+              "pct": 56.2,
+              "w": 36
+            },
+            "M": {
+              "l": 50,
+              "pct": 54.1,
+              "w": 59
+            },
+            "Other": {
+              "l": 151,
+              "pct": 58.6,
+              "w": 214
+            }
+          },
+          "by_round": {
+            "F": {
+              "l": 11,
+              "pct": 21.4,
+              "w": 3
+            },
+            "Q1": {
+              "l": 6,
+              "pct": 78.6,
+              "w": 22
+            },
+            "Q2": {
+              "l": 9,
+              "pct": 59.1,
+              "w": 13
+            },
+            "Q3": {
+              "l": 2,
+              "pct": 71.4,
+              "w": 5
+            },
+            "QF": {
+              "l": 29,
+              "pct": 49.1,
+              "w": 28
+            },
+            "R128": {
+              "l": 7,
+              "pct": 75.9,
+              "w": 22
+            },
+            "R16": {
+              "l": 55,
+              "pct": 50.9,
+              "w": 57
+            },
+            "R32": {
+              "l": 60,
+              "pct": 63.9,
+              "w": 106
+            },
+            "R64": {
+              "l": 31,
+              "pct": 53.7,
+              "w": 36
+            },
+            "RR": {
+              "l": 5,
+              "pct": 37.5,
+              "w": 3
+            },
+            "SF": {
+              "l": 14,
+              "pct": 50.0,
+              "w": 14
+            }
+          },
+          "comeback_set1_down": {
+            "clay": {
+              "l": 17,
+              "pct": 48.5,
+              "w": 16
+            },
+            "grass": {
+              "l": 3,
+              "pct": 40.0,
+              "w": 2
+            },
+            "hard": {
+              "l": 30,
+              "pct": 47.4,
+              "w": 27
+            },
+            "overall": {
+              "l": 50,
+              "pct": 47.4,
+              "w": 45
+            }
+          },
+          "deciding_sets": {
+            "clay": {
+              "l": 29,
+              "pct": 50.0,
+              "w": 29
+            },
+            "grass": {
+              "l": 8,
+              "pct": 27.3,
+              "w": 3
+            },
+            "hard": {
+              "l": 48,
+              "pct": 52.9,
+              "w": 54
+            },
+            "overall": {
+              "l": 85,
+              "pct": 50.3,
+              "w": 86
+            }
+          },
+          "set1": {
+            "clay": {
+              "l": 31,
+              "pct": 82.1,
+              "w": 142
+            },
+            "grass": {
+              "l": 4,
+              "pct": 78.9,
+              "w": 15
+            },
+            "hard": {
+              "l": 51,
+              "pct": 81.3,
+              "w": 222
+            },
+            "overall": {
+              "l": 86,
+              "pct": 81.5,
+              "w": 379
+            }
+          },
+          "set2": {
+            "clay": {
+              "l": 24,
+              "pct": 86.1,
+              "w": 149
+            },
+            "grass": {
+              "l": 3,
+              "pct": 84.2,
+              "w": 16
+            },
+            "hard": {
+              "l": 39,
+              "pct": 85.7,
+              "w": 234
+            },
+            "overall": {
+              "l": 66,
+              "pct": 85.8,
+              "w": 399
+            }
+          },
+          "set3": {
+            "clay": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 55
+            },
+            "grass": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 7
+            },
+            "hard": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 91
+            },
+            "overall": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 153
+            }
+          },
+          "tiebreaks": {
+            "clay": {
+              "l": 9,
+              "pct": 86.8,
+              "w": 59
+            },
+            "grass": {
+              "l": 3,
+              "pct": 81.2,
+              "w": 13
+            },
+            "hard": {
+              "l": 23,
+              "pct": 78.7,
+              "w": 85
+            },
+            "overall": {
+              "l": 35,
+              "pct": 81.8,
+              "w": 157
+            }
+          },
+          "vs_lefty": {
+            "clay": {
+              "l": 5,
+              "pct": 77.3,
+              "w": 17
+            },
+            "grass": {
+              "l": 2,
+              "pct": 50.0,
+              "w": 2
+            },
+            "hard": {
+              "l": 10,
+              "pct": 70.6,
+              "w": 24
+            },
+            "overall": {
+              "l": 17,
+              "pct": 71.7,
+              "w": 43
+            }
+          },
+          "vs_top10": {
+            "clay": {
+              "l": 13,
+              "pct": 27.8,
+              "w": 5
+            },
+            "grass": {
+              "l": 3,
+              "pct": 25.0,
+              "w": 1
+            },
+            "hard": {
+              "l": 18,
+              "pct": 25.0,
+              "w": 6
+            },
+            "overall": {
+              "l": 34,
+              "pct": 26.1,
+              "w": 12
+            }
+          },
+          "vs_top20": {
+            "clay": {
+              "l": 20,
+              "pct": 33.3,
+              "w": 10
+            },
+            "grass": {
+              "l": 3,
+              "pct": 40.0,
+              "w": 2
+            },
+            "hard": {
+              "l": 37,
+              "pct": 30.2,
+              "w": 16
+            },
+            "overall": {
+              "l": 60,
+              "pct": 31.8,
+              "w": 28
+            }
+          },
+          "vs_top50": {
+            "clay": {
+              "l": 32,
+              "pct": 44.8,
+              "w": 26
+            },
+            "grass": {
+              "l": 8,
+              "pct": 38.5,
+              "w": 5
+            },
+            "hard": {
+              "l": 71,
+              "pct": 36.0,
+              "w": 40
+            },
+            "overall": {
+              "l": 111,
+              "pct": 39.0,
+              "w": 71
+            }
+          }
+        },
+        "elo": {
+          "clay": 1810.8,
+          "clay_rank": 27,
+          "elo_rank": 21,
+          "grass": 1791.4,
+          "grass_rank": 15,
+          "hard": 1843.4,
+          "hard_rank": 21,
+          "overall": 1895.2,
+          "peak": 1934.8,
+          "peak_month": "2025-07"
+        },
+        "elo_as_of": "2026-09-22",
+        "match_count": 541,
+        "meta": {
+          "backhand": 2,
+          "country": "ESP",
+          "current_rank": 23,
+          "dob": 19990605,
+          "fullname": "Alejandro Davidovich Fokina",
+          "hand": "R",
+          "height_cm": 183,
+          "peak_rank": 14
+        }
+      },
+      "ratings_as_of": "2026-09-22",
+      "season": [
+        {
+          "clay_lost": "8",
+          "clay_won": "11",
+          "grass_lost": "3",
+          "grass_won": "3",
+          "hard_lost": "15",
+          "hard_won": "7",
+          "matches_lost": "26",
+          "matches_won": "21",
+          "rank": "31",
+          "season": "2022",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "7",
+          "clay_won": "16",
+          "grass_lost": "2",
+          "grass_won": "1",
+          "hard_lost": "15",
+          "hard_won": "11",
+          "matches_lost": "24",
+          "matches_won": "28",
+          "rank": "50",
+          "season": "2021",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "5",
+          "clay_won": "5",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "9",
+          "hard_won": "16",
+          "matches_lost": "14",
+          "matches_won": "21",
+          "rank": "52",
+          "season": "2020",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "14",
+          "clay_won": "27",
+          "grass_lost": "3",
+          "grass_won": "3",
+          "hard_lost": "11",
+          "hard_won": "19",
+          "matches_lost": "28",
+          "matches_won": "49",
+          "rank": "87",
+          "season": "2019",
+          "titles": "2",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "11",
+          "clay_won": "11",
+          "grass_lost": "1",
+          "grass_won": "1",
+          "hard_lost": "8",
+          "hard_won": "8",
+          "matches_lost": "20",
+          "matches_won": "20",
+          "rank": "237",
+          "season": "2018",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "7",
+          "clay_won": "12",
+          "grass_lost": "0",
+          "grass_won": "6",
+          "hard_lost": "3",
+          "hard_won": "9",
+          "matches_lost": "10",
+          "matches_won": "27",
+          "rank": "496",
+          "season": "2017",
+          "titles": "1",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "2",
+          "clay_won": "2",
+          "grass_lost": "1",
+          "grass_won": "0",
+          "hard_lost": "8",
+          "hard_won": "15",
+          "matches_lost": "11",
+          "matches_won": "17",
+          "rank": "857",
+          "season": "2016",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "3",
+          "clay_won": "2",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "1",
+          "hard_won": "1",
+          "matches_lost": "4",
+          "matches_won": "3",
+          "rank": "1469",
+          "season": "2015",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "8",
+          "clay_won": "9",
+          "grass_lost": "3",
+          "grass_won": "2",
+          "hard_lost": "15",
+          "hard_won": "20",
+          "matches_lost": "28",
+          "matches_won": "32",
+          "rank": "26",
+          "season": "2023",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "5",
+          "clay_won": "2",
+          "grass_lost": "1",
+          "grass_won": "0",
+          "hard_lost": "16",
+          "hard_won": "18",
+          "matches_lost": "22",
+          "matches_won": "20",
+          "rank": "61",
+          "season": "2024",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "6",
+          "clay_won": "9",
+          "grass_lost": "2",
+          "grass_won": "5",
+          "hard_lost": "18",
+          "hard_won": "30",
+          "matches_lost": "26",
+          "matches_won": "44",
+          "rank": "14",
+          "season": "2025",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "",
+          "clay_won": "",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "",
+          "hard_won": "",
+          "matches_lost": "0",
+          "matches_won": "1",
+          "rank": "",
+          "season": "2025",
+          "titles": "0",
+          "type": "mixed_doubles"
+        },
+        {
+          "clay_lost": "",
+          "clay_won": "",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "1",
+          "hard_won": "0",
+          "matches_lost": "1",
+          "matches_won": "0",
+          "rank": "14",
+          "season": "2026",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "",
+          "clay_won": "",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "",
+          "hard_won": "",
+          "matches_lost": "",
+          "matches_won": "",
+          "rank": "",
+          "season": "",
+          "titles": "",
+          "type": "mixed_doubles"
+        },
+        {
+          "clay_lost": "0",
+          "clay_won": "0",
+          "grass_lost": "0",
+          "grass_won": "0",
+          "hard_lost": "0",
+          "hard_won": "0",
+          "matches_lost": "0",
+          "matches_won": "0",
+          "rank": "0",
+          "season": "0",
+          "titles": "0",
+          "type": "mixed_doubles"
+        },
+        {
+          "clay_lost": "1",
+          "clay_won": "1",
+          "grass_lost": "1",
+          "grass_won": "1",
+          "hard_lost": "1",
+          "hard_won": "1",
+          "matches_lost": "1",
+          "matches_won": "1",
+          "rank": "1",
+          "season": "1",
+          "titles": "1",
+          "type": "mixed_doubles"
+        },
+        {
+          "clay_lost": "2",
+          "clay_won": "2",
+          "grass_lost": "2",
+          "grass_won": "2",
+          "hard_lost": "2",
+          "hard_won": "2",
+          "matches_lost": "2",
+          "matches_won": "2",
+          "rank": "2",
+          "season": "2",
+          "titles": "2",
+          "type": "mixed_doubles"
+        }
+      ]
+    },
+    "tour": null
+  },
+  "1633": {
+    "archive_player_id": 210748,
+    "backhand": 2,
+    "birthday": "2007-03-30",
+    "country": "ita",
+    "data_completeness": {
+      "known": 5,
+      "missing": [],
+      "of": 5
+    },
+    "hand": "R",
+    "id": 1633,
+    "is_doubles_team": false,
+    "name": "Federico Cinà",
+    "ranking": 170,
+    "ranking_checked_at": "2026-09-25T12:32:30.339129Z",
+    "ranking_movement": "up",
+    "ranking_points": 337,
+    "ranking_status": "ranked",
+    "stats": {
+      "ratings": {
+        "computed": {
+          "by_level": {
+            "G": {
+              "l": 4,
+              "pct": 63.6,
+              "w": 7
+            },
+            "M": {
+              "l": 5,
+              "pct": 28.6,
+              "w": 2
+            },
+            "Other": {
+              "l": 59,
+              "pct": 58.2,
+              "w": 82
+            }
+          },
+          "by_round": {
+            "F": {
+              "l": 4,
+              "pct": 42.9,
+              "w": 3
+            },
+            "Q1": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 7
+            },
+            "Q2": {
+              "l": 3,
+              "pct": 57.1,
+              "w": 4
+            },
+            "Q3": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 1
+            },
+            "QF": {
+              "l": 11,
+              "pct": 50.0,
+              "w": 11
+            },
+            "R128": {
+              "l": 3,
+              "pct": 50.0,
+              "w": 3
+            },
+            "R16": {
+              "l": 11,
+              "pct": 66.7,
+              "w": 22
+            },
+            "R32": {
+              "l": 29,
+              "pct": 53.2,
+              "w": 33
+            },
+            "R64": {
+              "l": 3,
+              "pct": 0.0,
+              "w": 0
+            },
+            "SF": {
+              "l": 4,
+              "pct": 63.6,
+              "w": 7
+            }
+          },
+          "comeback_set1_down": {
+            "clay": {
+              "l": 7,
+              "pct": 53.3,
+              "w": 8
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 8,
+              "pct": 27.3,
+              "w": 3
+            },
+            "overall": {
+              "l": 15,
+              "pct": 42.3,
+              "w": 11
+            }
+          },
+          "deciding_sets": {
+            "clay": {
+              "l": 13,
+              "pct": 48.0,
+              "w": 12
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 12,
+              "pct": 42.9,
+              "w": 9
+            },
+            "overall": {
+              "l": 25,
+              "pct": 45.7,
+              "w": 21
+            }
+          },
+          "set1": {
+            "clay": {
+              "l": 14,
+              "pct": 80.0,
+              "w": 56
+            },
+            "grass": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 2
+            },
+            "hard": {
+              "l": 11,
+              "pct": 86.7,
+              "w": 72
+            },
+            "overall": {
+              "l": 25,
+              "pct": 83.9,
+              "w": 130
+            }
+          },
+          "set2": {
+            "clay": {
+              "l": 10,
+              "pct": 85.7,
+              "w": 60
+            },
+            "grass": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 2
+            },
+            "hard": {
+              "l": 10,
+              "pct": 88.0,
+              "w": 73
+            },
+            "overall": {
+              "l": 20,
+              "pct": 87.1,
+              "w": 135
+            }
+          },
+          "set3": {
+            "clay": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 24
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 21
+            },
+            "overall": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 45
+            }
+          },
+          "tiebreaks": {
+            "clay": {
+              "l": 4,
+              "pct": 81.8,
+              "w": 18
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 5,
+              "pct": 84.4,
+              "w": 27
+            },
+            "overall": {
+              "l": 9,
+              "pct": 83.3,
+              "w": 45
+            }
+          },
+          "vs_lefty": {
+            "clay": {
+              "l": 6,
+              "pct": 53.8,
+              "w": 7
+            },
+            "grass": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 2,
+              "pct": 80.0,
+              "w": 8
+            },
+            "overall": {
+              "l": 9,
+              "pct": 62.5,
+              "w": 15
+            }
+          },
+          "vs_top10": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top20": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top50": {
+            "clay": {
+              "l": 3,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 4,
+              "pct": 0.0,
+              "w": 0
+            }
+          }
+        },
+        "elo": {
+          "clay": 1547.9,
+          "clay_rank": 179,
+          "elo_rank": 189,
+          "grass": 1490.6,
+          "grass_rank": 205,
+          "hard": 1555.5,
+          "hard_rank": 175,
+          "overall": 1586.0,
+          "peak": 1656.0,
+          "peak_month": "2026-06"
+        },
+        "elo_as_of": "2026-09-22",
+        "match_count": 159,
+        "meta": {
+          "backhand": 2,
+          "country": "ITA",
+          "current_rank": 174,
+          "dob": 20070330,
+          "fullname": "Federico Cina",
+          "hand": "R",
+          "height_cm": 183,
+          "peak_rank": 174
+        }
+      },
+      "ratings_as_of": "2026-09-22",
+      "season": [
+        {
+          "clay_lost": "3",
+          "clay_won": "0",
+          "grass_lost": "1",
+          "grass_won": "0",
+          "hard_lost": "3",
+          "hard_won": "6",
+          "matches_lost": "7",
+          "matches_won": "6",
+          "rank": "1850",
+          "season": "2023",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "1",
+          "clay_won": "1",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "",
+          "hard_won": "",
+          "matches_lost": "1",
+          "matches_won": "1",
+          "rank": "1650",
+          "season": "2022",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "9",
+          "clay_won": "15",
+          "grass_lost": "1",
+          "grass_won": "2",
+          "hard_lost": "16",
+          "hard_won": "18",
+          "matches_lost": "26",
+          "matches_won": "35",
+          "rank": "522",
+          "season": "2024",
+          "titles": "1",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "9",
+          "clay_won": "10",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "12",
+          "hard_won": "22",
+          "matches_lost": "21",
+          "matches_won": "32",
+          "rank": "236",
+          "season": "2025",
+          "titles": "1",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "13",
+          "clay_won": "15",
+          "grass_lost": "1",
+          "grass_won": "1",
+          "hard_lost": "8",
+          "hard_won": "13",
+          "matches_lost": "22",
+          "matches_won": "29",
+          "rank": "170",
+          "season": "2026",
+          "titles": "1",
           "type": "singles"
         }
       ]
