@@ -8,7 +8,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from tennis_ai.live_data import LiveTennisClient
-from tennis_ai.fixture_pipeline import fixture_round_code
+from tennis_ai.fixture_pipeline import (
+    apply_verified_fixture_rounds,
+    fixture_round_code,
+    verified_fixture_round,
+)
+import pandas as pd
 
 
 def fixture(match_id: int, status: str) -> dict[str, object]:
@@ -34,6 +39,27 @@ class LiveTennisClientTests(unittest.TestCase):
         self.assertEqual(fixture_round_code(None, "Round of 16"), "R16")
         self.assertEqual(fixture_round_code("QF", "Quarterfinal"), "QF")
         self.assertIsNone(fixture_round_code(None, None))
+
+    def test_verified_rounds_match_exact_fixture_identity(self):
+        self.assertEqual(
+            verified_fixture_round(195725, "Chengdu", "Jenson Brooksby", "Nikoloz Basilashvili"),
+            "QF",
+        )
+        self.assertEqual(
+            verified_fixture_round(195478, "ATP Laver Cup", "Casper Ruud", "Francisco Cerundolo"),
+            "DAY 1",
+        )
+        self.assertIsNone(
+            verified_fixture_round(195725, "Chengdu", "Jenson Brooksby", "Another Player")
+        )
+
+    def test_verified_rounds_repair_only_missing_snapshot_values(self):
+        fixtures = pd.DataFrame([
+            {"match_id": 195741, "tournament_name": "Hangzhou", "p1_display_name": "Fabian Marozsan", "p2_display_name": "Kyrian Jacquet", "round": float("nan")},
+            {"match_id": 195725, "tournament_name": "Chengdu", "p1_display_name": "Jenson Brooksby", "p2_display_name": "Nikoloz Basilashvili", "round": "SF"},
+        ])
+        updated = apply_verified_fixture_rounds(fixtures)
+        self.assertEqual(updated["round"].tolist(), ["QF", "SF"])
 
     def test_upcoming_feed_keeps_scheduled_and_live_matches(self):
         client = LiveTennisClient("test-key")

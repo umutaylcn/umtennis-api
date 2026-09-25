@@ -21,6 +21,19 @@ from .result_tracker import TrackedFixtureStore
 
 FIXTURE_SNAPSHOT_NAME = "upcoming_fixtures.json"
 
+# Provider round fields are missing for these exact fixtures. Source-backed
+# fallbacks are intentionally fixture-specific rather than tournament-wide.
+# Laver Cup: https://lavercup.com/news/2026/09/24/laver-cup-2026-day-1-lineups-ruud-and-cerundolo-open-at-the-o2
+# Chengdu: https://www.protennislive.com/posting/2026/7581/mds.pdf
+# Hangzhou: https://www.hangzhouopen.com/en/scores/draw
+VERIFIED_FIXTURE_ROUNDS = {
+    195478: ("ATP Laver Cup", "Casper Ruud", "Francisco Cerundolo", "DAY 1"),
+    195479: ("ATP Laver Cup", "Jakub Menšik", "Brandon Nakashima", "DAY 1"),
+    195480: ("ATP Laver Cup", "Rafael Jodar", "Alexander Bublik", "DAY 1"),
+    195725: ("Chengdu", "Jenson Brooksby", "Nikoloz Basilashvili", "QF"),
+    195741: ("Hangzhou", "Fabian Marozsan", "Kyrian Jacquet", "QF"),
+}
+
 DISPLAY_NAME_ALIASES = {
     "a molcan": "Alex Molcan",
     "f cina": "Federico Cina",
@@ -77,6 +90,43 @@ def fixture_round_code(code: object, name: object) -> str | None:
     return names.get(normalized)
 
 
+def verified_fixture_round(
+    match_id: object, tournament: object, p1_name: object, p2_name: object
+) -> str | None:
+    """Return a verified fallback only when the match identity also agrees."""
+    try:
+        expected = VERIFIED_FIXTURE_ROUNDS.get(int(match_id))
+    except (TypeError, ValueError):
+        return None
+    if expected is None:
+        return None
+    expected_tournament, expected_p1, expected_p2, round_code = expected
+    if normalize_player_name(tournament) != normalize_player_name(expected_tournament):
+        return None
+    actual_players = {normalize_player_name(p1_name), normalize_player_name(p2_name)}
+    expected_players = {normalize_player_name(expected_p1), normalize_player_name(expected_p2)}
+    return round_code if actual_players == expected_players else None
+
+
+def apply_verified_fixture_rounds(table: pd.DataFrame) -> pd.DataFrame:
+    """Repair missing round labels in previously saved fixture snapshots."""
+    corrected = table.copy()
+    required = {"match_id", "tournament_name", "p1_display_name", "p2_display_name", "round"}
+    if not required.issubset(corrected.columns):
+        return corrected
+    for index, row in corrected.iterrows():
+        current = row["round"]
+        if pd.notna(current) and str(current).strip().upper() not in {"", "NAN", "NONE", "NULL", "TBD"}:
+            continue
+        verified = verified_fixture_round(
+            row["match_id"], row["tournament_name"],
+            row["p1_display_name"], row["p2_display_name"],
+        )
+        if verified is not None:
+            corrected.at[index, "round"] = verified
+    return corrected
+
+
 def fixture_snapshot_path(project_root: str | Path) -> Path:
     return Path(project_root) / "data" / "cache" / FIXTURE_SNAPSHOT_NAME
 
@@ -110,7 +160,7 @@ def save_fixture_snapshot(project_root: str | Path, table: pd.DataFrame) -> None
         return
     path = fixture_snapshot_path(project_root)
     path.parent.mkdir(parents=True, exist_ok=True)
-    serializable = apply_player_id_name_overrides(table)
+    serializable = apply_verified_fixture_rounds(apply_player_id_name_overrides(table))
     serializable["start_time_utc"] = pd.to_datetime(
         serializable["start_time_utc"], utc=True, errors="coerce"
     ).map(lambda value: value.isoformat() if pd.notna(value) else None)
@@ -171,7 +221,7 @@ def load_fixture_snapshot(
     table = table[
         table["start_time_utc"].between(lower_bound, upper_bound, inclusive="both")
     ]
-    table = apply_player_id_name_overrides(table)
+    table = apply_verified_fixture_rounds(apply_player_id_name_overrides(table))
     return table.sort_values(
         ["start_time_utc", "tournament_name"], na_position="last"
     ).reset_index(drop=True)
@@ -279,7 +329,10 @@ def _fixture_row(
         "start_time_utc": fixture.start_time,
         "tournament_name": fixture.tournament_name,
         "surface": fixture.surface,
-        "round": fixture_round_code(fixture.round_code, fixture.round_name),
+        "round": fixture_round_code(fixture.round_code, fixture.round_name) or verified_fixture_round(
+            fixture.match_id, fixture.tournament_name,
+            p1["provider_full_name"], p2["provider_full_name"],
+        ),
         # Model lookup uses the historical identity, but the UI should retain
         # the current provider's canonical full name (for example John Jeffrey
         # Wolf rather than the archive abbreviation J J Wolf).
