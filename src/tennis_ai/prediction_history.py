@@ -11,6 +11,7 @@ from typing import Any
 
 import pandas as pd
 
+from .player_matching import normalize_player_name
 from .results_backfill import clean_tournament_name, player_identity_key
 
 
@@ -36,6 +37,59 @@ def _is_pre_match_record(record: dict[str, Any]) -> bool:
         and captured < start
         and (pd.isna(state_as_of) or state_as_of < start)
     )
+
+
+def _player_side(name: object, record: dict[str, Any]) -> str | None:
+    """Match historical/provider name variants to the captured display side."""
+    normalized = normalize_player_name(str(name or ""))
+    if not normalized:
+        return None
+    names = {side: str(record[f"{side}_name"]) for side in ("p1", "p2")}
+    checks = (
+        lambda candidate: normalize_player_name(candidate) == normalized,
+        lambda candidate: player_identity_key(candidate) == player_identity_key(name),
+        lambda candidate: set(normalize_player_name(candidate).split()) == set(normalized.split()),
+    )
+    for matches in checks:
+        sides = [side for side, candidate in names.items() if matches(candidate)]
+        if len(sides) == 1:
+            return sides[0]
+    return None
+
+
+def _result_sides(record: dict[str, Any], winner: object, loser: object) -> tuple[str, str] | None:
+    winner_side = _player_side(winner, record)
+    loser_side = _player_side(loser, record)
+    if winner_side is not None and loser_side is not None and winner_side == loser_side:
+        return None
+    if winner_side is None and loser_side is None:
+        return None
+    if winner_side is None:
+        winner_side = "p2" if loser_side == "p1" else "p1"
+    if loser_side is None:
+        loser_side = "p2" if winner_side == "p1" else "p1"
+    return winner_side, loser_side
+
+
+def _predicted_side(record: dict[str, Any]) -> str:
+    """The model's pick is the higher stored probability, never a name comparison."""
+    return "p1" if record["p1_win_probability"] >= record["p2_win_probability"] else "p2"
+
+
+def _display_record(record: dict[str, Any]) -> dict[str, Any] | None:
+    """Normalize legacy history at read time without changing saved probabilities."""
+    sides = _result_sides(record, record.get("actual_winner"), record.get("actual_loser"))
+    if sides is None:
+        return None
+    winner_side, loser_side = sides
+    displayed = record.copy()
+    displayed["predicted_side"] = _predicted_side(record)
+    displayed["actual_side"] = winner_side
+    displayed["predicted_winner"] = record[f"{displayed['predicted_side']}_name"]
+    displayed["actual_winner"] = record[f"{winner_side}_name"]
+    displayed["actual_loser"] = record[f"{loser_side}_name"]
+    displayed["prediction_correct"] = displayed["predicted_side"] == winner_side
+    return displayed
 
 
 class PredictionHistoryStore:
@@ -74,6 +128,7 @@ class PredictionHistoryStore:
             if match_id in self._predictions:
                 continue
             prediction = predictor.predict_frame(state.build_feature_row(fixture))
+            predicted_side = "p1" if prediction["p1_win_probability"] >= prediction["p2_win_probability"] else "p2"
             self._predictions[match_id] = {
                 "match_id": int(fixture.match_id),
                 "start_time_utc": _iso_utc(fixture.start_time_utc),
@@ -84,7 +139,8 @@ class PredictionHistoryStore:
                 "p2_name": str(fixture.p2_display_name),
                 "p1_win_probability": prediction["p1_win_probability"],
                 "p2_win_probability": prediction["p2_win_probability"],
-                "predicted_winner": prediction["predicted_winner"],
+                "predicted_side": predicted_side,
+                "predicted_winner": str(fixture[f"{predicted_side}_display_name"]),
                 "confidence": prediction["confidence"],
                 "captured_at_utc": _iso_utc(captured_at),
                 "state_as_of_utc": _iso_utc(state.state_as_of),
@@ -125,13 +181,20 @@ class PredictionHistoryStore:
                         break
             if record is None or record.get("actual_winner"):
                 continue
-            winner = str(row.winner_name)
+            sides = _result_sides(record, row.winner_name, row.loser_name)
+            if sides is None:
+                continue
+            winner_side, loser_side = sides
+            predicted_side = _predicted_side(record)
             record.update(
                 {
-                    "actual_winner": winner,
-                    "actual_loser": str(row.loser_name),
+                    "predicted_side": predicted_side,
+                    "predicted_winner": record[f"{predicted_side}_name"],
+                    "actual_side": winner_side,
+                    "actual_winner": record[f"{winner_side}_name"],
+                    "actual_loser": record[f"{loser_side}_name"],
                     "match_status": str(row.match_status),
-                    "prediction_correct": record.get("predicted_winner") == winner,
+                    "prediction_correct": predicted_side == winner_side,
                     "winner_sets": int(row.winner_sets),
                     "loser_sets": int(row.loser_sets),
                 }
@@ -143,8 +206,9 @@ class PredictionHistoryStore:
 
     def completed(self, limit: int = 100) -> list[dict[str, Any]]:
         rows = [
-            item.copy() for item in self._predictions.values()
+            displayed for item in self._predictions.values()
             if item.get("actual_winner") and _is_pre_match_record(item)
+            if (displayed := _display_record(item)) is not None
         ]
         rows.sort(key=lambda item: (item.get("start_time_utc") or "", item["match_id"]), reverse=True)
         return rows[: max(0, limit)]
