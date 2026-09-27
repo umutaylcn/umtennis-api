@@ -18,6 +18,12 @@ API_BASE_URL = "https://api.livetennisapi.com/api/public/v1"
 # tour event.  Reject anything dated before the official main-draw start.
 MAIN_DRAW_START_DATES: dict[tuple[str, int], date] = {
     ("US Open", 2026): date(2026, 8, 30),
+    # The free fixture feed omits qualifying flags/rounds for these events.
+    # Official schedules: japanopentennis.com/atp/en/about/tournament-fact-sheet/
+    # and chinaopen.com/cn/contents/281/1551.html. Tokyo main draw starts
+    # Sep 30; Beijing qualifying occupies Sep 28-29.
+    ("Tokyo", 2026): date(2026, 9, 30),
+    ("Beijing", 2026): date(2026, 9, 30),
 }
 
 

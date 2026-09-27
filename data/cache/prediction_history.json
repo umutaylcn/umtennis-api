@@ -475,10 +475,12 @@
       "confidence": 0.7217,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Hugo Gaston",
+      "actual_loser": "Jaime Faria",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "195478": {
       "match_id": 195478,
@@ -494,10 +496,12 @@
       "confidence": 0.5935,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Francisco Cerundolo",
+      "actual_loser": "Casper Ruud",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "195479": {
       "match_id": 195479,
@@ -513,10 +517,12 @@
       "confidence": 0.5264,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Jakub Mensik",
+      "actual_loser": "Brandon Nakashima",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "195480": {
       "match_id": 195480,
@@ -532,10 +538,12 @@
       "confidence": 0.5171,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Rafael Jodar",
+      "actual_loser": "Alexander Bublik",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "195491": {
       "match_id": 195491,
@@ -551,10 +559,12 @@
       "confidence": 0.6621,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Lloyd Harris",
+      "actual_loser": "Valentin Vacherot",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "195506": {
       "match_id": 195506,
@@ -570,10 +580,12 @@
       "confidence": 0.6842,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Hubert Hurkacz",
+      "actual_loser": "Martin Damm",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "195476": {
       "match_id": 195476,
@@ -589,10 +601,12 @@
       "confidence": 0.7048,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Federico Cina",
+      "actual_loser": "Alexandre Muller",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "195527": {
       "match_id": 195527,
@@ -608,10 +622,12 @@
       "confidence": 0.7489,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Alejandro Davidovich Fokina",
+      "actual_loser": "Juan Manuel Cerundolo",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "195492": {
       "match_id": 195492,
@@ -627,10 +643,12 @@
       "confidence": 0.5714,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Roman Safiullin",
+      "actual_loser": "Quentin Halys",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "195465": {
       "match_id": 195465,
@@ -646,10 +664,12 @@
       "confidence": 0.5939,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Kamil Majchrzak",
+      "actual_loser": "Bu Yunchaokete",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "195142": {
       "match_id": 195142,
@@ -665,10 +685,12 @@
       "confidence": 0.8024,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Daniil Medvedev",
+      "actual_loser": "Valentin Royer",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "195550": {
       "match_id": 195550,
@@ -684,10 +706,12 @@
       "confidence": 0.7352,
       "captured_at_utc": "2026-09-25T13:29:21.805844Z",
       "state_as_of_utc": "2026-09-25T10:35:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Coleman Wong",
+      "actual_loser": "Adolfo Daniel Vallejo",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "195725": {
       "match_id": 195725,
@@ -703,10 +727,12 @@
       "confidence": 0.7494,
       "captured_at_utc": "2026-09-25T13:29:21.805844Z",
       "state_as_of_utc": "2026-09-25T10:35:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Nikoloz Basilashvili",
+      "actual_loser": "Jenson Brooksby",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "195711": {
       "match_id": 195711,
@@ -722,10 +748,12 @@
       "confidence": 0.709,
       "captured_at_utc": "2026-09-25T13:29:21.805844Z",
       "state_as_of_utc": "2026-09-25T10:35:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Denis Shapovalov",
+      "actual_loser": "Adrian Mannarino",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "195741": {
       "match_id": 195741,
@@ -741,6 +769,84 @@
       "confidence": 0.7609,
       "captured_at_utc": "2026-09-25T13:29:21.805844Z",
       "state_as_of_utc": "2026-09-25T10:35:00Z",
+      "actual_winner": "Kyrian Jacquet",
+      "actual_loser": "Fabian Marozsan",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "winner_sets": 2,
+      "loser_sets": 0
+    },
+    "196435": {
+      "match_id": 196435,
+      "start_time_utc": "2026-09-28T09:00:00Z",
+      "tournament_name": "Chengdu",
+      "surface": "Hard",
+      "round": "SF",
+      "p1_name": "Nikoloz Basilashvili",
+      "p2_name": "Alejandro Davidovich Fokina",
+      "p1_win_probability": 0.2171,
+      "p2_win_probability": 0.7829,
+      "predicted_winner": "Alejandro Davidovich Fokina",
+      "confidence": 0.7829,
+      "captured_at_utc": "2026-09-27T18:04:43.032677Z",
+      "state_as_of_utc": "2026-09-27T08:40:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "196491": {
+      "match_id": 196491,
+      "start_time_utc": "2026-09-28T09:30:00Z",
+      "tournament_name": "Hangzhou",
+      "surface": "Hard",
+      "round": "SF",
+      "p1_name": "Kyrian Jacquet",
+      "p2_name": "Andrey Rublev",
+      "p1_win_probability": 0.21,
+      "p2_win_probability": 0.79,
+      "predicted_winner": "Andrey Rublev",
+      "confidence": 0.79,
+      "captured_at_utc": "2026-09-27T18:04:43.032677Z",
+      "state_as_of_utc": "2026-09-27T08:40:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "196548": {
+      "match_id": 196548,
+      "start_time_utc": "2026-09-28T11:00:00Z",
+      "tournament_name": "Chengdu",
+      "surface": "Hard",
+      "round": "nan",
+      "p1_name": "Hubert Hurkacz",
+      "p2_name": "Denis Shapovalov",
+      "p1_win_probability": 0.4864,
+      "p2_win_probability": 0.5136,
+      "predicted_winner": "Denis Shapovalov",
+      "confidence": 0.5136,
+      "captured_at_utc": "2026-09-27T18:04:43.032677Z",
+      "state_as_of_utc": "2026-09-27T08:40:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "196590": {
+      "match_id": 196590,
+      "start_time_utc": "2026-09-28T11:30:00Z",
+      "tournament_name": "Hangzhou",
+      "surface": "Hard",
+      "round": "SF",
+      "p1_name": "Daniil Medvedev",
+      "p2_name": "Roman Safiullin",
+      "p1_win_probability": 0.7654,
+      "p2_win_probability": 0.2346,
+      "predicted_winner": "Daniil Medvedev",
+      "confidence": 0.7654,
+      "captured_at_utc": "2026-09-27T18:04:43.032677Z",
+      "state_as_of_utc": "2026-09-27T08:40:00Z",
       "actual_winner": null,
       "actual_loser": null,
       "match_status": null,

@@ -6,6 +6,7 @@ from difflib import SequenceMatcher
 import json
 from pathlib import Path
 import re
+import time
 from typing import Any, Iterable
 import unicodedata
 
@@ -37,7 +38,16 @@ class PlayerProfileCache:
             json.dumps(self._profiles, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
-        temporary_path.replace(self.path)
+        # OneDrive can briefly hold the destination open while syncing a prior
+        # profile write. Keep the atomic replacement and retry transient locks.
+        for attempt in range(8):
+            try:
+                temporary_path.replace(self.path)
+                break
+            except PermissionError:
+                if attempt == 7:
+                    raise
+                time.sleep(min(0.25 * 2**attempt, 2.0))
 
 
 class HistoricalPlayerMatcher:

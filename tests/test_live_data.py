@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from tennis_ai.live_data import LiveTennisClient
 from tennis_ai.fixture_pipeline import (
     apply_verified_fixture_rounds,
+    exclude_pre_main_draw_fixtures,
     fixture_round_code,
     verified_fixture_round,
 )
@@ -61,6 +62,15 @@ class LiveTennisClientTests(unittest.TestCase):
         updated = apply_verified_fixture_rounds(fixtures)
         self.assertEqual(updated["round"].tolist(), ["QF", "SF"])
 
+    def test_cached_fixture_filter_removes_only_verified_qualifying_dates(self):
+        fixtures = pd.DataFrame([
+            {"match_id": 1, "tournament_name": "Tokyo", "event_date": "2026-09-28"},
+            {"match_id": 2, "tournament_name": "Beijing", "event_date": "2026-09-29"},
+            {"match_id": 3, "tournament_name": "Tokyo", "event_date": "2026-09-30"},
+            {"match_id": 4, "tournament_name": "Chengdu", "event_date": "2026-09-28"},
+        ])
+        self.assertEqual(exclude_pre_main_draw_fixtures(fixtures)["match_id"].tolist(), [3, 4])
+
     def test_upcoming_feed_keeps_scheduled_and_live_matches(self):
         client = LiveTennisClient("test-key")
         payload = {
@@ -109,6 +119,18 @@ class LiveTennisClientTests(unittest.TestCase):
             matches = client.get_upcoming_matches()
 
         self.assertEqual(matches, [])
+
+    def test_upcoming_feed_excludes_unlabeled_2026_tokyo_and_beijing_qualifiers(self):
+        client = LiveTennisClient("test-key")
+        tokyo_q = fixture(7, "scheduled")
+        tokyo_q.update(tournament="Tokyo", event_date="2026-09-28", round=None, round_code=None)
+        beijing_q = fixture(8, "scheduled")
+        beijing_q.update(tournament="Beijing", event_date="2026-09-29", round=None, round_code=None)
+        tokyo_main = fixture(9, "scheduled")
+        tokyo_main.update(tournament="Tokyo", event_date="2026-09-30", round="Round of 32", round_code="R32")
+        with patch.object(client, "_get", return_value={"data": [tokyo_q, beijing_q, tokyo_main]}):
+            matches = client.get_upcoming_matches()
+        self.assertEqual([match.match_id for match in matches], [9])
 
 
 if __name__ == "__main__":

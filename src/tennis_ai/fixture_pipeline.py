@@ -10,7 +10,7 @@ from typing import Iterable
 
 import pandas as pd
 
-from .live_data import LiveTennisClient, TennisAPIError, UpcomingMatch
+from .live_data import MAIN_DRAW_START_DATES, LiveTennisClient, TennisAPIError, UpcomingMatch
 from .player_matching import (
     HistoricalPlayerMatcher,
     PlayerProfileCache,
@@ -26,12 +26,14 @@ FIXTURE_SNAPSHOT_NAME = "upcoming_fixtures.json"
 # Laver Cup: https://lavercup.com/news/2026/09/24/laver-cup-2026-day-1-lineups-ruud-and-cerundolo-open-at-the-o2
 # Chengdu: https://www.protennislive.com/posting/2026/7581/mds.pdf
 # Hangzhou: https://www.hangzhouopen.com/en/scores/draw
+# Chengdu SF: https://www.protennislive.com/posting/2026/7581/mds.pdf
 VERIFIED_FIXTURE_ROUNDS = {
     195478: ("ATP Laver Cup", "Casper Ruud", "Francisco Cerundolo", "DAY 1"),
     195479: ("ATP Laver Cup", "Jakub Menšik", "Brandon Nakashima", "DAY 1"),
     195480: ("ATP Laver Cup", "Rafael Jodar", "Alexander Bublik", "DAY 1"),
     195725: ("Chengdu", "Jenson Brooksby", "Nikoloz Basilashvili", "QF"),
     195741: ("Hangzhou", "Fabian Marozsan", "Kyrian Jacquet", "QF"),
+    196548: ("Chengdu", "Hubert Hurkacz", "Denis Shapovalov", "SF"),
 }
 
 DISPLAY_NAME_ALIASES = {
@@ -127,6 +129,20 @@ def apply_verified_fixture_rounds(table: pd.DataFrame) -> pd.DataFrame:
     return corrected
 
 
+def exclude_pre_main_draw_fixtures(table: pd.DataFrame) -> pd.DataFrame:
+    """Apply verified qualifying windows to cached fixtures as well as live ones."""
+    if table.empty or not {"event_date", "tournament_name"}.issubset(table.columns):
+        return table.copy()
+    event_days = pd.to_datetime(table["event_date"], errors="coerce").dt.date
+    excluded = pd.Series(False, index=table.index)
+    for (tournament, year), main_draw_start in MAIN_DRAW_START_DATES.items():
+        excluded |= (
+            table["tournament_name"].eq(tournament)
+            & event_days.map(lambda day: day is not None and pd.notna(day) and day.year == year and day < main_draw_start)
+        )
+    return table.loc[~excluded].copy()
+
+
 def fixture_snapshot_path(project_root: str | Path) -> Path:
     return Path(project_root) / "data" / "cache" / FIXTURE_SNAPSHOT_NAME
 
@@ -160,7 +176,9 @@ def save_fixture_snapshot(project_root: str | Path, table: pd.DataFrame) -> None
         return
     path = fixture_snapshot_path(project_root)
     path.parent.mkdir(parents=True, exist_ok=True)
-    serializable = apply_verified_fixture_rounds(apply_player_id_name_overrides(table))
+    serializable = exclude_pre_main_draw_fixtures(
+        apply_verified_fixture_rounds(apply_player_id_name_overrides(table))
+    )
     serializable["start_time_utc"] = pd.to_datetime(
         serializable["start_time_utc"], utc=True, errors="coerce"
     ).map(lambda value: value.isoformat() if pd.notna(value) else None)
@@ -221,7 +239,9 @@ def load_fixture_snapshot(
     table = table[
         table["start_time_utc"].between(lower_bound, upper_bound, inclusive="both")
     ]
-    table = apply_verified_fixture_rounds(apply_player_id_name_overrides(table))
+    table = exclude_pre_main_draw_fixtures(
+        apply_verified_fixture_rounds(apply_player_id_name_overrides(table))
+    )
     return table.sort_values(
         ["start_time_utc", "tournament_name"], na_position="last"
     ).reset_index(drop=True)
