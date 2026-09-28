@@ -69,6 +69,28 @@ class PredictionHistoryTests(unittest.TestCase):
             self.assertEqual(row["actual_winner"], "Player Two")
             self.assertFalse(row["prediction_correct"])
 
+    def test_authoritative_result_corrects_earlier_provider_winner(self):
+        class RublevPredictor:
+            def predict_frame(self, frame):
+                return {"p1_win_probability": 0.21, "p2_win_probability": 0.79, "predicted_winner": "Andrey Rublev", "confidence": 0.79}
+
+        fixtures = pd.DataFrame([{"match_id": 196491, "start_time_utc": pd.Timestamp("2026-09-28T09:30:00Z"), "tournament_name": "Hangzhou", "surface": "hard", "round": "SF", "p1_display_name": "Kyrian Jacquet", "p2_display_name": "Andrey Rublev", "identities_resolved": True}])
+        tracked = pd.DataFrame([{"provider_match_id": 196491, "played_at_utc": pd.Timestamp("2026-09-28T09:30:00Z"), "tourney_name": "Hangzhou", "winner_name": "Kyrian Jacquet", "loser_name": "Andrey Rublev", "match_status": "completed", "winner_sets": 2, "loser_sets": 0}])
+        official = pd.DataFrame([{"provider_match_id": 95981172, "played_at_utc": pd.Timestamp("2026-09-28T11:00:00Z"), "tourney_name": "Hangzhou", "winner_name": "Andrey Rublev", "loser_name": "Kyrian Jacquet", "match_status": "completed", "winner_sets": 2, "loser_sets": 0}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            capture_time = datetime(2026, 9, 28, 8, tzinfo=timezone.utc)
+            self.assertEqual(store.capture(fixtures, FakeState(), RublevPredictor(), now_utc=capture_time), 1)
+            self.assertEqual(store.finalize(tracked), 1)
+            self.assertFalse(store.completed()[0]["prediction_correct"])
+            self.assertEqual(store.finalize(official, reconcile_existing=True), 1)
+            row = store.completed()[0]
+            self.assertEqual(row["predicted_winner"], "Andrey Rublev")
+            self.assertEqual(row["actual_winner"], "Andrey Rublev")
+            self.assertTrue(row["prediction_correct"])
+            self.assertEqual(row["captured_at_utc"], "2026-09-28T08:00:00Z")
+            self.assertEqual(store.finalize(official, reconcile_existing=True), 0)
+
     def test_started_matches_are_not_captured_or_shown_as_previous_predictions(self):
         fixtures = pd.DataFrame([{"match_id": 13, "start_time_utc": pd.Timestamp("2026-09-11T12:00:00Z"), "tournament_name": "US Open", "surface": "hard", "round": "SF", "p1_display_name": "Player One", "p2_display_name": "Player Two", "identities_resolved": True}])
         with tempfile.TemporaryDirectory() as directory:

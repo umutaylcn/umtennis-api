@@ -154,7 +154,7 @@ class PredictionHistoryStore:
             self.save()
         return captured
 
-    def finalize(self, results: pd.DataFrame) -> int:
+    def finalize(self, results: pd.DataFrame, *, reconcile_existing: bool = False) -> int:
         finalized = 0
         if results.empty:
             return finalized
@@ -167,7 +167,7 @@ class PredictionHistoryStore:
                 }
                 result_time = pd.to_datetime(row.played_at_utc, utc=True, errors="coerce")
                 for candidate in self._predictions.values():
-                    if candidate.get("actual_winner"):
+                    if candidate.get("actual_winner") and not reconcile_existing:
                         continue
                     candidate_players = {
                         player_identity_key(candidate["p1_name"]),
@@ -179,15 +179,14 @@ class PredictionHistoryStore:
                     if candidate_players == result_players and same_event and close_in_time:
                         record = candidate
                         break
-            if record is None or record.get("actual_winner"):
+            if record is None or (record.get("actual_winner") and not reconcile_existing):
                 continue
             sides = _result_sides(record, row.winner_name, row.loser_name)
             if sides is None:
                 continue
             winner_side, loser_side = sides
             predicted_side = _predicted_side(record)
-            record.update(
-                {
+            result_fields = {
                     "predicted_side": predicted_side,
                     "predicted_winner": record[f"{predicted_side}_name"],
                     "actual_side": winner_side,
@@ -197,9 +196,10 @@ class PredictionHistoryStore:
                     "prediction_correct": predicted_side == winner_side,
                     "winner_sets": int(row.winner_sets),
                     "loser_sets": int(row.loser_sets),
-                }
-            )
-            finalized += 1
+            }
+            if any(record.get(key) != value for key, value in result_fields.items()):
+                record.update(result_fields)
+                finalized += 1
         if finalized:
             self.save()
         return finalized
