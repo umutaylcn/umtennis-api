@@ -1419,6 +1419,46 @@
       "actual_loser": null,
       "match_status": null,
       "prediction_correct": null
+    },
+    "197114": {
+      "match_id": 197114,
+      "start_time_utc": "2026-09-29T11:00:00Z",
+      "tournament_name": "Chengdu",
+      "surface": "Hard",
+      "round": "F",
+      "p1_name": "Hubert Hurkacz",
+      "p2_name": "Alejandro Davidovich Fokina",
+      "p1_win_probability": 0.3977,
+      "p2_win_probability": 0.6023,
+      "predicted_side": "p2",
+      "predicted_winner": "Alejandro Davidovich Fokina",
+      "confidence": 0.6023,
+      "captured_at_utc": "2026-09-28T21:55:35.466236Z",
+      "state_as_of_utc": "2026-09-28T11:40:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "197115": {
+      "match_id": 197115,
+      "start_time_utc": "2026-09-29T11:30:00Z",
+      "tournament_name": "Hangzhou",
+      "surface": "Hard",
+      "round": "F",
+      "p1_name": "Daniil Medvedev",
+      "p2_name": "Andrey Rublev",
+      "p1_win_probability": 0.6263,
+      "p2_win_probability": 0.3737,
+      "predicted_side": "p1",
+      "predicted_winner": "Daniil Medvedev",
+      "confidence": 0.6263,
+      "captured_at_utc": "2026-09-28T21:55:35.466236Z",
+      "state_as_of_utc": "2026-09-28T11:40:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
     }
   }
 }
