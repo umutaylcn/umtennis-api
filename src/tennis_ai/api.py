@@ -18,12 +18,14 @@ from .fixture_pipeline import (
     build_upcoming_fixture_table,
     fixture_snapshot_is_fresh,
     load_fixture_snapshot,
+    verified_fixture_round,
 )
 from .inference import EnsemblePredictor
 from .live_data import LiveTennisClient, TennisAPIError
 from .mock_fixtures import build_mock_fixture_table
 from .presentation import PlayerPresentationService
 from .prediction_history import PredictionHistoryStore
+from .results_backfill import clean_tournament_name, player_identity_key
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -169,7 +171,47 @@ class PredictionService:
         return matches
 
     def previous_match_list(self, limit: int = 100) -> list[dict[str, Any]]:
-        return self.prediction_history.completed(limit)
+        records = self.prediction_history.completed(limit)
+        if not records:
+            return records
+        backfill_path = self.project_root / "data" / "processed" / "atp_backfill_2026_current.pkl"
+        backfill = pd.read_pickle(backfill_path) if backfill_path.exists() else pd.DataFrame()
+        for record in records:
+            original_round = record.get("round")
+            record["round_at_prediction"] = original_round
+            record["round_verified_after_match"] = False
+            if pd.notna(original_round) and str(original_round).strip().upper() not in {"", "NAN", "NONE", "NULL", "TBD"}:
+                continue
+            verified = verified_fixture_round(
+                record["match_id"], record["tournament_name"],
+                record["p1_name"], record["p2_name"],
+            )
+            if verified is None and not backfill.empty:
+                players = {player_identity_key(record["p1_name"]), player_identity_key(record["p2_name"])}
+                expected_time = pd.to_datetime(record.get("start_time_utc"), utc=True, errors="coerce")
+                matches = backfill[
+                    backfill["tourney_name"].map(clean_tournament_name).eq(
+                        clean_tournament_name(record["tournament_name"])
+                    )
+                ]
+                matches = matches[
+                    matches.apply(
+                        lambda row: {player_identity_key(row["winner_name"]), player_identity_key(row["loser_name"])} == players,
+                        axis=1,
+                    )
+                ]
+                if pd.notna(expected_time):
+                    matches = matches[
+                        (pd.to_datetime(matches["played_at_utc"], utc=True) - expected_time).abs()
+                        <= pd.Timedelta(days=2)
+                    ]
+                valid_rounds = matches["round"].dropna().astype(str)
+                if len(valid_rounds) == 1 and valid_rounds.iloc[0].upper() not in {"", "NAN", "NONE", "NULL", "TBD"}:
+                    verified = valid_rounds.iloc[0]
+            if verified is not None:
+                record["round"] = verified
+                record["round_verified_after_match"] = True
+        return records
 
     def predict(self, match_id: int) -> dict[str, Any]:
         self.ensure_current_artifacts()
