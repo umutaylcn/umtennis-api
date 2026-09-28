@@ -540,14 +540,14 @@
       "confidence": 0.5935,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": "Francisco Cerundolo",
-      "actual_loser": "Casper Ruud",
+      "actual_winner": "Casper Ruud",
+      "actual_loser": "Francisco Cerundolo",
       "match_status": "completed",
-      "prediction_correct": false,
+      "prediction_correct": true,
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p1"
     },
     "195479": {
       "match_id": 195479,
@@ -563,14 +563,14 @@
       "confidence": 0.5264,
       "captured_at_utc": "2026-09-24T16:11:45.970616Z",
       "state_as_of_utc": "2026-09-24T13:20:00Z",
-      "actual_winner": "Jakub Menšik",
-      "actual_loser": "Brandon Nakashima",
+      "actual_winner": "Brandon Nakashima",
+      "actual_loser": "Jakub Menšik",
       "match_status": "completed",
-      "prediction_correct": true,
+      "prediction_correct": false,
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p2"
     },
     "195480": {
       "match_id": 195480,

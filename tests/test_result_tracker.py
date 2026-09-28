@@ -76,6 +76,10 @@ class ResultTrackerTests(unittest.TestCase):
                         "status": "completed",
                         "event_status": None,
                         "winner": 2,
+                        "players": {
+                            "p1": {"id": 159, "name": "Adam Walton"},
+                            "p2": {"id": 229, "name": "Jesper De Jong"},
+                        },
                         "scheduled_time": "2026-08-23T10:00:00Z",
                         "tournament": "Winston-Salem",
                         "surface": "hard",
@@ -107,6 +111,10 @@ class ResultTrackerTests(unittest.TestCase):
                         "status": "completed",
                         "event_status": "Retired",
                         "winner": 1,
+                        "players": {
+                            "p1": {"id": 159, "name": "Adam Walton"},
+                            "p2": {"id": 229, "name": "Jesper De Jong"},
+                        },
                     }
                 ),
                 now=pd.Timestamp("2026-08-24T00:00:00Z"),
@@ -118,13 +126,53 @@ class ResultTrackerTests(unittest.TestCase):
             self.assertEqual(pending, [])
             self.assertEqual(mismatch, [])
 
+    def test_reversed_detail_order_uses_player_ids_for_winner_and_score(self):
+        with tempfile.TemporaryDirectory() as directory:
+            store = TrackedFixtureStore(Path(directory) / "tracked.json")
+            store.track(fixture_frame(194072))
+            results, terminal, pending, mismatch = collect_tracked_results(
+                store,
+                FakeClient(
+                    {
+                        "status": "completed",
+                        "winner": 1,
+                        "players": {
+                            "p1": {"id": 229, "name": "Jesper De Jong"},
+                            "p2": {"id": 159, "name": "Adam Walton"},
+                        },
+                        "scheduled_time": "2026-08-23T10:00:00Z",
+                        "score": {"sets": [2, 1], "games": [[6, 6, 6], [1, 7, 4]]},
+                    }
+                ),
+                now=pd.Timestamp("2026-08-24T00:00:00Z"),
+            )
+            self.assertEqual((terminal, pending, mismatch), ([], [], []))
+            self.assertEqual(results.iloc[0].winner_name, "Jesper De Jong")
+            self.assertEqual(results.iloc[0].loser_name, "Adam Walton")
+            self.assertEqual(results.iloc[0].winner_sets, 2)
+            self.assertEqual(results.iloc[0].winner_games, 18)
+
+    def test_missing_detail_identity_is_not_guessed_from_position(self):
+        with tempfile.TemporaryDirectory() as directory:
+            store = TrackedFixtureStore(Path(directory) / "tracked.json")
+            store.track(fixture_frame(194072))
+            results, terminal, pending, mismatch = collect_tracked_results(
+                store,
+                FakeClient({"status": "completed", "winner": 1}),
+                now=pd.Timestamp("2026-08-24T00:00:00Z"),
+            )
+            self.assertTrue(results.empty)
+            self.assertEqual((terminal, pending, mismatch), ([], [], [194072]))
+
     def test_live_match_stays_pending(self):
         with tempfile.TemporaryDirectory() as directory:
             store = TrackedFixtureStore(Path(directory) / "tracked.json")
             store.track(fixture_frame(77))
             results, terminal, pending, mismatch = collect_tracked_results(
                 store,
-                FakeClient({"status": "live", "winner": None}),
+                FakeClient({"status": "live", "winner": None, "players": {
+                    "p1": {"id": 159}, "p2": {"id": 229},
+                }}),
                 now=pd.Timestamp("2026-08-24T00:00:00Z"),
             )
             self.assertTrue(results.empty)

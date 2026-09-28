@@ -147,8 +147,11 @@ def _score_totals(
 
 def _completed_row(record: dict[str, Any], detail: dict[str, Any]) -> dict[str, Any]:
     winner = int(detail["winner"])
-    winner_prefix = "p1" if winner == 1 else "p2"
-    loser_prefix = "p2" if winner == 1 else "p1"
+    detail_sides = _detail_record_sides(record, detail)
+    if detail_sides is None:
+        raise ValueError("Match detail players cannot be mapped to tracked fixture IDs")
+    winner_prefix = detail_sides[winner - 1]
+    loser_prefix = detail_sides[2 - winner]
     tournament = clean_tournament_name(
         str(detail.get("tournament") or record["tournament_name"])
     )
@@ -190,40 +193,38 @@ def _completed_row(record: dict[str, Any], detail: dict[str, Any]) -> dict[str, 
 
 def _detail_matches_record(record: dict[str, Any], detail: dict[str, Any]) -> bool:
     """Reject provider ID collisions before they can mutate the Elo state."""
-    players = detail.get("players") or {}
-    detail_profiles = [players.get("p1") or {}, players.get("p2") or {}]
-    tracked_ids = {
-        int(value)
-        for value in (record.get("p1_id"), record.get("p2_id"))
-        if value is not None
-    }
-    detail_ids = {
-        int(profile["id"])
-        for profile in detail_profiles
-        if profile.get("id") is not None
-    }
-    if tracked_ids and detail_ids:
-        if tracked_ids != detail_ids:
-            return False
-    else:
-        tracked_names = {
-            normalize_player_name(record["p1_name"]),
-            normalize_player_name(record["p2_name"]),
-        }
-        detail_names = {
-            normalize_player_name(profile.get("name") or "")
-            for profile in detail_profiles
-            if profile.get("name")
-        }
-        if detail_names and tracked_names != detail_names:
-            return False
-
+    if _detail_record_sides(record, detail) is None:
+        return False
     tracked_time = pd.to_datetime(record.get("start_time_utc"), utc=True, errors="coerce")
     detail_time = pd.to_datetime(detail.get("scheduled_time"), utc=True, errors="coerce")
     if pd.notna(tracked_time) and pd.notna(detail_time):
         if abs(detail_time - tracked_time) > pd.Timedelta(days=2):
             return False
     return True
+
+
+def _detail_record_sides(record: dict[str, Any], detail: dict[str, Any]) -> tuple[str, str] | None:
+    """Map detail p1/p2 to fixture p1/p2; the provider may reverse their order."""
+    players = detail.get("players") or {}
+    detail_profiles = [players.get("p1") or {}, players.get("p2") or {}]
+    tracked_ids = [record.get("p1_id"), record.get("p2_id")]
+    detail_ids = [profile.get("id") for profile in detail_profiles]
+    if all(value is not None for value in (*tracked_ids, *detail_ids)):
+        mapped = [
+            next((side for side, tracked in enumerate(tracked_ids) if int(tracked) == int(detail_id)), None)
+            for detail_id in detail_ids
+        ]
+    else:
+        tracked_names = [normalize_player_name(record[f"p{side}_name"]) for side in (1, 2)]
+        detail_names = [normalize_player_name(profile.get("name") or "") for profile in detail_profiles]
+        mapped = [
+            next((side for side, tracked in enumerate(tracked_names) if tracked == detail_name), None)
+            if detail_name else None
+            for detail_name in detail_names
+        ]
+    if set(mapped) != {0, 1}:
+        return None
+    return (f"p{mapped[0] + 1}", f"p{mapped[1] + 1}")
 
 
 def collect_tracked_results(
