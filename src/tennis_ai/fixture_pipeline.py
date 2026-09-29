@@ -17,6 +17,7 @@ from .player_matching import (
     normalize_player_name,
 )
 from .result_tracker import TrackedFixtureStore
+from .results_backfill import clean_tournament_name, player_identity_key
 
 
 FIXTURE_SNAPSHOT_NAME = "upcoming_fixtures.json"
@@ -37,6 +38,9 @@ VERIFIED_FIXTURE_ROUNDS = {
 }
 
 DISPLAY_NAME_ALIASES = {
+    "u humbert": "Ugo Humbert",
+    "k nishikori": "Kei Nishikori",
+    "h rune": "Holger Rune",
     "a molcan": "Alex Molcan",
     "f cina": "Federico Cina",
     "luca van assche": "Luca Van Assche",
@@ -66,12 +70,67 @@ def apply_player_id_name_overrides(table: pd.DataFrame) -> pd.DataFrame:
             for column in (f"{side}_display_name", f"{side}_historical_name"):
                 if column in corrected:
                     corrected.loc[mask, column] = name
+        display_column = f"{side}_display_name"
+        if display_column in corrected:
+            corrected[display_column] = corrected[display_column].map(canonical_display_name)
     return corrected
 
 
 def canonical_display_name(name: object) -> str:
     value = str(name).strip()
     return DISPLAY_NAME_ALIASES.get(normalize_player_name(value), value)
+
+
+def fill_missing_fixture_ranks(table: pd.DataFrame, project_root: str | Path) -> pd.DataFrame:
+    """Use the same scheduled ATP match in the season CSV when profiles lack ranks."""
+    if table.empty:
+        return table.copy()
+    csv_path = Path(project_root) / "data" / "external" / "2026-atp-season.csv"
+    if not csv_path.exists():
+        return table.copy()
+    columns = [
+        "date_timestamp", "tournament", "status", "home_name", "away_name",
+        "home_rank", "away_rank", "home_points", "away_points",
+    ]
+    scheduled = pd.read_csv(csv_path, usecols=columns)
+    scheduled = scheduled[scheduled["status"].eq("SCHEDULED")]
+    by_fixture: dict[tuple[str, str, tuple[str, str]], dict[str, tuple[object, object]] | None] = {}
+    for row in scheduled.itertuples(index=False):
+        home_key = player_identity_key(row.home_name)
+        away_key = player_identity_key(row.away_name)
+        if not home_key or not away_key or home_key == away_key:
+            continue
+        event_date = pd.to_datetime(row.date_timestamp, unit="s", utc=True, errors="coerce")
+        if pd.isna(event_date):
+            continue
+        key = (
+            event_date.date().isoformat(),
+            clean_tournament_name(row.tournament),
+            tuple(sorted((home_key, away_key))),
+        )
+        values = {
+            home_key: (row.home_rank, row.home_points),
+            away_key: (row.away_rank, row.away_points),
+        }
+        by_fixture[key] = None if key in by_fixture else values
+
+    enriched = table.copy()
+    for index, fixture in enriched.iterrows():
+        players = [player_identity_key(fixture[f"{side}_historical_name"]) for side in ("p1", "p2")]
+        event_date = str(fixture.get("event_date") or "")[:10]
+        if not event_date or event_date == "nan" or not all(players):
+            continue
+        key = (event_date, clean_tournament_name(fixture["tournament_name"]), tuple(sorted(players)))
+        values = by_fixture.get(key)
+        if values is None:
+            continue
+        for side, player_key in zip(("p1", "p2"), players):
+            rank, points = values[player_key]
+            if pd.isna(fixture[f"{side}_current_rank"]) and pd.notna(rank):
+                enriched.at[index, f"{side}_current_rank"] = rank
+            if pd.isna(fixture[f"{side}_current_rank_points"]) and pd.notna(points):
+                enriched.at[index, f"{side}_current_rank_points"] = points
+    return enriched
 
 
 def fixture_round_code(code: object, name: object) -> str | None:
@@ -242,6 +301,7 @@ def load_fixture_snapshot(
     table = exclude_pre_main_draw_fixtures(
         apply_verified_fixture_rounds(apply_player_id_name_overrides(table))
     )
+    table = fill_missing_fixture_ranks(table, project_root)
     return table.sort_values(
         ["start_time_utc", "tournament_name"], na_position="last"
     ).reset_index(drop=True)
@@ -328,6 +388,7 @@ def build_upcoming_fixture_table(
         table["start_time_utc"] = pd.to_datetime(
             table["start_time_utc"], utc=True, errors="coerce"
         )
+        table = fill_missing_fixture_ranks(table, root)
         table = table.sort_values(
             ["start_time_utc", "tournament_name"], na_position="last"
         ).reset_index(drop=True)
