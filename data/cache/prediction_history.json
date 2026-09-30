@@ -975,10 +975,13 @@
       "confidence": 0.5363,
       "captured_at_utc": "2026-09-28T14:14:32.527002Z",
       "state_as_of_utc": "2026-09-28T11:40:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Matteo Arnaldi",
+      "actual_loser": "Rei Sakamoto",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "196939": {
       "match_id": 196939,
@@ -1135,10 +1138,13 @@
       "confidence": 0.7294,
       "captured_at_utc": "2026-09-28T14:14:32.527002Z",
       "state_as_of_utc": "2026-09-28T11:40:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Alejandro Tabilo",
+      "actual_loser": "Tommy Paul",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "196950": {
       "match_id": 196950,
@@ -1155,10 +1161,13 @@
       "confidence": 0.5962,
       "captured_at_utc": "2026-09-28T14:14:32.527002Z",
       "state_as_of_utc": "2026-09-28T11:40:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Valentin Vacherot",
+      "actual_loser": "Alexander Blockx",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "196942": {
       "match_id": 196942,
@@ -1195,10 +1204,13 @@
       "confidence": 0.7471,
       "captured_at_utc": "2026-09-28T14:14:32.527002Z",
       "state_as_of_utc": "2026-09-28T11:40:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Novak Djokovic",
+      "actual_loser": "Nuno Borges",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "196978": {
       "match_id": 196978,
@@ -1255,10 +1267,13 @@
       "confidence": 0.5129,
       "captured_at_utc": "2026-09-28T14:14:32.527002Z",
       "state_as_of_utc": "2026-09-28T11:40:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Yunchaokete Bu",
+      "actual_loser": "Juan Manuel Cerundolo",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 1
     },
     "196981": {
       "match_id": 196981,
@@ -1315,10 +1330,13 @@
       "confidence": 0.7329,
       "captured_at_utc": "2026-09-28T14:14:32.527002Z",
       "state_as_of_utc": "2026-09-28T11:40:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Karen Khachanov",
+      "actual_loser": "Felix Auger-Aliassime",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "196984": {
       "match_id": 196984,
@@ -1375,10 +1393,13 @@
       "confidence": 0.6828,
       "captured_at_utc": "2026-09-28T14:14:32.527002Z",
       "state_as_of_utc": "2026-09-28T11:40:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Jan-Lennard Struff",
+      "actual_loser": "Thiago Agustin Tirante",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "196987": {
       "match_id": 196987,
@@ -1501,10 +1522,13 @@
       "confidence": 0.8651,
       "captured_at_utc": "2026-09-29T19:05:08.245585Z",
       "state_as_of_utc": "2026-09-29T11:40:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Arthur Fils",
+      "actual_loser": "Luca Van Assche",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "197533": {
       "match_id": 197533,
@@ -1521,10 +1545,13 @@
       "confidence": 0.7463,
       "captured_at_utc": "2026-09-29T19:05:08.245585Z",
       "state_as_of_utc": "2026-09-29T11:40:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Arthur Gea",
+      "actual_loser": "Zhizhen Zhang",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0
     },
     "197536": {
       "match_id": 197536,
@@ -1621,6 +1648,46 @@
       "confidence": 0.5597,
       "captured_at_utc": "2026-09-29T19:05:08.245585Z",
       "state_as_of_utc": "2026-09-29T11:40:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "198004": {
+      "match_id": 198004,
+      "start_time_utc": "2026-10-01T02:00:00Z",
+      "tournament_name": "Tokyo",
+      "surface": "Hard",
+      "round": "R32",
+      "p1_name": "Jaime Faria",
+      "p2_name": "Arthur Fery",
+      "p1_win_probability": 0.5365,
+      "p2_win_probability": 0.4635,
+      "predicted_side": "p1",
+      "predicted_winner": "Jaime Faria",
+      "confidence": 0.5365,
+      "captured_at_utc": "2026-09-30T23:18:18.844388Z",
+      "state_as_of_utc": "2026-09-30T11:10:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "198048": {
+      "match_id": 198048,
+      "start_time_utc": "2026-10-02T02:00:00Z",
+      "tournament_name": "Beijing",
+      "surface": "Hard",
+      "round": "R16",
+      "p1_name": "Yunchaokete Bu",
+      "p2_name": "Novak Djokovic",
+      "p1_win_probability": 0.1854,
+      "p2_win_probability": 0.8146,
+      "predicted_side": "p2",
+      "predicted_winner": "Novak Djokovic",
+      "confidence": 0.8146,
+      "captured_at_utc": "2026-09-30T23:18:18.844388Z",
+      "state_as_of_utc": "2026-09-30T11:10:00Z",
       "actual_winner": null,
       "actual_loser": null,
       "match_status": null,
