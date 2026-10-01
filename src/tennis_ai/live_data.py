@@ -108,10 +108,11 @@ class LiveTennisClient:
         is_usage_check = endpoint.lstrip("/") == "usage"
         if self._rate_limited and not is_usage_check:
             raise TennisAPIError("API günlük veya dakikalık request limitine ulaştı")
-        if not is_usage_check:
-            if self.remaining_request_budget == 0:
-                raise TennisAPIError("Bu update için ayrılan API request bütçesi doldu")
-            self._requests_made += 1
+        # The provider documents /usage as exempt, but this key's live counter
+        # increments on those checks. Count every request conservatively.
+        if self.remaining_request_budget == 0:
+            raise TennisAPIError("Bu update için ayrılan API request bütçesi doldu")
+        self._requests_made += 1
         headers = {"Authorization": f"Bearer {self._api_key}"}
         try:
             response = self._session.get(
@@ -211,7 +212,7 @@ class LiveTennisClient:
         return upcoming
 
     def get_usage(self) -> dict[str, Any]:
-        """Check quota usage; the provider documents this call as quota-exempt."""
+        """Check quota usage; account for this call in the local budget."""
         return self._get("usage")
 
     def get_player(self, player_id: int) -> dict[str, Any]:

@@ -36,18 +36,18 @@ def fixture(match_id: int, status: str) -> dict[str, object]:
 
 
 class LiveTennisClientTests(unittest.TestCase):
-    def test_update_budget_exempts_usage_and_blocks_extra_calls(self):
+    def test_update_budget_counts_usage_and_blocks_extra_calls(self):
         response = Mock(status_code=200)
         response.json.return_value = {"data": {}}
         client = LiveTennisClient("test-key", session=Mock(get=Mock(return_value=response)))
-        client.set_request_budget(1)
+        client.set_request_budget(2)
 
         client.get_usage()
         client.get_match(1)
         with self.assertRaises(TennisAPIError):
             client.get_match(2)
 
-        self.assertEqual(client.requests_made, 1)
+        self.assertEqual(client.requests_made, 2)
         self.assertEqual(client._session.get.call_count, 2)
 
     def test_round_name_fallback_does_not_invent_missing_round(self):
