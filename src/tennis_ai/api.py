@@ -15,13 +15,10 @@ import joblib
 import pandas as pd
 
 from .fixture_pipeline import (
-    build_upcoming_fixture_table,
-    fixture_snapshot_is_fresh,
     load_fixture_snapshot,
     verified_fixture_round,
 )
 from .inference import EnsemblePredictor
-from .live_data import LiveTennisClient, TennisAPIError
 from .mock_fixtures import build_mock_fixture_table
 from .presentation import PlayerPresentationService
 from .prediction_history import PredictionHistoryStore
@@ -58,7 +55,6 @@ class PredictionService:
         self.prediction_history = PredictionHistoryStore(
             project_root / "data" / "cache" / "prediction_history.json"
         )
-        self.client = LiveTennisClient.from_env(project_root / ".env")
         self._fixtures = pd.DataFrame()
         self._fixtures_loaded_at = 0.0
         self._prediction_cache: dict[int, dict[str, Any]] = {}
@@ -118,19 +114,9 @@ class PredictionService:
                     limit=MOCK_ELO_LIMIT,
                 )
             else:
-                if fixture_snapshot_is_fresh(
-                    self.project_root, FIXTURE_CACHE_SECONDS
-                ):
-                    fixtures = load_fixture_snapshot(self.project_root)
-                else:
-                    try:
-                        fixtures = build_upcoming_fixture_table(
-                            self.project_root,
-                            self.client,
-                            self.state.players.keys(),
-                        )
-                    except TennisAPIError:
-                        fixtures = load_fixture_snapshot(self.project_root)
+                # Live requests are made only by the explicit update pipeline.
+                # A page visit must never consume the shared provider quota.
+                fixtures = load_fixture_snapshot(self.project_root)
             if not USE_MOCK_FIXTURES and not fixtures.empty:
                 fixtures = fixtures[
                     fixtures["identities_resolved"]

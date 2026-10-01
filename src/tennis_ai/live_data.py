@@ -81,14 +81,37 @@ class LiveTennisClient:
         self._timeout_seconds = timeout_seconds
         self._session = session or requests.Session()
         self._rate_limited = False
+        self._request_budget: int | None = None
+        self._requests_made = 0
+
+    def set_request_budget(self, limit: int) -> None:
+        """Cap quota-consuming calls made by this client during one update."""
+        if limit < 0:
+            raise ValueError("Request budget cannot be negative")
+        self._request_budget = limit
+
+    @property
+    def remaining_request_budget(self) -> int | None:
+        if self._request_budget is None:
+            return None
+        return max(0, self._request_budget - self._requests_made)
+
+    @property
+    def requests_made(self) -> int:
+        return self._requests_made
 
     @classmethod
     def from_env(cls, env_path: str | Path | None = None) -> "LiveTennisClient":
         return cls(load_api_key(env_path))
 
     def _get(self, endpoint: str, **params: Any) -> dict[str, Any]:
-        if self._rate_limited:
+        is_usage_check = endpoint.lstrip("/") == "usage"
+        if self._rate_limited and not is_usage_check:
             raise TennisAPIError("API günlük veya dakikalık request limitine ulaştı")
+        if not is_usage_check:
+            if self.remaining_request_budget == 0:
+                raise TennisAPIError("Bu update için ayrılan API request bütçesi doldu")
+            self._requests_made += 1
         headers = {"Authorization": f"Bearer {self._api_key}"}
         try:
             response = self._session.get(

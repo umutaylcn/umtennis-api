@@ -57,7 +57,7 @@ def test_abbreviated_names_use_full_display_names():
     assert corrected.loc[1, "p1_display_name"] == "Holger Rune"
 
 
-def test_scheduled_csv_fills_only_matching_missing_ranks(tmp_path):
+def test_scheduled_csv_refreshes_only_exact_matching_fixture_ranks(tmp_path):
     csv_path = tmp_path / "data" / "external" / "2026-atp-season.csv"
     csv_path.parent.mkdir(parents=True)
     pd.DataFrame([{
@@ -83,6 +83,6 @@ def test_scheduled_csv_fills_only_matching_missing_ranks(tmp_path):
 
     assert enriched.loc[0, "p1_current_rank"] == 142
     assert enriched.loc[0, "p1_current_rank_points"] == 400
-    assert enriched.loc[0, "p2_current_rank"] == 108
+    assert enriched.loc[0, "p2_current_rank"] == 107
     assert enriched.loc[0, "p2_current_rank_points"] == 581
     assert pd.isna(enriched.loc[1, "p1_current_rank"])

@@ -126,9 +126,9 @@ def fill_missing_fixture_ranks(table: pd.DataFrame, project_root: str | Path) ->
             continue
         for side, player_key in zip(("p1", "p2"), players):
             rank, points = values[player_key]
-            if pd.isna(fixture[f"{side}_current_rank"]) and pd.notna(rank):
+            if pd.notna(rank):
                 enriched.at[index, f"{side}_current_rank"] = rank
-            if pd.isna(fixture[f"{side}_current_rank_points"]) and pd.notna(points):
+            if pd.notna(points):
                 enriched.at[index, f"{side}_current_rank_points"] = points
     return enriched
 
@@ -315,20 +315,16 @@ def _resolve_player(
     matcher: HistoricalPlayerMatcher,
 ) -> dict[str, object]:
     profile = cache.get(player_id) if player_id is not None else None
-    if player_id is not None:
-        # Ranking and ranking-points fields change every week.  Reusing a player
-        # profile forever mixed snapshots from different dates and could assign
-        # the same ATP rank to multiple players. Refresh live fixture players on
-        # every daily build, while retaining the cache as an outage fallback.
+    if player_id is not None and profile is None:
+        # Reuse known identity and bio fields. The season CSV refreshes rankings
+        # for exact scheduled matches without spending a call per player.
         try:
             profile = client.get_player(player_id)
             cache.set(player_id, profile)
         except TennisAPIError:
-            if profile is None:
-                # Fixture data still contains a usable provider identity.  A
-                # missing profile must not make the whole daily snapshot fail
-                # when the optional ranking endpoint is rate-limited.
-                profile = {"name": fallback_name}
+            # Fixture data still contains a usable provider identity. A
+            # missing optional profile must not fail the full daily snapshot.
+            profile = {"name": fallback_name}
 
     full_name = PLAYER_ID_NAME_OVERRIDES.get(
         player_id,
