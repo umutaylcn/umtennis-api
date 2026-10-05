@@ -257,7 +257,7 @@ class CurrentStateEngine:
         surface = str(row.surface)
         config = getattr(self, "elo_config", DEFAULT_ELO_CONFIG)
         match_status = str(getattr(row, "match_status", "completed")).casefold()
-        elo_weight = config.retirement_weight if match_status == "retirement" else 1.0
+        elo_weight = config.retirement_weight if match_status in {"retirement", "defaulted"} else 1.0
         winner_change, loser_change = elo_changes(
             winner.elo, loser.elo, winner.matches, loser.matches, True, config
         )
@@ -301,9 +301,9 @@ class CurrentStateEngine:
         loser_tourney["losses"] += 1
         loser_tourney["elo_lost"] += -loser_change
 
-        # A retirement has an official winner, but its partial score must not be
-        # treated as a completed set/game performance.
-        if match_status != "retirement":
+        # An interrupted match has an official winner, but its partial score
+        # must not be treated as completed set/game performance.
+        if match_status not in {"retirement", "defaulted"}:
             winner_tourney["sets_won"] += int(row.winner_sets)
             winner_tourney["sets_lost"] += int(row.loser_sets)
             winner_tourney["games_won"] += int(row.winner_games)

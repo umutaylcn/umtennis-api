@@ -21,6 +21,7 @@ from .results_backfill import (
 
 
 TERMINAL_EVENT_STATUSES = {"walk over", "cancelled"}
+DEFAULT_EVENT_STATUSES = {"default", "defaulted", "disqualified", "disqualification"}
 
 
 def _json_value(value: Any) -> Any:
@@ -157,9 +158,13 @@ def _completed_row(record: dict[str, Any], detail: dict[str, Any]) -> dict[str, 
     )
     surface = str(detail.get("surface") or record["surface"]).title()
     round_code = detail.get("round_code") or record.get("round")
-    is_retirement = str(detail.get("event_status") or "").casefold() == "retired"
-    winner_sets, loser_sets, winner_games, loser_games = _score_totals(
-        detail, winner, allow_partial=is_retirement
+    event_status = str(detail.get("event_status") or "").strip().casefold()
+    is_retirement = event_status == "retired"
+    is_defaulted = event_status in DEFAULT_EVENT_STATUSES
+    winner_sets, loser_sets, winner_games, loser_games = (
+        (0, 0, 0, 0)
+        if is_defaulted
+        else _score_totals(detail, winner, allow_partial=is_retirement)
     )
     played_at = detail.get("scheduled_time") or record["start_time_utc"]
     level = tournament_level(tournament)
@@ -183,7 +188,7 @@ def _completed_row(record: dict[str, Any], detail: dict[str, Any]) -> dict[str, 
         "loser_rank": record.get(f"{loser_prefix}_rank"),
         "winner_rank_points": record.get(f"{winner_prefix}_rank_points"),
         "loser_rank_points": record.get(f"{loser_prefix}_rank_points"),
-        "match_status": "retirement" if is_retirement else "completed",
+        "match_status": "defaulted" if is_defaulted else "retirement" if is_retirement else "completed",
         "home_match_status": "provider_id",
         "away_match_status": "provider_id",
         "home_match_score": 1.0,

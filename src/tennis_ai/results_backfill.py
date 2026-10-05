@@ -31,6 +31,8 @@ DRAW_SIZE_MAP = {
     "Washington": 48,
 }
 
+DEFAULT_RESULT_STATUSES = {"DEFAULT", "DEFAULTED", "DISQUALIFIED", "DISQUALIFICATION", "DQ"}
+
 
 def player_identity_key(name: object) -> str:
     """Normalize full names and provider abbreviations to surname + initials."""
@@ -121,11 +123,12 @@ def load_completed_backfill(
     source["played_at_utc"] = pd.to_datetime(
         source["date_timestamp"], unit="s", utc=True, errors="coerce"
     )
+    source["normalized_status_extra"] = source["status_extra"].fillna("").astype(str).str.strip().str.upper()
 
     mask = (
         source["tour_type"].eq(1)
         & source["status"].eq("FINISHED")
-        & source["status_extra"].isin(["FINISHED", "RETIRED"])
+        & source["normalized_status_extra"].isin({"FINISHED", "RETIRED", *DEFAULT_RESULT_STATUSES})
         & source["winner_code"].isin([1, 2])
         & source["surface"].str.casefold().isin(["hard", "clay", "grass"])
         & ~source["tournament"].str.contains("Qualification", case=False, na=False)
@@ -148,8 +151,11 @@ def load_completed_backfill(
             winner_name, loser_name = away_name, home_name
             winner_prefix, loser_prefix = "away", "home"
 
-        winner_sets, loser_sets, winner_games, loser_games = _score_totals(
-            row, winner_prefix, loser_prefix
+        is_defaulted = row.normalized_status_extra in DEFAULT_RESULT_STATUSES
+        winner_sets, loser_sets, winner_games, loser_games = (
+            (0, 0, 0, 0)
+            if is_defaulted
+            else _score_totals(row, winner_prefix, loser_prefix)
         )
         records.append(
             {
@@ -173,7 +179,8 @@ def load_completed_backfill(
                 "winner_rank_points": getattr(row, f"{winner_prefix}_points"),
                 "loser_rank_points": getattr(row, f"{loser_prefix}_points"),
                 "match_status": (
-                    "retirement" if str(row.status_extra).upper() == "RETIRED" else "completed"
+                    "defaulted" if is_defaulted else
+                    "retirement" if row.normalized_status_extra == "RETIRED" else "completed"
                 ),
                 "home_match_status": home_status,
                 "away_match_status": away_status,
@@ -183,6 +190,8 @@ def load_completed_backfill(
         )
 
     result = pd.DataFrame(records)
+    if result.empty:
+        return result
     result = result[result["round"].notna()].copy()
     return result.sort_values(
         ["played_at_utc", "tourney_id", "round", "provider_match_id"]
@@ -198,10 +207,18 @@ def load_terminal_match_keys(
     source["played_at_utc"] = pd.to_datetime(
         source["date_timestamp"], unit="s", utc=True, errors="coerce"
     )
+    source["normalized_status_extra"] = source["status_extra"].fillna("").astype(str).str.strip().str.upper()
     mask = (
         source["tour_type"].eq(1)
         & source["status"].eq("FINISHED")
-        & source["status_extra"].isin(["WALKOVER", "CANCELLED"])
+        & source["normalized_status_extra"].isin(
+            {"WALKOVER", "CANCELED", "CANCELLED"}
+            | DEFAULT_RESULT_STATUSES
+        )
+        & (
+            ~source["normalized_status_extra"].isin(DEFAULT_RESULT_STATUSES)
+            | ~source["winner_code"].isin([1, 2])
+        )
         & ~source["tournament"].str.contains("Qualification", case=False, na=False)
         & source["played_at_utc"].ge(BACKFILL_START_UTC)
     )

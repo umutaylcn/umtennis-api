@@ -126,6 +126,40 @@ class ResultTrackerTests(unittest.TestCase):
             self.assertEqual(pending, [])
             self.assertEqual(mismatch, [])
 
+    def test_default_requires_official_winner_and_discards_partial_score(self):
+        with tempfile.TemporaryDirectory() as directory:
+            store = TrackedFixtureStore(Path(directory) / "tracked.json")
+            store.track(fixture_frame(199254))
+            detail = {
+                "status": "completed",
+                "event_status": "Defaulted",
+                "winner": None,
+                "players": {
+                    "p1": {"id": 159, "name": "Adam Walton"},
+                    "p2": {"id": 229, "name": "Jesper De Jong"},
+                },
+                "score": {"sets": [1, 0], "games": [[6, 4], [3, 2]]},
+            }
+            results, terminal, pending, mismatch = collect_tracked_results(
+                store, FakeClient(detail), now=pd.Timestamp("2026-08-24T00:00:00Z")
+            )
+            self.assertTrue(results.empty)
+            self.assertEqual(pending, [199254])
+            self.assertEqual(terminal, [])
+            self.assertEqual(mismatch, [])
+
+            detail["winner"] = 1
+            results, terminal, pending, mismatch = collect_tracked_results(
+                store, FakeClient(detail), now=pd.Timestamp("2026-08-24T00:00:00Z")
+            )
+            self.assertEqual(results.iloc[0].match_status, "defaulted")
+            self.assertEqual(results.iloc[0].winner_name, "Adam Walton")
+            self.assertEqual(results.iloc[0].winner_sets, 0)
+            self.assertEqual(results.iloc[0].winner_games, 0)
+            self.assertEqual(terminal, [])
+            self.assertEqual(pending, [])
+            self.assertEqual(mismatch, [])
+
     def test_reversed_detail_order_uses_player_ids_for_winner_and_score(self):
         with tempfile.TemporaryDirectory() as directory:
             store = TrackedFixtureStore(Path(directory) / "tracked.json")

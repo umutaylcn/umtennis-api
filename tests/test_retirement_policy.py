@@ -12,10 +12,12 @@ from tennis_ai.state_engine import CurrentStateEngine, EloConfig
 
 
 class RetirementPolicyTests(unittest.TestCase):
-    def test_retirement_has_half_elo_weight_and_full_result_weight(self):
-        state = CurrentStateEngine(EloConfig(provisional_k=32, standard_k=32))
-        row = pd.Series(
-            {
+    def test_interrupted_matches_have_half_elo_weight_and_full_result_weight(self):
+        for match_status in ("retirement", "defaulted"):
+            with self.subTest(match_status=match_status):
+                state = CurrentStateEngine(EloConfig(provisional_k=32, standard_k=32))
+                row = pd.Series(
+                    {
                 "played_at_utc": pd.Timestamp("2026-08-26T12:00:00Z"),
                 "tourney_name": "Winston-Salem",
                 "surface": "Hard",
@@ -29,24 +31,24 @@ class RetirementPolicyTests(unittest.TestCase):
                 "loser_rank": 53,
                 "winner_rank_points": 1006,
                 "loser_rank_points": 1005,
-                "match_status": "retirement",
-            }
-        )
+                        "match_status": match_status,
+                    }
+                )
 
-        state.apply_completed_match(row)
+                state.apply_completed_match(row)
 
-        self.assertAlmostEqual(state.players["Juan Manuel Cerundolo"].elo, 1508.0)
-        self.assertAlmostEqual(state.players["Sebastian Baez"].elo, 1492.0)
-        self.assertEqual(state.players["Juan Manuel Cerundolo"].matches, 1)
-        self.assertEqual(
-            state.head_to_head_snapshot(
-                "Juan Manuel Cerundolo", "Sebastian Baez", "Hard"
-            )["p1_wins"],
-            1,
-        )
-        tournament = state.tournaments[("Winston-Salem", "Juan Manuel Cerundolo")]
-        self.assertEqual(tournament["wins"], 1)
-        self.assertEqual(tournament["games_won"], 0)
+                self.assertAlmostEqual(state.players["Juan Manuel Cerundolo"].elo, 1508.0)
+                self.assertAlmostEqual(state.players["Sebastian Baez"].elo, 1492.0)
+                self.assertEqual(state.players["Juan Manuel Cerundolo"].matches, 1)
+                self.assertEqual(
+                    state.head_to_head_snapshot(
+                        "Juan Manuel Cerundolo", "Sebastian Baez", "Hard"
+                    )["p1_wins"],
+                    1,
+                )
+                tournament = state.tournaments[("Winston-Salem", "Juan Manuel Cerundolo")]
+                self.assertEqual(tournament["wins"], 1)
+                self.assertEqual(tournament["games_won"], 0)
 
 
 if __name__ == "__main__":
