@@ -225,14 +225,14 @@ class PredictionHistoryStore:
             self.save()
         return finalized
 
-    def completed(self, limit: int = 100) -> list[dict[str, Any]]:
+    def completed(self, limit: int | None = None) -> list[dict[str, Any]]:
         rows = [
             displayed for item in self._predictions.values()
             if item.get("actual_winner") and _is_pre_match_record(item)
             if (displayed := _display_record(item)) is not None
         ]
         rows.sort(key=lambda item: (item.get("start_time_utc") or "", item["match_id"]), reverse=True)
-        return rows[: max(0, limit)]
+        return rows if limit is None else rows[: max(0, limit)]
 
     def save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)

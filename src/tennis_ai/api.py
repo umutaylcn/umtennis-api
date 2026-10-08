@@ -156,7 +156,7 @@ class PredictionService:
             matches.append(payload)
         return matches
 
-    def previous_match_list(self, limit: int = 100) -> list[dict[str, Any]]:
+    def previous_match_list(self, limit: int | None = None) -> list[dict[str, Any]]:
         records = self.prediction_history.completed(limit)
         if not records:
             return records
@@ -357,8 +357,8 @@ def upcoming_matches(request: Request) -> dict[str, Any]:
 
 
 @app.get("/api/previous-matches")
-def previous_matches(request: Request, limit: int = 100) -> dict[str, Any]:
-    matches = _service(request).previous_match_list(min(max(limit, 1), 250))
+def previous_matches(request: Request, limit: int | None = None) -> dict[str, Any]:
+    matches = _service(request).previous_match_list(None if limit is None else min(max(limit, 1), 250))
     return {"count": len(matches), "matches": matches}
 
 

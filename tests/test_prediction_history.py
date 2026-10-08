@@ -139,6 +139,19 @@ class PredictionHistoryTests(unittest.TestCase):
             self.assertEqual(updated["p1_win_probability"], original["p1_win_probability"])
             self.assertEqual(updated["captured_at_utc"], original["captured_at_utc"])
 
+    def test_completed_without_limit_returns_every_match(self):
+        fixtures = pd.DataFrame([{"match_id": 1, "start_time_utc": pd.Timestamp("2026-09-11T12:00:00Z"), "tournament_name": "US Open", "surface": "hard", "round": "SF", "p1_display_name": "Player One", "p2_display_name": "Player Two", "identities_resolved": True}])
+        results = pd.DataFrame([{"provider_match_id": 1, "played_at_utc": pd.Timestamp("2026-09-11T12:00:00Z"), "tourney_name": "US Open", "winner_name": "Player One", "loser_name": "Player Two", "match_status": "completed", "winner_sets": 2, "loser_sets": 0}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            store.capture(fixtures, FakeState(), FakePredictor(), now_utc=datetime(2026, 9, 11, 8, tzinfo=timezone.utc))
+            store.finalize(results)
+            original = store._predictions["1"]
+            for match_id in range(2, 128):
+                store._predictions[str(match_id)] = {**original, "match_id": match_id}
+            self.assertEqual(len(store.completed()), 127)
+            self.assertEqual(len(store.completed(100)), 100)
+
 
 if __name__ == "__main__":
     unittest.main()
