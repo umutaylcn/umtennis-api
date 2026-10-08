@@ -48,6 +48,7 @@ def _player_side(name: object, record: dict[str, Any]) -> str | None:
     checks = (
         lambda candidate: normalize_player_name(candidate) == normalized,
         lambda candidate: player_identity_key(candidate) == player_identity_key(name),
+        lambda candidate: _compatible_identity_keys(player_identity_key(candidate), player_identity_key(name)),
         lambda candidate: set(normalize_player_name(candidate).split()) == set(normalized.split()),
     )
     for matches in checks:
@@ -55,6 +56,19 @@ def _player_side(name: object, record: dict[str, Any]) -> str | None:
         if len(sides) == 1:
             return sides[0]
     return None
+
+
+def _compatible_identity_keys(left: str, right: str) -> bool:
+    """Accept a single first initial for a hyphenated first name, with surname fixed."""
+    left_surname, _, left_initials = left.partition(":")
+    right_surname, _, right_initials = right.partition(":")
+    return bool(
+        left_surname == right_surname
+        and left_initials
+        and right_initials
+        and min(len(left_initials), len(right_initials)) == 1
+        and left_initials[0] == right_initials[0]
+    )
 
 
 def _result_sides(record: dict[str, Any], winner: object, loser: object) -> tuple[str, str] | None:
@@ -83,6 +97,9 @@ def _display_record(record: dict[str, Any]) -> dict[str, Any] | None:
         return None
     winner_side, loser_side = sides
     displayed = record.copy()
+    if record.get("actual_played_at_utc"):
+        displayed["scheduled_start_time_utc"] = record["start_time_utc"]
+        displayed["start_time_utc"] = record["actual_played_at_utc"]
     displayed["predicted_side"] = _predicted_side(record)
     displayed["actual_side"] = winner_side
     displayed["predicted_winner"] = record[f"{displayed['predicted_side']}_name"]
@@ -108,6 +125,7 @@ class PredictionHistoryStore:
         *, now_utc: datetime | None = None,
     ) -> int:
         captured = 0
+        schedule_updated = False
         if fixtures.empty:
             return captured
         captured_at = pd.Timestamp(now_utc or datetime.now(timezone.utc))
@@ -126,6 +144,10 @@ class PredictionHistoryStore:
                 continue
             match_id = str(int(fixture.match_id))
             if match_id in self._predictions:
+                record = self._predictions[match_id]
+                if not record.get("actual_winner") and record.get("start_time_utc") != _iso_utc(start):
+                    record["start_time_utc"] = _iso_utc(start)
+                    schedule_updated = True
                 continue
             prediction = predictor.predict_frame(state.build_feature_row(fixture))
             predicted_side = "p1" if prediction["p1_win_probability"] >= prediction["p2_win_probability"] else "p2"
@@ -150,7 +172,7 @@ class PredictionHistoryStore:
                 "prediction_correct": None,
             }
             captured += 1
-        if captured:
+        if captured or schedule_updated:
             self.save()
         return captured
 
@@ -161,22 +183,20 @@ class PredictionHistoryStore:
         for row in results.itertuples(index=False):
             record = self._predictions.get(str(int(row.provider_match_id)))
             if record is None:
-                result_players = {
-                    player_identity_key(row.winner_name),
-                    player_identity_key(row.loser_name),
-                }
                 result_time = pd.to_datetime(row.played_at_utc, utc=True, errors="coerce")
                 for candidate in self._predictions.values():
                     if candidate.get("actual_winner") and not reconcile_existing:
                         continue
-                    candidate_players = {
-                        player_identity_key(candidate["p1_name"]),
-                        player_identity_key(candidate["p2_name"]),
-                    }
-                    candidate_time = pd.to_datetime(candidate.get("start_time_utc"), utc=True, errors="coerce")
                     same_event = clean_tournament_name(str(candidate["tournament_name"])) == clean_tournament_name(str(row.tourney_name))
+                    if not same_event:
+                        continue
+                    candidate_time = pd.to_datetime(candidate.get("start_time_utc"), utc=True, errors="coerce")
                     close_in_time = pd.notna(result_time) and pd.notna(candidate_time) and abs(result_time - candidate_time) <= pd.Timedelta(days=2)
-                    if candidate_players == result_players and same_event and close_in_time:
+                    if not close_in_time:
+                        continue
+                    winner_side = _player_side(row.winner_name, candidate)
+                    loser_side = _player_side(row.loser_name, candidate)
+                    if winner_side is not None and loser_side is not None and winner_side != loser_side:
                         record = candidate
                         break
             if record is None or (record.get("actual_winner") and not reconcile_existing):
@@ -196,6 +216,7 @@ class PredictionHistoryStore:
                     "prediction_correct": predicted_side == winner_side,
                     "winner_sets": int(row.winner_sets),
                     "loser_sets": int(row.loser_sets),
+                    "actual_played_at_utc": _iso_utc(getattr(row, "played_at_utc", None)),
             }
             if any(record.get(key) != value for key, value in result_fields.items()):
                 record.update(result_fields)

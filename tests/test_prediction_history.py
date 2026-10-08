@@ -110,6 +110,35 @@ class PredictionHistoryTests(unittest.TestCase):
             }
             self.assertEqual(store.completed(), [])
 
+    def test_hyphenated_name_and_postponed_date_keep_original_prediction(self):
+        fixtures = pd.DataFrame([{"match_id": 199924, "start_time_utc": pd.Timestamp("2026-10-07T02:00:00Z"), "tournament_name": "Shanghai", "surface": "hard", "round": "R128", "p1_display_name": "Martin Landaluce", "p2_display_name": "Jan-Lennard Struff", "identities_resolved": True}])
+        result = pd.DataFrame([{"provider_match_id": 60470111, "played_at_utc": pd.Timestamp("2026-10-08T09:35:00Z"), "tourney_name": "Shanghai", "winner_name": "Struff J-L.", "loser_name": "Martin Landaluce", "match_status": "completed", "winner_sets": 2, "loser_sets": 0}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            store.capture(fixtures, FakeState(), FakePredictor(), now_utc=datetime(2026, 10, 6, 11, tzinfo=timezone.utc))
+            original = store._predictions["199924"].copy()
+            self.assertEqual(store.finalize(result), 1)
+            row = store.completed()[0]
+            self.assertEqual(row["actual_winner"], "Jan-Lennard Struff")
+            self.assertEqual(row["start_time_utc"], "2026-10-08T09:35:00Z")
+            self.assertEqual(row["scheduled_start_time_utc"], "2026-10-07T02:00:00Z")
+            self.assertEqual(row["p1_win_probability"], original["p1_win_probability"])
+            self.assertEqual(row["captured_at_utc"], original["captured_at_utc"])
+
+    def test_rescheduled_future_match_updates_only_start_time(self):
+        fixtures = pd.DataFrame([{"match_id": 42, "start_time_utc": pd.Timestamp("2026-10-10T02:00:00Z"), "tournament_name": "Shanghai", "surface": "hard", "round": "R32", "p1_display_name": "Player One", "p2_display_name": "Player Two", "identities_resolved": True}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            now = datetime(2026, 10, 8, 13, tzinfo=timezone.utc)
+            self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor(), now_utc=now), 1)
+            original = store._predictions["42"].copy()
+            fixtures.loc[0, "start_time_utc"] = pd.Timestamp("2026-10-09T09:00:00Z")
+            self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor(), now_utc=now), 0)
+            updated = PredictionHistoryStore(store.path)._predictions["42"]
+            self.assertEqual(updated["start_time_utc"], "2026-10-09T09:00:00Z")
+            self.assertEqual(updated["p1_win_probability"], original["p1_win_probability"])
+            self.assertEqual(updated["captured_at_utc"], original["captured_at_utc"])
+
 
 if __name__ == "__main__":
     unittest.main()

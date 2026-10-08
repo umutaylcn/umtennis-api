@@ -22,7 +22,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-23T07:10:00Z"
     },
     "194076": {
       "match_id": 194076,
@@ -45,7 +46,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-23T08:20:00Z"
     },
     "194074": {
       "match_id": 194074,
@@ -68,7 +70,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-23T11:40:00Z"
     },
     "194077": {
       "match_id": 194077,
@@ -91,7 +94,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-24T13:20:00Z"
     },
     "194070": {
       "match_id": 194070,
@@ -114,7 +118,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-24T08:35:00Z"
     },
     "194071": {
       "match_id": 194071,
@@ -137,7 +142,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-24T08:25:00Z"
     },
     "194072": {
       "match_id": 194072,
@@ -160,7 +166,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-24T10:10:00Z"
     },
     "194075": {
       "match_id": 194075,
@@ -183,7 +190,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-24T05:10:00Z"
     },
     "194073": {
       "match_id": 194073,
@@ -206,7 +214,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p2",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-24T05:40:00Z"
     },
     "194065": {
       "match_id": 194065,
@@ -229,7 +238,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-24T07:40:00Z"
     },
     "194063": {
       "match_id": 194063,
@@ -271,7 +281,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-24T07:10:00Z"
     },
     "194068": {
       "match_id": 194068,
@@ -294,7 +305,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-24T09:00:00Z"
     },
     "194069": {
       "match_id": 194069,
@@ -317,7 +329,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-24T11:05:00Z"
     },
     "194064": {
       "match_id": 194064,
@@ -340,7 +353,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-24T12:45:00Z"
     },
     "195452": {
       "match_id": 195452,
@@ -363,7 +377,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-25T05:15:00Z"
     },
     "195453": {
       "match_id": 195453,
@@ -386,7 +401,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-25T05:10:00Z"
     },
     "195112": {
       "match_id": 195112,
@@ -409,7 +425,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-25T05:40:00Z"
     },
     "195477": {
       "match_id": 195477,
@@ -432,7 +449,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-25T06:35:00Z"
     },
     "195454": {
       "match_id": 195454,
@@ -455,7 +473,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-25T07:30:00Z"
     },
     "195475": {
       "match_id": 195475,
@@ -478,7 +497,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-25T08:40:00Z"
     },
     "195464": {
       "match_id": 195464,
@@ -501,7 +521,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-25T10:35:00Z"
     },
     "195443": {
       "match_id": 195443,
@@ -524,7 +545,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-25T12:10:00Z"
     },
     "195478": {
       "match_id": 195478,
@@ -547,7 +569,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-25T12:20:00Z"
     },
     "195479": {
       "match_id": 195479,
@@ -570,7 +593,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-25T14:45:00Z"
     },
     "195480": {
       "match_id": 195480,
@@ -593,7 +617,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-25T18:25:00Z"
     },
     "195491": {
       "match_id": 195491,
@@ -616,7 +641,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-26T09:05:00Z"
     },
     "195506": {
       "match_id": 195506,
@@ -639,7 +665,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-26T06:55:00Z"
     },
     "195476": {
       "match_id": 195476,
@@ -662,7 +689,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-26T06:30:00Z"
     },
     "195527": {
       "match_id": 195527,
@@ -685,7 +713,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-26T05:10:00Z"
     },
     "195492": {
       "match_id": 195492,
@@ -708,7 +737,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-26T05:40:00Z"
     },
     "195465": {
       "match_id": 195465,
@@ -731,7 +761,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-26T08:20:00Z"
     },
     "195142": {
       "match_id": 195142,
@@ -754,7 +785,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-26T11:35:00Z"
     },
     "195550": {
       "match_id": 195550,
@@ -777,7 +809,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p1",
-      "actual_side": "p1"
+      "actual_side": "p1",
+      "actual_played_at_utc": "2026-09-26T13:40:00Z"
     },
     "195725": {
       "match_id": 195725,
@@ -800,7 +833,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-27T05:05:00Z"
     },
     "195711": {
       "match_id": 195711,
@@ -823,7 +857,8 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "predicted_side": "p2",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-27T08:40:00Z"
     },
     "195741": {
       "match_id": 195741,
@@ -846,7 +881,8 @@
       "winner_sets": 2,
       "loser_sets": 0,
       "predicted_side": "p1",
-      "actual_side": "p2"
+      "actual_side": "p2",
+      "actual_played_at_utc": "2026-09-27T05:35:00Z"
     },
     "196435": {
       "match_id": 196435,
@@ -869,7 +905,8 @@
       "predicted_side": "p2",
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-09-28T09:10:00Z"
     },
     "196491": {
       "match_id": 196491,
@@ -892,7 +929,8 @@
       "predicted_side": "p2",
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-28T09:40:00Z"
     },
     "196548": {
       "match_id": 196548,
@@ -915,7 +953,8 @@
       "predicted_side": "p2",
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-09-28T11:25:00Z"
     },
     "196590": {
       "match_id": 196590,
@@ -938,7 +977,8 @@
       "predicted_side": "p1",
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-28T11:40:00Z"
     },
     "196941": {
       "match_id": 196941,
@@ -961,7 +1001,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T02:10:00Z"
     },
     "196940": {
       "match_id": 196940,
@@ -984,7 +1025,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-09-30T09:00:00Z"
     },
     "196939": {
       "match_id": 196939,
@@ -1007,7 +1049,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T07:45:00Z"
     },
     "196945": {
       "match_id": 196945,
@@ -1030,7 +1073,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T02:10:00Z"
     },
     "196944": {
       "match_id": 196944,
@@ -1073,7 +1117,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T05:30:00Z"
     },
     "196946": {
       "match_id": 196946,
@@ -1096,7 +1141,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T05:30:00Z"
     },
     "196947": {
       "match_id": 196947,
@@ -1119,7 +1165,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T04:15:00Z"
     },
     "196948": {
       "match_id": 196948,
@@ -1142,7 +1189,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T07:55:00Z"
     },
     "196949": {
       "match_id": 196949,
@@ -1165,7 +1213,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-30T04:30:00Z"
     },
     "196950": {
       "match_id": 196950,
@@ -1188,7 +1237,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-30T02:10:00Z"
     },
     "196942": {
       "match_id": 196942,
@@ -1211,7 +1261,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T09:30:00Z"
     },
     "196977": {
       "match_id": 196977,
@@ -1234,7 +1285,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-30T11:10:00Z"
     },
     "196978": {
       "match_id": 196978,
@@ -1257,7 +1309,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T12:40:00Z"
     },
     "196979": {
       "match_id": 196979,
@@ -1280,7 +1333,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T05:40:00Z"
     },
     "196980": {
       "match_id": 196980,
@@ -1303,7 +1357,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-09-30T07:20:00Z"
     },
     "196981": {
       "match_id": 196981,
@@ -1326,7 +1381,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T03:10:00Z"
     },
     "196982": {
       "match_id": 196982,
@@ -1349,7 +1405,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T09:25:00Z"
     },
     "196983": {
       "match_id": 196983,
@@ -1372,7 +1429,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-30T03:10:00Z"
     },
     "196984": {
       "match_id": 196984,
@@ -1395,7 +1453,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T06:15:00Z"
     },
     "196985": {
       "match_id": 196985,
@@ -1418,7 +1477,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T07:55:00Z"
     },
     "196986": {
       "match_id": 196986,
@@ -1441,7 +1501,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-30T05:50:00Z"
     },
     "196987": {
       "match_id": 196987,
@@ -1464,7 +1525,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T11:30:00Z"
     },
     "196988": {
       "match_id": 196988,
@@ -1487,7 +1549,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T08:10:00Z"
     },
     "197114": {
       "match_id": 197114,
@@ -1510,7 +1573,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-29T11:10:00Z"
     },
     "197115": {
       "match_id": 197115,
@@ -1533,7 +1597,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-29T11:40:00Z"
     },
     "197534": {
       "match_id": 197534,
@@ -1556,7 +1621,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T03:40:00Z"
     },
     "197535": {
       "match_id": 197535,
@@ -1579,7 +1645,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-30T07:10:00Z"
     },
     "197533": {
       "match_id": 197533,
@@ -1602,7 +1669,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-09-30T10:05:00Z"
     },
     "197536": {
       "match_id": 197536,
@@ -1625,7 +1693,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T02:10:00Z"
     },
     "197537": {
       "match_id": 197537,
@@ -1648,7 +1717,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-01T10:35:00Z"
     },
     "197538": {
       "match_id": 197538,
@@ -1671,7 +1741,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-02T07:10:00Z"
     },
     "197539": {
       "match_id": 197539,
@@ -1714,7 +1785,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T04:45:00Z"
     },
     "198004": {
       "match_id": 198004,
@@ -1737,7 +1809,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-01T02:05:00Z"
     },
     "198048": {
       "match_id": 198048,
@@ -1760,7 +1833,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-02T12:35:00Z"
     },
     "198351": {
       "match_id": 198351,
@@ -1783,7 +1857,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-02T02:10:00Z"
     },
     "198353": {
       "match_id": 198353,
@@ -1806,7 +1881,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-02T03:35:00Z"
     },
     "198349": {
       "match_id": 198349,
@@ -1829,7 +1905,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-02T05:10:00Z"
     },
     "198350": {
       "match_id": 198350,
@@ -1852,7 +1929,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-02T08:00:00Z"
     },
     "198361": {
       "match_id": 198361,
@@ -1875,7 +1953,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-02T09:50:00Z"
     },
     "198450": {
       "match_id": 198450,
@@ -1898,7 +1977,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-02T11:25:00Z"
     },
     "198366": {
       "match_id": 198366,
@@ -1921,7 +2001,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-03T09:15:00Z"
     },
     "198380": {
       "match_id": 198380,
@@ -1944,7 +2025,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-03T04:40:00Z"
     },
     "198381": {
       "match_id": 198381,
@@ -1967,7 +2049,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-03T02:00:00Z"
     },
     "198407": {
       "match_id": 198407,
@@ -1990,7 +2073,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-03T07:10:00Z"
     },
     "198451": {
       "match_id": 198451,
@@ -2013,7 +2097,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-03T12:10:00Z"
     },
     "198360": {
       "match_id": 198360,
@@ -2036,7 +2121,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-03T03:05:00Z"
     },
     "198387": {
       "match_id": 198387,
@@ -2059,7 +2145,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-03T11:15:00Z"
     },
     "198406": {
       "match_id": 198406,
@@ -2082,7 +2169,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-03T05:50:00Z"
     },
     "198640": {
       "match_id": 198640,
@@ -2105,7 +2193,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-03T10:15:00Z"
     },
     "198645": {
       "match_id": 198645,
@@ -2128,7 +2217,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-04T02:10:00Z"
     },
     "198660": {
       "match_id": 198660,
@@ -2151,7 +2241,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-04T07:10:00Z"
     },
     "198689": {
       "match_id": 198689,
@@ -2174,7 +2265,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-04T05:15:00Z"
     },
     "198820": {
       "match_id": 198820,
@@ -2197,7 +2289,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 1,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-04T04:10:00Z"
     },
     "198823": {
       "match_id": 198823,
@@ -2220,7 +2313,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-04T07:10:00Z"
     },
     "199178": {
       "match_id": 199178,
@@ -2243,7 +2337,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 1,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-05T09:30:00Z"
     },
     "199135": {
       "match_id": 199135,
@@ -2266,7 +2361,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-05T07:25:00Z"
     },
     "199210": {
       "match_id": 199210,
@@ -2289,7 +2385,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-05T10:20:00Z"
     },
     "199254": {
       "match_id": 199254,
@@ -2312,7 +2409,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 0,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-05T11:25:00Z"
     },
     "199927": {
       "match_id": 199927,
@@ -2329,10 +2427,14 @@
       "confidence": 0.5303,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Pablo Carreno Busta",
+      "actual_loser": "Mariano Navone",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-08T06:20:00Z"
     },
     "199928": {
       "match_id": 199928,
@@ -2375,7 +2477,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-07T13:15:00Z"
     },
     "199930": {
       "match_id": 199930,
@@ -2398,7 +2501,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-07T04:10:00Z"
     },
     "199931": {
       "match_id": 199931,
@@ -2415,10 +2519,14 @@
       "confidence": 0.5208,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Thiago Agustin Tirante",
+      "actual_loser": "Hamad Medjedovic",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T06:05:00Z"
     },
     "199932": {
       "match_id": 199932,
@@ -2435,10 +2543,14 @@
       "confidence": 0.5868,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Daniel Adolfo Vallejo",
+      "actual_loser": "Valentin Royer",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T06:50:00Z"
     },
     "199933": {
       "match_id": 199933,
@@ -2455,10 +2567,14 @@
       "confidence": 0.5224,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Yunchaokete Bu",
+      "actual_loser": "Luca Van Assche",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T10:10:00Z"
     },
     "199934": {
       "match_id": 199934,
@@ -2475,10 +2591,14 @@
       "confidence": 0.5349,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Botic Van De Zandschulp",
+      "actual_loser": "Daniel Merida Aguilar",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-08T09:30:00Z"
     },
     "199935": {
       "match_id": 199935,
@@ -2501,7 +2621,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-07T06:45:00Z"
     },
     "199916": {
       "match_id": 199916,
@@ -2518,10 +2639,14 @@
       "confidence": 0.7114,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Nuno Borges",
+      "actual_loser": "Facundo Diaz Acosta",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T04:10:00Z"
     },
     "199917": {
       "match_id": 199917,
@@ -2544,7 +2669,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-07T12:15:00Z"
     },
     "199918": {
       "match_id": 199918,
@@ -2567,7 +2693,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-07T04:10:00Z"
     },
     "199919": {
       "match_id": 199919,
@@ -2584,10 +2711,14 @@
       "confidence": 0.6762,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Sebastián Báez",
+      "actual_loser": "Marcos Giron",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-08T07:15:00Z"
     },
     "199920": {
       "match_id": 199920,
@@ -2610,7 +2741,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-07T06:35:00Z"
     },
     "199921": {
       "match_id": 199921,
@@ -2627,10 +2759,14 @@
       "confidence": 0.7947,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Hubert Hurkacz",
+      "actual_loser": "James Duckworth",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T05:45:00Z"
     },
     "199924": {
       "match_id": 199924,
@@ -2647,10 +2783,14 @@
       "confidence": 0.5789,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Jan-Lennard Struff",
+      "actual_loser": "Martin Landaluce",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T09:35:00Z"
     },
     "199925": {
       "match_id": 199925,
@@ -2667,10 +2807,14 @@
       "confidence": 0.6348,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Zachary Svajda",
+      "actual_loser": "Fabian Marozsan",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T07:30:00Z"
     },
     "199926": {
       "match_id": 199926,
@@ -2687,10 +2831,14 @@
       "confidence": 0.5826,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Jenson Brooksby",
+      "actual_loser": "Jaume Munar",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T04:10:00Z"
     },
     "199922": {
       "match_id": 199922,
@@ -2707,10 +2855,14 @@
       "confidence": 0.6843,
       "captured_at_utc": "2026-10-06T11:25:13.366355Z",
       "state_as_of_utc": "2026-10-06T09:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Zizou Bergs",
+      "actual_loser": "Vit Kopřiva",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T11:30:00Z"
     },
     "199923": {
       "match_id": 199923,
@@ -2733,7 +2885,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-07T04:10:00Z"
     },
     "200695": {
       "match_id": 200695,
@@ -2756,7 +2909,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 1,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-07T05:40:00Z"
     },
     "200696": {
       "match_id": 200696,
@@ -2779,7 +2933,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-07T06:10:00Z"
     },
     "200697": {
       "match_id": 200697,
@@ -2802,7 +2957,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 1
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-07T10:05:00Z"
     },
     "200698": {
       "match_id": 200698,
@@ -2825,7 +2981,8 @@
       "prediction_correct": true,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-07T07:00:00Z"
     },
     "200699": {
       "match_id": 200699,
@@ -2848,7 +3005,8 @@
       "prediction_correct": false,
       "actual_side": "p2",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-07T08:15:00Z"
     },
     "200700": {
       "match_id": 200700,
@@ -2871,7 +3029,8 @@
       "prediction_correct": false,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-07T08:55:00Z"
     },
     "200701": {
       "match_id": 200701,
@@ -2894,7 +3053,8 @@
       "prediction_correct": true,
       "actual_side": "p1",
       "winner_sets": 2,
-      "loser_sets": 0
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-07T10:05:00Z"
     },
     "200707": {
       "match_id": 200707,
@@ -2911,10 +3071,14 @@
       "confidence": 0.7288,
       "captured_at_utc": "2026-10-06T23:24:49.786401Z",
       "state_as_of_utc": "2026-10-06T11:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Camilo Ugo Carabelli",
+      "actual_loser": "Ilia Simakin",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-08T04:10:00Z"
     },
     "200702": {
       "match_id": 200702,
@@ -2931,10 +3095,14 @@
       "confidence": 0.6715,
       "captured_at_utc": "2026-10-06T23:24:49.786401Z",
       "state_as_of_utc": "2026-10-06T11:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Juan Manuel Cerundolo",
+      "actual_loser": "Nicolas Mejia",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T08:15:00Z"
     },
     "200703": {
       "match_id": 200703,
@@ -2951,10 +3119,14 @@
       "confidence": 0.8917,
       "captured_at_utc": "2026-10-06T23:24:49.786401Z",
       "state_as_of_utc": "2026-10-06T11:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Stefanos Tsitsipas",
+      "actual_loser": "Kimmer Coppejans",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T04:10:00Z"
     },
     "200704": {
       "match_id": 200704,
@@ -2971,10 +3143,14 @@
       "confidence": 0.7139,
       "captured_at_utc": "2026-10-06T23:24:49.786401Z",
       "state_as_of_utc": "2026-10-06T11:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Pavel Kotov",
+      "actual_loser": "Tallon Griekspoor",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T04:10:00Z"
     },
     "200705": {
       "match_id": 200705,
@@ -2991,10 +3167,14 @@
       "confidence": 0.6893,
       "captured_at_utc": "2026-10-06T23:24:49.786401Z",
       "state_as_of_utc": "2026-10-06T11:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Dalibor Svrcina",
+      "actual_loser": "Cameron Norrie",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-08T12:10:00Z"
     },
     "200706": {
       "match_id": 200706,
@@ -3011,14 +3191,18 @@
       "confidence": 0.5866,
       "captured_at_utc": "2026-10-06T23:24:49.786401Z",
       "state_as_of_utc": "2026-10-06T11:15:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Matteo Arnaldi",
+      "actual_loser": "Bernard Tomic",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-08T06:00:00Z"
     },
     "201039": {
       "match_id": 201039,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T04:00:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3038,7 +3222,7 @@
     },
     "201040": {
       "match_id": 201040,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T07:00:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3058,7 +3242,7 @@
     },
     "201078": {
       "match_id": 201078,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T05:30:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3078,7 +3262,7 @@
     },
     "201117": {
       "match_id": 201117,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T05:30:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3098,7 +3282,7 @@
     },
     "201155": {
       "match_id": 201155,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T07:00:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3118,7 +3302,7 @@
     },
     "201196": {
       "match_id": 201196,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T04:00:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3138,7 +3322,7 @@
     },
     "201003": {
       "match_id": 201003,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T05:30:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3158,7 +3342,7 @@
     },
     "201041": {
       "match_id": 201041,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T08:30:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3178,7 +3362,7 @@
     },
     "201056": {
       "match_id": 201056,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T08:30:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3198,7 +3382,7 @@
     },
     "201057": {
       "match_id": 201057,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T05:30:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3218,7 +3402,7 @@
     },
     "201004": {
       "match_id": 201004,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T04:00:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3238,7 +3422,7 @@
     },
     "200992": {
       "match_id": 200992,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T08:30:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3258,7 +3442,7 @@
     },
     "201134": {
       "match_id": 201134,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T11:30:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3278,7 +3462,7 @@
     },
     "201005": {
       "match_id": 201005,
-      "start_time_utc": "2026-10-10T02:00:00Z",
+      "start_time_utc": "2026-10-09T04:00:00Z",
       "tournament_name": "Shanghai",
       "surface": "Hard",
       "round": "R64",
@@ -3291,6 +3475,326 @@
       "confidence": 0.731,
       "captured_at_utc": "2026-10-07T20:49:38.938249Z",
       "state_as_of_utc": "2026-10-07T13:15:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201416": {
+      "match_id": 201416,
+      "start_time_utc": "2026-10-09T07:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Alejandro Davidovich Fokina",
+      "p2_name": "Jenson Brooksby",
+      "p1_win_probability": 0.6375,
+      "p2_win_probability": 0.3625,
+      "predicted_side": "p1",
+      "predicted_winner": "Alejandro Davidovich Fokina",
+      "confidence": 0.6375,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201427": {
+      "match_id": 201427,
+      "start_time_utc": "2026-10-09T10:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Novak Djokovic",
+      "p2_name": "Hubert Hurkacz",
+      "p1_win_probability": 0.7034,
+      "p2_win_probability": 0.2966,
+      "predicted_side": "p1",
+      "predicted_winner": "Novak Djokovic",
+      "confidence": 0.7034,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201418": {
+      "match_id": 201418,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Jiri Lehecka",
+      "p2_name": "Nuno Borges",
+      "p1_win_probability": 0.6846,
+      "p2_win_probability": 0.3154,
+      "predicted_side": "p1",
+      "predicted_winner": "Jiri Lehecka",
+      "confidence": 0.6846,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201432": {
+      "match_id": 201432,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Thiago Agustin Tirante",
+      "p2_name": "Rafael Jodar",
+      "p1_win_probability": 0.4648,
+      "p2_win_probability": 0.5352,
+      "predicted_side": "p2",
+      "predicted_winner": "Rafael Jodar",
+      "confidence": 0.5352,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201417": {
+      "match_id": 201417,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Arthur Fils",
+      "p2_name": "Pavel Kotov",
+      "p1_win_probability": 0.8976,
+      "p2_win_probability": 0.1024,
+      "predicted_side": "p1",
+      "predicted_winner": "Arthur Fils",
+      "confidence": 0.8976,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201426": {
+      "match_id": 201426,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Matteo Arnaldi",
+      "p2_name": "Taylor Fritz",
+      "p1_win_probability": 0.214,
+      "p2_win_probability": 0.786,
+      "predicted_side": "p2",
+      "predicted_winner": "Taylor Fritz",
+      "confidence": 0.786,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201428": {
+      "match_id": 201428,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Camilo Ugo Carabelli",
+      "p2_name": "Felix Auger-Aliassime",
+      "p1_win_probability": 0.1201,
+      "p2_win_probability": 0.8799,
+      "predicted_side": "p2",
+      "predicted_winner": "Felix Auger-Aliassime",
+      "confidence": 0.8799,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201431": {
+      "match_id": 201431,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Tommy Paul",
+      "p2_name": "Daniel Adolfo Vallejo",
+      "p1_win_probability": 0.7066,
+      "p2_win_probability": 0.2934,
+      "predicted_side": "p1",
+      "predicted_winner": "Tommy Paul",
+      "confidence": 0.7066,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201437": {
+      "match_id": 201437,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Learner Tien",
+      "p2_name": "Zachary Svajda",
+      "p1_win_probability": 0.8064,
+      "p2_win_probability": 0.1936,
+      "predicted_side": "p1",
+      "predicted_winner": "Learner Tien",
+      "confidence": 0.8064,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201444": {
+      "match_id": 201444,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "nan",
+      "p1_name": "Sebastián Báez",
+      "p2_name": "Valentin Vacherot",
+      "p1_win_probability": 0.3814,
+      "p2_win_probability": 0.6186,
+      "predicted_side": "p2",
+      "predicted_winner": "Valentin Vacherot",
+      "confidence": 0.6186,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201445": {
+      "match_id": 201445,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "nan",
+      "p1_name": "Alejandro Tabilo",
+      "p2_name": "Pablo Carreno Busta",
+      "p1_win_probability": 0.5456,
+      "p2_win_probability": 0.4544,
+      "predicted_side": "p1",
+      "predicted_winner": "Alejandro Tabilo",
+      "confidence": 0.5456,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201466": {
+      "match_id": 201466,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "nan",
+      "p1_name": "Yunchaokete Bu",
+      "p2_name": "Casper Ruud",
+      "p1_win_probability": 0.2986,
+      "p2_win_probability": 0.7014,
+      "predicted_side": "p2",
+      "predicted_winner": "Casper Ruud",
+      "confidence": 0.7014,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201467": {
+      "match_id": 201467,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "nan",
+      "p1_name": "Juan Manuel Cerundolo",
+      "p2_name": "Carlos Alcaraz",
+      "p1_win_probability": 0.0573,
+      "p2_win_probability": 0.9427,
+      "predicted_side": "p2",
+      "predicted_winner": "Carlos Alcaraz",
+      "confidence": 0.9427,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201412": {
+      "match_id": 201412,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "R64",
+      "p1_name": "Luciano Darderi",
+      "p2_name": "Stefanos Tsitsipas",
+      "p1_win_probability": 0.3491,
+      "p2_win_probability": 0.6509,
+      "predicted_side": "p2",
+      "predicted_winner": "Stefanos Tsitsipas",
+      "confidence": 0.6509,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201468": {
+      "match_id": 201468,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "nan",
+      "p1_name": "Daniil Medvedev",
+      "p2_name": "Jan-Lennard Struff",
+      "p1_win_probability": 0.838,
+      "p2_win_probability": 0.162,
+      "predicted_side": "p1",
+      "predicted_winner": "Daniil Medvedev",
+      "confidence": 0.838,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "201469": {
+      "match_id": 201469,
+      "start_time_utc": "2026-10-10T02:00:00Z",
+      "tournament_name": "Shanghai",
+      "surface": "Hard",
+      "round": "nan",
+      "p1_name": "Botic Van De Zandschulp",
+      "p2_name": "Alex Michelsen",
+      "p1_win_probability": 0.3369,
+      "p2_win_probability": 0.6631,
+      "predicted_side": "p2",
+      "predicted_winner": "Alex Michelsen",
+      "confidence": 0.6631,
+      "captured_at_utc": "2026-10-08T15:58:47.979352Z",
+      "state_as_of_utc": "2026-10-08T06:50:00Z",
       "actual_winner": null,
       "actual_loser": null,
       "match_status": null,
