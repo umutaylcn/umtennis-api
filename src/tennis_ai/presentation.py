@@ -228,6 +228,8 @@ class PlayerPresentationService:
         seen = set(existing_keys)
         provider_ids = existing_provider_ids or set()
         for row in backfill.sort_values("played_at_utc").itertuples(index=False):
+            if str(getattr(row, "match_status", "completed")).casefold() == "defaulted":
+                continue
             provider_id = getattr(row, "provider_match_id", None)
             if pd.notna(provider_id) and int(provider_id) in provider_ids:
                 continue

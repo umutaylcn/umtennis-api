@@ -13,7 +13,7 @@ from tennis_ai.state_engine import CurrentStateEngine, EloConfig
 
 class RetirementPolicyTests(unittest.TestCase):
     def test_interrupted_matches_have_half_elo_weight_and_full_result_weight(self):
-        for match_status in ("retirement", "defaulted"):
+        for match_status in ("retirement",):
             with self.subTest(match_status=match_status):
                 state = CurrentStateEngine(EloConfig(provisional_k=32, standard_k=32))
                 row = pd.Series(
@@ -49,6 +49,19 @@ class RetirementPolicyTests(unittest.TestCase):
                 tournament = state.tournaments[("Winston-Salem", "Juan Manuel Cerundolo")]
                 self.assertEqual(tournament["wins"], 1)
                 self.assertEqual(tournament["games_won"], 0)
+
+    def test_defaulted_result_only_closes_fixture(self):
+        state = CurrentStateEngine(EloConfig(provisional_k=32, standard_k=32))
+        row = pd.Series({
+            "played_at_utc": pd.Timestamp("2026-10-05T11:25:00Z"),
+            "tourney_name": "Beijing", "surface": "Hard",
+            "winner_name": "Novak Djokovic", "loser_name": "Daniil Medvedev",
+            "match_status": "defaulted",
+        })
+        state.apply_completed_match(row)
+        self.assertEqual(state.players, {})
+        self.assertEqual(state.head_to_head_snapshot("Novak Djokovic", "Daniil Medvedev", "Hard")["matches"], 0)
+        self.assertTrue(state.is_completed_fixture("Beijing", "Novak Djokovic", "Daniil Medvedev"))
 
 
 if __name__ == "__main__":

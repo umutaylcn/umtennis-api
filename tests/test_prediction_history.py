@@ -153,5 +153,20 @@ class PredictionHistoryTests(unittest.TestCase):
             self.assertEqual(len(store.completed(100)), 100)
 
 
+    def test_defaulted_prediction_is_displayed_but_not_scored(self):
+        fixtures = pd.DataFrame([{"match_id": 199254, "start_time_utc": pd.Timestamp("2026-10-05T11:25:00Z"), "tournament_name": "Beijing", "surface": "hard", "round": "SF", "p1_display_name": "Novak Djokovic", "p2_display_name": "Daniil Medvedev", "identities_resolved": True}])
+        result = pd.DataFrame([{"provider_match_id": 199254, "played_at_utc": pd.Timestamp("2026-10-05T11:25:00Z"), "tourney_name": "Beijing", "winner_name": "Novak Djokovic", "loser_name": "Daniil Medvedev", "match_status": "defaulted", "winner_sets": 0, "loser_sets": 0}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            store.capture(fixtures, FakeState(), FakePredictor(), now_utc=datetime(2026, 10, 4, 8, tzinfo=timezone.utc))
+            store.finalize(result)
+            self.assertIsNone(store._predictions["199254"]["prediction_correct"])
+            row = store.completed()[0]
+            self.assertEqual(row["match_status"], "defaulted")
+            self.assertIsNone(row["prediction_correct"])
+            store._predictions["199254"]["prediction_correct"] = True
+            self.assertIsNone(store.completed()[0]["prediction_correct"])
+
+
 if __name__ == "__main__":
     unittest.main()

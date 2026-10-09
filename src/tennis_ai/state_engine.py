@@ -249,6 +249,12 @@ class CurrentStateEngine:
 
     def apply_completed_match(self, row: Any) -> None:
         winner_name, loser_name = str(row.winner_name), str(row.loser_name)
+        match_status = str(getattr(row, "match_status", "completed")).casefold()
+        if match_status == "defaulted":
+            # An official default closes the fixture, but is not playing evidence.
+            tournament = clean_tournament_name(row.tourney_name)
+            self.completed_keys.add((tournament, frozenset((winner_name, loser_name))))
+            return
         winner, loser = self._player(winner_name), self._player(loser_name)
         played_at = getattr(row, "played_at_utc", getattr(row, "tourney_date", None))
         season = int(pd.Timestamp(played_at).year)
@@ -256,8 +262,7 @@ class CurrentStateEngine:
         self._apply_annual_regression(loser, season)
         surface = str(row.surface)
         config = getattr(self, "elo_config", DEFAULT_ELO_CONFIG)
-        match_status = str(getattr(row, "match_status", "completed")).casefold()
-        elo_weight = config.retirement_weight if match_status in {"retirement", "defaulted"} else 1.0
+        elo_weight = config.retirement_weight if match_status == "retirement" else 1.0
         winner_change, loser_change = elo_changes(
             winner.elo, loser.elo, winner.matches, loser.matches, True, config
         )

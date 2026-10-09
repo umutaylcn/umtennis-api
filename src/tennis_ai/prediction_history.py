@@ -105,7 +105,10 @@ def _display_record(record: dict[str, Any]) -> dict[str, Any] | None:
     displayed["predicted_winner"] = record[f"{displayed['predicted_side']}_name"]
     displayed["actual_winner"] = record[f"{winner_side}_name"]
     displayed["actual_loser"] = record[f"{loser_side}_name"]
-    displayed["prediction_correct"] = displayed["predicted_side"] == winner_side
+    displayed["prediction_correct"] = (
+        None if str(record.get("match_status", "")).casefold() == "defaulted"
+        else displayed["predicted_side"] == winner_side
+    )
     return displayed
 
 
@@ -213,7 +216,7 @@ class PredictionHistoryStore:
                     "actual_winner": record[f"{winner_side}_name"],
                     "actual_loser": record[f"{loser_side}_name"],
                     "match_status": str(row.match_status),
-                    "prediction_correct": predicted_side == winner_side,
+                    "prediction_correct": None if str(row.match_status).casefold() == "defaulted" else predicted_side == winner_side,
                     "winner_sets": int(row.winner_sets),
                     "loser_sets": int(row.loser_sets),
                     "actual_played_at_utc": _iso_utc(getattr(row, "played_at_utc", None)),

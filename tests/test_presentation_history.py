@@ -86,6 +86,20 @@ class PresentationHistoryTests(unittest.TestCase):
 
         self.assertEqual(len(service._matches["Michael Zheng"]), 0)
 
+    def test_defaulted_result_is_not_added_to_form(self):
+        service = PlayerPresentationService.__new__(PlayerPresentationService)
+        service._matches = defaultdict(list)
+        backfill = pd.DataFrame([{
+            "provider_match_id": 199254,
+            "played_at_utc": "2026-10-05T11:25:00Z",
+            "tourney_name": "Beijing", "round": "SF", "surface": "Hard",
+            "winner_name": "Novak Djokovic", "loser_name": "Daniil Medvedev",
+            "match_status": "defaulted",
+        }])
+        service._append_backfill_only_history(backfill, {"Novak Djokovic", "Daniil Medvedev"}, set())
+        self.assertEqual(len(service._matches["Novak Djokovic"]), 0)
+        self.assertEqual(len(service._matches["Daniil Medvedev"]), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

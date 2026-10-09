@@ -2406,7 +2406,7 @@
       "actual_winner": "Novak Djokovic",
       "actual_loser": "Daniil Medvedev",
       "match_status": "defaulted",
-      "prediction_correct": true,
+      "prediction_correct": null,
       "actual_side": "p1",
       "winner_sets": 0,
       "loser_sets": 0,
