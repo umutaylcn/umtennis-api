@@ -86,7 +86,7 @@ class PresentationHistoryTests(unittest.TestCase):
 
         self.assertEqual(len(service._matches["Michael Zheng"]), 0)
 
-    def test_defaulted_result_is_not_added_to_form(self):
+    def test_defaulted_result_is_neutral_in_form(self):
         service = PlayerPresentationService.__new__(PlayerPresentationService)
         service._matches = defaultdict(list)
         backfill = pd.DataFrame([{
@@ -97,8 +97,16 @@ class PresentationHistoryTests(unittest.TestCase):
             "match_status": "defaulted",
         }])
         service._append_backfill_only_history(backfill, {"Novak Djokovic", "Daniil Medvedev"}, set())
-        self.assertEqual(len(service._matches["Novak Djokovic"]), 0)
-        self.assertEqual(len(service._matches["Daniil Medvedev"]), 0)
+        self.assertIsNone(service._matches["Novak Djokovic"][0]["won"])
+        self.assertIsNone(service._matches["Daniil Medvedev"][0]["won"])
+        rows = [
+            {"won": True}, {"won": True}, {"won": True}, {"won": True},
+            service._matches["Daniil Medvedev"][0],
+        ]
+        summary = service._summary(rows)
+        self.assertEqual((summary["wins"], summary["losses"]), (4, 0))
+        self.assertEqual(summary["form"], "WWWWN")
+        self.assertEqual(summary["win_rate"], 1.0)
 
 
 if __name__ == "__main__":

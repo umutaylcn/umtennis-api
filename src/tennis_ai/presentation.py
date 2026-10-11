@@ -32,7 +32,7 @@ STAT_COLUMNS = {
 # The 2026 provider feed contains this shortened duplicate of Ben Shelton.
 # Keep it available for historical matching, but never rank it as a second player.
 LEADERBOARD_EXCLUDED_ALIASES = {"Shelton B."}
-PRESENTATION_CACHE_VERSION = 2
+PRESENTATION_CACHE_VERSION = 3
 
 
 class PlayerPresentationService:
@@ -228,8 +228,7 @@ class PlayerPresentationService:
         seen = set(existing_keys)
         provider_ids = existing_provider_ids or set()
         for row in backfill.sort_values("played_at_utc").itertuples(index=False):
-            if str(getattr(row, "match_status", "completed")).casefold() == "defaulted":
-                continue
+            neutral = str(getattr(row, "match_status", "completed")).casefold() == "defaulted"
             provider_id = getattr(row, "provider_match_id", None)
             if pd.notna(provider_id) and int(provider_id) in provider_ids:
                 continue
@@ -240,8 +239,8 @@ class PlayerPresentationService:
                 continue
             seen.add(key)
             for name, opponent, won in (
-                (str(row.winner_name), str(row.loser_name), True),
-                (str(row.loser_name), str(row.winner_name), False),
+                (str(row.winner_name), str(row.loser_name), None if neutral else True),
+                (str(row.loser_name), str(row.winner_name), None if neutral else False),
             ):
                 if name not in active_names:
                     continue
@@ -419,13 +418,15 @@ class PlayerPresentationService:
     @staticmethod
     def _summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
         matches = len(rows)
-        wins = sum(int(row["won"]) for row in rows)
+        wins = sum(row["won"] is True for row in rows)
+        losses = sum(row["won"] is False for row in rows)
+        decided = wins + losses
         result: dict[str, Any] = {
             "matches": matches,
             "wins": wins,
-            "losses": matches - wins,
-            "form": "".join("W" if row["won"] else "L" for row in rows),
-            "win_rate": round(wins / matches, 3) if matches else None,
+            "losses": losses,
+            "form": "".join("N" if row["won"] is None else "W" if row["won"] else "L" for row in rows),
+            "win_rate": round(wins / decided, 3) if decided else None,
         }
         for metric in STAT_COLUMNS.values():
             values = pd.to_numeric(
