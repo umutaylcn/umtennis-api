@@ -63,6 +63,29 @@ class ResultTrackerTests(unittest.TestCase):
         )
         self.assertEqual(match_identity_key(full), match_identity_key(abbreviated))
 
+    def test_shanghai_name_variants_do_not_duplicate_results(self):
+        cases = [
+            ("Daniil Medvedev", "Jan Lennard Struff", "Medvedev D.", "Struff J-L."),
+            ("Casper Ruud", "Bu Yunchaokete", "Ruud C.", "Bu Y."),
+        ]
+        for full_winner, full_loser, short_winner, short_loser in cases:
+            with self.subTest(full_loser=full_loser):
+                full = SimpleNamespace(
+                    played_at_utc="2026-10-10T10:00:00Z",
+                    tourney_name="Shanghai",
+                    winner_name=full_winner,
+                    loser_name=full_loser,
+                    round="R64",
+                )
+                abbreviated = SimpleNamespace(
+                    played_at_utc="2026-10-10T10:00:00Z",
+                    tourney_name="Shanghai ATP",
+                    winner_name=short_winner,
+                    loser_name=short_loser,
+                    round="R64",
+                )
+                self.assertEqual(match_identity_key(full), match_identity_key(abbreviated))
+
     def test_completed_match_survives_restart_and_builds_winner_row(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "tracked.json"

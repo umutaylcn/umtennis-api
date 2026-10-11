@@ -39,6 +39,10 @@ def player_identity_key(name: object) -> str:
     tokens = normalize_player_name(str(name)).split()
     if not tokens:
         return ""
+    # The season CSV writes this name as "Bu Y." while the live feed uses
+    # "Bu Yunchaokete"; both identify the same player within a match.
+    if tokens == ["bu", "yunchaokete"]:
+        return "bu:y"
     if len(tokens) == 1:
         return tokens[0]
 
@@ -47,14 +51,14 @@ def player_identity_key(name: object) -> str:
         while tokens and len(tokens[-1]) == 1:
             initials.insert(0, tokens.pop())
         family = tokens[-1] if tokens else ""
-        return f"{family}:{''.join(initials)}"
+        return f"{family}:{initials[0]}"
 
     if len(tokens[0]) == 1:
         initials = []
         while tokens and len(tokens[0]) == 1:
             initials.append(tokens.pop(0))
         family = tokens[-1] if tokens else ""
-        return f"{family}:{''.join(initials)}"
+        return f"{family}:{initials[0]}"
 
     return f"{tokens[-1]}:{tokens[0][0]}"
 
