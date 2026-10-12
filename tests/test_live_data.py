@@ -64,6 +64,14 @@ class LiveTennisClientTests(unittest.TestCase):
             verified_fixture_round(195478, "ATP Laver Cup", "Casper Ruud", "Francisco Cerundolo"),
             "DAY 1",
         )
+        self.assertEqual(
+            verified_fixture_round(203161, "Shanghai", "Botic Van De Zandschulp", "Rafael Jodar"),
+            "R16",
+        )
+        self.assertEqual(
+            verified_fixture_round(203160, "Shanghai", "Tommy Paul", "Zizou Bergs"),
+            "R16",
+        )
         self.assertIsNone(
             verified_fixture_round(195725, "Chengdu", "Jenson Brooksby", "Another Player")
         )
@@ -72,9 +80,11 @@ class LiveTennisClientTests(unittest.TestCase):
         fixtures = pd.DataFrame([
             {"match_id": 195741, "tournament_name": "Hangzhou", "p1_display_name": "Fabian Marozsan", "p2_display_name": "Kyrian Jacquet", "round": float("nan")},
             {"match_id": 195725, "tournament_name": "Chengdu", "p1_display_name": "Jenson Brooksby", "p2_display_name": "Nikoloz Basilashvili", "round": "SF"},
+            {"match_id": 203161, "tournament_name": "Shanghai", "p1_display_name": "Botic Van De Zandschulp", "p2_display_name": "Rafael Jodar", "round": float("nan")},
+            {"match_id": 203160, "tournament_name": "Shanghai", "p1_display_name": "Tommy Paul", "p2_display_name": "Zizou Bergs", "round": float("nan")},
         ])
         updated = apply_verified_fixture_rounds(fixtures)
-        self.assertEqual(updated["round"].tolist(), ["QF", "SF"])
+        self.assertEqual(updated["round"].tolist(), ["QF", "SF", "R16", "R16"])
 
     def test_cached_fixture_filter_removes_only_verified_qualifying_dates(self):
         fixtures = pd.DataFrame([
