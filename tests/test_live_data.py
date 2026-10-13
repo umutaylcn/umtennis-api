@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
@@ -11,6 +12,7 @@ from tennis_ai.live_data import LiveTennisClient, TennisAPIError
 from tennis_ai.fixture_pipeline import (
     apply_verified_fixture_rounds,
     exclude_pre_main_draw_fixtures,
+    fill_missing_fixture_ranks,
     fixture_round_code,
     verified_fixture_round,
 )
@@ -36,6 +38,38 @@ def fixture(match_id: int, status: str) -> dict[str, object]:
 
 
 class LiveTennisClientTests(unittest.TestCase):
+    def test_scheduled_csv_fills_only_exact_missing_fixture_round(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            csv_path = Path(temporary) / "data" / "external" / "2026-atp-season.csv"
+            csv_path.parent.mkdir(parents=True)
+            pd.DataFrame([{
+                "date_timestamp": 1792116000,
+                "tournament": "Shanghai ATP",
+                "round": "Quarter-finals",
+                "status": "SCHEDULED",
+                "home_name": "Zverev A.",
+                "away_name": "De Minaur A.",
+                "home_rank": 2,
+                "away_rank": 9,
+                "home_points": 9720,
+                "away_points": 3300,
+            }]).to_csv(csv_path, index=False)
+            fixtures = pd.DataFrame([
+                {"event_date": "2026-10-16", "tournament_name": "Shanghai", "round": None,
+                 "p1_historical_name": "Alexander Zverev", "p2_historical_name": "Alex De Minaur"},
+                {"event_date": "2026-10-16", "tournament_name": "Shanghai", "round": "R16",
+                 "p1_historical_name": "Alexander Zverev", "p2_historical_name": "Alex De Minaur"},
+                {"event_date": "2026-10-17", "tournament_name": "Shanghai", "round": None,
+                 "p1_historical_name": "Alexander Zverev", "p2_historical_name": "Alex De Minaur"},
+            ])
+
+            enriched = fill_missing_fixture_ranks(fixtures, temporary)
+
+        self.assertEqual(enriched.loc[0, "round"], "QF")
+        self.assertEqual(enriched.loc[0, "p1_current_rank"], 2)
+        self.assertEqual(enriched.loc[1, "round"], "R16")
+        self.assertTrue(pd.isna(enriched.loc[2, "round"]))
+
     def test_update_budget_counts_usage_and_blocks_extra_calls(self):
         response = Mock(status_code=200)
         response.json.return_value = {"data": {}}
