@@ -29,7 +29,7 @@ MAIN_DRAW_START_DATES: dict[tuple[str, int], date] = {
 
 # Team competitions are not part of the ATP tour-level dataset used to train
 # UMTennis. The provider still returns them for ``tour=atp``.
-EXCLUDED_TOURNAMENT_MARKERS = ("davis cup",)
+EXCLUDED_TOURNAMENT_MARKERS = ("davis cup", "qualification", "qualifying")
 
 
 class TennisAPIError(RuntimeError):

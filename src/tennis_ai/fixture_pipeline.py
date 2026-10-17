@@ -206,7 +206,9 @@ def exclude_pre_main_draw_fixtures(table: pd.DataFrame) -> pd.DataFrame:
     if table.empty or not {"event_date", "tournament_name"}.issubset(table.columns):
         return table.copy()
     event_days = pd.to_datetime(table["event_date"], errors="coerce").dt.date
-    excluded = pd.Series(False, index=table.index)
+    excluded = table["tournament_name"].str.contains(
+        "qualification|qualifying", case=False, na=False
+    )
     for (tournament, year), main_draw_start in MAIN_DRAW_START_DATES.items():
         excluded |= (
             table["tournament_name"].eq(tournament)

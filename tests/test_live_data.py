@@ -126,6 +126,7 @@ class LiveTennisClientTests(unittest.TestCase):
             {"match_id": 2, "tournament_name": "Beijing", "event_date": "2026-09-29"},
             {"match_id": 3, "tournament_name": "Tokyo", "event_date": "2026-09-30"},
             {"match_id": 4, "tournament_name": "Chengdu", "event_date": "2026-09-28"},
+            {"match_id": 5, "tournament_name": "Lyon (France) - Qualification", "event_date": "2026-10-18"},
         ])
         self.assertEqual(exclude_pre_main_draw_fixtures(fixtures)["match_id"].tolist(), [3, 4])
 
@@ -163,6 +164,18 @@ class LiveTennisClientTests(unittest.TestCase):
         davis_cup["tournament"] = "ATP Davis Cup - World Group II"
 
         with patch.object(client, "_get", return_value={"data": [davis_cup]}):
+            matches = client.get_upcoming_matches()
+
+        self.assertEqual(matches, [])
+
+    def test_upcoming_feed_excludes_qualification_named_tournament(self):
+        client = LiveTennisClient("test-key")
+        qualifying = fixture(5, "scheduled")
+        qualifying["tournament"] = "Lyon (France) - Qualification"
+        qualifying["round"] = None
+        qualifying["round_code"] = None
+
+        with patch.object(client, "_get", return_value={"data": [qualifying]}):
             matches = client.get_upcoming_matches()
 
         self.assertEqual(matches, [])
