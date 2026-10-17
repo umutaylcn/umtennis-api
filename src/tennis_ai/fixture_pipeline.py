@@ -42,6 +42,7 @@ VERIFIED_FIXTURE_ROUNDS = {
 }
 
 DISPLAY_NAME_ALIASES = {
+    "t skatov": "Timofey Skatov",
     "u humbert": "Ugo Humbert",
     "k nishikori": "Kei Nishikori",
     "h rune": "Holger Rune",
@@ -58,6 +59,7 @@ DISPLAY_NAME_ALIASES = {
 # a different (WTA) player.  IDs are stable, so correct the identity before
 # historical matching, presentation, and photo lookup.
 PLAYER_ID_NAME_OVERRIDES = {
+    183: "Timofey Skatov",
     445: "Zhizhen Zhang",
 }
 

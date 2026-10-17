@@ -57,6 +57,20 @@ def test_abbreviated_names_use_full_display_names():
     assert corrected.loc[1, "p1_display_name"] == "Holger Rune"
 
 
+def test_skatov_provider_id_and_abbreviation_resolve_to_full_name():
+    fixtures = pd.DataFrame([{
+        "p1_id": 504, "p1_display_name": "Fabian Marozsan",
+        "p1_historical_name": "Fabian Marozsan",
+        "p2_id": 183, "p2_display_name": "T. Skatov",
+        "p2_historical_name": "T. Skatov",
+    }])
+
+    corrected = apply_player_id_name_overrides(fixtures)
+
+    assert corrected.loc[0, "p2_display_name"] == "Timofey Skatov"
+    assert corrected.loc[0, "p2_historical_name"] == "Timofey Skatov"
+
+
 def test_scheduled_csv_refreshes_only_exact_matching_fixture_ranks(tmp_path):
     csv_path = tmp_path / "data" / "external" / "2026-atp-season.csv"
     csv_path.parent.mkdir(parents=True)

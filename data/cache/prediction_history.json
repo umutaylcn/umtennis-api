@@ -5023,6 +5023,26 @@
       "actual_loser": null,
       "match_status": null,
       "prediction_correct": null
+    },
+    "205197": {
+      "match_id": 205197,
+      "start_time_utc": "2026-10-19T06:00:00Z",
+      "tournament_name": "Almaty",
+      "surface": "Hard",
+      "round": "R32",
+      "p1_name": "Zangar Nurlanuly",
+      "p2_name": "Tomas Machac",
+      "p1_win_probability": 0.0704,
+      "p2_win_probability": 0.9296,
+      "predicted_side": "p2",
+      "predicted_winner": "Tomas Machac",
+      "confidence": 0.9296,
+      "captured_at_utc": "2026-10-17T21:42:41.239769Z",
+      "state_as_of_utc": "2026-10-17T11:10:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
     }
   }
 }
