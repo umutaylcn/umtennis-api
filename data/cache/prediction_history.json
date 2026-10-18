@@ -4699,10 +4699,14 @@
       "confidence": 0.5536,
       "captured_at_utc": "2026-10-17T20:45:24.558897Z",
       "state_as_of_utc": "2026-10-16T10:10:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Alejandro Davidovich Fokina",
+      "actual_loser": "Rafael Jodar",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-18T08:40:00Z"
     },
     "205313": {
       "match_id": 205313,
