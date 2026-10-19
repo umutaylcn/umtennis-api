@@ -30,6 +30,7 @@ FIXTURE_SNAPSHOT_NAME = "upcoming_fixtures.json"
 # Chengdu SF: https://www.protennislive.com/posting/2026/7581/mds.pdf
 # Shanghai R4: https://en.rolexshanghaimasters.com/en/media/news/jodar-lehecka-shanghai-2026-monday
 # Shanghai R4: https://en.rolexshanghaimasters.com/en/media/news/day-6-preview-alcaraz-vacherot-tsitsipas-v-fritz
+# Brussels R32: https://www.protennislive.com/posting/2026/7485/mds.pdf
 VERIFIED_FIXTURE_ROUNDS = {
     195478: ("ATP Laver Cup", "Casper Ruud", "Francisco Cerundolo", "DAY 1"),
     195479: ("ATP Laver Cup", "Jakub Menšik", "Brandon Nakashima", "DAY 1"),
@@ -39,6 +40,12 @@ VERIFIED_FIXTURE_ROUNDS = {
     196548: ("Chengdu", "Hubert Hurkacz", "Denis Shapovalov", "SF"),
     203161: ("Shanghai", "Botic Van De Zandschulp", "Rafael Jodar", "R16"),
     203160: ("Shanghai", "Tommy Paul", "Zizou Bergs", "R16"),
+    206066: ("Brussels", "Federico Cinà", "Jaume Munar", "R32"),
+    206067: ("Brussels", "Yannick Hanfmann", "Martin Damm", "R32"),
+    206068: ("Brussels", "Andrea Guerrieri", "Alex Michelsen", "R32"),
+    206063: ("Brussels", "Nishesh Basavareddy", "Raphael Collignon", "R32"),
+    206064: ("Brussels", "David Goffin", "Remy Bertola", "R32"),
+    206065: ("Brussels", "Botic Van De Zandschulp", "Clement Chidekh", "R32"),
 }
 
 DISPLAY_NAME_ALIASES = {
