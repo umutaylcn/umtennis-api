@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from .live_data import is_pre_main_draw
 from .player_matching import HistoricalPlayerMatcher, normalize_player_name
 
 
@@ -140,6 +141,14 @@ def load_completed_backfill(
         & ~source["tournament"].str.contains("French Open", case=False, na=False)
     )
     filtered = source.loc[mask].copy()
+    filtered = filtered.loc[
+        ~pd.Series(
+            [is_pre_main_draw(name, played_at) for name, played_at in zip(
+                filtered["tournament"], filtered["played_at_utc"]
+            )],
+            index=filtered.index,
+        )
+    ].copy()
     matcher = HistoricalPlayerMatcher(historical_names)
 
     records: list[dict[str, object]] = []

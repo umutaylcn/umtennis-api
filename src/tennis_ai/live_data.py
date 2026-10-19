@@ -24,12 +24,28 @@ MAIN_DRAW_START_DATES: dict[tuple[str, int], date] = {
     # Sep 30; Beijing qualifying occupies Sep 28-29.
     ("Tokyo", 2026): date(2026, 9, 30),
     ("Beijing", 2026): date(2026, 9, 30),
+    # ATP 2026 calendar lists all three indoor main draws from October 19.
+    # The provider can omit qualifying flags and even label a qualifying final
+    # as an ordinary ATP fixture before that date.
+    ("Almaty", 2026): date(2026, 10, 19),
+    ("Brussels", 2026): date(2026, 10, 19),
+    ("Lyon", 2026): date(2026, 10, 19),
 }
 
 
 # Team competitions are not part of the ATP tour-level dataset used to train
 # UMTennis. The provider still returns them for ``tour=atp``.
 EXCLUDED_TOURNAMENT_MARKERS = ("davis cup", "qualification", "qualifying")
+
+
+def is_pre_main_draw(tournament_name: object, event_time: object) -> bool:
+    """Reject a known qualifying-window match even when provider flags are missing."""
+    try:
+        event_day = date.fromisoformat(str(event_time)[:10])
+    except ValueError:
+        return False
+    official_start = MAIN_DRAW_START_DATES.get((str(tournament_name), event_day.year))
+    return official_start is not None and event_day < official_start
 
 
 def lyon_main_draw_mislabel(fixture: dict[str, Any]) -> bool:
@@ -190,17 +206,7 @@ class LiveTennisClient:
                 for marker in EXCLUDED_TOURNAMENT_MARKERS
             ):
                 continue
-            event_date_text = str(fixture.get("event_date") or "").strip()
-            try:
-                event_day = date.fromisoformat(event_date_text)
-            except ValueError:
-                event_day = None
-            official_start = (
-                MAIN_DRAW_START_DATES.get((tournament_name, event_day.year))
-                if event_day is not None
-                else None
-            )
-            if official_start is not None and event_day < official_start:
+            if is_pre_main_draw(tournament_name, fixture.get("event_date") or fixture.get("start_time")):
                 continue
 
             p1_name = str(fixture.get("player1_name") or "").strip()

@@ -46,6 +46,26 @@ class FakeClient:
 
 
 class ResultTrackerTests(unittest.TestCase):
+    def test_pre_main_draw_result_is_terminal_without_detail_request(self):
+        with tempfile.TemporaryDirectory() as directory:
+            store = TrackedFixtureStore(Path(directory) / "tracked.json")
+            fixture = fixture_frame(205313)
+            fixture.loc[0, "tournament_name"] = "Brussels"
+            fixture.loc[0, "start_time_utc"] = pd.Timestamp("2026-10-18T14:00:00Z")
+            store.track(fixture)
+
+            class NoDetailClient:
+                def get_match(self, match_id):
+                    raise AssertionError("Qualifying result must not be fetched")
+
+            results, terminal, pending, mismatch = collect_tracked_results(
+                store, NoDetailClient(), now=pd.Timestamp("2026-10-19T00:00:00Z")
+            )
+            self.assertTrue(results.empty)
+            self.assertEqual(terminal, [205313])
+            self.assertEqual(pending, [])
+            self.assertEqual(mismatch, [])
+
     def test_cross_provider_full_and_abbreviated_names_share_identity(self):
         full = SimpleNamespace(
             played_at_utc="2026-09-09T03:05:00Z",

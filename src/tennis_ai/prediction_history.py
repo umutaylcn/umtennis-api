@@ -11,6 +11,7 @@ from typing import Any
 
 import pandas as pd
 
+from .live_data import is_pre_main_draw
 from .player_matching import normalize_player_name
 from .results_backfill import clean_tournament_name, player_identity_key
 
@@ -140,6 +141,8 @@ class PredictionHistoryStore:
         for _, fixture in fixtures.iterrows():
             if not bool(fixture.get("identities_resolved", False)):
                 continue
+            if is_pre_main_draw(fixture.get("tournament_name"), fixture.get("start_time_utc")):
+                continue
             start = pd.to_datetime(fixture.start_time_utc, utc=True, errors="coerce")
             if pd.isna(start) or captured_at >= start:
                 continue
@@ -232,10 +235,39 @@ class PredictionHistoryStore:
         rows = [
             displayed for item in self._predictions.values()
             if item.get("actual_winner") and _is_pre_match_record(item)
+            if not is_pre_main_draw(item.get("tournament_name"), item.get("start_time_utc"))
             if (displayed := _display_record(item)) is not None
         ]
         rows.sort(key=lambda item: (item.get("start_time_utc") or "", item["match_id"]), reverse=True)
         return rows if limit is None else rows[: max(0, limit)]
+
+    def drop_pre_main_draw(self) -> int:
+        """Purge qualifying-window captures from stored prediction history."""
+        invalid = [
+            match_id for match_id, record in self._predictions.items()
+            if is_pre_main_draw(record.get("tournament_name"), record.get("start_time_utc"))
+        ]
+        for match_id in invalid:
+            del self._predictions[match_id]
+        if invalid:
+            self.save()
+        return len(invalid)
+
+    def drop_pending_involving(self, player_names: set[str]) -> int:
+        """Recompute future predictions affected by a removed state result."""
+        normalized = {normalize_player_name(name) for name in player_names}
+        now = pd.Timestamp.now(tz="UTC")
+        invalid = [
+            match_id for match_id, record in self._predictions.items()
+            if not record.get("actual_winner")
+            and pd.to_datetime(record.get("start_time_utc"), utc=True, errors="coerce") > now
+            and any(normalize_player_name(record.get(f"{side}_name")) in normalized for side in ("p1", "p2"))
+        ]
+        for match_id in invalid:
+            del self._predictions[match_id]
+        if invalid:
+            self.save()
+        return len(invalid)
 
     def save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)

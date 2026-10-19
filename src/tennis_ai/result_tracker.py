@@ -11,7 +11,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from .live_data import LiveTennisClient, TennisAPIError
+from .live_data import LiveTennisClient, TennisAPIError, is_pre_main_draw
 from .player_matching import normalize_player_name
 from .results_backfill import (
     clean_tournament_name,
@@ -246,6 +246,9 @@ def collect_tracked_results(
     mismatch_ids: list[int] = []
     for record in store.pending(now)[:limit]:
         match_id = int(record["match_id"])
+        if is_pre_main_draw(record.get("tournament_name"), record.get("start_time_utc")):
+            terminal_ids.append(match_id)
+            continue
         try:
             detail = client.get_match(match_id)
         except TennisAPIError:

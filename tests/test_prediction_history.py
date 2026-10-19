@@ -26,6 +26,16 @@ class FakePredictor:
 
 
 class PredictionHistoryTests(unittest.TestCase):
+    def test_qualifying_window_cannot_be_captured_or_shown_in_previous(self):
+        fixtures = pd.DataFrame([{"match_id": 205313, "start_time_utc": pd.Timestamp("2026-10-18T14:00:00Z"), "tournament_name": "Brussels", "surface": "hard", "round": None, "p1_display_name": "Martin Damm", "p2_display_name": "Andrea Guerrieri", "identities_resolved": True}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor(), now_utc=datetime(2026, 10, 17, 20, tzinfo=timezone.utc)), 0)
+            store._predictions["205313"] = {"match_id": 205313, "start_time_utc": "2026-10-18T14:00:00Z", "captured_at_utc": "2026-10-17T20:00:00Z", "state_as_of_utc": "2026-10-16T10:00:00Z", "tournament_name": "Brussels", "surface": "Hard", "round": "nan", "p1_name": "Martin Damm", "p2_name": "Andrea Guerrieri", "p1_win_probability": 0.8, "p2_win_probability": 0.2, "actual_winner": "Andrea Guerrieri", "actual_loser": "Martin Damm", "match_status": "completed"}
+            self.assertEqual(store.completed(), [])
+            self.assertEqual(store.drop_pre_main_draw(), 1)
+            self.assertEqual(store._predictions, {})
+
     def test_capture_uses_display_side_not_historical_prediction_name(self):
         fixtures = pd.DataFrame([{"match_id": 21, "start_time_utc": pd.Timestamp("2026-09-11T12:00:00Z"), "tournament_name": "Laver Cup", "surface": "hard", "round": "DAY 1", "p1_display_name": "Jakub Menšik", "p2_display_name": "Brandon Nakashima", "identities_resolved": True}])
 

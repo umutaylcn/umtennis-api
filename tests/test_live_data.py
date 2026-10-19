@@ -229,6 +229,16 @@ class LiveTennisClientTests(unittest.TestCase):
             matches = client.get_upcoming_matches()
         self.assertEqual([match.match_id for match in matches], [9])
 
+    def test_brussels_qualifying_final_is_excluded_without_provider_flag(self):
+        client = LiveTennisClient("test-key")
+        qualifying = fixture(205313, "scheduled")
+        qualifying.update(tournament="Brussels", event_date="2026-10-18", round=None, round_code=None, is_qualifying=False)
+        main_draw = fixture(206067, "scheduled")
+        main_draw.update(tournament="Brussels", event_date="2026-10-19", round=None, round_code="R32", is_qualifying=False)
+        with patch.object(client, "_get", return_value={"data": [qualifying, main_draw]}):
+            matches = client.get_upcoming_matches()
+        self.assertEqual([match.match_id for match in matches], [206067])
+
 
 if __name__ == "__main__":
     unittest.main()
