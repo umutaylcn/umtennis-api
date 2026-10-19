@@ -26,6 +26,15 @@ class FakePredictor:
 
 
 class PredictionHistoryTests(unittest.TestCase):
+    def test_lyon_indoor_csv_result_matches_captured_lyon_prediction(self):
+        fixtures = pd.DataFrame([{"match_id": 205325, "start_time_utc": pd.Timestamp("2026-10-19T13:00:00Z"), "tournament_name": "Lyon", "surface": "Hard", "round": "R32", "p1_display_name": "Jaime Faria", "p2_display_name": "Felix Balshaw", "identities_resolved": True}])
+        result = pd.DataFrame([{"provider_match_id": 36353300, "played_at_utc": pd.Timestamp("2026-10-19T13:10:00Z"), "tourney_name": "Lyon ATP (indoor)", "winner_name": "Felix Balshaw", "loser_name": "Jaime Faria", "match_status": "completed", "winner_sets": 2, "loser_sets": 0}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor(), now_utc=datetime(2026, 10, 19, 0, tzinfo=timezone.utc)), 1)
+            self.assertEqual(store.finalize(result), 1)
+            self.assertEqual(store.completed()[0]["actual_winner"], "Felix Balshaw")
+
     def test_qualifying_window_cannot_be_captured_or_shown_in_previous(self):
         fixtures = pd.DataFrame([{"match_id": 205313, "start_time_utc": pd.Timestamp("2026-10-18T14:00:00Z"), "tournament_name": "Brussels", "surface": "hard", "round": None, "p1_display_name": "Martin Damm", "p2_display_name": "Andrea Guerrieri", "identities_resolved": True}])
         with tempfile.TemporaryDirectory() as directory:

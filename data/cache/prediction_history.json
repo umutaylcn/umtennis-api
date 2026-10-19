@@ -5227,10 +5227,14 @@
       "confidence": 0.8315,
       "captured_at_utc": "2026-10-19T00:27:29.351165Z",
       "state_as_of_utc": "2026-10-18T15:30:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Felix Balshaw",
+      "actual_loser": "Jaime Faria",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 1,
+      "actual_played_at_utc": "2026-10-19T13:10:00Z"
     },
     "205323": {
       "match_id": 205323,
@@ -5247,10 +5251,14 @@
       "confidence": 0.7471,
       "captured_at_utc": "2026-10-19T00:27:29.351165Z",
       "state_as_of_utc": "2026-10-18T15:30:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Lorenzo Musetti",
+      "actual_loser": "Matteo Arnaldi",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-19T15:20:00Z"
     },
     "205328": {
       "match_id": 205328,
@@ -5267,10 +5275,14 @@
       "confidence": 0.7173,
       "captured_at_utc": "2026-10-19T00:27:29.351165Z",
       "state_as_of_utc": "2026-10-18T15:30:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Moise Kouame",
+      "actual_loser": "Lorenzo Sonego",
+      "match_status": "completed",
+      "prediction_correct": false,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-10-19T17:00:00Z"
     },
     "205327": {
       "match_id": 205327,
