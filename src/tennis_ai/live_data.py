@@ -32,6 +32,25 @@ MAIN_DRAW_START_DATES: dict[tuple[str, int], date] = {
 EXCLUDED_TOURNAMENT_MARKERS = ("davis cup", "qualification", "qualifying")
 
 
+def lyon_main_draw_mislabel(fixture: dict[str, Any]) -> bool:
+    """Recognize 2026 Lyon main-draw rows filed under the qualifying event.
+
+    The provider supplies the main-draw round code and player pairing but
+    labels these rows as qualification on clay. Keep real qualifying rows out.
+    """
+    return (
+        fixture.get("tournament") == "Lyon (France) - Qualification"
+        and str(fixture.get("event_date") or "")[:10] in {
+            "2026-10-19", "2026-10-20", "2026-10-21", "2026-10-22",
+            "2026-10-23", "2026-10-24", "2026-10-25",
+        }
+        and not bool(fixture.get("is_qualifying", False))
+        and str(fixture.get("round") or "").startswith("ATP Lyon - ")
+        and str(fixture.get("round_code") or "").upper()
+        in {"R32", "R16", "QF", "SF", "F"}
+    )
+
+
 class TennisAPIError(RuntimeError):
     """Raised when the tennis provider returns an unsuccessful response."""
 
@@ -164,7 +183,8 @@ class LiveTennisClient:
             if status not in {"scheduled", "live"}:
                 continue
 
-            tournament_name = str(fixture.get("tournament") or "").strip()
+            mislabeled_lyon = lyon_main_draw_mislabel(fixture)
+            tournament_name = "Lyon" if mislabeled_lyon else str(fixture.get("tournament") or "").strip()
             if any(
                 marker in tournament_name.casefold()
                 for marker in EXCLUDED_TOURNAMENT_MARKERS
@@ -201,7 +221,7 @@ class LiveTennisClient:
                     p2_id=fixture.get("player2_id"),
                     p2_name=p2_name,
                     tournament_name=tournament_name,
-                    surface=fixture.get("surface"),
+                    surface="Hard" if mislabeled_lyon else fixture.get("surface"),
                     round_name=round_name or None,
                     round_code=fixture.get("round_code"),
                     status=status,

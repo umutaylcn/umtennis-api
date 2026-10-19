@@ -185,6 +185,27 @@ class LiveTennisClientTests(unittest.TestCase):
 
         self.assertEqual(matches, [])
 
+    def test_lyon_main_draw_mislabeled_as_qualifying_is_kept_on_hard(self):
+        client = LiveTennisClient("test-key")
+        main_draw = fixture(205323, "live")
+        main_draw.update(
+            tournament="Lyon (France) - Qualification",
+            event_date="2026-10-19",
+            round="ATP Lyon - 1/16-finals",
+            round_code="R32",
+            surface="clay",
+            is_qualifying=False,
+        )
+        qualifying = dict(main_draw, id=205757, round="ATP Lyon - Final", round_code=None)
+
+        with patch.object(client, "_get", return_value={"data": [main_draw, qualifying]}):
+            matches = client.get_upcoming_matches()
+
+        self.assertEqual([match.match_id for match in matches], [205323])
+        self.assertEqual(matches[0].tournament_name, "Lyon")
+        self.assertEqual(matches[0].surface, "Hard")
+        self.assertEqual(matches[0].round_code, "R32")
+
     def test_upcoming_feed_excludes_qualifying_when_provider_flag_is_wrong(self):
         client = LiveTennisClient("test-key")
         qualifying = fixture(6, "scheduled")
