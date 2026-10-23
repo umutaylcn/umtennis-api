@@ -18,6 +18,9 @@ class FakeHistory:
     def completed(self, limit):
         return [self.record.copy()]
 
+    def unpredicted_results(self, results):
+        return []
+
 
 def test_previous_round_is_verified_only_for_display():
     with tempfile.TemporaryDirectory() as directory:

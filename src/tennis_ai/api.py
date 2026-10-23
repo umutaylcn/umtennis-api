@@ -157,11 +157,13 @@ class PredictionService:
         return matches
 
     def previous_match_list(self, limit: int | None = None) -> list[dict[str, Any]]:
-        records = self.prediction_history.completed(limit)
-        if not records:
-            return records
+        records = self.prediction_history.completed(None)
         backfill_path = self.project_root / "data" / "processed" / "atp_backfill_2026_current.pkl"
         backfill = pd.read_pickle(backfill_path) if backfill_path.exists() else pd.DataFrame()
+        records.extend(self.prediction_history.unpredicted_results(backfill))
+        records.sort(key=lambda record: (record.get("start_time_utc") or "", record["match_id"]), reverse=True)
+        if limit is not None:
+            records = records[:max(0, limit)]
         for record in records:
             original_round = record.get("round")
             record["round_at_prediction"] = original_round

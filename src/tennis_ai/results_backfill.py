@@ -91,12 +91,14 @@ def match_identity_keys(frame: pd.DataFrame) -> set[tuple[str, str, frozenset[st
 
 def clean_tournament_name(provider_name: str) -> str:
     name = str(provider_name).strip()
+    if name.endswith(" ATP (indoor)"):
+        name = name[:-len(" ATP (indoor)")]
     if name.endswith(" ATP"):
         name = name[:-4]
     aliases = {
         "London": "Queens Club",
         "Hertogenbosch": "s-Hertogenbosch",
-        "Lyon ATP (indoor)": "Lyon",
+        "Lyon (France)": "Lyon",
     }
     return aliases.get(name, name)
 

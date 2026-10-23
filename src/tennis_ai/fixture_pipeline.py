@@ -10,7 +10,10 @@ from typing import Iterable
 
 import pandas as pd
 
-from .live_data import MAIN_DRAW_START_DATES, LiveTennisClient, TennisAPIError, UpcomingMatch
+from .live_data import (
+    EXCLUDED_TOURNAMENT_MARKERS, MAIN_DRAW_START_DATES, LiveTennisClient,
+    TennisAPIError, UpcomingMatch, is_pre_main_draw,
+)
 from .player_matching import (
     HistoricalPlayerMatcher,
     PlayerProfileCache,
@@ -157,6 +160,99 @@ def fill_missing_fixture_ranks(table: pd.DataFrame, project_root: str | Path) ->
         if csv_round and current_round in {"", "NAN", "NONE", "NULL", "TBD"}:
             enriched.at[index, "round"] = csv_round
     return enriched
+
+
+def load_scheduled_csv_fixtures(
+    project_root: str | Path,
+    matcher: HistoricalPlayerMatcher,
+    *,
+    now_utc: datetime | None = None,
+) -> pd.DataFrame:
+    """Supplement API gaps with genuine, still-scheduled ATP CSV fixtures.
+
+    CSV match IDs are kept so the later CSV result can finalize the captured
+    prediction. Unresolvable abbreviated names are never guessed.
+    """
+    csv_path = Path(project_root) / "data" / "external" / "2026-atp-season.csv"
+    if not csv_path.exists():
+        return pd.DataFrame()
+    columns = [
+        "match_id", "tour_type", "date_timestamp", "tournament", "round",
+        "surface", "status", "home_name", "away_name", "home_rank",
+        "away_rank", "home_points", "away_points",
+    ]
+    source = pd.read_csv(csv_path, usecols=columns, low_memory=False)
+    reference = pd.Timestamp(now_utc or datetime.now(timezone.utc))
+    if reference.tzinfo is None:
+        reference = reference.tz_localize("UTC")
+    else:
+        reference = reference.tz_convert("UTC")
+    source = source[
+        source["tour_type"].eq(1)
+        & source["status"].eq("SCHEDULED")
+        & source["surface"].astype(str).str.casefold().isin({"hard", "clay", "grass"})
+    ]
+
+    rows: list[dict[str, object]] = []
+    seen: set[tuple[str, str, str, str]] = set()
+    for row in source.itertuples(index=False):
+        start = pd.to_datetime(row.date_timestamp, unit="s", utc=True, errors="coerce")
+        if pd.isna(start) or not reference - timedelta(hours=3) <= start <= reference + timedelta(days=8):
+            continue
+        tournament = clean_tournament_name(row.tournament)
+        if any(marker in tournament.casefold() for marker in EXCLUDED_TOURNAMENT_MARKERS):
+            continue
+        if is_pre_main_draw(tournament, start):
+            continue
+        round_code = ROUND_MAP.get(str(row.round))
+        if round_code is None:
+            continue
+        p1_name, p1_score, p1_status = matcher.match_surname_initial(str(row.home_name))
+        p2_name, p2_score, p2_status = matcher.match_surname_initial(str(row.away_name))
+        if not p1_name or not p2_name or p1_name == p2_name:
+            continue
+        identity = (
+            tournament, round_code,
+            min(player_identity_key(p1_name), player_identity_key(p2_name)),
+            max(player_identity_key(p1_name), player_identity_key(p2_name)),
+        )
+        if identity in seen:
+            continue
+        seen.add(identity)
+        fixture = UpcomingMatch(
+            match_id=int(row.match_id), event_date=start.date().isoformat(),
+            start_time=start.isoformat(), p1_id=None, p1_name=p1_name,
+            p2_id=None, p2_name=p2_name, tournament_name=tournament,
+            surface=str(row.surface).title(), round_name=None,
+            round_code=round_code, status="scheduled", is_qualifying=False,
+        )
+        profiles = []
+        for name, score, status, rank, points in (
+            (p1_name, p1_score, p1_status, row.home_rank, row.home_points),
+            (p2_name, p2_score, p2_status, row.away_rank, row.away_points),
+        ):
+            profiles.append({
+                "provider_full_name": name, "historical_name": name,
+                "match_score": round(score, 4), "match_status": status,
+                "current_rank": rank if pd.notna(rank) else None,
+                "current_rank_points": points if pd.notna(points) else None,
+                "hand": None, "birthday": None, "country": None,
+            })
+        rows.append(_fixture_row(fixture, profiles[0], profiles[1]))
+    return pd.DataFrame(rows)
+
+
+def _same_scheduled_match(left: pd.Series, right: pd.Series) -> bool:
+    if clean_tournament_name(left["tournament_name"]) != clean_tournament_name(right["tournament_name"]):
+        return False
+    left_players = {player_identity_key(left[f"{side}_historical_name"]) for side in ("p1", "p2")}
+    right_players = {player_identity_key(right[f"{side}_historical_name"]) for side in ("p1", "p2")}
+    if "" in left_players or left_players != right_players:
+        return False
+    left_round, right_round = left.get("round"), right.get("round")
+    if pd.notna(left_round) and pd.notna(right_round) and left_round != right_round:
+        return False
+    return abs(pd.Timestamp(left["start_time_utc"]) - pd.Timestamp(right["start_time_utc"])) <= pd.Timedelta(days=2)
 
 
 def fixture_round_code(code: object, name: object) -> str | None:
@@ -395,7 +491,12 @@ def build_upcoming_fixture_table(
 
     matcher = HistoricalPlayerMatcher(historical_names)
     cache = PlayerProfileCache(root / "data" / "cache" / "live_players.json")
-    fixtures = client.get_upcoming_matches()
+    provider_error: TennisAPIError | None = None
+    try:
+        fixtures = client.get_upcoming_matches()
+    except TennisAPIError as exc:
+        provider_error = exc
+        fixtures = []
 
     rows: list[dict[str, object]] = []
     for fixture in fixtures:
@@ -407,7 +508,21 @@ def build_upcoming_fixture_table(
         )
         rows.append(_fixture_row(fixture, p1, p2))
 
-    table = pd.DataFrame(rows)
+    provider_table = pd.DataFrame(rows)
+    csv_table = load_scheduled_csv_fixtures(root, matcher)
+    csv_only = [
+        csv_row for _, csv_row in csv_table.iterrows()
+        if provider_table.empty or not any(
+            _same_scheduled_match(provider_row, csv_row)
+            for _, provider_row in provider_table.iterrows()
+        )
+    ]
+    print(f"Scheduled CSV fixtures not in live feed: {len(csv_only)}")
+    if provider_error is not None:
+        if provider_table.empty and not csv_only:
+            raise provider_error
+        print(f"Live fixture feed unavailable; using scheduled CSV: {provider_error}")
+    table = pd.concat([provider_table, pd.DataFrame(csv_only)], ignore_index=True)
     if not table.empty:
         table["start_time_utc"] = pd.to_datetime(
             table["start_time_utc"], utc=True, errors="coerce"
@@ -416,9 +531,10 @@ def build_upcoming_fixture_table(
         table = table.sort_values(
             ["start_time_utc", "tournament_name"], na_position="last"
         ).reset_index(drop=True)
-        TrackedFixtureStore(
-            root / "data" / "cache" / "tracked_fixtures.json"
-        ).track(table)
+        if not provider_table.empty:
+            TrackedFixtureStore(
+                root / "data" / "cache" / "tracked_fixtures.json"
+            ).track(provider_table)
         save_fixture_snapshot(root, table)
     return table
 

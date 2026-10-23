@@ -15,7 +15,10 @@ from tennis_ai.fixture_pipeline import (
     fill_missing_fixture_ranks,
     fixture_round_code,
     verified_fixture_round,
+    load_scheduled_csv_fixtures,
 )
+from tennis_ai.player_matching import HistoricalPlayerMatcher
+from datetime import datetime, timezone
 import pandas as pd
 
 
@@ -38,6 +41,32 @@ def fixture(match_id: int, status: str) -> dict[str, object]:
 
 
 class LiveTennisClientTests(unittest.TestCase):
+    def test_csv_only_main_draw_fixture_is_available_for_capture(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            csv_path = Path(temporary) / "data" / "external" / "2026-atp-season.csv"
+            csv_path.parent.mkdir(parents=True)
+            start = int(pd.Timestamp("2026-10-23T15:00:00Z").timestamp())
+            pd.DataFrame([
+                {"match_id": 101, "tour_type": 1, "date_timestamp": start,
+                 "tournament": "Lyon ATP (indoor)", "round": "Quarter-finals",
+                 "status": "SCHEDULED", "surface": "Hard", "home_name": "Fritz T.",
+                 "away_name": "Altmaier D.", "home_rank": 5, "away_rank": 50,
+                 "home_points": 4000, "away_points": 900},
+                {"match_id": 102, "tour_type": 1, "date_timestamp": start,
+                 "tournament": "Lyon ATP - Qualification", "round": "Quarter-finals",
+                 "status": "SCHEDULED", "surface": "Hard", "home_name": "Fritz T.",
+                 "away_name": "Altmaier D.", "home_rank": 5, "away_rank": 50,
+                 "home_points": 4000, "away_points": 900},
+            ]).to_csv(csv_path, index=False)
+            matcher = HistoricalPlayerMatcher(["Taylor Fritz", "Daniel Altmaier"])
+            rows = load_scheduled_csv_fixtures(
+                temporary, matcher, now_utc=datetime(2026, 10, 23, 9, tzinfo=timezone.utc)
+            )
+            self.assertEqual(rows["match_id"].tolist(), [101])
+            self.assertEqual(rows.iloc[0]["tournament_name"], "Lyon")
+            self.assertEqual(rows.iloc[0]["round"], "QF")
+            self.assertTrue(rows.iloc[0]["identities_resolved"])
+
     def test_scheduled_csv_fills_only_exact_missing_fixture_round(self):
         with tempfile.TemporaryDirectory() as temporary:
             csv_path = Path(temporary) / "data" / "external" / "2026-atp-season.csv"
