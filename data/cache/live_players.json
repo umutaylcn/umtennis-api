@@ -92964,5 +92964,2102 @@
       ]
     },
     "tour": "atp"
+  },
+  "573": {
+    "archive_player_id": 148679,
+    "backhand": 1,
+    "birthday": "2007-01-25",
+    "country": "sui",
+    "data_completeness": {
+      "known": 5,
+      "missing": [],
+      "of": 5
+    },
+    "doubles_ranking": null,
+    "hand": "R",
+    "height_cm": null,
+    "id": 573,
+    "is_doubles_team": false,
+    "itf_ranking": null,
+    "name": "Henry Bernet",
+    "profile_restated_at": null,
+    "profile_version": 1,
+    "ranking": 364,
+    "ranking_checked_at": "2026-10-23T23:09:28.663559Z",
+    "ranking_movement": "down",
+    "ranking_points": 138,
+    "ranking_status": "ranked",
+    "stats": {
+      "ratings": {
+        "computed": {
+          "by_level": {
+            "G": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "M": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "Other": {
+              "l": 34,
+              "pct": 56.4,
+              "w": 44
+            }
+          },
+          "by_round": {
+            "F": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 3
+            },
+            "Q1": {
+              "l": 3,
+              "pct": 62.5,
+              "w": 5
+            },
+            "Q2": {
+              "l": 4,
+              "pct": 20.0,
+              "w": 1
+            },
+            "QF": {
+              "l": 3,
+              "pct": 66.7,
+              "w": 6
+            },
+            "R16": {
+              "l": 8,
+              "pct": 52.9,
+              "w": 9
+            },
+            "R32": {
+              "l": 13,
+              "pct": 56.7,
+              "w": 17
+            },
+            "RR": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "SF": {
+              "l": 3,
+              "pct": 50.0,
+              "w": 3
+            }
+          },
+          "comeback_set1_down": {
+            "clay": {
+              "l": 6,
+              "pct": 45.5,
+              "w": 5
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 2,
+              "pct": 50.0,
+              "w": 2
+            },
+            "overall": {
+              "l": 8,
+              "pct": 46.7,
+              "w": 7
+            }
+          },
+          "deciding_sets": {
+            "clay": {
+              "l": 13,
+              "pct": 40.9,
+              "w": 9
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 5,
+              "pct": 28.6,
+              "w": 2
+            },
+            "overall": {
+              "l": 18,
+              "pct": 37.9,
+              "w": 11
+            }
+          },
+          "set1": {
+            "clay": {
+              "l": 11,
+              "pct": 81.0,
+              "w": 47
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 4,
+              "pct": 80.0,
+              "w": 16
+            },
+            "overall": {
+              "l": 15,
+              "pct": 80.8,
+              "w": 63
+            }
+          },
+          "set2": {
+            "clay": {
+              "l": 11,
+              "pct": 81.0,
+              "w": 47
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 3,
+              "pct": 85.0,
+              "w": 17
+            },
+            "overall": {
+              "l": 14,
+              "pct": 82.1,
+              "w": 64
+            }
+          },
+          "set3": {
+            "clay": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 22
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 7
+            },
+            "overall": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 29
+            }
+          },
+          "tiebreaks": {
+            "clay": {
+              "l": 6,
+              "pct": 64.7,
+              "w": 11
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 80.0,
+              "w": 4
+            },
+            "overall": {
+              "l": 7,
+              "pct": 68.2,
+              "w": 15
+            }
+          },
+          "vs_lefty": {
+            "clay": {
+              "l": 4,
+              "pct": 55.6,
+              "w": 5
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 2,
+              "pct": 50.0,
+              "w": 2
+            },
+            "overall": {
+              "l": 6,
+              "pct": 53.8,
+              "w": 7
+            }
+          },
+          "vs_top10": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top20": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top50": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            }
+          }
+        },
+        "elo": {
+          "clay": 1443.8,
+          "clay_rank": 276,
+          "elo_rank": 274,
+          "grass": 1447.1,
+          "grass_rank": 267,
+          "hard": 1440.4,
+          "hard_rank": 281,
+          "overall": 1494.3,
+          "peak": 1542.4,
+          "peak_month": "2026-09"
+        },
+        "elo_as_of": "2026-10-20",
+        "match_count": 79,
+        "meta": {
+          "backhand": 1,
+          "country": "SUI",
+          "current_rank": 483,
+          "dob": 20070125,
+          "fullname": "Henry Bernet",
+          "hand": "R",
+          "peak_rank": 397
+        }
+      },
+      "ratings_as_of": "2026-10-20",
+      "season": [
+        {
+          "clay_lost": "1",
+          "clay_won": "1",
+          "grass_lost": "1",
+          "grass_won": "1",
+          "hard_lost": "1",
+          "hard_won": "1",
+          "matches_lost": "1",
+          "matches_won": "1",
+          "rank": "1",
+          "season": "1",
+          "titles": "1",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "",
+          "clay_won": "",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "",
+          "hard_won": "",
+          "matches_lost": "",
+          "matches_won": "",
+          "rank": "",
+          "season": "",
+          "titles": "",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "2",
+          "clay_won": "2",
+          "grass_lost": "2",
+          "grass_won": "2",
+          "hard_lost": "2",
+          "hard_won": "2",
+          "matches_lost": "2",
+          "matches_won": "2",
+          "rank": "2",
+          "season": "2",
+          "titles": "2",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "0",
+          "clay_won": "0",
+          "grass_lost": "0",
+          "grass_won": "0",
+          "hard_lost": "0",
+          "hard_won": "0",
+          "matches_lost": "0",
+          "matches_won": "0",
+          "rank": "0",
+          "season": "0",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "3",
+          "clay_won": "7",
+          "grass_lost": "1",
+          "grass_won": "2",
+          "hard_lost": "2",
+          "hard_won": "2",
+          "matches_lost": "6",
+          "matches_won": "11",
+          "rank": "786",
+          "season": "2024",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "1",
+          "clay_won": "1",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "",
+          "hard_won": "",
+          "matches_lost": "1",
+          "matches_won": "1",
+          "rank": "1674",
+          "season": "2023",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "5",
+          "clay_won": "15",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "4",
+          "hard_won": "8",
+          "matches_lost": "10",
+          "matches_won": "23",
+          "rank": "510",
+          "season": "2025",
+          "titles": "3",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "14",
+          "clay_won": "19",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "7",
+          "hard_won": "9",
+          "matches_lost": "21",
+          "matches_won": "28",
+          "rank": "483",
+          "season": "2026",
+          "titles": "2",
+          "type": "singles"
+        }
+      ]
+    },
+    "tour": "atp"
+  },
+  "98": {
+    "archive_player_id": 209903,
+    "backhand": 2,
+    "birthday": "2002-09-06",
+    "country": "aut",
+    "data_completeness": {
+      "known": 5,
+      "missing": [],
+      "of": 5
+    },
+    "doubles_ranking": null,
+    "hand": "R",
+    "height_cm": null,
+    "id": 98,
+    "is_doubles_team": false,
+    "itf_ranking": null,
+    "name": "Lukas Neumayer",
+    "profile_restated_at": null,
+    "profile_version": 1,
+    "ranking": 168,
+    "ranking_checked_at": "2026-10-23T23:09:28.663559Z",
+    "ranking_movement": "down",
+    "ranking_points": 342,
+    "ranking_status": "ranked",
+    "stats": {
+      "ratings": {
+        "computed": {
+          "by_level": {
+            "G": {
+              "l": 10,
+              "pct": 33.3,
+              "w": 5
+            },
+            "M": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "Other": {
+              "l": 157,
+              "pct": 58.1,
+              "w": 218
+            }
+          },
+          "by_round": {
+            "F": {
+              "l": 8,
+              "pct": 42.9,
+              "w": 6
+            },
+            "Q1": {
+              "l": 14,
+              "pct": 58.8,
+              "w": 20
+            },
+            "Q2": {
+              "l": 9,
+              "pct": 57.1,
+              "w": 12
+            },
+            "Q3": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "QF": {
+              "l": 32,
+              "pct": 42.9,
+              "w": 24
+            },
+            "R16": {
+              "l": 31,
+              "pct": 64.4,
+              "w": 56
+            },
+            "R32": {
+              "l": 61,
+              "pct": 58.8,
+              "w": 87
+            },
+            "RR": {
+              "l": 1,
+              "pct": 83.3,
+              "w": 5
+            },
+            "SF": {
+              "l": 10,
+              "pct": 56.5,
+              "w": 13
+            }
+          },
+          "comeback_set1_down": {
+            "clay": {
+              "l": 36,
+              "pct": 43.8,
+              "w": 28
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 9,
+              "pct": 35.7,
+              "w": 5
+            },
+            "overall": {
+              "l": 45,
+              "pct": 42.3,
+              "w": 33
+            }
+          },
+          "deciding_sets": {
+            "clay": {
+              "l": 55,
+              "pct": 48.1,
+              "w": 51
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 14,
+              "pct": 46.2,
+              "w": 12
+            },
+            "overall": {
+              "l": 69,
+              "pct": 47.7,
+              "w": 63
+            }
+          },
+          "set1": {
+            "clay": {
+              "l": 64,
+              "pct": 79.1,
+              "w": 242
+            },
+            "grass": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 3
+            },
+            "hard": {
+              "l": 14,
+              "pct": 79.7,
+              "w": 55
+            },
+            "overall": {
+              "l": 78,
+              "pct": 79.4,
+              "w": 300
+            }
+          },
+          "set2": {
+            "clay": {
+              "l": 42,
+              "pct": 86.3,
+              "w": 264
+            },
+            "grass": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 3
+            },
+            "hard": {
+              "l": 12,
+              "pct": 82.6,
+              "w": 57
+            },
+            "overall": {
+              "l": 54,
+              "pct": 85.7,
+              "w": 324
+            }
+          },
+          "set3": {
+            "clay": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 106
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 26
+            },
+            "overall": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 132
+            }
+          },
+          "tiebreaks": {
+            "clay": {
+              "l": 16,
+              "pct": 81.8,
+              "w": 72
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 3,
+              "pct": 87.5,
+              "w": 21
+            },
+            "overall": {
+              "l": 19,
+              "pct": 83.0,
+              "w": 93
+            }
+          },
+          "vs_lefty": {
+            "clay": {
+              "l": 13,
+              "pct": 68.3,
+              "w": 28
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 6,
+              "pct": 45.5,
+              "w": 5
+            },
+            "overall": {
+              "l": 19,
+              "pct": 63.5,
+              "w": 33
+            }
+          },
+          "vs_top10": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top20": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top50": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          }
+        },
+        "elo": {
+          "clay": 1551.6,
+          "clay_rank": 173,
+          "elo_rank": 201,
+          "grass": 1417.4,
+          "grass_rank": 336,
+          "hard": 1466.7,
+          "hard_rank": 250,
+          "overall": 1571.7,
+          "peak": 1658.4,
+          "peak_month": "2026-05"
+        },
+        "elo_as_of": "2026-10-20",
+        "match_count": 391,
+        "meta": {
+          "backhand": 2,
+          "country": "AUT",
+          "current_rank": 180,
+          "dob": 20020906,
+          "fullname": "Lukas Neumayer",
+          "hand": "R",
+          "height_cm": 183,
+          "peak_rank": 157
+        }
+      },
+      "ratings_as_of": "2026-10-20",
+      "season": [
+        {
+          "clay_lost": "21",
+          "clay_won": "46",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "5",
+          "hard_won": "5",
+          "matches_lost": "26",
+          "matches_won": "51",
+          "rank": "296",
+          "season": "2022",
+          "titles": "3",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "13",
+          "clay_won": "16",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "10",
+          "hard_won": "9",
+          "matches_lost": "23",
+          "matches_won": "25",
+          "rank": "660",
+          "season": "2021",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "3",
+          "clay_won": "3",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "2",
+          "hard_won": "1",
+          "matches_lost": "5",
+          "matches_won": "4",
+          "rank": "",
+          "season": "2020",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "28",
+          "clay_won": "38",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "4",
+          "hard_won": "2",
+          "matches_lost": "32",
+          "matches_won": "40",
+          "rank": "236",
+          "season": "2023",
+          "titles": "2",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "29",
+          "clay_won": "37",
+          "grass_lost": "1",
+          "grass_won": "0",
+          "hard_lost": "2",
+          "hard_won": "2",
+          "matches_lost": "32",
+          "matches_won": "40",
+          "rank": "226",
+          "season": "2024",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "21",
+          "clay_won": "32",
+          "grass_lost": "1",
+          "grass_won": "0",
+          "hard_lost": "8",
+          "hard_won": "3",
+          "matches_lost": "31",
+          "matches_won": "37",
+          "rank": "221",
+          "season": "2025",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "17",
+          "clay_won": "34",
+          "grass_lost": "1",
+          "grass_won": "0",
+          "hard_lost": "7",
+          "hard_won": "9",
+          "matches_lost": "26",
+          "matches_won": "44",
+          "rank": "180",
+          "season": "2026",
+          "titles": "2",
+          "type": "singles"
+        }
+      ]
+    },
+    "tour": "atp"
+  },
+  "211": {
+    "archive_player_id": null,
+    "backhand": 2,
+    "birthday": "2006-01-27",
+    "country": "aut",
+    "data_completeness": {
+      "known": 5,
+      "missing": [],
+      "of": 5
+    },
+    "doubles_ranking": null,
+    "hand": "L",
+    "height_cm": null,
+    "id": 211,
+    "is_doubles_team": false,
+    "itf_ranking": null,
+    "name": "Josef Schwaerzler Joel",
+    "profile_restated_at": null,
+    "profile_version": 1,
+    "ranking": 173,
+    "ranking_checked_at": "2026-10-23T23:09:28.663559Z",
+    "ranking_movement": "down",
+    "ranking_points": 334,
+    "ranking_status": "ranked",
+    "stats": {
+      "ratings": {
+        "computed": {
+          "by_level": {
+            "G": {
+              "l": 2,
+              "pct": 33.3,
+              "w": 1
+            },
+            "M": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "Other": {
+              "l": 71,
+              "pct": 55.3,
+              "w": 88
+            }
+          },
+          "by_round": {
+            "F": {
+              "l": 4,
+              "pct": 42.9,
+              "w": 3
+            },
+            "Q1": {
+              "l": 5,
+              "pct": 58.3,
+              "w": 7
+            },
+            "Q2": {
+              "l": 3,
+              "pct": 57.1,
+              "w": 4
+            },
+            "QF": {
+              "l": 10,
+              "pct": 50.0,
+              "w": 10
+            },
+            "R16": {
+              "l": 18,
+              "pct": 52.6,
+              "w": 20
+            },
+            "R32": {
+              "l": 28,
+              "pct": 58.2,
+              "w": 39
+            },
+            "SF": {
+              "l": 5,
+              "pct": 54.5,
+              "w": 6
+            }
+          },
+          "comeback_set1_down": {
+            "clay": {
+              "l": 7,
+              "pct": 61.1,
+              "w": 11
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 3,
+              "pct": 40.0,
+              "w": 2
+            },
+            "overall": {
+              "l": 10,
+              "pct": 56.5,
+              "w": 13
+            }
+          },
+          "deciding_sets": {
+            "clay": {
+              "l": 14,
+              "pct": 61.1,
+              "w": 22
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 7,
+              "pct": 36.4,
+              "w": 4
+            },
+            "overall": {
+              "l": 21,
+              "pct": 55.3,
+              "w": 26
+            }
+          },
+          "set1": {
+            "clay": {
+              "l": 18,
+              "pct": 86.0,
+              "w": 111
+            },
+            "grass": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 1
+            },
+            "hard": {
+              "l": 5,
+              "pct": 82.8,
+              "w": 24
+            },
+            "overall": {
+              "l": 23,
+              "pct": 85.5,
+              "w": 136
+            }
+          },
+          "set2": {
+            "clay": {
+              "l": 18,
+              "pct": 86.0,
+              "w": 111
+            },
+            "grass": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 1
+            },
+            "hard": {
+              "l": 6,
+              "pct": 79.3,
+              "w": 23
+            },
+            "overall": {
+              "l": 24,
+              "pct": 84.9,
+              "w": 135
+            }
+          },
+          "set3": {
+            "clay": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 36
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 11
+            },
+            "overall": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 47
+            }
+          },
+          "tiebreaks": {
+            "clay": {
+              "l": 6,
+              "pct": 87.0,
+              "w": 40
+            },
+            "grass": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 1
+            },
+            "hard": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 7
+            },
+            "overall": {
+              "l": 6,
+              "pct": 88.9,
+              "w": 48
+            }
+          },
+          "vs_lefty": {
+            "clay": {
+              "l": 7,
+              "pct": 53.3,
+              "w": 8
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 66.7,
+              "w": 2
+            },
+            "overall": {
+              "l": 8,
+              "pct": 55.6,
+              "w": 10
+            }
+          },
+          "vs_top10": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top20": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top50": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 1,
+              "pct": 0.0,
+              "w": 0
+            }
+          }
+        },
+        "elo": {
+          "clay": 1489.8,
+          "clay_rank": 227,
+          "elo_rank": 242,
+          "grass": 1445.2,
+          "grass_rank": 265,
+          "hard": 1494.0,
+          "hard_rank": 218,
+          "overall": 1526.0,
+          "peak": 1660.8,
+          "peak_month": "2026-04"
+        },
+        "match_count": 164,
+        "meta": {
+          "backhand": 2,
+          "country": "AUT",
+          "current_rank": 185,
+          "dob": 20060127,
+          "fullname": "Joel Schwaerzler",
+          "hand": "L",
+          "height_cm": 188,
+          "peak_rank": 169
+        }
+      },
+      "ratings_as_of": "2026-07-27",
+      "season": [
+        {
+          "clay_lost": "8",
+          "clay_won": "8",
+          "grass_lost": "1",
+          "grass_won": "0",
+          "hard_lost": "4",
+          "hard_won": "1",
+          "matches_lost": "13",
+          "matches_won": "9",
+          "rank": "1155",
+          "season": "2023",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "1",
+          "clay_won": "0",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "",
+          "hard_won": "",
+          "matches_lost": "1",
+          "matches_won": "0",
+          "rank": "",
+          "season": "2022",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "17",
+          "clay_won": "25",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "7",
+          "hard_won": "4",
+          "matches_lost": "24",
+          "matches_won": "29",
+          "rank": "330",
+          "season": "2024",
+          "titles": "1",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "25",
+          "clay_won": "39",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "1",
+          "hard_won": "0",
+          "matches_lost": "26",
+          "matches_won": "39",
+          "rank": "256",
+          "season": "2025",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "14",
+          "clay_won": "14",
+          "grass_lost": "1",
+          "grass_won": "0",
+          "hard_lost": "11",
+          "hard_won": "19",
+          "matches_lost": "26",
+          "matches_won": "33",
+          "rank": "176",
+          "season": "2026",
+          "titles": "2",
+          "type": "singles"
+        }
+      ]
+    },
+    "tour": "atp"
+  },
+  "913": {
+    "archive_player_id": 210285,
+    "backhand": null,
+    "birthday": "2005-12-19",
+    "country": "aut",
+    "data_completeness": {
+      "known": 4,
+      "missing": [
+        "backhand"
+      ],
+      "of": 5
+    },
+    "doubles_ranking": null,
+    "hand": "R",
+    "height_cm": null,
+    "id": 913,
+    "is_doubles_team": false,
+    "itf_ranking": null,
+    "name": "Sebastian Sorger",
+    "profile_restated_at": null,
+    "profile_version": 1,
+    "ranking": 372,
+    "ranking_checked_at": "2026-10-23T23:09:28.663559Z",
+    "ranking_movement": "down",
+    "ranking_points": 135,
+    "ranking_status": "ranked",
+    "stats": {
+      "ratings": {
+        "computed": {
+          "by_level": {
+            "G": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "M": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "Other": {
+              "l": 101,
+              "pct": 55.1,
+              "w": 124
+            }
+          },
+          "by_round": {
+            "F": {
+              "l": 2,
+              "pct": 50.0,
+              "w": 2
+            },
+            "Q1": {
+              "l": 7,
+              "pct": 30.0,
+              "w": 3
+            },
+            "Q2": {
+              "l": 3,
+              "pct": 0.0,
+              "w": 0
+            },
+            "QF": {
+              "l": 13,
+              "pct": 59.4,
+              "w": 19
+            },
+            "R16": {
+              "l": 31,
+              "pct": 50.8,
+              "w": 32
+            },
+            "R32": {
+              "l": 30,
+              "pct": 68.1,
+              "w": 64
+            },
+            "SF": {
+              "l": 15,
+              "pct": 21.1,
+              "w": 4
+            }
+          },
+          "comeback_set1_down": {
+            "clay": {
+              "l": 17,
+              "pct": 46.9,
+              "w": 15
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 5,
+              "pct": 44.4,
+              "w": 4
+            },
+            "overall": {
+              "l": 22,
+              "pct": 46.3,
+              "w": 19
+            }
+          },
+          "deciding_sets": {
+            "clay": {
+              "l": 30,
+              "pct": 48.3,
+              "w": 28
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 10,
+              "pct": 44.4,
+              "w": 8
+            },
+            "overall": {
+              "l": 40,
+              "pct": 47.4,
+              "w": 36
+            }
+          },
+          "set1": {
+            "clay": {
+              "l": 32,
+              "pct": 79.7,
+              "w": 126
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 9,
+              "pct": 84.7,
+              "w": 50
+            },
+            "overall": {
+              "l": 41,
+              "pct": 81.1,
+              "w": 176
+            }
+          },
+          "set2": {
+            "clay": {
+              "l": 26,
+              "pct": 83.5,
+              "w": 132
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 9,
+              "pct": 84.7,
+              "w": 50
+            },
+            "overall": {
+              "l": 35,
+              "pct": 83.9,
+              "w": 182
+            }
+          },
+          "set3": {
+            "clay": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 58
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 18
+            },
+            "overall": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 76
+            }
+          },
+          "tiebreaks": {
+            "clay": {
+              "l": 6,
+              "pct": 78.6,
+              "w": 22
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 1,
+              "pct": 92.3,
+              "w": 12
+            },
+            "overall": {
+              "l": 7,
+              "pct": 82.9,
+              "w": 34
+            }
+          },
+          "vs_lefty": {
+            "clay": {
+              "l": 10,
+              "pct": 41.2,
+              "w": 7
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 2,
+              "pct": 50.0,
+              "w": 2
+            },
+            "overall": {
+              "l": 12,
+              "pct": 42.9,
+              "w": 9
+            }
+          },
+          "vs_top10": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top20": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top50": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          }
+        },
+        "elo": null,
+        "match_count": 226
+      },
+      "ratings_as_of": "2026-05-01",
+      "season": [
+        {
+          "clay_lost": "16",
+          "clay_won": "18",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "12",
+          "hard_won": "15",
+          "matches_lost": "28",
+          "matches_won": "33",
+          "rank": "690",
+          "season": "2023",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "9",
+          "clay_won": "8",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "6",
+          "hard_won": "3",
+          "matches_lost": "15",
+          "matches_won": "11",
+          "rank": "998",
+          "season": "2022",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "",
+          "clay_won": "",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "1",
+          "hard_won": "0",
+          "matches_lost": "1",
+          "matches_won": "0",
+          "rank": "",
+          "season": "2021",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "21",
+          "clay_won": "32",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "3",
+          "hard_won": "1",
+          "matches_lost": "24",
+          "matches_won": "33",
+          "rank": "662",
+          "season": "2024",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "23",
+          "clay_won": "35",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "1",
+          "hard_won": "0",
+          "matches_lost": "24",
+          "matches_won": "35",
+          "rank": "564",
+          "season": "2025",
+          "titles": "1",
+          "type": "singles"
+        }
+      ]
+    },
+    "tour": "atp"
+  },
+  "4797": {
+    "archive_player_id": 209983,
+    "backhand": 2,
+    "birthday": "2004-10-02",
+    "country": "sui",
+    "data_completeness": {
+      "known": 5,
+      "missing": [],
+      "of": 5
+    },
+    "doubles_ranking": null,
+    "hand": "R",
+    "height_cm": null,
+    "id": 4797,
+    "is_doubles_team": false,
+    "itf_ranking": null,
+    "name": "Mika Brunold",
+    "profile_restated_at": null,
+    "profile_version": 1,
+    "ranking": 195,
+    "ranking_checked_at": "2026-10-23T23:09:28.663559Z",
+    "ranking_movement": "down",
+    "ranking_points": 300,
+    "ranking_status": "ranked",
+    "stats": {
+      "ratings": {
+        "computed": {
+          "by_level": {
+            "G": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "M": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "Other": {
+              "l": 99,
+              "pct": 58.2,
+              "w": 138
+            }
+          },
+          "by_round": {
+            "F": {
+              "l": 1,
+              "pct": 83.3,
+              "w": 5
+            },
+            "Q1": {
+              "l": 15,
+              "pct": 53.1,
+              "w": 17
+            },
+            "Q2": {
+              "l": 3,
+              "pct": 84.2,
+              "w": 16
+            },
+            "QF": {
+              "l": 15,
+              "pct": 46.4,
+              "w": 13
+            },
+            "R16": {
+              "l": 24,
+              "pct": 53.8,
+              "w": 28
+            },
+            "R32": {
+              "l": 34,
+              "pct": 60.5,
+              "w": 52
+            },
+            "RR": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 1
+            },
+            "SF": {
+              "l": 7,
+              "pct": 46.2,
+              "w": 6
+            }
+          },
+          "comeback_set1_down": {
+            "clay": {
+              "l": 9,
+              "pct": 57.1,
+              "w": 12
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 11,
+              "pct": 31.2,
+              "w": 5
+            },
+            "overall": {
+              "l": 20,
+              "pct": 45.9,
+              "w": 17
+            }
+          },
+          "deciding_sets": {
+            "clay": {
+              "l": 23,
+              "pct": 51.1,
+              "w": 24
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 15,
+              "pct": 42.3,
+              "w": 11
+            },
+            "overall": {
+              "l": 38,
+              "pct": 47.9,
+              "w": 35
+            }
+          },
+          "set1": {
+            "clay": {
+              "l": 21,
+              "pct": 85.4,
+              "w": 123
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 16,
+              "pct": 81.0,
+              "w": 68
+            },
+            "overall": {
+              "l": 37,
+              "pct": 83.8,
+              "w": 191
+            }
+          },
+          "set2": {
+            "clay": {
+              "l": 26,
+              "pct": 81.9,
+              "w": 118
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 10,
+              "pct": 88.1,
+              "w": 74
+            },
+            "overall": {
+              "l": 36,
+              "pct": 84.2,
+              "w": 192
+            }
+          },
+          "set3": {
+            "clay": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 47
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 26
+            },
+            "overall": {
+              "l": 0,
+              "pct": 100.0,
+              "w": 73
+            }
+          },
+          "tiebreaks": {
+            "clay": {
+              "l": 7,
+              "pct": 84.4,
+              "w": 38
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 7,
+              "pct": 76.7,
+              "w": 23
+            },
+            "overall": {
+              "l": 14,
+              "pct": 81.3,
+              "w": 61
+            }
+          },
+          "vs_lefty": {
+            "clay": {
+              "l": 7,
+              "pct": 22.2,
+              "w": 2
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 4,
+              "pct": 50.0,
+              "w": 4
+            },
+            "overall": {
+              "l": 11,
+              "pct": 35.3,
+              "w": 6
+            }
+          },
+          "vs_top10": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top20": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          },
+          "vs_top50": {
+            "clay": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "grass": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "hard": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            },
+            "overall": {
+              "l": 0,
+              "pct": 0.0,
+              "w": 0
+            }
+          }
+        },
+        "elo": {
+          "clay": 1568.0,
+          "clay_rank": 161,
+          "elo_rank": 153,
+          "grass": 1519.7,
+          "grass_rank": 176,
+          "hard": 1605.6,
+          "hard_rank": 139,
+          "overall": 1639.4,
+          "peak": 1639.4,
+          "peak_month": "2026-10"
+        },
+        "elo_as_of": "2026-10-20",
+        "match_count": 237,
+        "meta": {
+          "backhand": 2,
+          "country": "SUI",
+          "current_rank": 256,
+          "dob": 20041002,
+          "fullname": "Mika Brunold",
+          "hand": "R",
+          "height_cm": 191,
+          "peak_rank": 256
+        }
+      },
+      "ratings_as_of": "2026-10-20",
+      "season": [
+        {
+          "clay_lost": "9",
+          "clay_won": "10",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "11",
+          "hard_won": "9",
+          "matches_lost": "20",
+          "matches_won": "19",
+          "rank": "568",
+          "season": "2023",
+          "titles": "1",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "5",
+          "clay_won": "6",
+          "grass_lost": "1",
+          "grass_won": "0",
+          "hard_lost": "5",
+          "hard_won": "4",
+          "matches_lost": "11",
+          "matches_won": "10",
+          "rank": "891",
+          "season": "2022",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "2",
+          "clay_won": "0",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "1",
+          "hard_won": "0",
+          "matches_lost": "3",
+          "matches_won": "0",
+          "rank": "",
+          "season": "2021",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "16",
+          "clay_won": "34",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "9",
+          "hard_won": "9",
+          "matches_lost": "25",
+          "matches_won": "43",
+          "rank": "385",
+          "season": "2024",
+          "titles": "3",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "17",
+          "clay_won": "18",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "8",
+          "hard_won": "14",
+          "matches_lost": "25",
+          "matches_won": "32",
+          "rank": "346",
+          "season": "2025",
+          "titles": "0",
+          "type": "singles"
+        },
+        {
+          "clay_lost": "10",
+          "clay_won": "22",
+          "grass_lost": "",
+          "grass_won": "",
+          "hard_lost": "6",
+          "hard_won": "11",
+          "matches_lost": "16",
+          "matches_won": "34",
+          "rank": "410",
+          "season": "2026",
+          "titles": "1",
+          "type": "singles"
+        }
+      ]
+    },
+    "tour": "atp"
   }
 }
