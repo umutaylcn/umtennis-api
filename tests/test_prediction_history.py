@@ -45,18 +45,6 @@ class PredictionHistoryTests(unittest.TestCase):
             self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor(), now_utc=datetime(2026, 10, 24, 10, tzinfo=timezone.utc)), 1)
             self.assertEqual(len(store._predictions), 1)
 
-    def test_missing_prediction_is_result_only_and_never_scored(self):
-        fixture = pd.DataFrame([{"match_id": 1, "start_time_utc": pd.Timestamp("2026-10-22T12:00:00Z"), "tournament_name": "Lyon", "surface": "Hard", "round": "R16", "p1_display_name": "Taylor Fritz", "p2_display_name": "Daniel Altmaier", "identities_resolved": True}])
-        result = pd.DataFrame([{"provider_match_id": 2, "played_at_utc": pd.Timestamp("2026-10-23T15:00:00Z"), "tourney_name": "Lyon ATP (indoor)", "winner_name": "Tommy Paul", "loser_name": "Benjamin Bonzi", "round": "R16", "surface": "Hard", "match_status": "completed", "winner_sets": 2, "loser_sets": 0}])
-        with tempfile.TemporaryDirectory() as directory:
-            store = PredictionHistoryStore(Path(directory) / "history.json")
-            store.capture(fixture, FakeState(), FakePredictor(), now_utc=datetime(2026, 10, 22, 10, tzinfo=timezone.utc))
-            missing = store.unpredicted_results(result)
-            self.assertEqual(len(missing), 1)
-            self.assertIsNone(missing[0]["p1_win_probability"])
-            self.assertIsNone(missing[0]["prediction_correct"])
-            self.assertFalse(missing[0]["prediction_available"])
-
     def test_lyon_indoor_csv_result_matches_captured_lyon_prediction(self):
         fixtures = pd.DataFrame([{"match_id": 205325, "start_time_utc": pd.Timestamp("2026-10-19T13:00:00Z"), "tournament_name": "Lyon", "surface": "Hard", "round": "R32", "p1_display_name": "Jaime Faria", "p2_display_name": "Felix Balshaw", "identities_resolved": True}])
         result = pd.DataFrame([{"provider_match_id": 36353300, "played_at_utc": pd.Timestamp("2026-10-19T13:10:00Z"), "tourney_name": "Lyon ATP (indoor)", "winner_name": "Felix Balshaw", "loser_name": "Jaime Faria", "match_status": "completed", "winner_sets": 2, "loser_sets": 0}])

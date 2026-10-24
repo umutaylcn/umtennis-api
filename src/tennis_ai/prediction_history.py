@@ -261,62 +261,6 @@ class PredictionHistoryStore:
         rows.sort(key=lambda item: (item.get("start_time_utc") or "", item["match_id"]), reverse=True)
         return rows if limit is None else rows[: max(0, limit)]
 
-    def unpredicted_results(self, results: pd.DataFrame) -> list[dict[str, Any]]:
-        """Expose missed results honestly, without inventing a backdated forecast."""
-        if results.empty or not self._predictions:
-            return []
-        first_capture = min(
-            pd.to_datetime(item["captured_at_utc"], utc=True)
-            for item in self._predictions.values() if item.get("captured_at_utc")
-        )
-        rows: list[dict[str, Any]] = []
-        seen: set[tuple[str, str, frozenset[str], str]] = set()
-        for row in results.itertuples(index=False):
-            played_at = pd.to_datetime(row.played_at_utc, utc=True, errors="coerce")
-            if pd.isna(played_at) or played_at < first_capture:
-                continue
-            tournament = clean_tournament_name(row.tourney_name)
-            if is_pre_main_draw(tournament, played_at) or "laver cup" in tournament.casefold():
-                continue
-            players = frozenset((player_identity_key(row.winner_name), player_identity_key(row.loser_name)))
-            if len(players) != 2 or "" in players:
-                continue
-            identity = (played_at.date().isoformat(), tournament, players, str(row.round))
-            if identity in seen:
-                continue
-            seen.add(identity)
-            captured = any(
-                clean_tournament_name(item.get("tournament_name", "")) == tournament
-                and frozenset((player_identity_key(item.get("p1_name", "")), player_identity_key(item.get("p2_name", "")))) == players
-                and abs(pd.to_datetime(item.get("start_time_utc"), utc=True) - played_at) <= pd.Timedelta(days=2)
-                for item in self._predictions.values()
-            )
-            if captured:
-                continue
-            rows.append({
-                "match_id": int(row.provider_match_id),
-                "start_time_utc": _iso_utc(played_at),
-                "tournament_name": tournament,
-                "surface": str(row.surface).title(),
-                "round": str(row.round),
-                "p1_name": str(row.winner_name),
-                "p2_name": str(row.loser_name),
-                "p1_win_probability": None,
-                "p2_win_probability": None,
-                "predicted_side": None,
-                "predicted_winner": None,
-                "confidence": None,
-                "actual_side": "p1",
-                "actual_winner": str(row.winner_name),
-                "actual_loser": str(row.loser_name),
-                "match_status": str(row.match_status),
-                "prediction_correct": None,
-                "prediction_available": False,
-                "winner_sets": int(row.winner_sets),
-                "loser_sets": int(row.loser_sets),
-            })
-        return rows
-
     def drop_pre_main_draw(self) -> int:
         """Purge qualifying-window captures from stored prediction history."""
         invalid = [
