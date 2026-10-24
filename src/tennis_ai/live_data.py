@@ -30,6 +30,8 @@ MAIN_DRAW_START_DATES: dict[tuple[str, int], date] = {
     ("Almaty", 2026): date(2026, 10, 19),
     ("Brussels", 2026): date(2026, 10, 19),
     ("Lyon", 2026): date(2026, 10, 19),
+    ("Basel", 2026): date(2026, 10, 26),
+    ("Vienna", 2026): date(2026, 10, 26),
 }
 
 

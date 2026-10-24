@@ -242,6 +242,109 @@ def load_scheduled_csv_fixtures(
     return pd.DataFrame(rows)
 
 
+def exclude_csv_qualifying_fixtures(table: pd.DataFrame, project_root: str | Path) -> pd.DataFrame:
+    """Cross-check provider fixtures against the CSV's explicit qualifying draw.
+
+    The live provider often omits both the qualifying flag and round. Match by
+    tournament, calendar day and both player identities, not by provider ID.
+    """
+    if table.empty:
+        return table.copy()
+    csv_path = Path(project_root) / "data" / "external" / "2026-atp-season.csv"
+    if not csv_path.exists():
+        return table.copy()
+    columns = ["date_timestamp", "tournament", "round", "home_name", "away_name"]
+    source = pd.read_csv(csv_path, usecols=columns, low_memory=False)
+    qualifying = source[
+        source["tournament"].astype(str).str.contains("qualification|qualifying", case=False, na=False)
+        | source["round"].astype(str).str.contains("qualif", case=False, na=False)
+    ]
+    identities: set[tuple[str, str, frozenset[str]]] = set()
+    for row in qualifying.itertuples(index=False):
+        timestamp = pd.to_datetime(row.date_timestamp, unit="s", utc=True, errors="coerce")
+        if pd.isna(timestamp):
+            continue
+        event = str(row.tournament).split(" ATP - Qualification", 1)[0]
+        event = event.split(" - Qualification", 1)[0]
+        players = frozenset((player_identity_key(row.home_name), player_identity_key(row.away_name)))
+        if len(players) == 2 and "" not in players:
+            identities.add((timestamp.date().isoformat(), clean_tournament_name(event), players))
+    keep = []
+    for _, fixture in table.iterrows():
+        day = str(fixture.get("event_date") or fixture.get("start_time_utc") or "")[:10]
+        players = frozenset((
+            player_identity_key(fixture.get("p1_historical_name") or fixture.get("p1_display_name")),
+            player_identity_key(fixture.get("p2_historical_name") or fixture.get("p2_display_name")),
+        ))
+        key = (day, clean_tournament_name(fixture["tournament_name"]), players)
+        keep.append(key not in identities)
+    return table.loc[keep].copy()
+
+
+def load_verified_fixture_overrides(
+    project_root: str | Path, matcher: HistoricalPlayerMatcher,
+    *, now_utc: datetime | None = None,
+) -> pd.DataFrame:
+    """Use source-backed fixture corrections only after both entrants won their prior round."""
+    root = Path(project_root)
+    override_path = root / "data" / "manual" / "verified_fixtures.json"
+    backfill_path = root / "data" / "processed" / "atp_backfill_2026_current.pkl"
+    if not override_path.exists() or not backfill_path.exists():
+        return pd.DataFrame()
+    entries = json.loads(override_path.read_text(encoding="utf-8")).get("fixtures", [])
+    backfill = pd.read_pickle(backfill_path)
+    now = pd.Timestamp(now_utc or datetime.now(timezone.utc))
+    if now.tzinfo is None:
+        now = now.tz_localize("UTC")
+    else:
+        now = now.tz_convert("UTC")
+    rows: list[dict[str, object]] = []
+    for entry in entries:
+        start = pd.to_datetime(entry.get("start_time_utc"), utc=True, errors="coerce")
+        if pd.isna(start) or not now - timedelta(hours=3) <= start <= now + timedelta(days=8):
+            continue
+        if int(entry.get("match_id", 0)) >= 0 or len(entry.get("sources", [])) < 2:
+            raise ValueError("Verified fixture override requires a negative ID and two sources")
+        event = clean_tournament_name(entry["tournament_name"])
+        entrants = [str(entry[f"p{side}_name"]) for side in (1, 2)]
+        prior = backfill[
+            backfill["tourney_name"].map(clean_tournament_name).eq(event)
+            & backfill["round"].eq(entry["qualifying_result_round"])
+            & pd.to_datetime(backfill["played_at_utc"], utc=True).between(
+                start - pd.Timedelta(days=3), start, inclusive="both"
+            )
+        ]
+        winners = {player_identity_key(name) for name in prior["winner_name"]}
+        if not all(player_identity_key(name) in winners for name in entrants):
+            print(f"Verified override held pending confirmed prior-round winners: {event} {entrants}")
+            continue
+        profiles = []
+        for name in entrants:
+            historical, score, status = matcher.match_surname_initial(name)
+            if historical is None:
+                break
+            recent = prior[prior["winner_name"].map(player_identity_key).eq(player_identity_key(name))]
+            latest = recent.sort_values("played_at_utc").iloc[-1]
+            profiles.append({
+                "provider_full_name": name, "historical_name": historical,
+                "match_score": round(score, 4), "match_status": status,
+                "current_rank": latest["winner_rank"] if pd.notna(latest["winner_rank"]) else None,
+                "current_rank_points": latest["winner_rank_points"] if pd.notna(latest["winner_rank_points"]) else None,
+                "hand": None, "birthday": None, "country": None,
+            })
+        if len(profiles) != 2:
+            continue
+        fixture = UpcomingMatch(
+            match_id=int(entry["match_id"]), event_date=start.date().isoformat(),
+            start_time=start.isoformat(), p1_id=None, p1_name=entrants[0],
+            p2_id=None, p2_name=entrants[1], tournament_name=event,
+            surface=entry["surface"], round_name=None, round_code=entry["round"],
+            status="scheduled", is_qualifying=False,
+        )
+        rows.append(_fixture_row(fixture, profiles[0], profiles[1]))
+    return pd.DataFrame(rows)
+
+
 def _same_scheduled_match(left: pd.Series, right: pd.Series) -> bool:
     if clean_tournament_name(left["tournament_name"]) != clean_tournament_name(right["tournament_name"]):
         return False
@@ -425,6 +528,7 @@ def load_fixture_snapshot(
     table = exclude_pre_main_draw_fixtures(
         apply_verified_fixture_rounds(apply_player_id_name_overrides(table))
     )
+    table = exclude_csv_qualifying_fixtures(table, project_root)
     table = fill_missing_fixture_ranks(table, project_root)
     return table.sort_values(
         ["start_time_utc", "tournament_name"], na_position="last"
@@ -508,8 +612,9 @@ def build_upcoming_fixture_table(
         )
         rows.append(_fixture_row(fixture, p1, p2))
 
-    provider_table = pd.DataFrame(rows)
+    provider_table = exclude_csv_qualifying_fixtures(pd.DataFrame(rows), root)
     csv_table = load_scheduled_csv_fixtures(root, matcher)
+    verified_table = load_verified_fixture_overrides(root, matcher)
     csv_only = [
         csv_row for _, csv_row in csv_table.iterrows()
         if provider_table.empty or not any(
@@ -518,11 +623,17 @@ def build_upcoming_fixture_table(
         )
     ]
     print(f"Scheduled CSV fixtures not in live feed: {len(csv_only)}")
+    verified_only = [
+        row for _, row in verified_table.iterrows()
+        if not any(_same_scheduled_match(existing, row) for existing in [
+            *[item for _, item in provider_table.iterrows()], *csv_only
+        ])
+    ]
     if provider_error is not None:
-        if provider_table.empty and not csv_only:
+        if provider_table.empty and not csv_only and not verified_only:
             raise provider_error
         print(f"Live fixture feed unavailable; using scheduled CSV: {provider_error}")
-    table = pd.concat([provider_table, pd.DataFrame(csv_only)], ignore_index=True)
+    table = pd.concat([provider_table, pd.DataFrame(csv_only), pd.DataFrame(verified_only)], ignore_index=True)
     if not table.empty:
         table["start_time_utc"] = pd.to_datetime(
             table["start_time_utc"], utc=True, errors="coerce"

@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 import sys
 import tempfile
 import unittest
@@ -16,6 +17,8 @@ from tennis_ai.fixture_pipeline import (
     fixture_round_code,
     verified_fixture_round,
     load_scheduled_csv_fixtures,
+    exclude_csv_qualifying_fixtures,
+    load_verified_fixture_overrides,
 )
 from tennis_ai.player_matching import HistoricalPlayerMatcher
 from datetime import datetime, timezone
@@ -41,6 +44,60 @@ def fixture(match_id: int, status: str) -> dict[str, object]:
 
 
 class LiveTennisClientTests(unittest.TestCase):
+    def test_basel_and_vienna_pre_main_draw_dates_are_excluded(self):
+        rows = pd.DataFrame([
+            {"match_id": 1, "tournament_name": "Basel", "event_date": "2026-10-24"},
+            {"match_id": 2, "tournament_name": "Vienna", "event_date": "2026-10-25"},
+            {"match_id": 3, "tournament_name": "Basel", "event_date": "2026-10-26"},
+            {"match_id": 4, "tournament_name": "Vienna", "event_date": "2026-10-26"},
+        ])
+        self.assertEqual(exclude_pre_main_draw_fixtures(rows)["match_id"].tolist(), [3, 4])
+
+    def test_verified_override_requires_real_prior_round_wins(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manual = root / "data" / "manual" / "verified_fixtures.json"
+            manual.parent.mkdir(parents=True)
+            manual.write_text(json.dumps({"fixtures": [{
+                "match_id": -999, "tournament_name": "Test Open", "surface": "Hard",
+                "round": "SF", "start_time_utc": "2026-10-24T14:00:00Z",
+                "p1_name": "Flavio Cobolli", "p2_name": "Lorenzo Musetti",
+                "qualifying_result_round": "QF", "sources": ["source-a", "source-b"],
+            }]}), encoding="utf-8")
+            backfill_path = root / "data" / "processed" / "atp_backfill_2026_current.pkl"
+            backfill_path.parent.mkdir(parents=True)
+            results = pd.DataFrame([
+                {"tourney_name": "Test Open", "round": "QF", "played_at_utc": pd.Timestamp("2026-10-23T15:00:00Z"), "winner_name": "Flavio Cobolli", "winner_rank": 6, "winner_rank_points": 3640},
+                {"tourney_name": "Test Open", "round": "QF", "played_at_utc": pd.Timestamp("2026-10-23T19:00:00Z"), "winner_name": "Lorenzo Musetti", "winner_rank": 26, "winner_rank_points": 1870},
+            ])
+            results.to_pickle(backfill_path)
+            matcher = HistoricalPlayerMatcher(["Flavio Cobolli", "Lorenzo Musetti"])
+            now = datetime(2026, 10, 24, 1, tzinfo=timezone.utc)
+            rows = load_verified_fixture_overrides(root, matcher, now_utc=now)
+            self.assertEqual(rows["match_id"].tolist(), [-999])
+            self.assertEqual(rows.iloc[0]["p1_current_rank"], 6)
+            results.loc[1, "winner_name"] = "Another Player"
+            results.to_pickle(backfill_path)
+            self.assertTrue(load_verified_fixture_overrides(root, matcher, now_utc=now).empty)
+
+    def test_csv_qualifying_identity_removes_mislabeled_provider_fixture(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            csv_path = Path(temporary) / "data" / "external" / "2026-atp-season.csv"
+            csv_path.parent.mkdir(parents=True)
+            pd.DataFrame([{
+                "date_timestamp": int(pd.Timestamp("2026-10-24T10:00:00Z").timestamp()),
+                "tournament": "Future Open ATP - Qualification (indoor)",
+                "round": "Qualifier", "home_name": "Bernet H.", "away_name": "Altmaier D.",
+            }]).to_csv(csv_path, index=False)
+            provider = pd.DataFrame([
+                {"event_date": "2026-10-24", "tournament_name": "Future Open",
+                 "p1_historical_name": "Henry Bernet", "p2_historical_name": "Daniel Altmaier"},
+                {"event_date": "2026-10-24", "tournament_name": "Future Open",
+                 "p1_historical_name": "Taylor Fritz", "p2_historical_name": "Tommy Paul"},
+            ])
+            cleaned = exclude_csv_qualifying_fixtures(provider, temporary)
+            self.assertEqual(cleaned["p1_historical_name"].tolist(), ["Taylor Fritz"])
+
     def test_csv_only_main_draw_fixture_is_available_for_capture(self):
         with tempfile.TemporaryDirectory() as temporary:
             csv_path = Path(temporary) / "data" / "external" / "2026-atp-season.csv"

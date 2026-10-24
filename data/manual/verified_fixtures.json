@@ -1,0 +1,18 @@
+{
+  "fixtures": [
+    {
+      "match_id": -2026102401,
+      "tournament_name": "Lyon",
+      "surface": "Hard",
+      "round": "SF",
+      "start_time_utc": "2026-10-24T14:00:00Z",
+      "p1_name": "Flavio Cobolli",
+      "p2_name": "Lorenzo Musetti",
+      "qualifying_result_round": "QF",
+      "sources": [
+        "https://www.tntsports.co.uk/tennis/atp-lyon/2026/draw.shtml",
+        "https://www.movistarplus.es/deportes/tenis/torneo-de-lyon-2026/semifinal-2/ficha?id=4151109&tipo=E"
+      ]
+    }
+  ]
+}
