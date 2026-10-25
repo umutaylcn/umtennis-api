@@ -1,0 +1,15 @@
+{
+  "fixtures": [
+    {"tournament": "Basel", "players": ["Valentin Vacherot", "Mariano Navone"], "start_time_utc": "2026-10-26T12:30:00Z", "precision": "time", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Holger Rune", "Quentin Halys"], "start_time_utc": "2026-10-26T14:00:00Z", "precision": "date_only", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Dominic Stricker", "Casper Ruud"], "start_time_utc": "2026-10-26T19:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Mika Brunold", "Nuno Borges"], "start_time_utc": "2026-10-26T12:30:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Daniel Altmaier", "Juan Manuel Cerundolo"], "start_time_utc": "2026-10-26T14:00:00Z", "precision": "date_only", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Vienna", "players": ["Matteo Berrettini", "Tomas Martin Etcheverry"], "start_time_utc": "2026-10-26T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=3"},
+    {"tournament": "Vienna", "players": ["Tomas Machac", "Alex De Minaur"], "start_time_utc": "2026-10-26T14:00:00Z", "precision": "date_only", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=3"},
+    {"tournament": "Vienna", "players": ["Jakub Mensik", "Lukas Neumayer"], "start_time_utc": "2026-10-26T16:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=3"},
+    {"tournament": "Vienna", "players": ["Luca Van Assche", "Learner Tien"], "start_time_utc": "2026-10-26T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=3"},
+    {"tournament": "Vienna", "players": ["Arthur Fery", "Jacob Fearnley"], "start_time_utc": "2026-10-26T16:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=3"},
+    {"tournament": "Vienna", "players": ["Luciano Darderi", "Matteo Arnaldi"], "start_time_utc": "2026-10-26T18:00:00Z", "precision": "date_only", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=3"}
+  ]
+}

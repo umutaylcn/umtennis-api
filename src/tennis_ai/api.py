@@ -286,6 +286,7 @@ class PredictionService:
         return {
             "match_id": int(row.match_id),
             "start_time_utc": _iso_utc(row.start_time_utc),
+            "schedule_precision": str(row.get("schedule_precision") or "date_only"),
             "tournament_name": str(row.tournament_name),
             "surface": str(row.surface).title(),
             "round": str(row["round"]) if pd.notna(row["round"]) and str(row["round"]).strip().lower() not in {"", "nan", "none"} else "TBD",

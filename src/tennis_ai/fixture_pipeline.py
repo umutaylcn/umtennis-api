@@ -21,6 +21,7 @@ from .player_matching import (
 )
 from .result_tracker import TrackedFixtureStore
 from .results_backfill import ROUND_MAP, clean_tournament_name, player_identity_key
+from .fixture_schedule import reconcile_fixture_schedule
 
 
 FIXTURE_SNAPSHOT_NAME = "upcoming_fixtures.json"
@@ -530,6 +531,7 @@ def load_fixture_snapshot(
     )
     table = exclude_csv_qualifying_fixtures(table, project_root)
     table = fill_missing_fixture_ranks(table, project_root)
+    table = reconcile_fixture_schedule(table, project_root)
     return table.sort_values(
         ["start_time_utc", "tournament_name"], na_position="last"
     ).reset_index(drop=True)
@@ -639,6 +641,7 @@ def build_upcoming_fixture_table(
             table["start_time_utc"], utc=True, errors="coerce"
         )
         table = fill_missing_fixture_ranks(table, root)
+        table = reconcile_fixture_schedule(table, root)
         table = table.sort_values(
             ["start_time_utc", "tournament_name"], na_position="last"
         ).reset_index(drop=True)

@@ -1,5 +1,5 @@
 {
-  "saved_at_utc": "2026-10-25T18:40:32.960120+00:00",
+  "saved_at_utc": "2026-10-25T19:00:39.776288+00:00",
   "fixtures": [
     {
       "match_id": 209759,
@@ -28,7 +28,8 @@
       "p2_birthday": "1997-10-28",
       "p1_country": "ita",
       "p2_country": "usa",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "date_only"
     },
     {
       "match_id": 209832,
@@ -57,7 +58,98 @@
       "p2_birthday": "1996-07-02",
       "p1_country": "ger",
       "p2_country": "ned",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "date_only"
+    },
+    {
+      "match_id": 209812,
+      "event_date": "2026-10-26",
+      "start_time_utc": "2026-10-26T12:30:00+00:00",
+      "tournament_name": "Basel",
+      "surface": "hard",
+      "round": "R32",
+      "p1_display_name": "Valentin Vacherot",
+      "p2_display_name": "Mariano Navone",
+      "p1_id": 26,
+      "p2_id": 208,
+      "p1_historical_name": "Valentin Vacherot",
+      "p2_historical_name": "Mariano Navone",
+      "p1_match_status": "exact",
+      "p2_match_status": "exact",
+      "p1_match_score": 1.0,
+      "p2_match_score": 1.0,
+      "p1_current_rank": 18.0,
+      "p2_current_rank": 45.0,
+      "p1_current_rank_points": 2250.0,
+      "p2_current_rank_points": 1155.0,
+      "p1_hand": "R",
+      "p2_hand": "R",
+      "p1_birthday": "1998-11-16",
+      "p2_birthday": "2001-02-27",
+      "p1_country": "mon",
+      "p2_country": "arg",
+      "identities_resolved": true,
+      "schedule_precision": "time"
+    },
+    {
+      "match_id": 209695,
+      "event_date": "2026-10-26",
+      "start_time_utc": "2026-10-26T12:30:00+00:00",
+      "tournament_name": "Vienna",
+      "surface": "hard",
+      "round": "R32",
+      "p1_display_name": "Matteo Berrettini",
+      "p2_display_name": "Tomas Martin Etcheverry",
+      "p1_id": 25,
+      "p2_id": 24,
+      "p1_historical_name": "Matteo Berrettini",
+      "p2_historical_name": "Tomas Martin Etcheverry",
+      "p1_match_status": "exact",
+      "p2_match_status": "exact",
+      "p1_match_score": 1.0,
+      "p2_match_score": 1.0,
+      "p1_current_rank": 47.0,
+      "p2_current_rank": 30.0,
+      "p1_current_rank_points": 1128.0,
+      "p2_current_rank_points": 1590.0,
+      "p1_hand": "R",
+      "p2_hand": "R",
+      "p1_birthday": "1996-04-12",
+      "p2_birthday": "1999-07-18",
+      "p1_country": "ita",
+      "p2_country": "arg",
+      "identities_resolved": true,
+      "schedule_precision": "time"
+    },
+    {
+      "match_id": 209809,
+      "event_date": "2026-10-26",
+      "start_time_utc": "2026-10-26T14:00:00+00:00",
+      "tournament_name": "Basel",
+      "surface": "hard",
+      "round": "R32",
+      "p1_display_name": "Holger Rune",
+      "p2_display_name": "Quentin Halys",
+      "p1_id": 13352,
+      "p2_id": 29,
+      "p1_historical_name": "Holger Rune",
+      "p2_historical_name": "Quentin Halys",
+      "p1_match_status": "exact",
+      "p2_match_status": "exact",
+      "p1_match_score": 1.0,
+      "p2_match_score": 1.0,
+      "p1_current_rank": 195.0,
+      "p2_current_rank": 50.0,
+      "p1_current_rank_points": 300.0,
+      "p2_current_rank_points": 1070.0,
+      "p1_hand": null,
+      "p2_hand": "R",
+      "p1_birthday": "2003-04-29",
+      "p2_birthday": "1996-10-26",
+      "p1_country": "den",
+      "p2_country": "fra",
+      "identities_resolved": true,
+      "schedule_precision": "date_only"
     },
     {
       "match_id": 24704247,
@@ -86,7 +178,8 @@
       "p2_birthday": null,
       "p1_country": null,
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "date_only"
     },
     {
       "match_id": 52096680,
@@ -115,7 +208,8 @@
       "p2_birthday": null,
       "p1_country": null,
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "date_only"
     },
     {
       "match_id": 97765079,
@@ -144,7 +238,8 @@
       "p2_birthday": null,
       "p1_country": null,
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "time"
     },
     {
       "match_id": 54525103,
@@ -173,7 +268,98 @@
       "p2_birthday": null,
       "p1_country": null,
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "not_before"
+    },
+    {
+      "match_id": 209697,
+      "event_date": "2026-10-26",
+      "start_time_utc": "2026-10-26T18:00:00+00:00",
+      "tournament_name": "Vienna",
+      "surface": "hard",
+      "round": "R32",
+      "p1_display_name": "Luciano Darderi",
+      "p2_display_name": "Matteo Arnaldi",
+      "p1_id": 506,
+      "p2_id": 502,
+      "p1_historical_name": "Luciano Darderi",
+      "p2_historical_name": "Matteo Arnaldi",
+      "p1_match_status": "exact",
+      "p2_match_status": "exact",
+      "p1_match_score": 1.0,
+      "p2_match_score": 1.0,
+      "p1_current_rank": 19.0,
+      "p2_current_rank": 37.0,
+      "p1_current_rank_points": 2200.0,
+      "p2_current_rank_points": 1336.0,
+      "p1_hand": "R",
+      "p2_hand": "R",
+      "p1_birthday": "2002-02-14",
+      "p2_birthday": "2001-02-22",
+      "p1_country": "ita",
+      "p2_country": "ita",
+      "identities_resolved": true,
+      "schedule_precision": "date_only"
+    },
+    {
+      "match_id": 209810,
+      "event_date": "2026-10-26",
+      "start_time_utc": "2026-10-26T19:00:00+00:00",
+      "tournament_name": "Basel",
+      "surface": "hard",
+      "round": "R32",
+      "p1_display_name": "Dominic Stricker",
+      "p2_display_name": "Casper Ruud",
+      "p1_id": 559,
+      "p2_id": 537,
+      "p1_historical_name": "Dominic Stricker",
+      "p2_historical_name": "Casper Ruud",
+      "p1_match_status": "exact",
+      "p2_match_status": "exact",
+      "p1_match_score": 1.0,
+      "p2_match_score": 1.0,
+      "p1_current_rank": 251.0,
+      "p2_current_rank": 21.0,
+      "p1_current_rank_points": 217.0,
+      "p2_current_rank_points": 2145.0,
+      "p1_hand": "L",
+      "p2_hand": "R",
+      "p1_birthday": "2002-08-16",
+      "p2_birthday": "1998-12-22",
+      "p1_country": "sui",
+      "p2_country": "nor",
+      "identities_resolved": true,
+      "schedule_precision": "not_before"
+    },
+    {
+      "match_id": 209705,
+      "event_date": "2026-10-26",
+      "start_time_utc": "2026-10-26T19:00:00+00:00",
+      "tournament_name": "Vienna",
+      "surface": "hard",
+      "round": "R32",
+      "p1_display_name": "Luca Van Assche",
+      "p2_display_name": "Learner Tien",
+      "p1_id": 232,
+      "p2_id": 511,
+      "p1_historical_name": "Luca Van Assche",
+      "p2_historical_name": "Learner Tien",
+      "p1_match_status": "exact",
+      "p2_match_status": "exact",
+      "p1_match_score": 1.0,
+      "p2_match_score": 1.0,
+      "p1_current_rank": 43.0,
+      "p2_current_rank": 15.0,
+      "p1_current_rank_points": 1180.0,
+      "p2_current_rank_points": 2395.0,
+      "p1_hand": "R",
+      "p2_hand": "L",
+      "p1_birthday": "2004-05-11",
+      "p2_birthday": "2005-12-02",
+      "p1_country": "fra",
+      "p2_country": "usa",
+      "identities_resolved": true,
+      "schedule_precision": "not_before"
     },
     {
       "match_id": 209803,
@@ -202,7 +388,8 @@
       "p2_birthday": "1999-06-03",
       "p1_country": "esp",
       "p2_country": "bel",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209804,
@@ -231,7 +418,8 @@
       "p2_birthday": "1998-06-26",
       "p1_country": "srb",
       "p2_country": "fra",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209805,
@@ -260,7 +448,8 @@
       "p2_birthday": "1998-08-12",
       "p1_country": "usa",
       "p2_country": "gre",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209806,
@@ -289,7 +478,8 @@
       "p2_birthday": "2004-06-12",
       "p1_country": "pol",
       "p2_country": "fra",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209807,
@@ -318,7 +508,8 @@
       "p2_birthday": "1995-07-23",
       "p1_country": "sui",
       "p2_country": "fra",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209808,
@@ -347,65 +538,8 @@
       "p2_birthday": "1995-10-04",
       "p1_country": "usa",
       "p2_country": "ned",
-      "identities_resolved": true
-    },
-    {
-      "match_id": 209809,
-      "event_date": "2026-10-27",
-      "start_time_utc": "2026-10-27T09:00:00+00:00",
-      "tournament_name": "Basel",
-      "surface": "hard",
-      "round": "R32",
-      "p1_display_name": "Holger Rune",
-      "p2_display_name": "Quentin Halys",
-      "p1_id": 13352,
-      "p2_id": 29,
-      "p1_historical_name": "Holger Rune",
-      "p2_historical_name": "Quentin Halys",
-      "p1_match_status": "exact",
-      "p2_match_status": "exact",
-      "p1_match_score": 1.0,
-      "p2_match_score": 1.0,
-      "p1_current_rank": 195.0,
-      "p2_current_rank": 50.0,
-      "p1_current_rank_points": 300.0,
-      "p2_current_rank_points": 1070.0,
-      "p1_hand": null,
-      "p2_hand": "R",
-      "p1_birthday": "2003-04-29",
-      "p2_birthday": "1996-10-26",
-      "p1_country": "den",
-      "p2_country": "fra",
-      "identities_resolved": true
-    },
-    {
-      "match_id": 209810,
-      "event_date": "2026-10-27",
-      "start_time_utc": "2026-10-27T09:00:00+00:00",
-      "tournament_name": "Basel",
-      "surface": "hard",
-      "round": "R32",
-      "p1_display_name": "Dominic Stricker",
-      "p2_display_name": "Casper Ruud",
-      "p1_id": 559,
-      "p2_id": 537,
-      "p1_historical_name": "Dominic Stricker",
-      "p2_historical_name": "Casper Ruud",
-      "p1_match_status": "exact",
-      "p2_match_status": "exact",
-      "p1_match_score": 1.0,
-      "p2_match_score": 1.0,
-      "p1_current_rank": 251.0,
-      "p2_current_rank": 21.0,
-      "p1_current_rank_points": 217.0,
-      "p2_current_rank_points": 2145.0,
-      "p1_hand": "L",
-      "p2_hand": "R",
-      "p1_birthday": "2002-08-16",
-      "p2_birthday": "1998-12-22",
-      "p1_country": "sui",
-      "p2_country": "nor",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209811,
@@ -434,36 +568,8 @@
       "p2_birthday": "2006-09-17",
       "p1_country": "chi",
       "p2_country": "esp",
-      "identities_resolved": true
-    },
-    {
-      "match_id": 209812,
-      "event_date": "2026-10-27",
-      "start_time_utc": "2026-10-27T09:00:00+00:00",
-      "tournament_name": "Basel",
-      "surface": "hard",
-      "round": "R32",
-      "p1_display_name": "Valentin Vacherot",
-      "p2_display_name": "Mariano Navone",
-      "p1_id": 26,
-      "p2_id": 208,
-      "p1_historical_name": "Valentin Vacherot",
-      "p2_historical_name": "Mariano Navone",
-      "p1_match_status": "exact",
-      "p2_match_status": "exact",
-      "p1_match_score": 1.0,
-      "p2_match_score": 1.0,
-      "p1_current_rank": 18.0,
-      "p2_current_rank": 45.0,
-      "p1_current_rank_points": 2250.0,
-      "p2_current_rank_points": 1155.0,
-      "p1_hand": "R",
-      "p2_hand": "R",
-      "p1_birthday": "1998-11-16",
-      "p2_birthday": "2001-02-27",
-      "p1_country": "mon",
-      "p2_country": "arg",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209813,
@@ -492,7 +598,8 @@
       "p2_birthday": "2001-11-08",
       "p1_country": "sui",
       "p2_country": "cze",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 60519624,
@@ -521,7 +628,8 @@
       "p2_birthday": null,
       "p1_country": null,
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 81550499,
@@ -550,7 +658,8 @@
       "p2_birthday": null,
       "p1_country": null,
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 25232053,
@@ -579,7 +688,8 @@
       "p2_birthday": null,
       "p1_country": null,
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209696,
@@ -608,36 +718,8 @@
       "p2_birthday": "1991-05-16",
       "p1_country": "ita",
       "p2_country": "bul",
-      "identities_resolved": true
-    },
-    {
-      "match_id": 209697,
-      "event_date": "2026-10-27",
-      "start_time_utc": "2026-10-27T09:00:00+00:00",
-      "tournament_name": "Vienna",
-      "surface": "hard",
-      "round": "R32",
-      "p1_display_name": "Luciano Darderi",
-      "p2_display_name": "Matteo Arnaldi",
-      "p1_id": 506,
-      "p2_id": 502,
-      "p1_historical_name": "Luciano Darderi",
-      "p2_historical_name": "Matteo Arnaldi",
-      "p1_match_status": "exact",
-      "p2_match_status": "exact",
-      "p1_match_score": 1.0,
-      "p2_match_score": 1.0,
-      "p1_current_rank": 19.0,
-      "p2_current_rank": 37.0,
-      "p1_current_rank_points": 2200.0,
-      "p2_current_rank_points": 1336.0,
-      "p1_hand": "R",
-      "p2_hand": "R",
-      "p1_birthday": "2002-02-14",
-      "p2_birthday": "2001-02-22",
-      "p1_country": "ita",
-      "p2_country": "ita",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209698,
@@ -666,7 +748,8 @@
       "p2_birthday": "2001-08-03",
       "p1_country": "ned",
       "p2_country": "usa",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209699,
@@ -695,7 +778,8 @@
       "p2_birthday": "2003-05-05",
       "p1_country": null,
       "p2_country": "esp",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209700,
@@ -724,7 +808,8 @@
       "p2_birthday": "1996-02-11",
       "p1_country": "esp",
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209702,
@@ -753,7 +838,8 @@
       "p2_birthday": "1998-08-13",
       "p1_country": "gbr",
       "p2_country": "arg",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209703,
@@ -782,7 +868,8 @@
       "p2_birthday": "1997-10-20",
       "p1_country": "usa",
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209704,
@@ -811,7 +898,8 @@
       "p2_birthday": "1992-02-23",
       "p1_country": "aut",
       "p2_country": "geo",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209706,
@@ -840,65 +928,8 @@
       "p2_birthday": "2006-01-08",
       "p1_country": "ger",
       "p2_country": "esp",
-      "identities_resolved": true
-    },
-    {
-      "match_id": 209695,
-      "event_date": "2026-10-27",
-      "start_time_utc": "2026-10-27T09:00:00+00:00",
-      "tournament_name": "Vienna",
-      "surface": "hard",
-      "round": "R32",
-      "p1_display_name": "Matteo Berrettini",
-      "p2_display_name": "Tomas Martin Etcheverry",
-      "p1_id": 25,
-      "p2_id": 24,
-      "p1_historical_name": "Matteo Berrettini",
-      "p2_historical_name": "Tomas Martin Etcheverry",
-      "p1_match_status": "exact",
-      "p2_match_status": "exact",
-      "p1_match_score": 1.0,
-      "p2_match_score": 1.0,
-      "p1_current_rank": 47.0,
-      "p2_current_rank": 30.0,
-      "p1_current_rank_points": 1128.0,
-      "p2_current_rank_points": 1590.0,
-      "p1_hand": "R",
-      "p2_hand": "R",
-      "p1_birthday": "1996-04-12",
-      "p2_birthday": "1999-07-18",
-      "p1_country": "ita",
-      "p2_country": "arg",
-      "identities_resolved": true
-    },
-    {
-      "match_id": 209705,
-      "event_date": "2026-10-27",
-      "start_time_utc": "2026-10-27T09:00:00+00:00",
-      "tournament_name": "Vienna",
-      "surface": "hard",
-      "round": "R32",
-      "p1_display_name": "Luca Van Assche",
-      "p2_display_name": "Learner Tien",
-      "p1_id": 232,
-      "p2_id": 511,
-      "p1_historical_name": "Luca Van Assche",
-      "p2_historical_name": "Learner Tien",
-      "p1_match_status": "exact",
-      "p2_match_status": "exact",
-      "p1_match_score": 1.0,
-      "p2_match_score": 1.0,
-      "p1_current_rank": 43.0,
-      "p2_current_rank": 15.0,
-      "p1_current_rank_points": 1180.0,
-      "p2_current_rank_points": 2395.0,
-      "p1_hand": "R",
-      "p2_hand": "L",
-      "p1_birthday": "2004-05-11",
-      "p2_birthday": "2005-12-02",
-      "p1_country": "fra",
-      "p2_country": "usa",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 209701,
@@ -927,7 +958,8 @@
       "p2_birthday": "1998-01-20",
       "p1_country": "ita",
       "p2_country": "usa",
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     },
     {
       "match_id": 80779543,
@@ -956,7 +988,8 @@
       "p2_birthday": null,
       "p1_country": null,
       "p2_country": null,
-      "identities_resolved": true
+      "identities_resolved": true,
+      "schedule_precision": "tba"
     }
   ]
 }

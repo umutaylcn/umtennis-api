@@ -27,6 +27,24 @@ def main() -> int:
     leaked = len(fixtures) - len(exclude_csv_qualifying_fixtures(fixtures, ROOT))
     if leaked:
         print(f"AUDIT FAIL: {leaked} qualifying fixtures entered the main-draw snapshot")
+    valid_precision = {"time", "not_before", "date_only", "tba"}
+    invalid_schedule = fixtures[
+        ~fixtures["schedule_precision"].isin(valid_precision)
+    ] if not fixtures.empty and "schedule_precision" in fixtures else fixtures
+    if not fixtures.empty and ("schedule_precision" not in fixtures or not invalid_schedule.empty):
+        print("AUDIT FAIL: upcoming fixtures lack a valid schedule precision label")
+        leaked += len(invalid_schedule) or 1
+    if not fixtures.empty and "schedule_precision" in fixtures:
+        times = pd.to_datetime(fixtures["start_time_utc"], utc=True, errors="coerce")
+        batched = pd.DataFrame({
+            "event": fixtures["tournament_name"],
+            "time": times.dt.strftime("%Y-%m-%dT%H:%M"),
+            "precision": fixtures["schedule_precision"],
+        })
+        for (event, time), group in batched.groupby(["event", "time"]):
+            if len(group) >= 5 and str(time).endswith("T09:00") and group["precision"].ne("tba").any():
+                print(f"AUDIT FAIL: {event} {time} placeholder displayed as a schedule")
+                leaked += 1
     missing_round = fixtures[
         ~fixtures["round"].fillna("").astype(str).str.upper().isin(
             {"R128", "R64", "R32", "R16", "QF", "SF", "F", "RR"}
