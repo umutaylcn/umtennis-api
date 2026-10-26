@@ -18,6 +18,15 @@ from tennis_ai.fixture_pipeline import exclude_csv_qualifying_fixtures
 from tennis_ai.results_backfill import clean_tournament_name, player_identity_key
 
 
+def _placeholder_clock_exposed(group: pd.DataFrame, time: str) -> bool:
+    """Date-only rows can use 09:00 for sorting without showing that time."""
+    return (
+        len(group) >= 5
+        and str(time).endswith("T09:00")
+        and group["precision"].isin({"time", "not_before"}).any()
+    )
+
+
 def main() -> int:
     source = pd.read_csv(ROOT / "data" / "external" / "2026-atp-season.csv", low_memory=False)
     snapshot = json.loads((ROOT / "data" / "cache" / "upcoming_fixtures.json").read_text(encoding="utf-8"))
@@ -42,7 +51,7 @@ def main() -> int:
             "precision": fixtures["schedule_precision"],
         })
         for (event, time), group in batched.groupby(["event", "time"]):
-            if len(group) >= 5 and str(time).endswith("T09:00") and group["precision"].ne("tba").any():
+            if _placeholder_clock_exposed(group, time):
                 print(f"AUDIT FAIL: {event} {time} placeholder displayed as a schedule")
                 leaked += 1
     missing_round = fixtures[
