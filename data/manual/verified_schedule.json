@@ -12,6 +12,13 @@
     {"tournament": "Vienna", "players": ["Arthur Fery", "Jacob Fearnley"], "start_time_utc": "2026-10-26T16:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=3"},
     {"tournament": "Vienna", "players": ["Luciano Darderi", "Matteo Arnaldi"], "start_time_utc": "2026-10-26T18:00:00Z", "precision": "date_only", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=3"},
     {"tournament": "Vienna", "players": ["Karen Khachanov", "Carlos Alcaraz"], "start_time_utc": "2026-10-27T09:00:00Z", "precision": "date_only", "source": "https://www.erstebank-open.com/en/news/storys/carlos-alcaraz-kommt-nach-wien"},
-    {"tournament": "Basel", "players": ["Stan Wawrinka", "Jiri Lehecka"], "start_time_utc": "2026-10-27T09:00:00Z", "precision": "date_only", "source": "https://www.swissindoorsbasel.ch/en/tournament/tournament-news/articles/202610-13_Entry-list-for-Swiss-Indoors-Basel-2026.php"}
+    {"tournament": "Basel", "players": ["Stan Wawrinka", "Jiri Lehecka"], "start_time_utc": "2026-10-27T09:00:00Z", "precision": "date_only", "source": "https://www.swissindoorsbasel.ch/en/tournament/tournament-news/articles/202610-13_Entry-list-for-Swiss-Indoors-Basel-2026.php"},
+    {"tournament": "Basel", "players": ["Hubert Hurkacz", "Zizou Bergs"], "start_time_utc": "2026-10-27T11:00:00Z", "precision": "time", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Alejandro Tabilo", "Rafael Jodar"], "start_time_utc": "2026-10-27T13:00:00Z", "precision": "time", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Ben Shelton", "Aleksandar Kovacevic"], "start_time_utc": "2026-10-27T17:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Vienna", "players": ["Tommy Paul", "Andrey Rublev"], "start_time_utc": "2026-10-27T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Adrian Mannarino", "Ignacio Buse"], "start_time_utc": "2026-10-27T14:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Alexander Zverev", "Martin Landaluce"], "start_time_utc": "2026-10-27T16:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Flavio Cobolli", "Grigor Dimitrov"], "start_time_utc": "2026-10-27T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"}
   ]
 }

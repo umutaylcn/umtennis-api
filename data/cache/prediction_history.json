@@ -7327,6 +7327,26 @@
       "actual_loser": null,
       "match_status": null,
       "prediction_correct": null
+    },
+    "211234": {
+      "match_id": 211234,
+      "start_time_utc": "2026-10-28T09:00:00Z",
+      "tournament_name": "Basel",
+      "surface": "Hard",
+      "round": "R16",
+      "p1_name": "Nuno Borges",
+      "p2_name": "Casper Ruud",
+      "p1_win_probability": 0.3118,
+      "p2_win_probability": 0.6882,
+      "predicted_side": "p2",
+      "predicted_winner": "Casper Ruud",
+      "confidence": 0.6882,
+      "captured_at_utc": "2026-10-27T10:43:57.138521Z",
+      "state_as_of_utc": "2026-10-26T20:00:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
     }
   }
 }
