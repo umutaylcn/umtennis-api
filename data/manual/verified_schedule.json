@@ -19,6 +19,12 @@
     {"tournament": "Vienna", "players": ["Tommy Paul", "Andrey Rublev"], "start_time_utc": "2026-10-27T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule"},
     {"tournament": "Vienna", "players": ["Adrian Mannarino", "Ignacio Buse"], "start_time_utc": "2026-10-27T14:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
     {"tournament": "Vienna", "players": ["Alexander Zverev", "Martin Landaluce"], "start_time_utc": "2026-10-27T16:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
-    {"tournament": "Vienna", "players": ["Flavio Cobolli", "Grigor Dimitrov"], "start_time_utc": "2026-10-27T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"}
+    {"tournament": "Vienna", "players": ["Flavio Cobolli", "Grigor Dimitrov"], "start_time_utc": "2026-10-27T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Basel", "players": ["Nuno Borges", "Casper Ruud"], "start_time_utc": "2026-10-28T13:00:00Z", "precision": "time", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Taylor Fritz", "Rinky Hijikata"], "start_time_utc": "2026-10-28T17:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Vienna", "players": ["Daniel Merida Aguilar", "Daniil Medvedev"], "start_time_utc": "2026-10-28T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=5"},
+    {"tournament": "Vienna", "players": ["Tallon Griekspoor", "Brandon Nakashima"], "start_time_utc": "2026-10-28T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=5"},
+    {"tournament": "Vienna", "players": ["Jurij Rodionov", "Nikoloz Basilashvili"], "start_time_utc": "2026-10-28T16:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=5"},
+    {"tournament": "Vienna", "players": ["Learner Tien", "Alex De Minaur"], "start_time_utc": "2026-10-28T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=5"}
   ]
 }
