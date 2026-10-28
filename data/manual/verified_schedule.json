@@ -25,6 +25,16 @@
     {"tournament": "Vienna", "players": ["Daniel Merida Aguilar", "Daniil Medvedev"], "start_time_utc": "2026-10-28T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=5"},
     {"tournament": "Vienna", "players": ["Tallon Griekspoor", "Brandon Nakashima"], "start_time_utc": "2026-10-28T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=5"},
     {"tournament": "Vienna", "players": ["Jurij Rodionov", "Nikoloz Basilashvili"], "start_time_utc": "2026-10-28T16:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=5"},
-    {"tournament": "Vienna", "players": ["Learner Tien", "Alex De Minaur"], "start_time_utc": "2026-10-28T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=5"}
+    {"tournament": "Vienna", "players": ["Learner Tien", "Alex De Minaur"], "start_time_utc": "2026-10-28T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=5"},
+    {"tournament": "Basel", "players": ["Valentin Vacherot", "Rafael Jodar"], "start_time_utc": "2026-10-29T11:00:00Z", "precision": "time", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Alex Michelsen", "Arthur Fils"], "start_time_utc": "2026-10-29T13:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Novak Djokovic", "Jan-Lennard Struff"], "start_time_utc": "2026-10-29T17:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Daniel Altmaier", "Jiri Lehecka"], "start_time_utc": "2026-10-29T15:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Vienna", "players": ["Cameron Norrie", "Daniil Medvedev"], "start_time_utc": "2026-10-29T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Nikoloz Basilashvili", "Carlos Alcaraz"], "start_time_utc": "2026-10-29T14:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Alexander Zverev", "Tallon Griekspoor"], "start_time_utc": "2026-10-29T16:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Flavio Cobolli", "Matteo Berrettini"], "start_time_utc": "2026-10-29T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Tommy Paul", "Luciano Darderi"], "start_time_utc": "2026-10-29T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Arthur Fery", "Lorenzo Musetti"], "start_time_utc": "2026-10-29T16:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"}
   ]
 }
