@@ -35,6 +35,14 @@
     {"tournament": "Vienna", "players": ["Alexander Zverev", "Tallon Griekspoor"], "start_time_utc": "2026-10-29T16:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
     {"tournament": "Vienna", "players": ["Flavio Cobolli", "Matteo Berrettini"], "start_time_utc": "2026-10-29T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
     {"tournament": "Vienna", "players": ["Tommy Paul", "Luciano Darderi"], "start_time_utc": "2026-10-29T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule"},
-    {"tournament": "Vienna", "players": ["Arthur Fery", "Lorenzo Musetti"], "start_time_utc": "2026-10-29T16:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"}
+    {"tournament": "Vienna", "players": ["Arthur Fery", "Lorenzo Musetti"], "start_time_utc": "2026-10-29T16:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Adrian Mannarino", "Daniil Medvedev"], "start_time_utc": "2026-10-30T12:30:00Z", "precision": "time", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=4"},
+    {"tournament": "Vienna", "players": ["Tommy Paul", "Carlos Alcaraz"], "start_time_utc": "2026-10-30T14:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=4"},
+    {"tournament": "Vienna", "players": ["Alexander Zverev", "Arthur Fery"], "start_time_utc": "2026-10-30T16:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=4"},
+    {"tournament": "Vienna", "players": ["Matteo Berrettini", "Alex De Minaur"], "start_time_utc": "2026-10-30T19:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule?dayToDisplay=4"},
+    {"tournament": "Basel", "players": ["Holger Rune", "Valentin Vacherot"], "start_time_utc": "2026-10-30T13:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Taylor Fritz", "Arthur Fils"], "start_time_utc": "2026-10-30T15:00:00Z", "precision": "date_only", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Jerome Kym", "Jiri Lehecka"], "start_time_utc": "2026-10-30T17:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
+    {"tournament": "Basel", "players": ["Jan-Lennard Struff", "Nuno Borges"], "start_time_utc": "2026-10-30T19:00:00Z", "precision": "date_only", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"}
   ]
 }
