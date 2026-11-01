@@ -47,6 +47,8 @@
     {"tournament": "Basel", "players": ["Valentin Vacherot", "Taylor Fritz"], "start_time_utc": "2026-10-31T14:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
     {"tournament": "Basel", "players": ["Jiri Lehecka", "Jan-Lennard Struff"], "start_time_utc": "2026-10-31T16:00:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
     {"tournament": "Vienna", "players": ["Daniil Medvedev", "Carlos Alcaraz"], "start_time_utc": "2026-10-31T14:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
-    {"tournament": "Vienna", "players": ["Alexander Zverev", "Alex De Minaur"], "start_time_utc": "2026-10-31T15:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"}
+    {"tournament": "Vienna", "players": ["Alexander Zverev", "Alex De Minaur"], "start_time_utc": "2026-10-31T15:30:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/scores/schedule"},
+    {"tournament": "Vienna", "players": ["Alex De Minaur", "Carlos Alcaraz"], "start_time_utc": "2026-11-01T13:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/news/storys/vienna-2026-schedule"},
+    {"tournament": "Basel", "players": ["Jiri Lehecka", "Valentin Vacherot"], "start_time_utc": "2026-11-01T14:30:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"}
   ]
 }
