@@ -1,0 +1,24 @@
+{
+  "reason": "CSV-confirmed round recovered after schedule date reconciliation",
+  "corrected_at_utc": "2026-11-02T23:54:53.379986+00:00",
+  "original_prediction": {
+    "match_id": 214353,
+    "start_time_utc": "2026-11-03T19:30:00Z",
+    "tournament_name": "Paris",
+    "surface": "Hard",
+    "round": "nan",
+    "p1_name": "Casper Ruud",
+    "p2_name": "Rafael Jodar",
+    "p1_win_probability": 0.5017,
+    "p2_win_probability": 0.4983,
+    "predicted_side": "p1",
+    "predicted_winner": "Casper Ruud",
+    "confidence": 0.5017,
+    "captured_at_utc": "2026-11-02T23:47:05.105814Z",
+    "state_as_of_utc": "2026-11-02T20:55:00Z",
+    "actual_winner": null,
+    "actual_loser": null,
+    "match_status": null,
+    "prediction_correct": null
+  }
+}

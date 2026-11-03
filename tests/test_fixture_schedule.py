@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from tennis_ai.fixture_schedule import reconcile_fixture_schedule
+from tennis_ai.fixture_pipeline import load_fixture_snapshot
 
 
 def test_official_schedule_overrides_provider_and_csv_times(tmp_path):
@@ -69,3 +70,36 @@ def test_csv_day_replaces_placeholder_but_clock_remains_unverified(tmp_path):
     result = reconcile_fixture_schedule(fixtures, tmp_path).iloc[0]
     assert result.start_time_utc == pd.Timestamp("2026-10-26T19:00:00Z")
     assert result.schedule_precision == "date_only"
+
+
+def test_round_enrichment_runs_again_after_csv_corrects_provider_date(tmp_path):
+    external = tmp_path / "data" / "external"
+    external.mkdir(parents=True)
+    pd.DataFrame([{
+        "date_timestamp": int(pd.Timestamp("2026-11-03T19:30:00Z").timestamp()),
+        "tournament": "Paris ATP (indoor)", "round": "1/16-finals",
+        "status": "SCHEDULED", "home_name": "Ruud C.", "away_name": "Jodar R.",
+        "home_rank": 25, "away_rank": 11,
+        "home_points": 1000, "away_points": 1500,
+    }]).to_csv(external / "2026-atp-season.csv", index=False)
+    cache = tmp_path / "data" / "cache"
+    cache.mkdir(parents=True)
+    (cache / "upcoming_fixtures.json").write_text(json.dumps({
+        "saved_at_utc": "2026-11-02T20:00:00Z",
+        "fixtures": [{
+            "match_id": 214353, "event_date": "2026-11-02",
+            "start_time_utc": "2026-11-02T19:30:00Z",
+            "tournament_name": "Paris", "round": "NaN",
+            "p1_display_name": "Casper Ruud", "p2_display_name": "Rafael Jodar",
+            "p1_historical_name": "Casper Ruud", "p2_historical_name": "Rafael Jodar",
+        }],
+    }), encoding="utf-8")
+
+    fixture = load_fixture_snapshot(
+        tmp_path, now_utc=pd.Timestamp("2026-11-02T21:00:00Z")
+    ).iloc[0]
+
+    assert fixture.event_date == "2026-11-03"
+    assert fixture["round"] == "R32"
+    assert fixture.p1_current_rank == 25
+    assert fixture.p2_current_rank == 11

@@ -532,6 +532,9 @@ def load_fixture_snapshot(
     table = exclude_csv_qualifying_fixtures(table, project_root)
     table = fill_missing_fixture_ranks(table, project_root)
     table = reconcile_fixture_schedule(table, project_root)
+    # Schedule corrections can move a fixture onto the CSV's event date.
+    # Re-enrich after reconciliation so a verified round is not left as NaN.
+    table = fill_missing_fixture_ranks(table, project_root)
     return table.sort_values(
         ["start_time_utc", "tournament_name"], na_position="last"
     ).reset_index(drop=True)
@@ -642,6 +645,7 @@ def build_upcoming_fixture_table(
         )
         table = fill_missing_fixture_ranks(table, root)
         table = reconcile_fixture_schedule(table, root)
+        table = fill_missing_fixture_ranks(table, root)
         table = table.sort_values(
             ["start_time_utc", "tournament_name"], na_position="last"
         ).reset_index(drop=True)
