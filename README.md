@@ -70,7 +70,12 @@ Main endpoints:
 | `GET /api/matches/{match_id}` | model-ready match details |
 | `GET /api/matches/{match_id}/prediction` | ensemble probabilities and pre-match statistics |
 
-Upcoming fixtures and presentation state are cached so ordinary page visits do not repeatedly call the live provider.
+The public site uses Cloudflare-hosted snapshots, not this API. Data endpoints
+are private by default: without `UMTENNIS_API_TOKEN` they return 404. If a
+trusted client needs direct API access, configure a long random token as a
+secret environment variable and send `Authorization: Bearer <token>`. Never
+put that token in frontend code. `/api/health` remains public for Render's
+health checks. Ordinary requests never call the live fixture provider.
 
 ## Local setup
 
@@ -82,7 +87,9 @@ copy .env.example .env
 uvicorn tennis_ai.api:app --app-dir src --reload
 ```
 
-Set `LIVE_TENNIS_API_KEY` in `.env` for live upcoming fixtures. The secret is never committed.
+Set `LIVE_TENNIS_API_KEY` in `.env` for live upcoming fixtures. Set
+`UMTENNIS_API_TOKEN` only if direct access to the data endpoints is needed.
+Neither secret is committed.
 
 ## Tests
 

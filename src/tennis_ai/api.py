@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
+import secrets
 import os
 from pathlib import Path
 from threading import RLock
 import time
 from typing import Any
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import pandas as pd
@@ -338,6 +339,21 @@ def _service(request: Request) -> PredictionService:
     return request.app.state.prediction_service
 
 
+def require_api_token(request: Request) -> None:
+    """Keep expensive inference routes private; the public site uses static data."""
+    expected = os.getenv("UMTENNIS_API_TOKEN", "").strip()
+    if not expected:
+        # Fail closed even if a deployment forgot to configure a token.
+        raise HTTPException(status_code=404, detail="Not found")
+    scheme, separator, supplied = request.headers.get("authorization", "").partition(" ")
+    if scheme.casefold() != "bearer" or not separator or not secrets.compare_digest(supplied, expected):
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid API token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+
 @app.get("/api/health")
 def health(request: Request) -> dict[str, Any]:
     service = _service(request)
@@ -351,19 +367,19 @@ def health(request: Request) -> dict[str, Any]:
     }
 
 
-@app.get("/api/matches")
+@app.get("/api/matches", dependencies=[Depends(require_api_token)])
 def upcoming_matches(request: Request) -> dict[str, Any]:
     matches = _service(request).match_list()
     return {"count": len(matches), "matches": matches}
 
 
-@app.get("/api/previous-matches")
+@app.get("/api/previous-matches", dependencies=[Depends(require_api_token)])
 def previous_matches(request: Request, limit: int | None = None) -> dict[str, Any]:
     matches = _service(request).previous_match_list(None if limit is None else min(max(limit, 1), 250))
     return {"count": len(matches), "matches": matches}
 
 
-@app.get("/api/matches/{match_id}/prediction")
+@app.get("/api/matches/{match_id}/prediction", dependencies=[Depends(require_api_token)])
 def match_prediction(match_id: int, request: Request) -> dict[str, Any]:
     try:
         return _service(request).predict(match_id)
