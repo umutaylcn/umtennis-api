@@ -15,7 +15,44 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from tennis_ai.fixture_pipeline import exclude_csv_qualifying_fixtures
-from tennis_ai.results_backfill import clean_tournament_name, player_identity_key
+from tennis_ai.live_data import EXCLUDED_TOURNAMENT_MARKERS, is_pre_main_draw
+from tennis_ai.results_backfill import ROUND_MAP, clean_tournament_name, player_identity_key
+
+
+def missing_scheduled_csv_fixtures(
+    source: pd.DataFrame, fixtures: pd.DataFrame, now: datetime
+) -> list[tuple[str, str, str, str]]:
+    """Catch source-backed main-draw matches dropped by identity matching."""
+    snapshot_keys = {
+        (
+            str(row.event_date)[:10], clean_tournament_name(row.tournament_name),
+            str(row.round),
+            frozenset((player_identity_key(row.p1_display_name), player_identity_key(row.p2_display_name))),
+        )
+        for row in fixtures.itertuples(index=False)
+    } if not fixtures.empty else set()
+    missing = []
+    for row in source.itertuples(index=False):
+        if row.tour_type != 1 or row.status != "SCHEDULED":
+            continue
+        start = pd.to_datetime(row.date_timestamp, unit="s", utc=True, errors="coerce")
+        if pd.isna(start) or not now - timedelta(hours=3) <= start <= now + timedelta(days=8):
+            continue
+        tournament = clean_tournament_name(row.tournament)
+        if any(marker in tournament.casefold() for marker in EXCLUDED_TOURNAMENT_MARKERS):
+            continue
+        if is_pre_main_draw(tournament, start):
+            continue
+        round_code = ROUND_MAP.get(str(row.round))
+        if round_code is None or str(row.surface).casefold() not in {"hard", "clay", "grass"}:
+            continue
+        players = frozenset((player_identity_key(row.home_name), player_identity_key(row.away_name)))
+        if len(players) != 2 or "" in players:
+            continue
+        key = (start.date().isoformat(), tournament, round_code, players)
+        if key not in snapshot_keys:
+            missing.append((tournament, round_code, str(row.home_name), str(row.away_name)))
+    return missing
 
 
 def _placeholder_clock_exposed(group: pd.DataFrame, time: str) -> bool:
@@ -62,6 +99,10 @@ def main() -> int:
     if not missing_round.empty:
         print(f"AUDIT REVIEW: {len(missing_round)} fixtures have no verified main-draw round")
     needs_review = not missing_round.empty
+    missing_csv = missing_scheduled_csv_fixtures(source, fixtures, datetime.now(timezone.utc))
+    for event, round_code, player1, player2 in missing_csv:
+        print(f"AUDIT FAIL: scheduled CSV fixture missing: {event} {round_code} {player1} vs {player2}")
+    leaked += len(missing_csv)
 
     cutoff = pd.Timestamp(datetime.now(timezone.utc) - timedelta(days=3))
     recent = source[

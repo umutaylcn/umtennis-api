@@ -8,6 +8,7 @@ from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT / "scripts"))
 
 from tennis_ai.live_data import LiveTennisClient, TennisAPIError
 from tennis_ai.fixture_pipeline import (
@@ -21,6 +22,7 @@ from tennis_ai.fixture_pipeline import (
     load_verified_fixture_overrides,
 )
 from tennis_ai.player_matching import HistoricalPlayerMatcher
+from audit_live_snapshot import missing_scheduled_csv_fixtures
 from datetime import datetime, timezone
 import pandas as pd
 
@@ -123,6 +125,47 @@ class LiveTennisClientTests(unittest.TestCase):
             self.assertEqual(rows.iloc[0]["tournament_name"], "Lyon")
             self.assertEqual(rows.iloc[0]["round"], "QF")
             self.assertTrue(rows.iloc[0]["identities_resolved"])
+
+    def test_csv_short_name_uses_unique_recent_full_identity(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            csv_path = root / "data" / "external" / "2026-atp-season.csv"
+            csv_path.parent.mkdir(parents=True)
+            model_path = root / "data" / "processed" / "atp_model_data_1990_2026.pkl"
+            model_path.parent.mkdir(parents=True)
+            pd.DataFrame([{
+                "source_year": 2026, "p1_name": "Casper Ruud", "p2_name": "Nuno Borges"
+            }]).to_pickle(model_path)
+            pd.DataFrame([{
+                "match_id": 103, "tour_type": 1,
+                "date_timestamp": int(pd.Timestamp("2026-11-06T19:30:00Z").timestamp()),
+                "tournament": "Paris ATP (indoor)", "round": "Quarter-finals",
+                "status": "SCHEDULED", "surface": "Hard", "home_name": "Ruud C.",
+                "away_name": "Borges N.", "home_rank": 23, "away_rank": 49,
+                "home_points": 2035, "away_points": 1075,
+            }]).to_csv(csv_path, index=False)
+            matcher = HistoricalPlayerMatcher(["Casper Ruud", "Christian Ruud", "Nuno Borges"])
+            rows = load_scheduled_csv_fixtures(
+                root, matcher, now_utc=datetime(2026, 11, 5, 22, tzinfo=timezone.utc)
+            )
+            self.assertEqual(rows.iloc[0]["p1_historical_name"], "Casper Ruud")
+            self.assertEqual(rows.iloc[0]["p1_match_status"], "recent_unique")
+            self.assertTrue(rows.iloc[0]["identities_resolved"])
+
+    def test_audit_flags_scheduled_csv_match_missing_from_snapshot(self):
+        now = datetime(2026, 11, 5, 22, tzinfo=timezone.utc)
+        source = pd.DataFrame([{
+            "tour_type": 1, "status": "SCHEDULED",
+            "date_timestamp": int(pd.Timestamp("2026-11-06T19:30:00Z").timestamp()),
+            "tournament": "Paris ATP (indoor)", "round": "Quarter-finals",
+            "surface": "hard", "home_name": "Ruud C.", "away_name": "Borges N.",
+        }])
+        self.assertEqual(len(missing_scheduled_csv_fixtures(source, pd.DataFrame(), now)), 1)
+        fixtures = pd.DataFrame([{
+            "event_date": "2026-11-06", "tournament_name": "Paris", "round": "QF",
+            "p1_display_name": "Casper Ruud", "p2_display_name": "Nuno Borges",
+        }])
+        self.assertEqual(missing_scheduled_csv_fixtures(source, fixtures, now), [])
 
     def test_scheduled_csv_fills_only_exact_missing_fixture_round(self):
         with tempfile.TemporaryDirectory() as temporary:

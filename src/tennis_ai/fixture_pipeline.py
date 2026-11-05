@@ -188,6 +188,16 @@ def load_scheduled_csv_fixtures(
         reference = reference.tz_localize("UTC")
     else:
         reference = reference.tz_convert("UTC")
+    # A surname plus initial can name two historical players (Casper and
+    # Christian Ruud, for example). Use recent full-name match history only
+    # when it identifies exactly one active player; otherwise keep it unresolved.
+    active_names: dict[str, set[str]] = {}
+    model_path = Path(project_root) / "data" / "processed" / "atp_model_data_1990_2026.pkl"
+    if model_path.exists():
+        recent = pd.read_pickle(model_path)
+        recent = recent[pd.to_numeric(recent["source_year"], errors="coerce").ge(reference.year - 2)]
+        for name in pd.concat([recent["p1_name"], recent["p2_name"]]).dropna().unique():
+            active_names.setdefault(player_identity_key(name), set()).add(str(name))
     source = source[
         source["tour_type"].eq(1)
         & source["status"].eq("SCHEDULED")
@@ -210,6 +220,14 @@ def load_scheduled_csv_fixtures(
             continue
         p1_name, p1_score, p1_status = matcher.match_surname_initial(str(row.home_name))
         p2_name, p2_score, p2_status = matcher.match_surname_initial(str(row.away_name))
+        if p1_status == "ambiguous_short":
+            candidates = active_names.get(player_identity_key(row.home_name), set())
+            if len(candidates) == 1:
+                p1_name, p1_score, p1_status = next(iter(candidates)), 1.0, "recent_unique"
+        if p2_status == "ambiguous_short":
+            candidates = active_names.get(player_identity_key(row.away_name), set())
+            if len(candidates) == 1:
+                p2_name, p2_score, p2_status = next(iter(candidates)), 1.0, "recent_unique"
         if not p1_name or not p2_name or p1_name == p2_name:
             continue
         identity = (
