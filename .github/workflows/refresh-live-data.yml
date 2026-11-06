@@ -2,7 +2,7 @@ name: Refresh ATP live data
 
 on:
   schedule:
-    - cron: "23 5,11,17,23 * * *"
+    - cron: "23 1,5,9,13,17,21 * * *"
   workflow_dispatch:
 
 permissions:
