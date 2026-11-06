@@ -1,4 +1,4 @@
-name: Refresh ATP live data
+name: Hide completed published matches
 
 on:
   schedule:
@@ -15,10 +15,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
-    env:
-      LIVE_TENNIS_API_KEY: ${{ secrets.LIVE_TENNIS_API_KEY }}
-      PYTHONUTF8: "1"
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,33 +23,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-          cache: pip
-      - name: Require provider key
-        run: test -n "$LIVE_TENNIS_API_KEY"
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Sync tracked results and pre-match predictions
-        run: python scripts/sync_free_results.py
-      - name: Rebuild presentation and export public bundle
-        run: |
-          python scripts/build_presentation_cache.py
-          python scripts/export_frontend_snapshot.py \
-            --output "${RUNNER_TEMP}/upcoming.json" \
-            --previous-output "${RUNNER_TEMP}/previous.json" \
-            --bundle-output "${RUNNER_TEMP}/live_bundle.json"
-          python scripts/validate_public_bundle.py "${RUNNER_TEMP}/live_bundle.json" \
-            --previous-bundle data/public/live_bundle.json
-          mkdir -p data/public
-          cp "${RUNNER_TEMP}/live_bundle.json" data/public/live_bundle.json
-      - name: Commit verified state and snapshot
+      - name: Check only currently published fixtures
+        env:
+          LIVE_TENNIS_API_KEY: ${{ secrets.LIVE_TENNIS_API_KEY }}
+        run: python scripts/check_completed_fixtures.py
+      - name: Commit completed fixture IDs only
         run: |
           git config user.name "UMTennis data bot"
           git config user.email "216855458+umutaylcn@users.noreply.github.com"
-          git add models/current_state.joblib data/processed/atp_backfill_2026_current.pkl \
-            data/cache/tracked_fixtures.json data/cache/prediction_history.json \
-            data/cache/upcoming_fixtures.json data/cache/live_players.json \
-            data/public/live_bundle.json
+          git add data/public/completed_fixtures.json
           if ! git diff --cached --quiet; then
-            git commit -m "Refresh ATP result state and public snapshot"
+            git commit -m "Hide completed published ATP fixtures"
             git push
           fi
