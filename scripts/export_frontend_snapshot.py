@@ -15,6 +15,8 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from tennis_ai.api import PredictionService
 
+VALID_PUBLIC_ROUNDS = {"R128", "R64", "R32", "R16", "QF", "SF", "F", "RR"}
+
 
 def write_json(output: Path, payload: dict) -> None:
     output = output.resolve()
@@ -31,6 +33,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--previous-output", type=Path, required=True)
+    parser.add_argument("--bundle-output", type=Path)
     args = parser.parse_args()
 
     service = PredictionService(PROJECT_ROOT)
@@ -55,6 +58,26 @@ def main() -> None:
         "count": len(previous),
         "matches": previous,
     })
+    if args.bundle_output is not None:
+        # A provider fixture with an unknown round can be a qualifier. It is
+        # safer to omit it than to publish a confident main-draw prediction.
+        safe_matches = [
+            match for match in matches
+            if str(match.get("round") or "").upper() in VALID_PUBLIC_ROUNDS
+        ]
+        safe_predictions = {
+            str(match["match_id"]): predictions[str(match["match_id"])]
+            for match in safe_matches
+        }
+        write_json(args.bundle_output, {
+            "generated_at_utc": generated_at,
+            "state_as_of_utc": payload["state_as_of_utc"],
+            "upcoming": {"count": len(safe_matches), "matches": safe_matches,
+                         "predictions": safe_predictions},
+            "previous": {"count": len(previous), "matches": previous},
+        })
+        print(f"Public bundle: {len(safe_matches)} verified-round upcoming; "
+              f"{len(matches) - len(safe_matches)} unknown-round omitted")
     print(f"Cloudflare snapshot: {len(matches)} upcoming/details, {len(previous)} previous")
 
 
