@@ -15,7 +15,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data" / "public" / "completed_fixtures.json"
-SITE_URL = "https://prediction.umtennis.workers.dev/data/upcoming.json"
+SITE_URL = "https://raw.githubusercontent.com/umutaylcn/UMTennis/main/public/data/upcoming.json"
 API_BASE = "https://api.livetennisapi.com/api/public/v1"
 TERMINAL_EVENTS = {"walk over", "cancelled"}
 
