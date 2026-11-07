@@ -32,6 +32,8 @@ MAIN_DRAW_START_DATES: dict[tuple[str, int], date] = {
     ("Lyon", 2026): date(2026, 10, 19),
     ("Basel", 2026): date(2026, 10, 26),
     ("Vienna", 2026): date(2026, 10, 26),
+    # Qualifying begins Nov 7; ATP lists the tour-level draw from Nov 8.
+    ("Stockholm", 2026): date(2026, 11, 8),
 }
 
 

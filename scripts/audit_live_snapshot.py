@@ -96,6 +96,37 @@ def _placeholder_clock_exposed(group: pd.DataFrame, time: str) -> bool:
     )
 
 
+def previous_qualifying_leaks(source: pd.DataFrame, previous: list[dict]) -> list[int]:
+    """Catch mislabeled provider rounds using the CSV's qualifying days."""
+    dates = pd.to_datetime(source["date_timestamp"], unit="s", utc=True, errors="coerce")
+    qualifying_days: dict[str, set[str]] = defaultdict(set)
+    main_draw_starts: dict[str, pd.Timestamp] = {}
+    for row, timestamp in zip(source.itertuples(index=False), dates):
+        if pd.isna(timestamp) or row.tour_type != 1:
+            continue
+        name = str(row.tournament)
+        if "qualif" in name.casefold():
+            event = clean_tournament_name(name.split(" - Qualification", 1)[0])
+            qualifying_days[event].add(timestamp.date().isoformat())
+        elif str(row.round) in ROUND_MAP:
+            event = clean_tournament_name(name)
+            if event not in main_draw_starts or timestamp < main_draw_starts[event]:
+                main_draw_starts[event] = timestamp
+    leaked = []
+    for match in previous:
+        event = clean_tournament_name(str(match.get("tournament_name", "")))
+        start = pd.to_datetime(match.get("scheduled_start_time_utc") or match.get("start_time_utc"), utc=True, errors="coerce")
+        if pd.isna(start):
+            continue
+        if is_pre_main_draw(event, start) or (
+            start.date().isoformat() in qualifying_days.get(event, set())
+            and event in main_draw_starts
+            and start.date() < main_draw_starts[event].date()
+        ):
+            leaked.append(int(match["match_id"]))
+    return leaked
+
+
 def main() -> int:
     source = pd.read_csv(ROOT / "data" / "external" / "2026-atp-season.csv", low_memory=False)
     snapshot = json.loads((ROOT / "data" / "cache" / "upcoming_fixtures.json").read_text(encoding="utf-8"))
@@ -105,6 +136,13 @@ def main() -> int:
     leaked = len(fixtures) - len(exclude_csv_qualifying_fixtures(fixtures, ROOT))
     if leaked:
         print(f"AUDIT FAIL: {leaked} qualifying fixtures entered the main-draw snapshot")
+    previous_path = ROOT.parent / "web" / "public" / "data" / "previous.json"
+    if previous_path.exists():
+        previous = json.loads(previous_path.read_text(encoding="utf-8")).get("matches", [])
+        previous_leaks = previous_qualifying_leaks(source, previous)
+        if previous_leaks:
+            print(f"AUDIT FAIL: qualifying matches entered Previous: {previous_leaks}")
+            leaked += len(previous_leaks)
     valid_precision = {"time", "not_before", "date_only", "tba"}
     invalid_schedule = fixtures[
         ~fixtures["schedule_precision"].isin(valid_precision)

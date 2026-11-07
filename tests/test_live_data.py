@@ -22,7 +22,7 @@ from tennis_ai.fixture_pipeline import (
     load_verified_fixture_overrides,
 )
 from tennis_ai.player_matching import HistoricalPlayerMatcher
-from audit_live_snapshot import missing_scheduled_csv_fixtures
+from audit_live_snapshot import missing_scheduled_csv_fixtures, previous_qualifying_leaks
 from datetime import datetime, timezone
 import pandas as pd
 
@@ -46,6 +46,14 @@ def fixture(match_id: int, status: str) -> dict[str, object]:
 
 
 class LiveTennisClientTests(unittest.TestCase):
+    def test_previous_audit_detects_qualifier_mislabeled_sf(self):
+        source = pd.DataFrame([
+            {"date_timestamp": 1794049200, "tour_type": 1, "tournament": "Stockholm ATP - Qualification (indoor)", "round": "Qualifier"},
+            {"date_timestamp": 1794222000, "tour_type": 1, "tournament": "Stockholm ATP (indoor)", "round": "1/16-finals"},
+        ])
+        previous = [{"match_id": 216281, "tournament_name": "Stockholm", "round": "SF", "start_time_utc": "2026-11-07T10:10:00Z"}]
+        self.assertEqual(previous_qualifying_leaks(source, previous), [216281])
+
     def test_stockholm_wildcard_cannot_be_mapped_to_jack_lin(self):
         with tempfile.TemporaryDirectory() as temporary:
             csv_path = Path(temporary) / "data" / "external" / "2026-atp-season.csv"

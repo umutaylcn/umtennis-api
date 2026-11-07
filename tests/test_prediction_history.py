@@ -130,6 +130,15 @@ class PredictionHistoryTests(unittest.TestCase):
             self.assertEqual(store.drop_pre_main_draw(), 1)
             self.assertEqual(store._predictions, {})
 
+    def test_stockholm_qualifying_sf_is_not_previous_even_with_main_draw_round(self):
+        fixtures = pd.DataFrame([{"match_id": 216281, "start_time_utc": pd.Timestamp("2026-11-07T10:10:00Z"), "tournament_name": "Stockholm", "surface": "Hard", "round": "SF", "p1_display_name": "Mika Brunold", "p2_display_name": "Borna Gojo", "identities_resolved": True}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            self.assertEqual(store.capture(fixtures, FakeState(), FakePredictor(), now_utc=datetime(2026, 11, 7, 8, tzinfo=timezone.utc)), 0)
+            store._predictions["216281"] = {"match_id": 216281, "start_time_utc": "2026-11-07T10:10:00Z", "captured_at_utc": "2026-11-07T08:00:00Z", "state_as_of_utc": "2026-11-06T00:00:00Z", "tournament_name": "Stockholm", "surface": "Hard", "round": "SF", "p1_name": "Mika Brunold", "p2_name": "Borna Gojo", "p1_win_probability": 0.6, "p2_win_probability": 0.4, "actual_winner": "Borna Gojo", "actual_loser": "Mika Brunold", "match_status": "completed"}
+            self.assertEqual(store.completed(), [])
+            self.assertEqual(store.drop_pre_main_draw(), 1)
+
     def test_capture_uses_display_side_not_historical_prediction_name(self):
         fixtures = pd.DataFrame([{"match_id": 21, "start_time_utc": pd.Timestamp("2026-09-11T12:00:00Z"), "tournament_name": "Laver Cup", "surface": "hard", "round": "DAY 1", "p1_display_name": "Jakub Menšik", "p2_display_name": "Brandon Nakashima", "identities_resolved": True}])
 
