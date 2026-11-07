@@ -16,6 +16,14 @@ from .player_matching import normalize_player_name
 from .results_backfill import clean_tournament_name, player_identity_key
 
 
+KNOWN_MAIN_DRAW_ROUNDS = {"R128", "R64", "R32", "R16", "QF", "SF", "F", "RR"}
+
+
+def _known_round(value: object) -> str | None:
+    normalized = str(value or "").strip().upper()
+    return normalized if normalized in KNOWN_MAIN_DRAW_ROUNDS else None
+
+
 def _iso_utc(value: Any) -> str | None:
     if value is None or pd.isna(value):
         return None
@@ -193,6 +201,10 @@ class PredictionHistoryStore:
                 prior_state = pd.to_datetime(record.get("state_as_of_utc"), utc=True, errors="coerce")
                 if pd.notna(prior_state) and (pd.isna(state_as_of) or state_as_of < prior_state):
                     continue
+                verified_round = _known_round(fixture.get("round"))
+                if verified_round and not _known_round(record.get("round")):
+                    record["round"] = verified_round
+                    changed = True
                 if record.get("start_time_utc") != _iso_utc(start):
                     record["start_time_utc"] = _iso_utc(start)
                     changed = True
@@ -242,6 +254,32 @@ class PredictionHistoryStore:
         if captured or changed:
             self.save()
         return captured
+
+    def reconcile_pre_match_rounds(self, snapshot: dict[str, Any]) -> int:
+        """Restore rounds proven by a published snapshot dated before match start."""
+        published_at = pd.to_datetime(snapshot.get("generated_at_utc"), utc=True, errors="coerce")
+        if pd.isna(published_at):
+            return 0
+        corrected = 0
+        for fixture in snapshot.get("matches", []):
+            record = self._predictions.get(str(fixture.get("match_id")))
+            round_code = _known_round(fixture.get("round"))
+            if record is None or round_code is None or _known_round(record.get("round")):
+                continue
+            start = pd.to_datetime(record.get("start_time_utc"), utc=True, errors="coerce")
+            if pd.isna(start) or published_at >= start or not _is_pre_match_record(record):
+                continue
+            if clean_tournament_name(record.get("tournament_name", "")) != clean_tournament_name(fixture.get("tournament_name", "")):
+                continue
+            record_players = {player_identity_key(record.get(f"{side}_name", "")) for side in ("p1", "p2")}
+            fixture_players = {player_identity_key(fixture.get(f"{side}_name", "")) for side in ("p1", "p2")}
+            if len(record_players) != 2 or record_players != fixture_players:
+                continue
+            record["round"] = round_code
+            corrected += 1
+        if corrected:
+            self.save()
+        return corrected
 
     def finalize(self, results: pd.DataFrame, *, reconcile_existing: bool = False) -> int:
         finalized = 0
