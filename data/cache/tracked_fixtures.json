@@ -9315,7 +9315,7 @@
     },
     "216082": {
       "match_id": 216082,
-      "start_time_utc": "2026-11-06T22:15:00Z",
+      "start_time_utc": "2026-11-06T22:00:00Z",
       "tournament_name": "Paris",
       "surface": "Hard",
       "round": "QF",
@@ -9327,7 +9327,7 @@
       "p2_rank": 49,
       "p1_rank_points": 2145,
       "p2_rank_points": 1070,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "216287": {
       "match_id": 216287,
@@ -9350,7 +9350,7 @@
       "start_time_utc": "2026-11-07T13:30:00Z",
       "tournament_name": "Paris",
       "surface": "Hard",
-      "round": null,
+      "round": "SF",
       "p1_name": "Luca Van Assche",
       "p2_name": "Ben Shelton",
       "p1_id": 232,
@@ -9375,7 +9375,7 @@
       "p2_rank": 207,
       "p1_rank_points": 385,
       "p2_rank_points": 270,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "216281": {
       "match_id": 216281,
@@ -9471,6 +9471,22 @@
       "p2_rank": 337,
       "p1_rank_points": 623,
       "p2_rank_points": 156,
+      "sync_status": "pending"
+    },
+    "216324": {
+      "match_id": 216324,
+      "start_time_utc": "2026-11-07T16:00:00Z",
+      "tournament_name": "Paris",
+      "surface": "Hard",
+      "round": "SF",
+      "p1_name": "Casper Ruud",
+      "p2_name": "Carlos Alcaraz",
+      "p1_id": 537,
+      "p2_id": 13,
+      "p1_rank": 21,
+      "p2_rank": 3,
+      "p1_rank_points": 2145,
+      "p2_rank_points": 5060,
       "sync_status": "pending"
     }
   }

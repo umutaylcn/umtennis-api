@@ -37,6 +37,9 @@ def main() -> None:
     args = parser.parse_args()
 
     service = PredictionService(PROJECT_ROOT)
+    # Refresh the durable pick with the latest valid pre-match state before
+    # exporting the same probability to Upcoming and, later, Previous.
+    service.prediction_history.capture(service.fixtures(), service.state, service.predictor)
     matches = service.match_list()
     generated_at = datetime.now(timezone.utc).isoformat()
     predictions = {str(match["match_id"]): service.predict(match["match_id"]) for match in matches}

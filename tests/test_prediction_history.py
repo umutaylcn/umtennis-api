@@ -2,6 +2,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 
 import pandas as pd
@@ -11,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from tennis_ai.prediction_history import PredictionHistoryStore
+from tennis_ai.api import PredictionService
 
 
 class FakeState:
@@ -26,6 +28,61 @@ class FakePredictor:
 
 
 class PredictionHistoryTests(unittest.TestCase):
+    def test_provider_id_change_refreshes_one_pre_match_record(self):
+        fixtures = pd.DataFrame([
+            {"match_id": 101, "start_time_utc": pd.Timestamp("2026-09-12T12:00:00Z"), "tournament_name": "US Open", "surface": "hard", "round": "SF", "p1_display_name": "Player One", "p2_display_name": "Player Two", "identities_resolved": True},
+            {"match_id": 202, "start_time_utc": pd.Timestamp("2026-09-12T12:00:00Z"), "tournament_name": "US Open", "surface": "hard", "round": "SF", "p1_display_name": "Player Two", "p2_display_name": "Player One", "identities_resolved": True},
+        ])
+
+        class SwappedPredictor:
+            def predict_frame(self, frame):
+                return {"p1_win_probability": 0.35, "p2_win_probability": 0.65, "confidence": 0.65}
+
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            store.capture(fixtures.iloc[:1], FakeState(), FakePredictor(), now_utc=datetime(2026, 9, 11, 8, tzinfo=timezone.utc))
+            newer_state = FakeState()
+            newer_state.state_as_of = pd.Timestamp("2026-09-11T09:00:00Z")
+            self.assertEqual(store.capture(fixtures.iloc[1:], newer_state, SwappedPredictor(), now_utc=datetime(2026, 9, 11, 10, tzinfo=timezone.utc)), 0)
+            self.assertEqual(len(store._predictions), 1)
+            self.assertEqual(store._predictions["101"]["p1_win_probability"], 0.65)
+
+    def test_started_fixture_displays_last_captured_pre_match_probability(self):
+        service = object.__new__(PredictionService)
+        service.prediction_history = SimpleNamespace(record_for_fixture=lambda fixture: {
+            "start_time_utc": "2026-09-12T12:00:00Z",
+            "captured_at_utc": "2026-09-11T10:00:00Z",
+            "state_as_of_utc": "2026-09-11T09:00:00Z",
+            "p1_name": "Player One", "p2_name": "Player Two",
+            "p1_win_probability": 0.6, "p2_win_probability": 0.4,
+        })
+        service.state = SimpleNamespace(build_feature_row=lambda fixture: self.fail("Model must not run after start"))
+        fixture = pd.Series({"match_id": 41, "start_time_utc": pd.Timestamp("2026-09-12T12:00:00Z"), "p1_display_name": "Player One", "p2_display_name": "Player Two"})
+        displayed = service._prediction_for_fixture(fixture)
+        self.assertEqual(displayed["p1_win_probability"], 0.6)
+        self.assertEqual(displayed["predicted_winner"], "Player One")
+
+    def test_latest_pre_match_prediction_replaces_pending_pick_then_freezes(self):
+        fixtures = pd.DataFrame([{"match_id": 41, "start_time_utc": pd.Timestamp("2026-09-12T12:00:00Z"), "tournament_name": "US Open", "surface": "hard", "round": "SF", "p1_display_name": "Player One", "p2_display_name": "Player Two", "identities_resolved": True}])
+
+        class UpdatedPredictor:
+            def predict_frame(self, frame):
+                return {"p1_win_probability": 0.6, "p2_win_probability": 0.4, "confidence": 0.6}
+
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            store.capture(fixtures, FakeState(), FakePredictor(), now_utc=datetime(2026, 9, 11, 8, tzinfo=timezone.utc))
+            newer_state = FakeState()
+            newer_state.state_as_of = pd.Timestamp("2026-09-11T09:00:00Z")
+            store.capture(fixtures, newer_state, UpdatedPredictor(), now_utc=datetime(2026, 9, 11, 10, tzinfo=timezone.utc))
+            updated = PredictionHistoryStore(store.path)._predictions["41"]
+            self.assertEqual(updated["p1_win_probability"], 0.6)
+            self.assertEqual(updated["captured_at_utc"], "2026-09-11T10:00:00Z")
+            self.assertEqual(updated["state_as_of_utc"], "2026-09-11T09:00:00Z")
+            newer_state.state_as_of = pd.Timestamp("2026-09-12T11:00:00Z")
+            store.capture(fixtures, newer_state, FakePredictor(), now_utc=datetime(2026, 9, 12, 13, tzinfo=timezone.utc))
+            self.assertEqual(PredictionHistoryStore(store.path)._predictions["41"], updated)
+
     def test_brussels_csv_alias_finalizes_real_pre_match_prediction(self):
         fixture = pd.DataFrame([{"match_id": 208178, "start_time_utc": pd.Timestamp("2026-10-23T16:50:00Z"), "tournament_name": "Brussels", "surface": "Hard", "round": "QF", "p1_display_name": "Arthur Fils", "p2_display_name": "Alex Michelsen", "identities_resolved": True}])
         result = pd.DataFrame([{"provider_match_id": 334444, "played_at_utc": pd.Timestamp("2026-10-23T16:50:00Z"), "tourney_name": "Brussels ATP (indoor)", "winner_name": "Arthur Fils", "loser_name": "Alex Michelsen", "match_status": "completed", "winner_sets": 2, "loser_sets": 1}])

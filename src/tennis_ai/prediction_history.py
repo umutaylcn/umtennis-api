@@ -1,4 +1,4 @@
-"""Immutable pre-match predictions joined with final ATP results."""
+"""Latest pre-match predictions, frozen at match start, joined with ATP results."""
 
 from __future__ import annotations
 
@@ -114,7 +114,7 @@ def _display_record(record: dict[str, Any]) -> dict[str, Any] | None:
 
 
 class PredictionHistoryStore:
-    """Durable store; a prediction is never overwritten after first capture."""
+    """Durable store; refresh pending picks and freeze them at match start."""
 
     def __init__(self, path: str | Path) -> None:
         self.path = Path(path)
@@ -124,12 +124,33 @@ class PredictionHistoryStore:
         else:
             self._predictions: dict[str, dict[str, Any]] = {}
 
+    def record_for_fixture(self, fixture: pd.Series) -> dict[str, Any] | None:
+        """Find the same match even when the CSV and live feed use different IDs."""
+        exact = self._predictions.get(str(int(fixture.match_id)))
+        if exact is not None:
+            return exact
+        start = pd.to_datetime(fixture.start_time_utc, utc=True, errors="coerce")
+        players = {player_identity_key(fixture[f"{side}_display_name"]) for side in ("p1", "p2")}
+        if pd.isna(start) or len(players) != 2:
+            return None
+        for record in self._predictions.values():
+            record_start = pd.to_datetime(record.get("start_time_utc"), utc=True, errors="coerce")
+            if (
+                clean_tournament_name(record.get("tournament_name", ""))
+                == clean_tournament_name(fixture.tournament_name)
+                and players == {player_identity_key(record.get(f"{side}_name", "")) for side in ("p1", "p2")}
+                and pd.notna(record_start)
+                and abs(record_start - start) <= pd.Timedelta(days=2)
+            ):
+                return record
+        return None
+
     def capture(
         self, fixtures: pd.DataFrame, state: Any, predictor: Any,
         *, now_utc: datetime | None = None,
     ) -> int:
         captured = 0
-        schedule_updated = False
+        changed = False
         if fixtures.empty:
             return captured
         captured_at = pd.Timestamp(now_utc or datetime.now(timezone.utc))
@@ -149,31 +170,39 @@ class PredictionHistoryStore:
             if pd.notna(state_as_of) and state_as_of >= start:
                 continue
             match_id = str(int(fixture.match_id))
-            if match_id in self._predictions:
-                record = self._predictions[match_id]
-                if not record.get("actual_winner") and record.get("start_time_utc") != _iso_utc(start):
+            record = self.record_for_fixture(fixture)
+            if record is not None:
+                if record.get("actual_winner"):
+                    continue
+                fixture_sides = [player_identity_key(fixture[f"{side}_display_name"]) for side in ("p1", "p2")]
+                record_sides = [player_identity_key(record.get(f"{side}_name", "")) for side in ("p1", "p2")]
+                if set(fixture_sides) != set(record_sides) or len(set(fixture_sides)) != 2:
+                    continue
+                prior_state = pd.to_datetime(record.get("state_as_of_utc"), utc=True, errors="coerce")
+                if pd.notna(prior_state) and (pd.isna(state_as_of) or state_as_of < prior_state):
+                    continue
+                if record.get("start_time_utc") != _iso_utc(start):
                     record["start_time_utc"] = _iso_utc(start)
-                    schedule_updated = True
-                continue
-            # A CSV fixture may later receive a different live-provider ID.
-            # Preserve the first genuine pre-match prediction as the only one.
-            fixture_players = {
-                player_identity_key(fixture.p1_display_name),
-                player_identity_key(fixture.p2_display_name),
-            }
-            equivalent = any(
-                clean_tournament_name(record.get("tournament_name", ""))
-                == clean_tournament_name(fixture.tournament_name)
-                and fixture_players == {
-                    player_identity_key(record.get("p1_name", "")),
-                    player_identity_key(record.get("p2_name", "")),
-                }
-                and abs(
-                    pd.to_datetime(record.get("start_time_utc"), utc=True) - start
-                ) <= pd.Timedelta(days=2)
-                for record in self._predictions.values()
-            )
-            if equivalent:
+                    changed = True
+                prediction = predictor.predict_frame(state.build_feature_row(fixture))
+                p1_probability = prediction["p1_win_probability"] if fixture_sides[0] == record_sides[0] else prediction["p2_win_probability"]
+                p2_probability = prediction["p2_win_probability"] if fixture_sides[0] == record_sides[0] else prediction["p1_win_probability"]
+                if (
+                    record.get("p1_win_probability") != p1_probability
+                    or record.get("p2_win_probability") != p2_probability
+                    or record.get("state_as_of_utc") != _iso_utc(state.state_as_of)
+                ):
+                    predicted_side = "p1" if p1_probability >= p2_probability else "p2"
+                    record.update({
+                        "p1_win_probability": p1_probability,
+                        "p2_win_probability": p2_probability,
+                        "predicted_side": predicted_side,
+                        "predicted_winner": record[f"{predicted_side}_name"],
+                        "confidence": max(p1_probability, p2_probability),
+                        "captured_at_utc": _iso_utc(captured_at),
+                        "state_as_of_utc": _iso_utc(state.state_as_of),
+                    })
+                    changed = True
                 continue
             prediction = predictor.predict_frame(state.build_feature_row(fixture))
             predicted_side = "p1" if prediction["p1_win_probability"] >= prediction["p2_win_probability"] else "p2"
@@ -198,7 +227,7 @@ class PredictionHistoryStore:
                 "prediction_correct": None,
             }
             captured += 1
-        if captured or schedule_updated:
+        if captured or changed:
             self.save()
         return captured
 

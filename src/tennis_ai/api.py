@@ -19,10 +19,10 @@ from .fixture_pipeline import (
     load_fixture_snapshot,
     verified_fixture_round,
 )
-from .inference import EnsemblePredictor
+from .inference import EnsemblePredictor, confidence_label
 from .mock_fixtures import build_mock_fixture_table
 from .presentation import PlayerPresentationService
-from .prediction_history import PredictionHistoryStore
+from .prediction_history import PredictionHistoryStore, _is_pre_match_record
 from .results_backfill import clean_tournament_name, player_identity_key
 
 
@@ -144,7 +144,7 @@ class PredictionService:
         matches: list[dict[str, Any]] = []
         for _, row in self.fixtures().iterrows():
             payload = self._match_payload(row)
-            prediction = self.predictor.predict_frame(self.state.build_feature_row(row))
+            prediction = self._prediction_for_fixture(row)
             payload.update(
                 {
                     "p1_win_probability": prediction["p1_win_probability"],
@@ -156,6 +156,28 @@ class PredictionService:
             )
             matches.append(payload)
         return matches
+
+    def _prediction_for_fixture(self, fixture: pd.Series) -> dict[str, Any]:
+        """Use the last captured pre-match pick once a fixture has started."""
+        start = pd.to_datetime(fixture.start_time_utc, utc=True, errors="coerce")
+        if pd.notna(start) and pd.Timestamp.now(tz="UTC") >= start:
+            record = self.prediction_history.record_for_fixture(fixture)
+            if record and _is_pre_match_record(record):
+                fixture_sides = [player_identity_key(fixture[f"{side}_display_name"]) for side in ("p1", "p2")]
+                record_sides = [player_identity_key(record.get(f"{side}_name", "")) for side in ("p1", "p2")]
+                if set(fixture_sides) == set(record_sides) and len(set(fixture_sides)) == 2:
+                    same_order = fixture_sides[0] == record_sides[0]
+                    p1 = record["p1_win_probability"] if same_order else record["p2_win_probability"]
+                    p2 = record["p2_win_probability"] if same_order else record["p1_win_probability"]
+                    confidence = max(p1, p2)
+                    return {
+                        "p1_win_probability": p1,
+                        "p2_win_probability": p2,
+                        "predicted_winner": fixture["p1_display_name"] if p1 >= p2 else fixture["p2_display_name"],
+                        "confidence": confidence,
+                        "confidence_label": confidence_label(confidence),
+                    }
+        return self.predictor.predict_frame(self.state.build_feature_row(fixture))
 
     def previous_match_list(self, limit: int | None = None) -> list[dict[str, Any]]:
         records = self.prediction_history.completed(limit)
@@ -210,8 +232,7 @@ class PredictionService:
         if selected.empty:
             raise KeyError(match_id)
         fixture = selected.iloc[0]
-        feature_frame = self.state.build_feature_row(fixture)
-        prediction = self.predictor.predict_frame(feature_frame)
+        prediction = self._prediction_for_fixture(fixture)
         surface = str(fixture.surface).title()
         h2h = self.state.head_to_head_snapshot(
             str(fixture.p1_historical_name),
