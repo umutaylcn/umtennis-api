@@ -26,6 +26,10 @@ from .fixture_schedule import reconcile_fixture_schedule
 
 FIXTURE_SNAPSHOT_NAME = "upcoming_fixtures.json"
 
+# Stockholm's 2026 wildcard Max Dahlin has no historical model row yet.
+# Official roster: https://www.stockholmopen.se/en/tournament/nyheter/wild-cards-2026
+VERIFIED_CSV_NEW_PLAYERS = {("Stockholm", "dahlin m"): "Max Dahlin"}
+
 # Provider round fields are missing for these exact fixtures. Source-backed
 # fallbacks are intentionally fixture-specific rather than tournament-wide.
 # Laver Cup: https://lavercup.com/news/2026/09/24/laver-cup-2026-day-1-lineups-ruud-and-cerundolo-open-at-the-o2
@@ -168,6 +172,7 @@ def load_scheduled_csv_fixtures(
     matcher: HistoricalPlayerMatcher,
     *,
     now_utc: datetime | None = None,
+    active_names: dict[str, set[str]] | None = None,
 ) -> pd.DataFrame:
     """Supplement API gaps with genuine, still-scheduled ATP CSV fixtures.
 
@@ -191,13 +196,14 @@ def load_scheduled_csv_fixtures(
     # A surname plus initial can name two historical players (Casper and
     # Christian Ruud, for example). Use recent full-name match history only
     # when it identifies exactly one active player; otherwise keep it unresolved.
-    active_names: dict[str, set[str]] = {}
-    model_path = Path(project_root) / "data" / "processed" / "atp_model_data_1990_2026.pkl"
-    if model_path.exists():
-        recent = pd.read_pickle(model_path)
-        recent = recent[pd.to_numeric(recent["source_year"], errors="coerce").ge(reference.year - 2)]
-        for name in pd.concat([recent["p1_name"], recent["p2_name"]]).dropna().unique():
-            active_names.setdefault(player_identity_key(name), set()).add(str(name))
+    if active_names is None:
+        active_names = {}
+        model_path = Path(project_root) / "data" / "processed" / "atp_model_data_1990_2026.pkl"
+        if model_path.exists():
+            recent = pd.read_pickle(model_path)
+            recent = recent[pd.to_numeric(recent["source_year"], errors="coerce").ge(reference.year - 2)]
+            for name in pd.concat([recent["p1_name"], recent["p2_name"]]).dropna().unique():
+                active_names.setdefault(player_identity_key(name), set()).add(str(name))
     source = source[
         source["tour_type"].eq(1)
         & source["status"].eq("SCHEDULED")
@@ -220,6 +226,12 @@ def load_scheduled_csv_fixtures(
             continue
         p1_name, p1_score, p1_status = matcher.match_surname_initial(str(row.home_name))
         p2_name, p2_score, p2_status = matcher.match_surname_initial(str(row.away_name))
+        verified_p1 = VERIFIED_CSV_NEW_PLAYERS.get((tournament, normalize_player_name(str(row.home_name))))
+        verified_p2 = VERIFIED_CSV_NEW_PLAYERS.get((tournament, normalize_player_name(str(row.away_name))))
+        if verified_p1 is not None:
+            p1_name, p1_score, p1_status = verified_p1, 1.0, "verified_new"
+        if verified_p2 is not None:
+            p2_name, p2_score, p2_status = verified_p2, 1.0, "verified_new"
         if p1_status == "ambiguous_short":
             candidates = active_names.get(player_identity_key(row.home_name), set())
             if len(candidates) == 1:
@@ -605,16 +617,29 @@ def build_upcoming_fixture_table(
     project_root: str | Path,
     client: LiveTennisClient,
     historical_names: Iterable[str] | None = None,
+    recent_names: Iterable[str] | None = None,
 ) -> pd.DataFrame:
     root = Path(project_root)
+    active_names: dict[str, set[str]] | None = None
+    if recent_names is not None:
+        active_names = {}
+        for name in recent_names:
+            active_names.setdefault(player_identity_key(name), set()).add(str(name))
     if historical_names is None:
         model_data = pd.read_pickle(
             root / "data" / "processed" / "atp_model_data_1990_2026.pkl"
         )
+        if active_names is None:
+            active_names = {}
+            recent = model_data[pd.to_numeric(model_data["source_year"], errors="coerce").ge(datetime.now(timezone.utc).year - 2)]
+            for name in pd.concat([recent["p1_name"], recent["p2_name"]]).dropna().unique():
+                active_names.setdefault(player_identity_key(name), set()).add(str(name))
+            del recent
         historical_names = pd.concat(
             [model_data["p1_name"], model_data["p2_name"]],
             ignore_index=True,
         ).dropna()
+        del model_data
 
     matcher = HistoricalPlayerMatcher(historical_names)
     cache = PlayerProfileCache(root / "data" / "cache" / "live_players.json")
@@ -636,7 +661,7 @@ def build_upcoming_fixture_table(
         rows.append(_fixture_row(fixture, p1, p2))
 
     provider_table = exclude_csv_qualifying_fixtures(pd.DataFrame(rows), root)
-    csv_table = load_scheduled_csv_fixtures(root, matcher)
+    csv_table = load_scheduled_csv_fixtures(root, matcher, active_names=active_names)
     verified_table = load_verified_fixture_overrides(root, matcher)
     csv_only = [
         csv_row for _, csv_row in csv_table.iterrows()

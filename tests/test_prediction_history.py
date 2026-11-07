@@ -28,6 +28,15 @@ class FakePredictor:
 
 
 class PredictionHistoryTests(unittest.TestCase):
+    def test_wrong_pending_player_identity_is_replaced_before_start(self):
+        fixture = pd.DataFrame([{"match_id": 41, "start_time_utc": pd.Timestamp("2026-09-12T12:00:00Z"), "tournament_name": "US Open", "surface": "hard", "round": "SF", "p1_display_name": "Player One", "p2_display_name": "Max Dahlin", "identities_resolved": True}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            store._predictions["41"] = {"match_id": 41, "start_time_utc": "2026-09-12T12:00:00Z", "tournament_name": "US Open", "p1_name": "Player One", "p2_name": "Jack Mingjie Lin", "p1_win_probability": 0.5, "p2_win_probability": 0.5, "actual_winner": None}
+            self.assertEqual(store.capture(fixture, FakeState(), FakePredictor(), now_utc=datetime(2026, 9, 11, 10, tzinfo=timezone.utc)), 1)
+            self.assertEqual(store._predictions["41"]["p2_name"], "Max Dahlin")
+            self.assertEqual(store._predictions["41"]["p1_win_probability"], 0.7)
+
     def test_provider_id_change_refreshes_one_pre_match_record(self):
         fixtures = pd.DataFrame([
             {"match_id": 101, "start_time_utc": pd.Timestamp("2026-09-12T12:00:00Z"), "tournament_name": "US Open", "surface": "hard", "round": "SF", "p1_display_name": "Player One", "p2_display_name": "Player Two", "identities_resolved": True},

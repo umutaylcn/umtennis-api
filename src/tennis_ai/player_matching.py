@@ -177,7 +177,11 @@ class HistoricalPlayerMatcher:
                         continue
                     candidate_family = "".join(historical_tokens[family_start:])
                     score = SequenceMatcher(None, provider_family, candidate_family).ratio()
-                    if provider_family in candidate_family or candidate_family in provider_family:
+                    # A short surname such as "Lin" must not impersonate
+                    # "Dahlin" merely because it is a suffix.
+                    if min(len(provider_family), len(candidate_family)) >= 5 and (
+                        provider_family in candidate_family or candidate_family in provider_family
+                    ):
                         score = max(score, 0.95)
                     candidates.append((score, historical_name))
 

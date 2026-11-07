@@ -156,8 +156,7 @@ def main() -> None:
     try:
         lock_fd = os.open(LOCK_PATH, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
     except FileExistsError:
-        print("Another result sync is already running; exiting safely.")
-        return
+        raise RuntimeError("Another result sync is running or left a stale lock; refusing to publish stale data.")
     try:
         os.write(lock_fd, str(os.getpid()).encode("ascii"))
         os.close(lock_fd)
@@ -174,7 +173,14 @@ def main() -> None:
         # Fetch fixtures first. A backlog of match-detail calls must not use up
         # the budget before tomorrow's matches can be captured.
         try:
-            upcoming = build_upcoming_fixture_table(PROJECT_ROOT, client)
+            upcoming = build_upcoming_fixture_table(
+                PROJECT_ROOT, client,
+                historical_names=state.players.keys(),
+                recent_names=(
+                    name for name, player in state.players.items()
+                    if player.last_season is not None and player.last_season >= pd.Timestamp.now(tz="UTC").year - 2
+                ),
+            )
             print(f"Upcoming fixtures tracked: {len(upcoming)}")
         except TennisAPIError as exc:
             upcoming = pd.DataFrame()

@@ -16,7 +16,20 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from tennis_ai.fixture_pipeline import exclude_csv_qualifying_fixtures
 from tennis_ai.live_data import EXCLUDED_TOURNAMENT_MARKERS, is_pre_main_draw
+from tennis_ai.player_matching import normalize_player_name
 from tennis_ai.results_backfill import ROUND_MAP, clean_tournament_name, player_identity_key
+
+
+def short_name_matches(short_name: str, full_name: str) -> bool:
+    """Allow a provider's middle initial without accepting another surname."""
+    short_tokens = normalize_player_name(short_name).split()
+    full_tokens = normalize_player_name(full_name).split()
+    if len(short_tokens) < 2 or len(full_tokens) < 2:
+        return False
+    return (
+        short_tokens[0] == full_tokens[-1]
+        and all(initial in {name[0] for name in full_tokens[:-1]} for initial in short_tokens[1:])
+    )
 
 
 def missing_scheduled_csv_fixtures(
@@ -51,6 +64,25 @@ def missing_scheduled_csv_fixtures(
             continue
         key = (start.date().isoformat(), tournament, round_code, players)
         if key not in snapshot_keys:
+            # A source ID is stable even if one provider uses a middle initial
+            # ("Vallejo D.") and our display name includes both given names.
+            same_id = fixtures[fixtures["match_id"].astype(str).eq(str(row.match_id))] if (
+                not fixtures.empty and "match_id" in fixtures and hasattr(row, "match_id")
+            ) else pd.DataFrame()
+            matched = any(
+                str(fixture.event_date)[:10] == start.date().isoformat()
+                and clean_tournament_name(fixture.tournament_name) == tournament
+                and str(fixture.round) == round_code
+                and (
+                    short_name_matches(str(row.home_name), str(fixture.p1_display_name))
+                    and short_name_matches(str(row.away_name), str(fixture.p2_display_name))
+                    or short_name_matches(str(row.home_name), str(fixture.p2_display_name))
+                    and short_name_matches(str(row.away_name), str(fixture.p1_display_name))
+                )
+                for fixture in same_id.itertuples(index=False)
+            )
+            if matched:
+                continue
             missing.append((tournament, round_code, str(row.home_name), str(row.away_name)))
     return missing
 

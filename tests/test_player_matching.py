@@ -10,6 +10,10 @@ from tennis_ai.player_matching import HistoricalPlayerMatcher
 
 
 class HistoricalPlayerMatcherTests(unittest.TestCase):
+    def test_short_surname_suffix_cannot_match_unrelated_player(self):
+        matcher = HistoricalPlayerMatcher(["Jack Mingjie Lin"])
+        self.assertIsNone(matcher.match_surname_initial("Dahlin M.")[0])
+
     def test_current_provider_abbreviations_resolve_to_canonical_players(self):
         matcher = HistoricalPlayerMatcher(
             ["Ben Shelton", "Bryan Shelton", "Jakub Mensik", "Jakub Menšík"]

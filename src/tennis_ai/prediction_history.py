@@ -177,7 +177,19 @@ class PredictionHistoryStore:
                 fixture_sides = [player_identity_key(fixture[f"{side}_display_name"]) for side in ("p1", "p2")]
                 record_sides = [player_identity_key(record.get(f"{side}_name", "")) for side in ("p1", "p2")]
                 if set(fixture_sides) != set(record_sides) or len(set(fixture_sides)) != 2:
-                    continue
+                    # Correct an earlier false identity match while the same
+                    # fixture is still in the future. Never rewrite a result.
+                    if (
+                        str(record.get("match_id")) == match_id
+                        and clean_tournament_name(record.get("tournament_name", ""))
+                        == clean_tournament_name(fixture.tournament_name)
+                    ):
+                        del self._predictions[match_id]
+                        changed = True
+                        record = None
+                    else:
+                        continue
+            if record is not None:
                 prior_state = pd.to_datetime(record.get("state_as_of_utc"), utc=True, errors="coerce")
                 if pd.notna(prior_state) and (pd.isna(state_as_of) or state_as_of < prior_state):
                     continue

@@ -46,6 +46,45 @@ def fixture(match_id: int, status: str) -> dict[str, object]:
 
 
 class LiveTennisClientTests(unittest.TestCase):
+    def test_stockholm_wildcard_cannot_be_mapped_to_jack_lin(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            csv_path = Path(temporary) / "data" / "external" / "2026-atp-season.csv"
+            csv_path.parent.mkdir(parents=True)
+            pd.DataFrame([{
+                "match_id": 84535270, "tour_type": 1,
+                "date_timestamp": int(pd.Timestamp("2026-11-09T10:00:00Z").timestamp()),
+                "tournament": "Stockholm ATP (indoor)", "round": "1/16-finals",
+                "status": "SCHEDULED", "surface": "hard",
+                "home_name": "Etcheverry T. M.", "away_name": "Dahlin M.",
+                "home_rank": 30, "away_rank": None,
+                "home_points": 1500, "away_points": None,
+            }]).to_csv(csv_path, index=False)
+            matcher = HistoricalPlayerMatcher(["Tomas Martin Etcheverry", "Jack Mingjie Lin"])
+            table = load_scheduled_csv_fixtures(
+                temporary, matcher, active_names={},
+                now_utc=datetime(2026, 11, 7, 13, tzinfo=timezone.utc),
+            )
+            self.assertEqual(table.iloc[0]["p2_display_name"], "Max Dahlin")
+            self.assertEqual(table.iloc[0]["p2_match_status"], "verified_new")
+
+    def test_audit_accepts_middle_initial_but_rejects_wrong_surname(self):
+        now = datetime(2026, 11, 7, 13, tzinfo=timezone.utc)
+        start = int(pd.Timestamp("2026-11-09T10:00:00Z").timestamp())
+        source = pd.DataFrame([{
+            "match_id": 80883258, "tour_type": 1, "status": "SCHEDULED",
+            "date_timestamp": start, "tournament": "Stockholm ATP (indoor)",
+            "round": "1/16-finals", "surface": "hard",
+            "home_name": "Vallejo D.", "away_name": "Humbert U.",
+        }])
+        snapshot = pd.DataFrame([{
+            "match_id": 80883258, "event_date": "2026-11-09",
+            "tournament_name": "Stockholm", "round": "R32",
+            "p1_display_name": "Adolfo Daniel Vallejo", "p2_display_name": "Ugo Humbert",
+        }])
+        self.assertEqual(missing_scheduled_csv_fixtures(source, snapshot, now), [])
+        snapshot.loc[0, "p1_display_name"] = "Jack Mingjie Lin"
+        self.assertEqual(len(missing_scheduled_csv_fixtures(source, snapshot, now)), 1)
+
     def test_basel_and_vienna_pre_main_draw_dates_are_excluded(self):
         rows = pd.DataFrame([
             {"match_id": 1, "tournament_name": "Basel", "event_date": "2026-10-24"},
