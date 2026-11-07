@@ -32,9 +32,13 @@ class PredictionHistoryTests(unittest.TestCase):
         fixture = pd.DataFrame([{"match_id": 216279, "start_time_utc": pd.Timestamp("2026-11-07T13:30:00Z"), "tournament_name": "Paris", "surface": "Hard", "round": "TBD", "p1_display_name": "Luca Van Assche", "p2_display_name": "Ben Shelton", "identities_resolved": True}])
         with tempfile.TemporaryDirectory() as directory:
             store = PredictionHistoryStore(Path(directory) / "history.json")
-            store.capture(fixture, FakeState(), FakePredictor(), now_utc=datetime(2026, 11, 7, 11, tzinfo=timezone.utc))
+            state = FakeState()
+            state.state_as_of = pd.Timestamp("2026-11-07T10:00:00Z")
+            store.capture(fixture, state, FakePredictor(), now_utc=datetime(2026, 11, 7, 11, tzinfo=timezone.utc))
             fixture.loc[0, "round"] = "SF"
-            store.capture(fixture, FakeState(), FakePredictor(), now_utc=datetime(2026, 11, 7, 12, tzinfo=timezone.utc))
+            stale_state = FakeState()
+            stale_state.state_as_of = pd.Timestamp("2026-11-06T10:00:00Z")
+            store.capture(fixture, stale_state, FakePredictor(), now_utc=datetime(2026, 11, 7, 12, tzinfo=timezone.utc))
             self.assertEqual(PredictionHistoryStore(store.path)._predictions["216279"]["round"], "SF")
 
     def test_round_reconciliation_requires_published_pre_match_evidence(self):
@@ -47,6 +51,16 @@ class PredictionHistoryTests(unittest.TestCase):
             snapshot["generated_at_utc"] = "2026-11-07T12:19:59Z"
             self.assertEqual(store.reconcile_pre_match_rounds(snapshot), 1)
             self.assertEqual(PredictionHistoryStore(store.path)._predictions["216279"]["round"], "SF")
+
+    def test_publication_guard_detects_round_not_saved_in_history(self):
+        fixture = pd.DataFrame([{"match_id": 216279, "start_time_utc": pd.Timestamp("2026-11-07T13:30:00Z"), "tournament_name": "Paris", "surface": "Hard", "round": "TBD", "p1_display_name": "Luca Van Assche", "p2_display_name": "Ben Shelton", "identities_resolved": True}])
+        with tempfile.TemporaryDirectory() as directory:
+            store = PredictionHistoryStore(Path(directory) / "history.json")
+            store.capture(fixture, FakeState(), FakePredictor(), now_utc=datetime(2026, 11, 7, 11, tzinfo=timezone.utc))
+            fixture.loc[0, "round"] = "SF"
+            self.assertEqual(store.pending_round_mismatches(fixture, now_utc=datetime(2026, 11, 7, 12, tzinfo=timezone.utc)), [216279])
+            store.capture(fixture, FakeState(), FakePredictor(), now_utc=datetime(2026, 11, 7, 12, tzinfo=timezone.utc))
+            self.assertEqual(store.pending_round_mismatches(fixture, now_utc=datetime(2026, 11, 7, 12, tzinfo=timezone.utc)), [])
 
     def test_wrong_pending_player_identity_is_replaced_before_start(self):
         fixture = pd.DataFrame([{"match_id": 41, "start_time_utc": pd.Timestamp("2026-09-12T12:00:00Z"), "tournament_name": "US Open", "surface": "hard", "round": "SF", "p1_display_name": "Player One", "p2_display_name": "Max Dahlin", "identities_resolved": True}])

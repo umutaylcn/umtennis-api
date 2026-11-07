@@ -39,7 +39,11 @@ def main() -> None:
     service = PredictionService(PROJECT_ROOT)
     # Refresh the durable pick with the latest valid pre-match state before
     # exporting the same probability to Upcoming and, later, Previous.
-    service.prediction_history.capture(service.fixtures(), service.state, service.predictor)
+    fixtures = service.fixtures()
+    service.prediction_history.capture(fixtures, service.state, service.predictor)
+    round_mismatches = service.prediction_history.pending_round_mismatches(fixtures)
+    if round_mismatches:
+        raise ValueError(f"Pre-match rounds disagree with prediction history: {round_mismatches}")
     matches = service.match_list()
     generated_at = datetime.now(timezone.utc).isoformat()
     predictions = {str(match["match_id"]): service.predict(match["match_id"]) for match in matches}

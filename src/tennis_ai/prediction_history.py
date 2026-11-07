@@ -198,13 +198,13 @@ class PredictionHistoryStore:
                     else:
                         continue
             if record is not None:
-                prior_state = pd.to_datetime(record.get("state_as_of_utc"), utc=True, errors="coerce")
-                if pd.notna(prior_state) and (pd.isna(state_as_of) or state_as_of < prior_state):
-                    continue
                 verified_round = _known_round(fixture.get("round"))
                 if verified_round and not _known_round(record.get("round")):
                     record["round"] = verified_round
                     changed = True
+                prior_state = pd.to_datetime(record.get("state_as_of_utc"), utc=True, errors="coerce")
+                if pd.notna(prior_state) and (pd.isna(state_as_of) or state_as_of < prior_state):
+                    continue
                 if record.get("start_time_utc") != _iso_utc(start):
                     record["start_time_utc"] = _iso_utc(start)
                     changed = True
@@ -280,6 +280,22 @@ class PredictionHistoryStore:
         if corrected:
             self.save()
         return corrected
+
+    def pending_round_mismatches(
+        self, fixtures: pd.DataFrame, *, now_utc: datetime | None = None,
+    ) -> list[int]:
+        """Block publication if a known pre-match round disagrees with history."""
+        now = pd.Timestamp(now_utc or datetime.now(timezone.utc))
+        mismatches = []
+        for _, fixture in fixtures.iterrows():
+            round_code = _known_round(fixture.get("round"))
+            start = pd.to_datetime(fixture.get("start_time_utc"), utc=True, errors="coerce")
+            if round_code is None or pd.isna(start) or now >= start:
+                continue
+            record = self.record_for_fixture(fixture)
+            if record is not None and _is_pre_match_record(record) and _known_round(record.get("round")) != round_code:
+                mismatches.append(int(fixture.match_id))
+        return mismatches
 
     def finalize(self, results: pd.DataFrame, *, reconcile_existing: bool = False) -> int:
         finalized = 0
