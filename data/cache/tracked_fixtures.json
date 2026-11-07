@@ -9343,7 +9343,7 @@
       "p2_rank": 1299,
       "p1_rank_points": 745,
       "p2_rank_points": 8,
-      "sync_status": "pending"
+      "sync_status": "terminal"
     },
     "216279": {
       "match_id": 216279,
@@ -9359,7 +9359,7 @@
       "p2_rank": 9,
       "p1_rank_points": 1180,
       "p2_rank_points": 3480,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "216280": {
       "match_id": 216280,
@@ -9407,7 +9407,7 @@
       "p2_rank": 191,
       "p1_rank_points": 612,
       "p2_rank_points": 301,
-      "sync_status": "pending"
+      "sync_status": "terminal"
     },
     "216283": {
       "match_id": 216283,
@@ -9423,7 +9423,7 @@
       "p2_rank": 86,
       "p1_rank_points": 117,
       "p2_rank_points": 683,
-      "sync_status": "pending"
+      "sync_status": "terminal"
     },
     "216284": {
       "match_id": 216284,
@@ -9439,7 +9439,7 @@
       "p2_rank": 109,
       "p1_rank_points": 95,
       "p2_rank_points": 568,
-      "sync_status": "pending"
+      "sync_status": "terminal"
     },
     "216285": {
       "match_id": 216285,
@@ -9455,7 +9455,7 @@
       "p2_rank": 110,
       "p1_rank_points": 34,
       "p2_rank_points": 567,
-      "sync_status": "pending"
+      "sync_status": "terminal"
     },
     "216286": {
       "match_id": 216286,
@@ -9471,7 +9471,7 @@
       "p2_rank": 337,
       "p1_rank_points": 623,
       "p2_rank_points": 156,
-      "sync_status": "pending"
+      "sync_status": "terminal"
     },
     "216324": {
       "match_id": 216324,
@@ -9487,6 +9487,134 @@
       "p2_rank": 3,
       "p1_rank_points": 2145,
       "p2_rank_points": 5060,
+      "sync_status": "applied"
+    },
+    "216403": {
+      "match_id": 216403,
+      "start_time_utc": "2026-11-08T16:30:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Thiago Agustin Tirante",
+      "p2_name": "Jaume Munar",
+      "p1_id": 2,
+      "p2_id": 813,
+      "p1_rank": 52,
+      "p2_rank": 64,
+      "p1_rank_points": 1010,
+      "p2_rank_points": 875,
+      "sync_status": "pending"
+    },
+    "216405": {
+      "match_id": 216405,
+      "start_time_utc": "2026-11-08T15:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Elias Ymer",
+      "p2_name": "Juan Manuel Cerundolo",
+      "p1_id": 1279,
+      "p2_id": 1002,
+      "p1_rank": 245,
+      "p2_rank": 53,
+      "p1_rank_points": 226,
+      "p2_rank_points": 995,
+      "sync_status": "pending"
+    },
+    "216399": {
+      "match_id": 216399,
+      "start_time_utc": "2026-11-09T10:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Tomas Martin Etcheverry",
+      "p2_name": "Max Dahlin",
+      "p1_id": 24,
+      "p2_id": 7980,
+      "p1_rank": 30,
+      "p2_rank": 772,
+      "p1_rank_points": 1590,
+      "p2_rank_points": 37,
+      "sync_status": "pending"
+    },
+    "216400": {
+      "match_id": 216400,
+      "start_time_utc": "2026-11-09T10:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Alex Michelsen",
+      "p2_name": "Yannick Hanfmann",
+      "p1_id": 36,
+      "p2_id": 230,
+      "p1_rank": 34,
+      "p2_rank": 54,
+      "p1_rank_points": 1460,
+      "p2_rank_points": 976,
+      "sync_status": "pending"
+    },
+    "216401": {
+      "match_id": 216401,
+      "start_time_utc": "2026-11-09T10:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Arthur Rinderknech",
+      "p2_name": "Miomir Kecmanovic",
+      "p1_id": 538,
+      "p2_id": 536,
+      "p1_rank": 33,
+      "p2_rank": 60,
+      "p1_rank_points": 1520,
+      "p2_rank_points": 925,
+      "sync_status": "pending"
+    },
+    "216402": {
+      "match_id": 216402,
+      "start_time_utc": "2026-11-09T10:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Holger Rune",
+      "p2_name": "Zizou Bergs",
+      "p1_id": 13352,
+      "p2_id": 528,
+      "p1_rank": 195,
+      "p2_rank": 38,
+      "p1_rank_points": 300,
+      "p2_rank_points": 1320,
+      "sync_status": "pending"
+    },
+    "216404": {
+      "match_id": 216404,
+      "start_time_utc": "2026-11-09T10:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": "R32",
+      "p1_name": "Adolfo Daniel Vallejo",
+      "p2_name": "Ugo Humbert",
+      "p1_id": 197,
+      "p2_id": 4,
+      "p1_rank": 56,
+      "p2_rank": 32,
+      "p1_rank_points": 939,
+      "p2_rank_points": 1535,
+      "sync_status": "pending"
+    },
+    "216398": {
+      "match_id": 216398,
+      "start_time_utc": "2026-11-09T10:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "James Duckworth",
+      "p2_name": "Cameron Norrie",
+      "p1_id": 64,
+      "p2_id": 535,
+      "p1_rank": 65,
+      "p2_rank": 39,
+      "p1_rank_points": 877,
+      "p2_rank_points": 1275,
       "sync_status": "pending"
     }
   }

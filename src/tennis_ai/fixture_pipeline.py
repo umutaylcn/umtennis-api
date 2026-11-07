@@ -41,6 +41,7 @@ VERIFIED_CSV_NEW_PLAYERS = {("Stockholm", "dahlin m"): "Max Dahlin"}
 # Brussels R32: https://www.protennislive.com/posting/2026/7485/mds.pdf
 # Brussels R16: https://www.protennislive.com/posting/2026/7485/mds.pdf
 VERIFIED_FIXTURE_ROUNDS = {
+    216404: ('Stockholm', 'Daniel Adolfo Vallejo', 'Ugo Humbert', 'R32'),
     195478: ("ATP Laver Cup", "Casper Ruud", "Francisco Cerundolo", "DAY 1"),
     195479: ("ATP Laver Cup", "Jakub Menšik", "Brandon Nakashima", "DAY 1"),
     195480: ("ATP Laver Cup", "Rafael Jodar", "Alexander Bublik", "DAY 1"),

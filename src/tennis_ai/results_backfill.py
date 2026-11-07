@@ -44,6 +44,8 @@ def player_identity_key(name: object) -> str:
     # "Bu Yunchaokete"; both identify the same player within a match.
     if tokens == ["bu", "yunchaokete"]:
         return "bu:y"
+    if tokens in (['adolfo', 'daniel', 'vallejo'], ['daniel', 'adolfo', 'vallejo']):
+        return 'vallejo:d'
     if len(tokens) == 1:
         return tokens[0]
 
