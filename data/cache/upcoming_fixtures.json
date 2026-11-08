@@ -1,5 +1,5 @@
 {
-  "saved_at_utc": "2026-11-08T00:52:52.609062+00:00",
+  "saved_at_utc": "2026-11-08T12:57:30.426137+00:00",
   "fixtures": [
     {
       "match_id": 216535,
@@ -29,7 +29,7 @@
       "p1_country": "usa",
       "p2_country": "esp",
       "identities_resolved": true,
-      "schedule_precision": "date_only"
+      "schedule_precision": "not_before"
     },
     {
       "match_id": 216405,
@@ -59,7 +59,7 @@
       "p1_country": "swe",
       "p2_country": "arg",
       "identities_resolved": true,
-      "schedule_precision": "date_only"
+      "schedule_precision": "not_before"
     },
     {
       "match_id": 216403,
@@ -88,36 +88,6 @@
       "p2_birthday": "1997-05-05",
       "p1_country": "arg",
       "p2_country": "esp",
-      "identities_resolved": true,
-      "schedule_precision": "date_only"
-    },
-    {
-      "match_id": 216402,
-      "event_date": "2026-11-09",
-      "start_time_utc": "2026-11-09T10:00:00+00:00",
-      "tournament_name": "Stockholm",
-      "surface": "hard",
-      "round": "R32",
-      "p1_display_name": "Holger Rune",
-      "p2_display_name": "Zizou Bergs",
-      "p1_id": 13352,
-      "p2_id": 528,
-      "p1_historical_name": "Holger Rune",
-      "p2_historical_name": "Zizou Bergs",
-      "p1_match_status": "exact",
-      "p2_match_status": "exact",
-      "p1_match_score": 1.0,
-      "p2_match_score": 1.0,
-      "p1_current_rank": 433,
-      "p2_current_rank": 40,
-      "p1_current_rank_points": 110,
-      "p2_current_rank_points": 1226,
-      "p1_hand": NaN,
-      "p2_hand": "R",
-      "p1_birthday": "2003-04-29",
-      "p2_birthday": "1999-06-03",
-      "p1_country": "den",
-      "p2_country": "bel",
       "identities_resolved": true,
       "schedule_precision": "date_only"
     },
@@ -268,6 +238,36 @@
       "p2_birthday": "1999-08-31",
       "p1_country": "fra",
       "p2_country": "srb",
+      "identities_resolved": true,
+      "schedule_precision": "date_only"
+    },
+    {
+      "match_id": 216402,
+      "event_date": "2026-11-09",
+      "start_time_utc": "2026-11-09T10:00:00+00:00",
+      "tournament_name": "Stockholm",
+      "surface": "hard",
+      "round": "R32",
+      "p1_display_name": "Holger Rune",
+      "p2_display_name": "Zizou Bergs",
+      "p1_id": 13352,
+      "p2_id": 528,
+      "p1_historical_name": "Holger Rune",
+      "p2_historical_name": "Zizou Bergs",
+      "p1_match_status": "exact",
+      "p2_match_status": "exact",
+      "p1_match_score": 1.0,
+      "p2_match_score": 1.0,
+      "p1_current_rank": 433,
+      "p2_current_rank": 40,
+      "p1_current_rank_points": 110,
+      "p2_current_rank_points": 1226,
+      "p1_hand": NaN,
+      "p2_hand": "R",
+      "p1_birthday": "2003-04-29",
+      "p2_birthday": "1999-06-03",
+      "p1_country": "den",
+      "p2_country": "bel",
       "identities_resolved": true,
       "schedule_precision": "date_only"
     }
