@@ -51,6 +51,8 @@
     {"tournament": "Vienna", "players": ["Alex De Minaur", "Carlos Alcaraz"], "start_time_utc": "2026-11-01T13:00:00Z", "precision": "not_before", "source": "https://www.erstebank-open.com/en/news/storys/vienna-2026-schedule"},
     {"tournament": "Basel", "players": ["Jiri Lehecka", "Valentin Vacherot"], "start_time_utc": "2026-11-01T14:30:00Z", "precision": "not_before", "source": "https://www.swissindoorsbasel.ch/en/tournament/match-schedule/"},
     {"tournament": "Paris", "players": ["Ben Shelton", "Carlos Alcaraz"], "start_time_utc": "2026-11-08T14:00:00Z", "precision": "not_before", "source": "https://www.rolexparismasters.com/en/news/article/2026-edition-complete-schedule-qualifying-main-draw-singles-doubles-wheelchair-tennis"},
-    {"tournament": "Stockholm", "players": ["Elias Ymer", "Juan Manuel Cerundolo"], "start_time_utc": "2026-11-08T15:00:00Z", "precision": "not_before", "source": "https://www.stockholmopen.se/sv-se/tournament/spelschema"}
+    {"tournament": "Stockholm", "players": ["Elias Ymer", "Juan Manuel Cerundolo"], "start_time_utc": "2026-11-08T15:00:00Z", "precision": "not_before", "source": "https://www.stockholmopen.se/sv-se/tournament/spelschema"},
+    {"tournament": "Stockholm", "players": ["James Duckworth", "Cameron Norrie"], "start_time_utc": "2026-11-09T12:00:00Z", "precision": "not_before", "source": "https://www.protennislive.com/posting/2026/429/op.pdf"},
+    {"tournament": "Stockholm", "players": ["Tomas Martin Etcheverry", "Max Dahlin"], "start_time_utc": "2026-11-09T17:00:00Z", "precision": "not_before", "source": "https://www.protennislive.com/posting/2026/429/op.pdf"}
   ]
 }
