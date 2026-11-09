@@ -53,6 +53,10 @@
     {"tournament": "Paris", "players": ["Ben Shelton", "Carlos Alcaraz"], "start_time_utc": "2026-11-08T14:00:00Z", "precision": "not_before", "source": "https://www.rolexparismasters.com/en/news/article/2026-edition-complete-schedule-qualifying-main-draw-singles-doubles-wheelchair-tennis"},
     {"tournament": "Stockholm", "players": ["Elias Ymer", "Juan Manuel Cerundolo"], "start_time_utc": "2026-11-08T15:00:00Z", "precision": "not_before", "source": "https://www.stockholmopen.se/sv-se/tournament/spelschema"},
     {"tournament": "Stockholm", "players": ["James Duckworth", "Cameron Norrie"], "start_time_utc": "2026-11-09T12:00:00Z", "precision": "not_before", "source": "https://www.protennislive.com/posting/2026/429/op.pdf"},
-    {"tournament": "Stockholm", "players": ["Tomas Martin Etcheverry", "Max Dahlin"], "start_time_utc": "2026-11-09T17:00:00Z", "precision": "not_before", "source": "https://www.protennislive.com/posting/2026/429/op.pdf"}
+    {"tournament": "Stockholm", "players": ["Tomas Martin Etcheverry", "Max Dahlin"], "start_time_utc": "2026-11-09T17:00:00Z", "precision": "not_before", "source": "https://www.protennislive.com/posting/2026/429/op.pdf"},
+    {"tournament":"Stockholm","players":["Alex Michelsen","Juan Manuel Cerundolo"],"start_time_utc":"2026-11-10T12:00:00Z","precision":"time","source":"https://www.stockholmopen.se/en/tournament/spelschema?dayToDisplay=4"},
+    {"tournament":"Stockholm","players":["Adrian Mannarino","Aleksandr Shevchenko"],"start_time_utc":"2026-11-10T12:00:00Z","precision":"time","source":"https://www.stockholmopen.se/en/tournament/spelschema?dayToDisplay=4"},
+    {"tournament":"Stockholm","players":["Holger Rune","Zizou Bergs"],"start_time_utc":"2026-11-10T17:00:00Z","precision":"not_before","source":"https://www.stockholmopen.se/en/tournament/spelschema?dayToDisplay=4"}
   ]
 }
+

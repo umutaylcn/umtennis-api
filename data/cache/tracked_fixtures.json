@@ -9523,7 +9523,7 @@
     },
     "216399": {
       "match_id": 216399,
-      "start_time_utc": "2026-11-09T17:00:00Z",
+      "start_time_utc": "2026-11-09T17:10:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
       "round": "R32",
@@ -9551,11 +9551,11 @@
       "p2_rank": 54,
       "p1_rank_points": 1460,
       "p2_rank_points": 976,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "216401": {
       "match_id": 216401,
-      "start_time_utc": "2026-11-10T10:00:00Z",
+      "start_time_utc": "2026-11-10T15:00:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
       "round": "R32",
@@ -9571,7 +9571,7 @@
     },
     "216402": {
       "match_id": 216402,
-      "start_time_utc": "2026-11-10T10:00:00Z",
+      "start_time_utc": "2026-11-10T17:00:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
       "round": "R32",
@@ -9599,7 +9599,7 @@
       "p2_rank": 32,
       "p1_rank_points": 939,
       "p2_rank_points": 1535,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "216398": {
       "match_id": 216398,
@@ -9615,7 +9615,7 @@
       "p2_rank": 39,
       "p1_rank_points": 877,
       "p2_rank_points": 1275,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "216535": {
       "match_id": 216535,
@@ -9647,14 +9647,14 @@
       "p2_rank": 150,
       "p1_rank_points": 770,
       "p2_rank_points": 379,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "217224": {
       "match_id": 217224,
-      "start_time_utc": "2026-11-09T18:30:00Z",
+      "start_time_utc": "2026-11-09T19:15:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
-      "round": null,
+      "round": "R32",
       "p1_name": "Leo Borg",
       "p2_name": "Toby Samuel",
       "p1_id": 5685,
@@ -9683,10 +9683,10 @@
     },
     "217226": {
       "match_id": 217226,
-      "start_time_utc": "2026-11-10T10:00:00Z",
+      "start_time_utc": "2026-11-10T13:30:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
-      "round": null,
+      "round": "R32",
       "p1_name": "Lorenzo Sonego",
       "p2_name": "Quentin Halys",
       "p1_id": 884,
