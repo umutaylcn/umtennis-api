@@ -9583,7 +9583,7 @@
       "p2_rank": 38,
       "p1_rank_points": 300,
       "p2_rank_points": 1320,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "216404": {
       "match_id": 216404,
@@ -9759,11 +9759,11 @@
       "p2_rank": 110,
       "p1_rank_points": 2415,
       "p2_rank_points": 567,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "217721": {
       "match_id": 217721,
-      "start_time_utc": "2026-11-11T12:00:00Z",
+      "start_time_utc": "2026-11-11T15:00:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
       "round": "R16",
@@ -9779,7 +9779,7 @@
     },
     "217687": {
       "match_id": 217687,
-      "start_time_utc": "2026-11-11T10:00:00Z",
+      "start_time_utc": "2026-11-11T13:30:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
       "round": "R16",
@@ -9791,6 +9791,54 @@
       "p2_rank": 39,
       "p1_rank_points": 2880,
       "p2_rank_points": 1275,
+      "sync_status": "pending"
+    },
+    "218997": {
+      "match_id": 218997,
+      "start_time_utc": "2026-11-11T18:30:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Miomir Kecmanovic",
+      "p2_name": "Holger Rune",
+      "p1_id": 536,
+      "p2_id": 13352,
+      "p1_rank": 60,
+      "p2_rank": 195,
+      "p1_rank_points": 925,
+      "p2_rank_points": 300,
+      "sync_status": "pending"
+    },
+    "218811": {
+      "match_id": 218811,
+      "start_time_utc": "2026-11-11T17:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Alexander Shevchenko",
+      "p2_name": "Casper Ruud",
+      "p1_id": 12,
+      "p2_id": 537,
+      "p1_rank": 109,
+      "p2_rank": 21,
+      "p1_rank_points": 568,
+      "p2_rank_points": 2145,
+      "sync_status": "pending"
+    },
+    "218822": {
+      "match_id": 218822,
+      "start_time_utc": "2026-11-11T12:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Lorenzo Sonego",
+      "p2_name": "Alejandro Tabilo",
+      "p1_id": 884,
+      "p2_id": 35,
+      "p1_rank": 86,
+      "p2_rank": 31,
+      "p1_rank_points": 683,
+      "p2_rank_points": 1565,
       "sync_status": "pending"
     }
   }
