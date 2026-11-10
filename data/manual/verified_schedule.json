@@ -56,7 +56,7 @@
     {"tournament": "Stockholm", "players": ["Tomas Martin Etcheverry", "Max Dahlin"], "start_time_utc": "2026-11-09T17:00:00Z", "precision": "not_before", "source": "https://www.protennislive.com/posting/2026/429/op.pdf"},
     {"tournament":"Stockholm","players":["Alex Michelsen","Juan Manuel Cerundolo"],"start_time_utc":"2026-11-10T12:00:00Z","precision":"time","source":"https://www.stockholmopen.se/en/tournament/spelschema?dayToDisplay=4"},
     {"tournament":"Stockholm","players":["Adrian Mannarino","Aleksandr Shevchenko"],"start_time_utc":"2026-11-10T12:00:00Z","precision":"time","source":"https://www.stockholmopen.se/en/tournament/spelschema?dayToDisplay=4"},
-    {"tournament":"Stockholm","players":["Holger Rune","Zizou Bergs"],"start_time_utc":"2026-11-10T17:00:00Z","precision":"not_before","source":"https://www.stockholmopen.se/en/tournament/spelschema?dayToDisplay=4"}
+    {"tournament":"Stockholm","players":["Holger Rune","Zizou Bergs"],"start_time_utc":"2026-11-10T17:00:00Z","precision":"not_before","source":"https://www.stockholmopen.se/en/tournament/spelschema?dayToDisplay=4"},
+    {"tournament":"Stockholm","players":["Tomas Martin Etcheverry","Thiago Agustin Tirante"],"start_time_utc":"2026-11-10T13:30:00Z","precision":"not_before","source":"https://www.protennislive.com/posting/2026/429/op.pdf"}
   ]
 }
-
