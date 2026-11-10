@@ -9555,7 +9555,7 @@
     },
     "216401": {
       "match_id": 216401,
-      "start_time_utc": "2026-11-10T15:00:00Z",
+      "start_time_utc": "2026-11-10T14:35:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
       "round": "R32",
@@ -9567,11 +9567,11 @@
       "p2_rank": 60,
       "p1_rank_points": 1520,
       "p2_rank_points": 925,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "216402": {
       "match_id": 216402,
-      "start_time_utc": "2026-11-10T17:00:00Z",
+      "start_time_utc": "2026-11-10T17:10:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
       "round": "R32",
@@ -9695,7 +9695,7 @@
       "p2_rank": 50,
       "p1_rank_points": 683,
       "p2_rank_points": 1070,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "218290": {
       "match_id": 218290,
@@ -9711,7 +9711,7 @@
       "p2_rank": 52,
       "p1_rank_points": 1590,
       "p2_rank_points": 1010,
-      "sync_status": "pending"
+      "sync_status": "terminal"
     },
     "217688": {
       "match_id": 217688,
@@ -9727,7 +9727,7 @@
       "p2_rank": 53,
       "p1_rank_points": 1460,
       "p2_rank_points": 995,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "217720": {
       "match_id": 217720,
@@ -9743,11 +9743,11 @@
       "p2_rank": 109,
       "p1_rank_points": 745,
       "p2_rank_points": 568,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "218316": {
       "match_id": 218316,
-      "start_time_utc": "2026-11-10T18:30:00Z",
+      "start_time_utc": "2026-11-10T18:40:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
       "round": "R16",

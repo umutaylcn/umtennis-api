@@ -234,11 +234,11 @@ def load_scheduled_csv_fixtures(
         if verified_p2 is not None:
             p2_name, p2_score, p2_status = verified_p2, 1.0, "verified_new"
         if p1_status == "ambiguous_short":
-            candidates = active_names.get(player_identity_key(row.home_name), set())
+            candidates = active_names.get(player_identity_key(row.home_name), set()) - {str(row.home_name)}
             if len(candidates) == 1:
                 p1_name, p1_score, p1_status = next(iter(candidates)), 1.0, "recent_unique"
         if p2_status == "ambiguous_short":
-            candidates = active_names.get(player_identity_key(row.away_name), set())
+            candidates = active_names.get(player_identity_key(row.away_name), set()) - {str(row.away_name)}
             if len(candidates) == 1:
                 p2_name, p2_score, p2_status = next(iter(candidates)), 1.0, "recent_unique"
         if not p1_name or not p2_name or p1_name == p2_name:
