@@ -9807,7 +9807,7 @@
       "p2_rank": 195,
       "p1_rank_points": 925,
       "p2_rank_points": 300,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "218811": {
       "match_id": 218811,
@@ -9823,7 +9823,7 @@
       "p2_rank": 21,
       "p1_rank_points": 568,
       "p2_rank_points": 2145,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "218822": {
       "match_id": 218822,
@@ -9840,6 +9840,38 @@
       "p1_rank_points": 683,
       "p2_rank_points": 1565,
       "sync_status": "applied"
+    },
+    "219338": {
+      "match_id": 219338,
+      "start_time_utc": "2026-11-12T12:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Alex Michelsen",
+      "p2_name": "Alejandro Tabilo",
+      "p1_id": 36,
+      "p2_id": 35,
+      "p1_rank": 34,
+      "p2_rank": 31,
+      "p1_rank_points": 1460,
+      "p2_rank_points": 1565,
+      "sync_status": "pending"
+    },
+    "219357": {
+      "match_id": 219357,
+      "start_time_utc": "2026-11-12T19:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Lorenzo Musetti",
+      "p2_name": "Ugo Humbert",
+      "p1_id": 664,
+      "p2_id": 4,
+      "p1_rank": 15,
+      "p2_rank": 32,
+      "p1_rank_points": 2415,
+      "p2_rank_points": 1535,
+      "sync_status": "pending"
     }
   }
 }
