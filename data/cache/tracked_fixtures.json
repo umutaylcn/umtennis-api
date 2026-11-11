@@ -9775,7 +9775,7 @@
       "p2_rank": 32,
       "p1_rank_points": 379,
       "p2_rank_points": 1535,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "217687": {
       "match_id": 217687,
@@ -9791,14 +9791,14 @@
       "p2_rank": 39,
       "p1_rank_points": 2880,
       "p2_rank_points": 1275,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "218997": {
       "match_id": 218997,
-      "start_time_utc": "2026-11-11T18:30:00Z",
+      "start_time_utc": "2026-11-11T18:35:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
-      "round": null,
+      "round": "R16",
       "p1_name": "Miomir Kecmanovic",
       "p2_name": "Holger Rune",
       "p1_id": 536,
@@ -9811,10 +9811,10 @@
     },
     "218811": {
       "match_id": 218811,
-      "start_time_utc": "2026-11-11T17:00:00Z",
+      "start_time_utc": "2026-11-11T17:10:00Z",
       "tournament_name": "Stockholm",
       "surface": "Hard",
-      "round": null,
+      "round": "R16",
       "p1_name": "Alexander Shevchenko",
       "p2_name": "Casper Ruud",
       "p1_id": 12,
@@ -9839,7 +9839,7 @@
       "p2_rank": 31,
       "p1_rank_points": 683,
       "p2_rank_points": 1565,
-      "sync_status": "pending"
+      "sync_status": "applied"
     }
   }
 }
