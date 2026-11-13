@@ -70,13 +70,17 @@ def reconcile_fixture_schedule(table: pd.DataFrame, project_root: str | Path) ->
 
     overrides_path = root / "data" / "manual" / "verified_schedule.json"
     overrides = {}
+    verified_schedule_only = set()
     if overrides_path.exists():
-        for item in json.loads(overrides_path.read_text(encoding="utf-8")).get("fixtures", []):
+        schedule = json.loads(overrides_path.read_text(encoding="utf-8"))
+        verified_schedule_only = set(map(clean_tournament_name, schedule.get("verified_schedule_only", [])))
+        for item in schedule.get("fixtures", []):
             overrides[_identity(item["tournament"], *item["players"])] = item
 
     provider_placeholders = _placeholder_keys(
         corrected, "tournament_name", "start_time_utc"
     )
+    unscheduled = []
     for index, fixture in corrected.iterrows():
         identity = _identity(
             fixture["tournament_name"], fixture["p1_display_name"], fixture["p2_display_name"]
@@ -89,7 +93,13 @@ def reconcile_fixture_schedule(table: pd.DataFrame, project_root: str | Path) ->
                 corrected.at[index, "start_time_utc"] = verified_start
                 corrected.at[index, "event_date"] = verified_start.date().isoformat()
                 corrected.at[index, "schedule_precision"] = override["precision"]
+                if override.get("round"):
+                    corrected.at[index, "round"] = override["round"]
                 continue
+
+        if identity[0] in verified_schedule_only:
+            unscheduled.append(index)
+            continue
 
         candidates = csv_by_pair.get(identity, [])
         if pd.notna(original):
@@ -109,4 +119,4 @@ def reconcile_fixture_schedule(table: pd.DataFrame, project_root: str | Path) ->
     corrected["start_time_utc"] = pd.to_datetime(
         corrected["start_time_utc"], utc=True, errors="coerce"
     )
-    return corrected
+    return corrected.drop(index=unscheduled)
