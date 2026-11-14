@@ -9919,7 +9919,7 @@
       "p2_rank": 52,
       "p1_rank_points": 1565,
       "p2_rank_points": 1010,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219749": {
       "match_id": 219749,
@@ -10111,6 +10111,22 @@
       "p2_rank": 12,
       "p1_rank_points": 3710,
       "p2_rank_points": 2680,
+      "sync_status": "pending"
+    },
+    "220118": {
+      "match_id": 220118,
+      "start_time_utc": "2026-11-14T12:00:00Z",
+      "tournament_name": "Stockholm",
+      "surface": "Hard",
+      "round": null,
+      "p1_name": "Taylor Fritz",
+      "p2_name": "Thiago Agustin Tirante",
+      "p1_id": 18,
+      "p2_id": 2,
+      "p1_rank": 12,
+      "p2_rank": 52,
+      "p1_rank_points": 2880,
+      "p2_rank_points": 1010,
       "sync_status": "pending"
     }
   }

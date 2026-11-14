@@ -71,7 +71,8 @@
     {"tournament":"Finals - Turin","players":["Alexander Zverev","Rafael Jodar"],"start_time_utc":"2026-11-15T13:00:00Z","precision":"not_before","round":"RR","source":"https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule-sunday-monday"},
     {"tournament":"Finals - Turin","players":["Ben Shelton","Arthur Fils"],"start_time_utc":"2026-11-15T19:30:00Z","precision":"not_before","round":"RR","source":"https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule-sunday-monday"},
     {"tournament":"Finals - Turin","players":["Carlos Alcaraz","Frances Tiafoe"],"start_time_utc":"2026-11-16T13:00:00Z","precision":"not_before","round":"RR","source":"https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule-sunday-monday"},
-    {"tournament":"Finals - Turin","players":["Daniil Medvedev","Flavio Cobolli"],"start_time_utc":"2026-11-16T19:30:00Z","precision":"not_before","round":"RR","source":"https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule-sunday-monday"}
+    {"tournament":"Finals - Turin","players":["Daniil Medvedev","Flavio Cobolli"],"start_time_utc":"2026-11-16T19:30:00Z","precision":"not_before","round":"RR","source":"https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule-sunday-monday"},
+    {"tournament":"Stockholm","players":["Taylor Fritz","Thiago Agustin Tirante"],"start_time_utc":"2026-11-14T12:00:00Z","precision":"time","round":"F","source":"https://www.stockholmopen.se/en/tournament/spelschema"}
   ],
   "verified_schedule_only": ["Finals - Turin"]
 }
