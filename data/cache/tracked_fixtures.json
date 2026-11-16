@@ -9935,7 +9935,7 @@
       "p2_rank": 9,
       "p1_rank_points": 3480,
       "p2_rank_points": 3150,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219753": {
       "match_id": 219753,
@@ -9951,7 +9951,7 @@
       "p2_rank": 13,
       "p1_rank_points": 9630,
       "p2_rank_points": 2659,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219744": {
       "match_id": 219744,
