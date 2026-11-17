@@ -9967,7 +9967,7 @@
       "p2_rank": 12,
       "p1_rank_points": 5060,
       "p2_rank_points": 2680,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219747": {
       "match_id": 219747,
@@ -9983,11 +9983,11 @@
       "p2_rank": 7,
       "p1_rank_points": 3710,
       "p2_rank_points": 3680,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219742": {
       "match_id": 219742,
-      "start_time_utc": "2026-11-17T13:00:00Z",
+      "start_time_utc": "2026-11-18T13:00:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,
@@ -10003,7 +10003,7 @@
     },
     "219751": {
       "match_id": 219751,
-      "start_time_utc": "2026-11-17T13:00:00Z",
+      "start_time_utc": "2026-11-17T19:30:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,
@@ -10019,7 +10019,7 @@
     },
     "219752": {
       "match_id": 219752,
-      "start_time_utc": "2026-11-17T13:00:00Z",
+      "start_time_utc": "2026-11-19T13:00:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,
@@ -10035,7 +10035,7 @@
     },
     "219750": {
       "match_id": 219750,
-      "start_time_utc": "2026-11-17T13:00:00Z",
+      "start_time_utc": "2026-11-19T13:00:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,
@@ -10051,7 +10051,7 @@
     },
     "219743": {
       "match_id": 219743,
-      "start_time_utc": "2026-11-17T13:00:00Z",
+      "start_time_utc": "2026-11-19T13:00:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,
@@ -10067,7 +10067,7 @@
     },
     "219745": {
       "match_id": 219745,
-      "start_time_utc": "2026-11-17T13:00:00Z",
+      "start_time_utc": "2026-11-18T19:30:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,
@@ -10099,7 +10099,7 @@
     },
     "219748": {
       "match_id": 219748,
-      "start_time_utc": "2026-11-17T13:00:00Z",
+      "start_time_utc": "2026-11-19T13:00:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,

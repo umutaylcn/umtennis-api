@@ -10116,10 +10116,14 @@
       "confidence": 0.8448,
       "captured_at_utc": "2026-11-16T03:38:01.032172Z",
       "state_as_of_utc": "2026-11-15T19:45:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Carlos Alcaraz",
+      "actual_loser": "Frances Tiafoe",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-11-16T13:10:00Z"
     },
     "219747": {
       "match_id": 219747,
@@ -10136,10 +10140,14 @@
       "confidence": 0.6524,
       "captured_at_utc": "2026-11-16T03:38:01.032172Z",
       "state_as_of_utc": "2026-11-15T19:45:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Daniil Medvedev",
+      "actual_loser": "Flavio Cobolli",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p1",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-11-16T20:00:00Z"
     },
     "220118": {
       "match_id": 220118,
@@ -10164,6 +10172,46 @@
       "winner_sets": 2,
       "loser_sets": 1,
       "actual_played_at_utc": "2026-11-14T12:10:00Z"
+    },
+    "219746": {
+      "match_id": 219746,
+      "start_time_utc": "2026-11-17T13:00:00Z",
+      "tournament_name": "Finals - Turin",
+      "surface": "Hard",
+      "round": "RR",
+      "p1_name": "Arthur Fils",
+      "p2_name": "Rafael Jodar",
+      "p1_win_probability": 0.6862,
+      "p2_win_probability": 0.3138,
+      "predicted_side": "p1",
+      "predicted_winner": "Arthur Fils",
+      "confidence": 0.6862,
+      "captured_at_utc": "2026-11-17T03:33:19.932425Z",
+      "state_as_of_utc": "2026-11-16T20:00:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
+    },
+    "219751": {
+      "match_id": 219751,
+      "start_time_utc": "2026-11-17T19:30:00Z",
+      "tournament_name": "Finals - Turin",
+      "surface": "Hard",
+      "round": "RR",
+      "p1_name": "Alexander Zverev",
+      "p2_name": "Ben Shelton",
+      "p1_win_probability": 0.554,
+      "p2_win_probability": 0.446,
+      "predicted_side": "p1",
+      "predicted_winner": "Alexander Zverev",
+      "confidence": 0.554,
+      "captured_at_utc": "2026-11-17T03:33:19.932425Z",
+      "state_as_of_utc": "2026-11-16T20:00:00Z",
+      "actual_winner": null,
+      "actual_loser": null,
+      "match_status": null,
+      "prediction_correct": null
     }
   }
 }
