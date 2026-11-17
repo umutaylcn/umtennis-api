@@ -32,7 +32,7 @@ STAT_COLUMNS = {
 # The 2026 provider feed contains this shortened duplicate of Ben Shelton.
 # Keep it available for historical matching, but never rank it as a second player.
 LEADERBOARD_EXCLUDED_ALIASES = {"Shelton B."}
-PRESENTATION_CACHE_VERSION = 3
+PRESENTATION_CACHE_VERSION = 4
 
 
 class PlayerPresentationService:
@@ -223,10 +223,12 @@ class PlayerPresentationService:
         active_names: set[str],
         existing_keys: set[tuple[str, str, frozenset[str], str]],
         existing_provider_ids: set[int] | None = None,
+        existing_time_pairs: set[tuple[pd.Timestamp, frozenset[str]]] | None = None,
     ) -> None:
         """Add tracked results missing from the season CSV without duplicating matches."""
         seen = set(existing_keys)
         provider_ids = existing_provider_ids or set()
+        time_pairs = set(existing_time_pairs or set())
         for row in backfill.sort_values("played_at_utc").itertuples(index=False):
             neutral = str(getattr(row, "match_status", "completed")).casefold() == "defaulted"
             provider_id = getattr(row, "provider_match_id", None)
@@ -235,9 +237,14 @@ class PlayerPresentationService:
             if str(row.surface).title() not in SUPPORTED_SURFACES:
                 continue
             key = match_identity_key(row)
-            if key in seen:
+            time_pair = (
+                pd.to_datetime(row.played_at_utc, utc=True),
+                key[2],
+            )
+            if key in seen or time_pair in time_pairs:
                 continue
             seen.add(key)
+            time_pairs.add(time_pair)
             for name, opponent, won in (
                 (str(row.winner_name), str(row.loser_name), None if neutral else True),
                 (str(row.loser_name), str(row.winner_name), None if neutral else False),
@@ -286,6 +293,7 @@ class PlayerPresentationService:
         csv_path = self.root / "data" / "external" / "2026-atp-season.csv"
         current_match_keys: set[tuple[str, str, frozenset[str], str]] = set()
         current_provider_ids: set[int] = set()
+        current_time_pairs: set[tuple[pd.Timestamp, frozenset[str]]] = set()
         if csv_path.exists():
             provider_players = pd.read_csv(
                 csv_path,
@@ -336,8 +344,10 @@ class PlayerPresentationService:
                 winner_name = home_name if int(row.winner_code) == 1 else away_name
                 loser_name = away_name if int(row.winner_code) == 1 else home_name
                 if winner_name and loser_name:
-                    current_match_keys.add(
-                        self._csv_match_identity(row, winner_name, loser_name)
+                    key = self._csv_match_identity(row, winner_name, loser_name)
+                    current_match_keys.add(key)
+                    current_time_pairs.add(
+                        (pd.to_datetime(row.played_at_utc, utc=True), key[2])
                     )
                 for side, opponent_side, won in (
                     ("home", "away", int(row.winner_code) == 1),
@@ -369,6 +379,7 @@ class PlayerPresentationService:
                 active_names,
                 current_match_keys,
                 current_provider_ids,
+                current_time_pairs,
             )
 
         for history in self._matches.values():

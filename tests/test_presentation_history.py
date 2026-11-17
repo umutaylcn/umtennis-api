@@ -86,6 +86,36 @@ class PresentationHistoryTests(unittest.TestCase):
 
         self.assertEqual(len(service._matches["Michael Zheng"]), 0)
 
+    def test_same_match_with_different_provider_id_and_missing_round_is_not_added(self):
+        service = PlayerPresentationService.__new__(PlayerPresentationService)
+        service._matches = defaultdict(list)
+        backfill = pd.DataFrame([{
+            "provider_match_id": 219749,
+            "played_at_utc": "2026-11-15T19:45:00Z",
+            "tourney_name": "Finals - Turin",
+            "round": None,
+            "surface": "Hard",
+            "winner_name": "Ben Shelton",
+            "loser_name": "Arthur Fils",
+        }])
+        csv_row = pd.Series({
+            "played_at_utc": pd.Timestamp("2026-11-15T19:45:00Z"),
+            "tournament": "Finals - Turin ATP (indoor)",
+            "round": float("nan"),
+        })
+        csv_key = service._csv_match_identity(csv_row, "Ben Shelton", "Arthur Fils")
+
+        service._append_backfill_only_history(
+            backfill,
+            {"Ben Shelton", "Arthur Fils"},
+            {csv_key},
+            {11824892},
+            {(csv_row.played_at_utc, csv_key[2])},
+        )
+
+        self.assertEqual(len(service._matches["Ben Shelton"]), 0)
+        self.assertEqual(len(service._matches["Arthur Fils"]), 0)
+
     def test_defaulted_result_is_neutral_in_form(self):
         service = PlayerPresentationService.__new__(PlayerPresentationService)
         service._matches = defaultdict(list)
