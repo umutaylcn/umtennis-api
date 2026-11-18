@@ -10015,11 +10015,11 @@
       "p2_rank": 9,
       "p1_rank_points": 9630,
       "p2_rank_points": 3480,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219752": {
       "match_id": 219752,
-      "start_time_utc": "2026-11-19T13:00:00Z",
+      "start_time_utc": "2026-11-19T19:30:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,
@@ -10051,7 +10051,7 @@
     },
     "219743": {
       "match_id": 219743,
-      "start_time_utc": "2026-11-19T13:00:00Z",
+      "start_time_utc": "2026-11-20T13:00:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,
@@ -10095,11 +10095,11 @@
       "p2_rank": 13,
       "p1_rank_points": 3150,
       "p2_rank_points": 2659,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219748": {
       "match_id": 219748,
-      "start_time_utc": "2026-11-19T13:00:00Z",
+      "start_time_utc": "2026-11-20T13:00:00Z",
       "tournament_name": "Finals - Turin",
       "surface": "Hard",
       "round": null,
