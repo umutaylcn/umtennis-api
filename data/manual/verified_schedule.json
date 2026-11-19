@@ -790,6 +790,28 @@
       "precision": "not_before",
       "round": "RR",
       "source": "https://www.nittoatpfinals.com/en/scores-centre/schedule"
+    },
+    {
+      "tournament": "Finals - Turin",
+      "players": [
+        "Carlos Alcaraz",
+        "Flavio Cobolli"
+      ],
+      "start_time_utc": "2026-11-20T13:00:00Z",
+      "precision": "not_before",
+      "round": "RR",
+      "source": "https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule"
+    },
+    {
+      "tournament": "Finals - Turin",
+      "players": [
+        "Daniil Medvedev",
+        "Frances Tiafoe"
+      ],
+      "start_time_utc": "2026-11-20T19:30:00Z",
+      "precision": "not_before",
+      "round": "RR",
+      "source": "https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule"
     }
   ],
   "verified_schedule_only": [
