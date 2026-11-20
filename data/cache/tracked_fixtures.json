@@ -10031,7 +10031,7 @@
       "p2_rank": 9,
       "p1_rank_points": 9630,
       "p2_rank_points": 3150,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219750": {
       "match_id": 219750,
@@ -10047,7 +10047,7 @@
       "p2_rank": 13,
       "p1_rank_points": 3480,
       "p2_rank_points": 2659,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219743": {
       "match_id": 219743,
@@ -10128,6 +10128,22 @@
       "p1_rank_points": 2880,
       "p2_rank_points": 1010,
       "sync_status": "applied"
+    },
+    "223144": {
+      "match_id": 223144,
+      "start_time_utc": "2026-11-21T13:00:00Z",
+      "tournament_name": "Finals - Turin",
+      "surface": "Hard",
+      "round": "SF",
+      "p1_name": "Carlos Alcaraz",
+      "p2_name": "Ben Shelton",
+      "p1_id": 13,
+      "p2_id": 11,
+      "p1_rank": 3,
+      "p2_rank": 9,
+      "p1_rank_points": 5060,
+      "p2_rank_points": 3480,
+      "sync_status": "pending"
     }
   }
 }
