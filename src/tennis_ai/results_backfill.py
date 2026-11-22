@@ -99,6 +99,7 @@ def clean_tournament_name(provider_name: str) -> str:
         name = name[:-4]
     aliases = {
         "London": "Queens Club",
+        "Finals - Turin ATP - Play Offs (indoor)": "Finals - Turin",
         "Hertogenbosch": "s-Hertogenbosch",
         "Lyon (France)": "Lyon",
     }

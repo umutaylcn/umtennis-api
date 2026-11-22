@@ -812,6 +812,17 @@
       "precision": "not_before",
       "round": "RR",
       "source": "https://www.nittoatpfinals.com/en/news/nitto-atp-finals-2026-schedule"
+    },
+    {
+      "tournament": "Finals - Turin",
+      "players": [
+        "Alexander Zverev",
+        "Carlos Alcaraz"
+      ],
+      "start_time_utc": "2026-11-22T17:00:00Z",
+      "precision": "not_before",
+      "round": "F",
+      "source": "https://www.nittoatpfinals.com/en/scores-centre/schedule"
     }
   ],
   "verified_schedule_only": [

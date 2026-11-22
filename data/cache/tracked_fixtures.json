@@ -10063,7 +10063,7 @@
       "p2_rank": 7,
       "p1_rank_points": 5060,
       "p2_rank_points": 3680,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "219745": {
       "match_id": 219745,
@@ -10111,7 +10111,7 @@
       "p2_rank": 12,
       "p1_rank_points": 3710,
       "p2_rank_points": 2680,
-      "sync_status": "pending"
+      "sync_status": "applied"
     },
     "220118": {
       "match_id": 220118,
@@ -10143,6 +10143,22 @@
       "p2_rank": 9,
       "p1_rank_points": 5060,
       "p2_rank_points": 3480,
+      "sync_status": "applied"
+    },
+    "223687": {
+      "match_id": 223687,
+      "start_time_utc": "2026-11-22T17:00:00Z",
+      "tournament_name": "Finals - Turin",
+      "surface": "Hard",
+      "round": "F",
+      "p1_name": "Alexander Zverev",
+      "p2_name": "Carlos Alcaraz",
+      "p1_id": 6,
+      "p2_id": 13,
+      "p1_rank": 2,
+      "p2_rank": 3,
+      "p1_rank_points": 9630,
+      "p2_rank_points": 5060,
       "sync_status": "pending"
     }
   }
