@@ -10404,10 +10404,14 @@
       "confidence": 0.7328,
       "captured_at_utc": "2026-11-22T03:38:13.578595Z",
       "state_as_of_utc": "2026-11-21T19:45:00Z",
-      "actual_winner": null,
-      "actual_loser": null,
-      "match_status": null,
-      "prediction_correct": null
+      "actual_winner": "Carlos Alcaraz",
+      "actual_loser": "Alexander Zverev",
+      "match_status": "completed",
+      "prediction_correct": true,
+      "actual_side": "p2",
+      "winner_sets": 2,
+      "loser_sets": 0,
+      "actual_played_at_utc": "2026-11-22T17:15:00Z"
     }
   }
 }
